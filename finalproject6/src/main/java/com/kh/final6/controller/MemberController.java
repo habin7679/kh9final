@@ -1,5 +1,9 @@
 package com.kh.final6.controller;
 
-public class MemberController {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
+@RequestMapping("/member")
+public class MemberController {
 }
