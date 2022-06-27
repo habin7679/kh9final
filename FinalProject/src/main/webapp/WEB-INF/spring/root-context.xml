@@ -21,7 +21,7 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<!-- 복사한 뒤 반드시 고쳐야 하는 부분 -->
-	<context:component-scan base-package="com.kh.home" use-default-filters="true">
+	<context:component-scan base-package="com.kh.final" use-default-filters="true">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	<!-- 복사한 뒤 반드시 고쳐야 하는 부분 -->
