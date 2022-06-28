@@ -13,14 +13,7 @@
 	
 	<div>
 	        <label>이메일</label>    
-	        <input type="text" name="memberId" autocomplete="off" required class="form-input fill input-round"><span>@</span>
-    <select name="memberId">
-        <option>gmail.com</option>
-        <option>hanmail.net</option>
-        <option>naver.com</option>
-        <option>직접입력</option>
-    </select>
-    	<input type ="hidden" value="">
+	        <input type="text" name="memberId" autocomplete="off" required class="form-input fill input-round">
     </div>
 
 	    
