@@ -40,9 +40,29 @@ import com.kh.final6.entity.MemberDto;
 				else {
 					return null;
 				}
+				
+			
+		}
+
+		@Override
+		public MemberDto info(String memberId) {
+			return sqlSession.selectOne("member.one", memberId); 
+		}
+
+		@Override
+		public boolean changePassword(String memberId, String currentPw, String changePw) {
+			MemberDto memberDto =  this.login(memberId,  currentPw);
+			if(memberDto ==null) {
+				return false;
+			}
+			 
+			int count = sqlSession.update("member.changePassword", 
+					MemberDto.builder().memberId(memberId).memberPw(changePw).build());
+			
+			return count > 0; 
+					
 		}
 	}
-
 	
 	
 

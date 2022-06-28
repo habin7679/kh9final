@@ -40,18 +40,23 @@
 		) 
 	</insert>
 	
+		<!-- 회원 시퀀스 -->
+	<select id="sequence" resultType="int">
+		select member_seq.nextval from dual
+	</select>
 	
 		<!-- 단일조회 -->
 	<select id="one" resultType="MemberDto" parameterType="String">
 		select * from member where member_id = #{memberId}
 	</select>
-	
-	<!-- 회원 시퀀스 -->
-	<select id="sequence" resultType="int">
-		select member_seq.nextval from dual
-	</select>
-	
 
+	<!-- 비밀번호 변경  -->
+	<update id = "changePassword" parameterType = "MemberDto">
+		update  member 
+		set member_pw = #{memberPw} 
+		where member_id = #{memberId} 
+	</update>
+		
 
 </mapper> 
 	
