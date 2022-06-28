@@ -25,25 +25,30 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-
+	<select id="sequence" resultType="int">
+		select member_seq.nextval form dual
+	</select>
+	
 	<insert id="join" parameterType="MemberDto">
 		insert into member(
-		    member_no, member_Id, member_pw,  member_name, 
+		    member_no, member_id, member_pw,  member_name, 
 		    member_nick, member_birth, member_phone, 
-		    member_gender, member_kind
+		    member_gender
 		)
 		values(
 		     #{memberNo}, #{memberId}, #{memberPw}, #{memberName},
 		     #{memberNick}, #{memberBirth}, #{memberPhone}, 
-		     #{memberGender}, #{memberKind}
+		     #{memberGender}
 		) 
 	</insert>
+	
 	
 		<!-- 단일조회 -->
 	<select id="one" resultType="MemberDto" parameterType="String">
 		select * from member where member_id = #{memberId}
 	</select>
 	
+	<!-- 회원 시퀀스 -->
 	<select id="sequence" resultType="int">
 		select member_seq.nextval from dual
 	</select>
