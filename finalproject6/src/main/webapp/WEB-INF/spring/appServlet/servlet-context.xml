@@ -52,10 +52,10 @@
 	
 	<!-- 
 		파일 업로드를 위한 도구 등록 
-		- (주의) 등록할 때 ID는 반드시 "multipartResolver"로 해야 한다.
+		- (주의) 등록할 때 ID는 반드시 "multipartResolver"로 해야 한다
 	-->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="defaultEncoding" value="UFT-8"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
 		<property name="maxUploadSize" value="${project.fileupload.max-total-size}"></property>
 		<property name="maxUploadSizePerFile" value="${project.fileupload.max-file-size}"></property>
 	</bean>
