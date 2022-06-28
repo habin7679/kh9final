@@ -70,6 +70,7 @@ public class MemberController {
 		if(memberDto != null) {//로그인 성공
 			//세션
 			session.setAttribute("login", memberDto.getMemberId());
+			session.setAttribute("auth", memberDto.getMemberKind());
 			
 			//쿠키
 			if(remember != null) {//체크하고 로그인 했으면 -> 쿠키 발행
