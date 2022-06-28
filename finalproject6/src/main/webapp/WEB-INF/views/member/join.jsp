@@ -26,12 +26,12 @@
 	    
 	    <div class="row">
 	        <label>비밀번호</label>
-	        <input type="password" name="memberPw" required placeholder="정규식" class="form-input fill input-round">
+	        <input type="password" name="memberPw" required placeholder="" class="form-input fill input-round">
 	    </div>
 	   
 	    <div class="row">
 	        <label>이름</label>
-	        <input type="text" name="memberName" required class="form-input input-round" autocomplete="off">
+	        <input type="text" name="memberName" required placeholder = "정규식"class="form-input input-round" autocomplete="off">
 	    </div>
 	   
 	    <div>
@@ -59,15 +59,6 @@
 	        </select>
 	    </div>
 	     
-	     <div class="row">
-	        <label>등급</label>
-	        <select  name="memberKind">
-	        	<option>일반</option>
-	        	<option>판매자</option>
-	        	<option>관리자</option>
-	        </select>
-	    </div>
-	
 	    <div class="row">
 	        <button type="submit" class="btn btn-primary fill">회원가입</button>
 	    </div>
