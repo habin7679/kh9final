@@ -1,5 +1,6 @@
 package com.kh.final6.repository;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,3 +41,4 @@ import com.kh.final6.entity.MemberDto;
 
 	
 	
+
