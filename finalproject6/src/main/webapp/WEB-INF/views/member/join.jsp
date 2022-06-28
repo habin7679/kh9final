@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
-   
     <!-- 프로필 이미지를 추가하기 위해 enctype을 multipart/form-data로 변경 -->
 <form action="join" method="post" enctype="multipart/form-data">
 	<div class="container w450 m30">
@@ -16,7 +14,6 @@
 	        <input type="text" name="memberId" autocomplete="off" required class="form-input fill input-round">
     </div>
 
-	    
 	    <div class="row">
 	        <label>비밀번호</label>
 	        <input type="password" name="memberPw" required placeholder="" class="form-input fill input-round">
@@ -51,8 +48,6 @@
 	        	<option>여성 </option>
 	        </select>
 	    </div>
-	     	
-	     	<
 	     	
 	    <div class="row">
 	        <button type="submit" class="btn btn-primary fill">회원가입</button>
