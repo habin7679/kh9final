@@ -85,4 +85,14 @@
 	<mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>
 	<mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"></mvc:resources>
 	
+
+
+<!-- 개발시 로그인 유지 인터셉터 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			 <mvc:mapping path="/**"/>
+			 <bean class="com.kh.final6.interceptor.LoginContinueInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>
