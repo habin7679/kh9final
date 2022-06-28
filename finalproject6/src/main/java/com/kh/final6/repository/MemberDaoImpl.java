@@ -16,7 +16,9 @@ import com.kh.final6.entity.MemberDto;
 		
 		@Override
 		public void join(MemberDto memberDto) {
-				sqlSession.insert("member.join", memberDto);
+			int memberNo = sqlSession.selectOne("member.squence");
+			memberDto.setMemberNo(memberNo);	
+			sqlSession.insert("member.join", memberDto);
 			}
 
 		// String memberPw 는 사용자가 입력한 비밀번호 
