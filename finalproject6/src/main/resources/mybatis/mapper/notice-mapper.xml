@@ -29,4 +29,9 @@
  		select * from notice order by notice_time desc
  	</select>
  	
+ 	<select id="one" parameterType="long" resultType="NoticeDto">
+ 		select * from notice
+ 			where notice_no = #{notcieNo}
+ 	</select>
+ 	
  </mapper>

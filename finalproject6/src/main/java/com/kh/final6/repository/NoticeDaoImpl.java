@@ -19,4 +19,9 @@ public class NoticeDaoImpl implements NoticeDao{
 		return sqlSession.selectList("notice.list");
 	}
 
+	@Override
+	public NoticeDto one(long noticeNo) {
+		return sqlSession.selectOne("notice.one",noticeNo);
+	}
+
 }
