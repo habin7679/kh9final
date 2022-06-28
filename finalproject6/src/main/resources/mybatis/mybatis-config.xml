@@ -25,7 +25,10 @@
 		ex : <package name = "com.kh.spring08.entity"/>
 	-->
 	<typeAliases>
-		
+
+		<package name=""/>
+
+
 	</typeAliases>
 	
 </configuration>

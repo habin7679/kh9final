@@ -1,5 +1,16 @@
 package com.kh.final6.entity;
 
-public class AttachmentDto {
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
+public class AttachmentDto {
+	private long attachmentNo;
+	private String attachmentUploadname;
+	private String attachmentSavename;
+	private String attachmentType;
+	private String attachmentSize;
 }

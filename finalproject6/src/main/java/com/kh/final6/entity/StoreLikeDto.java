@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class NoticeAttachDto {
-	private long noticeNo;
-	private long attachmentNo;
+public class StoreLikeDto {
+	private long likeNo;
+	private long storeNo;
+	private long memberNo;
+	private int likeCheck;
 }
