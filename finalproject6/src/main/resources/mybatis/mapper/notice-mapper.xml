@@ -25,8 +25,26 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
  <mapper namespace="notice">
  	
- 	<select id="list" resultType="NoticeDto">
- 		select * from notice order by notice_time desc
+ 	<select id="list" resultType="NoticeDto" parameterType="Map">
+ 		select * from (
+ 			select rownum rn, TMP.* from(
+	 			select * from notice
+	 			<if test="type != null and keyword != null">
+	 				<![CDATA[
+	 				where instr (${type},#{keyword}) > 0
+	 				]]>
+	 			</if>
+	 			order by notice_no desc)TMP
+ 			) where rn between #{begin} and #{end}
+ 	</select>
+ 	
+ 	<select id="count" parameterType="Map" resultType="int">
+ 		select count(*) from notice 
+ 		<if test = "type != null and keyword != null">
+ 			<![CDATA[
+ 			where instr (${type},#{keyword} > 0
+ 			]]>
+ 		</if>
  	</select>
  	
  	<select id="one" parameterType="long" resultType="NoticeDto">
