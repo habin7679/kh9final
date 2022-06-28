@@ -16,7 +16,9 @@ import com.kh.final6.entity.MemberDto;
 		
 		@Override
 		public void join(MemberDto memberDto) {
-			int memberNo = sqlSession.selectOne("member.squence");
+
+			int memberNo = sqlSession.selectOne("member.sequence");
+
 			memberDto.setMemberNo(memberNo);	
 			sqlSession.insert("member.join", memberDto);
 			}

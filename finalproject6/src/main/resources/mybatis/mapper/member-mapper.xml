@@ -31,14 +31,14 @@
 	
 	<insert id="join" parameterType="MemberDto">
 		insert into member(
-		    member_no, member_Id, member_pw,  member_name, 
+		    member_no, member_id, member_pw,  member_name, 
 		    member_nick, member_birth, member_phone, 
-		    member_gender, member_kind
+		    member_gender
 		)
 		values(
 		     #{memberNo}, #{memberId}, #{memberPw}, #{memberName},
 		     #{memberNick}, #{memberBirth}, #{memberPhone}, 
-		     #{memberGender}, #{memberKind}
+		     #{memberGender}
 		) 
 	</insert>
 	
@@ -48,6 +48,7 @@
 		select * from member where member_id = #{memberId}
 	</select>
 	
+	<!-- 회원 시퀀스 -->
 	<select id="sequence" resultType="int">
 		select member_seq.nextval from dual
 	</select>
