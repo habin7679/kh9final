@@ -1,5 +1,12 @@
 package com.kh.final6.controller;
 
-public class HomeController {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+@Controller
+public class HomeController {
+	@RequestMapping("/")
+	public String index() {
+		return "index";
+	}
 }
