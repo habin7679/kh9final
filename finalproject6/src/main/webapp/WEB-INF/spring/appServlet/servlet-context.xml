@@ -45,10 +45,10 @@
 		- mvc 모듈 설정으로 처리
 		- 일반적으로 webapp 안의 resources 에 모든 요소를 저장
 	 -->
-	<mvc:resources location="/resources/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/resources/js/" mapping="/js/**"></mvc:resources>
-	<mvc:resources location="/resources/font/" mapping="/font/**"></mvc:resources>
-	<mvc:resources location="/resources/image/" mapping="/image/**"></mvc:resources>
+	<mvc:resources location="/resources/css/" mapping="/css/**"></mvc:resources>
+	<mvc:resources location="/resources/vendor/" mapping="/vendor/**"></mvc:resources>
+	<mvc:resources location="/resources/img/" mapping="/img/**"></mvc:resources>
 	
 	<!-- 
 		파일 업로드를 위한 도구 등록 
@@ -84,5 +84,15 @@
 	 -->
 	<mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"></mvc:resources>
 	<mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"></mvc:resources>
+	
+
+
+<!-- 개발시 로그인 유지 인터셉터 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			 <mvc:mapping path="/**"/>
+			 <bean class="com.kh.final6.interceptor.LoginContinueInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 </beans>

@@ -19,8 +19,6 @@ public class ReservationDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reservationDate;
 	private String reservationStatus;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date reservationPayment;
 	private int reservationPeople;
 	private int reservationVisitState;
 	private String reservationTime;
