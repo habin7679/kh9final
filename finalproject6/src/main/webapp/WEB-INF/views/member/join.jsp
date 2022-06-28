@@ -58,7 +58,7 @@
 	        	<option>여성 </option>
 	        </select>
 	    </div>
-	     
+	    
 	    <div class="row">
 	        <button type="submit" class="btn btn-primary fill">회원가입</button>
 	    </div>
