@@ -8,5 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/notice")
 public class NoticeController {
 
-
+	@GetMapping("/")
+	public String list() {
+		return "notice/list";
+	}
 }
