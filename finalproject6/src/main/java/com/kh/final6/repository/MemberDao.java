@@ -1,5 +1,16 @@
 package com.kh.final6.repository;
 
-public class MemberDao {
+import com.kh.final6.entity.MemberDto;
+
+public interface MemberDao {
+
+	void join(MemberDto memberDto);
+
+	MemberDto login(String memberId, String memberPw);
+
+
+		
+
+	
 
 }
