@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data	@AllArgsConstructor @NoArgsConstructor @Builder
-public class PaymentVO {
+public class PaymentNoVO {
 
 	private int storeNo;
 	private int reservationNo;
