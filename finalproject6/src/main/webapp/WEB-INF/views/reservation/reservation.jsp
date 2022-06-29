@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include> --%>
 
-<form action="pay" method="post">
+<form action="insert" method="post">
 <div>
 ${storeDto}
 <input type="hidden" name="storeNo" value="${storeDto.storeNo}">
@@ -51,3 +52,7 @@ ${memberNo}
 <input type="submit" value="예약하기">
 
 </form>
+
+
+
+<%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> --%>

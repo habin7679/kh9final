@@ -14,8 +14,9 @@ public class PaymentDto {
 	
 	private int paymentNo;
 	private int storeNo;
+	private int reservationNo;
 	private int memberNo;
 	private int paymentTid;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date paymentTime;
+	private int paymentPrice;
 }

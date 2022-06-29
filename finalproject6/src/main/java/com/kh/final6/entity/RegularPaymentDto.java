@@ -16,7 +16,6 @@ public class RegularPaymentDto {
 	private int storeNo;
 	private int sellerNo;
 	private int RegularPaymentTid;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date RegularPaymentTime;
 	private int RegularPaymentPrice;
 

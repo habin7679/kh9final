@@ -6,4 +6,6 @@ public interface ReservationDao {
 
 	void insert(ReservationDto reservationDto);
 
+	ReservationDto one(int reservationNo);
+
 }

@@ -16,7 +16,6 @@ public class ReservationDto {
 	private int storeNo;
 	private int memberNo;
 	private int reservationPrice;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date reservationDate;
 	private String reservationStatus;
 	private int reservationPeople;
