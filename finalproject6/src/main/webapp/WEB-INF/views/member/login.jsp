@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="saveIdExist" value="${cookie.saveId != null}"></c:set>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-
+<section>
 <form action="login" method="post">
 	<input type="hidden" name="referer" value="${referer}">
 
@@ -34,7 +35,7 @@
         	</label>
         </div>
         <div class="row">
-            <input type="submit" value="로그인" class="btn btn-primary fill">
+            <input type="submit" value="로그인" class="btn1">
         </div>
         <div class="row center">
             <a href="find_id" class="link">아이디가 기억나지 않아요</a>
@@ -51,3 +52,5 @@
 		</c:if>
     </div>
 </form>
+</section>
+    <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
