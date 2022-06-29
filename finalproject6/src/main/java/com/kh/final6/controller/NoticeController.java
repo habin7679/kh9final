@@ -66,7 +66,7 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(@RequestParam long noticeNo,
+	public String detail(@RequestParam int noticeNo,
 						Model model,
 						HttpSession session,
 						RedirectAttributes attr) {
@@ -75,19 +75,19 @@ public class NoticeController {
 		
 		if(noticeDto.getNoticeNo() != 0) {
 			MemberDto memberDto = memberDao.info(noticeDto.getNoticeWriter());
-			model.addAttribute(memberDto);
+			model.addAttribute("memberDto",memberDto);
 		}
 		
 		//내 글 여부 확인
-		String memberId = (String)session.getAttribute("login");
-		MemberDto memberDto = memberDao.info(noticeDto.getNoticeWriter());
-		boolean isLogin = memberId != null; 
-		//boolean isAuth = isLogin && memberId.equals();
+		Integer memberNo = (Integer)session.getAttribute("no");
+		boolean isLogin = memberNo != null; 
+		boolean isOwner = isLogin && memberNo.equals(noticeDto.getMemberNo());
 		model.addAttribute(isLogin);
+		model.addAttribute(isOwner);
 		
 		//관리자 여부 확인
 		String memberGrade = (String)session.getAttribute("auth");
-		boolean isAdmin = isLogin && memberGrade.equals("관리자");
+		boolean isAdmin = isLogin && memberGrade.equals("관리자"); 
 		model.addAttribute(isAdmin);
 		
 		attr.addAttribute("noticeNo",noticeNo);
@@ -101,14 +101,20 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/write")
-	public String wirte(@ModelAttribute NoticeDto noticeDto,
-						@RequestParam MultipartFile noticeImg,
+	public String write(@ModelAttribute NoticeDto noticeDto,
+						//@RequestParam MultipartFile noticeImg,
 						HttpSession session,
 						RedirectAttributes attr) {
-		String memberId= (String)session.getAttribute("login");
-		noticeDto.setNoticeNo(memberId);
+		int memberNo= (Integer)session.getAttribute("no");
+		String memberId = (String)session.getAttribute("login");
+		MemberDto memberDto = memberDao.info(memberId);
+		noticeDto.setMemberNo(memberNo);
+		noticeDto.setNoticeWriter(memberDto.getMemberNick());
+		System.out.println(noticeDto);
+		int noticeNo = noticeDao.insert(noticeDto);
+		attr.addAttribute("noticeNo",noticeNo);
 		
-		return "notice/detail";
+		return "redirect:detail";
 		
 	}
 	

@@ -9,9 +9,9 @@ public interface NoticeDao {
 	List<NoticeDto> list(String type,String keyword, int p, int s);
 	int count(String type, String keyword);
 	
-	NoticeDto one(long noticeNo);
+	NoticeDto one(int noticeNo);
 	
-	long getSequence();
-	long insert(NoticeDto noticeDto);
+	int getSequence();
+	int insert(NoticeDto noticeDto);
 
 }

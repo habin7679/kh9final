@@ -41,18 +41,18 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 	//게시글 상세조회
 	@Override
-	public NoticeDto one(long noticeNo) {
+	public NoticeDto one(int noticeNo) {
 		return sqlSession.selectOne("notice.one",noticeNo);
 	}
 	//게시글 번호(시퀀스) 조회
 	@Override
-	public long getSequence() {
+	public int getSequence() {
 		return sqlSession.selectOne("notice.sequence");
 	}
 	//게시글 작성
 	@Override
-	public long insert(NoticeDto noticeDto) {
-		long noticeNo = sqlSession.selectOne("notice.sequence");
+	public int insert(NoticeDto noticeDto) {
+		int noticeNo = sqlSession.selectOne("notice.sequence");
 		noticeDto.setNoticeNo(noticeNo);
 		
 		sqlSession.insert("notice.write",noticeDto);

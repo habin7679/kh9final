@@ -42,17 +42,17 @@
  		select count(*) from notice 
  		<if test = "type != null and keyword != null">
  			<![CDATA[
- 			where instr (${type},#{keyword} > 0
+ 			where instr (${type},#{keyword}) > 0
  			]]>
  		</if>
  	</select>
  	
- 	<select id="one" parameterType="long" resultType="NoticeDto">
+ 	<select id="one" parameterType="int" resultType="NoticeDto">
  		select * from notice
  			where notice_no = #{noticeNo}
  	</select>
  	
- 	<select id="sequence" resultType="long">
+ 	<select id="sequence" resultType="int">
  		select notice_seq.nextval from dual
  	</select>
  	

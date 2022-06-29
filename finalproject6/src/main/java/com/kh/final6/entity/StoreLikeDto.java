@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class StoreLikeDto {
 	private long likeNo;
 	private long storeNo;
-	private long memberNo;
+	private int memberNo;
 	private int likeCheck;
 }

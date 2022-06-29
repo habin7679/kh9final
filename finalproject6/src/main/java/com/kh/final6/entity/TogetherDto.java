@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class TogetherDto {
-	private long togetherNo;
-	private long memberNo;
+	private int togetherNo;
+	private int memberNo;
 	private String togetherWriter;
 	private String togetherTitle;
 	private String togetherContent;
