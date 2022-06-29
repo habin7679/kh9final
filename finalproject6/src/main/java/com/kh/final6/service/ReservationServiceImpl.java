@@ -24,8 +24,8 @@ public class ReservationServiceImpl implements ReservationService{
 		StoreDto storeDto = storeDao.one(reservationDto.getStoreNo());
 		int total = reservationDto.getReservationPeople() * storeDto.getStoreReservationPrice();
 		reservationDto.setReservationPrice(total);
-		log.debug("reservationDto = {} ", reservationDto);
 		reservationDao.insert(reservationDto);
 		
 	}
+	
 }
