@@ -49,7 +49,17 @@
  	
  	<select id="one" parameterType="long" resultType="NoticeDto">
  		select * from notice
- 			where notice_no = #{notcieNo}
+ 			where notice_no = #{noticeNo}
  	</select>
+ 	
+ 	<select id="sequence" resultType="long">
+ 		select notice_seq.nextval from dual
+ 	</select>
+ 	
+ 	<insert id="write" parameterType="NoticeDto">
+ 		insert into notice (
+ 			notice_no,member_no,notice_head,notice_title,notice_content,notice_writer)
+ 		values (#{noticeNo},#{memberNo},#{noticeHead},#{noticeTitle},#{noticeContent},#{noticeWriter})
+ 	</insert>
  	
  </mapper>
