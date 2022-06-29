@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnaDto {
-	private long qnaNo;
-	private long memberNo;
+	private int qnaNo;
+	private int memberNo;
 	private String qnaWriter;
 	private String qnaHead;
 	private String qnaTitle;

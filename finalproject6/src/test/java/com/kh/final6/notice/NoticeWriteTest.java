@@ -28,7 +28,7 @@ public class NoticeWriteTest {
 	
 	@Before
 	public void data() {
-		long noticeNo = noticeDao.getSequence();
+		int noticeNo = noticeDao.getSequence();
 		
 		noticeDto = new NoticeDto();
 		noticeDto.setNoticeNo(noticeNo);

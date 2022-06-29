@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class NoticeDto {
-	private long noticeNo;
-	private long memberNo;
+	private int noticeNo;
+	private int memberNo;
 	private String noticeWriter;
 	private String noticeHead;
 	private String noticeTitle;

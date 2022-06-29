@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ReplyDto {
-	private long replyNo;
-	private long replyTarget;
-	private long memberNo;
+	private int replyNo;
+	private int replyTarget;
+	private int memberNo;
 	private String replyWriter;
 	private String replyContent;
 	private Date replyTime;

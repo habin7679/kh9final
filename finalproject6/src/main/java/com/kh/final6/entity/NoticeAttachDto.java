@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class NoticeAttachDto {
-	private long noticeNo;
+	private int noticeNo;
 	private long attachmentNo;
 }
