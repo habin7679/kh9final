@@ -24,7 +24,7 @@ public class StoreDto {
     private int storeLikecount;
     private String storeContent;
     private String storeLunchTime;
-    private String storeDinnerTim;
+    private String storeDinnerTime;
     private String storeStart;
     private String storeEnd;
     private int  storeReservationPrice;

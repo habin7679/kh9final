@@ -29,13 +29,23 @@ ${memberNo}
 	<span>예약금 : ${storeDto.storeReservationPrice}</span>
 </div>
 <div>
-	인원수 : <input type="number" name="peopleCount">
+	인원수 : <input type="number" name="reservationPeople">
 </div>
 <div>
 	<span>토탈 : ${storeDto.storeReservationPrice}  </span>
 </div>
 <div>
 	예약일 ; <input type="date" name="reservationDate">
+</div>
+<div>
+	<label>
+	런치값
+	<input type="checkbox" name=reservationTime value="${storeDto.storeLunchTime }">
+	</label>
+</div>
+
+<div>
+	요청사항 : <textarea rows="10" cols="10" name="reservationContent"></textarea>
 </div>
 
 <input type="submit" value="예약하기">
