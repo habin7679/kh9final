@@ -47,9 +47,6 @@ public class MemberController {
 	}
 	
 //	로그인 처리
-// 사용자 요청 헤더에 있는 Referer라는 값을 알아야 로그인 성공 후 다시 이동 시킬 수 있다 
-// - @RequestHeader("헤더이름")
-	
 	@GetMapping("/login")
 	public String login(
 			@RequestHeader(value = "Referer", defaultValue="/") String referer,
@@ -61,18 +58,21 @@ public class MemberController {
 	
 	@PostMapping("/login")
 	public String login(
+			
 			@RequestParam String memberId, 
 			@RequestParam String memberPw,
 			@RequestParam String referer,
 			@RequestParam(required=false) String remember,
 			HttpSession session, 
 			HttpServletResponse response) {
-		MemberDto memberDto = memberDao.login(memberId, memberPw);
+		MemberDto memberDto = memberDao.login( memberId, memberPw);
 		if(memberDto != null) {//로그인 성공
 			//세션
+			
+			session.setAttribute("no", memberDto.getMemberNo());
 			session.setAttribute("login", memberDto.getMemberId());
 			session.setAttribute("auth", memberDto.getMemberKind());
-			
+		
 			//쿠키
 			if(remember != null) {//체크하고 로그인 했으면 -> 쿠키 발행
 				Cookie ck = new Cookie("saveId", memberDto.getMemberId());
@@ -93,6 +93,7 @@ public class MemberController {
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
+		session.removeAttribute("no");
 		session.removeAttribute("login");
 		session.removeAttribute("auth");
 		return "redirect:/";
@@ -102,7 +103,7 @@ public class MemberController {
 	
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
-		String memberId = (String) session.getAttribute("login");
+		String memberId = String.valueOf(session.getAttribute("login"));
 		
 		MemberDto memberDto = memberDao.info(memberId);
 		model.addAttribute("memberDto", memberDto);
@@ -131,7 +132,56 @@ public class MemberController {
 			}
 	}
 	
+	//탈퇴 
+	@GetMapping("/exit")
+	public String exit() {
+		return "member/exit"; 
+	}
+	
+	@PostMapping("/exit")
+	public String exit(@RequestParam String memberPw, HttpSession session) {
+	
+	String memberId = (String)session.getAttribute("login");
+	boolean success =  memberDao.exit(memberId, memberPw);
+	
+	if(success) {
+		session.removeAttribute("login");
+		session.removeAttribute("autth");
+		return "redirect:exit_finish"; 
+	}
+	else {
+		return "redirect:exit?error"; 
+	}
+}
 
+	@GetMapping("/exit_finish")
+	public String exitFinish() {
+		return "member/exit_finish"; 
+	}
+
+	//개인정보 변경 
+	@GetMapping("/information")
+	public String information(HttpSession session, Model model) {
+		String memberId = String.valueOf( session.getAttribute("login"));
+		MemberDto memberDto = memberDao.info(memberId); 
+		model.addAttribute("memberDto", memberDto);
+		return "member/information";
+	}
+	
+	@PostMapping("/information")
+	public String information(HttpSession session, @ModelAttribute MemberDto memberDto) {
+		String memberId = String.valueOf(session.getAttribute("login"));
+		memberDto.setMemberId(memberId);
+
+		boolean success = memberDao.changeInformation(memberDto);
+		if(success) {
+			return"redirect:mypage"; 
+		}
+		else {
+			return "redirect:information?error"; 
+		}
+	
+	}
 }
 
 

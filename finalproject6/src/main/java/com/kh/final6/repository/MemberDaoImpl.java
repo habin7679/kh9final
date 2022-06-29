@@ -23,8 +23,6 @@ import com.kh.final6.entity.MemberDto;
 			sqlSession.insert("member.join", memberDto);
 			}
 
-		// String memberPw 는 사용자가 입력한 비밀번호 
-		// memberDto 는 DB 데이터 
 		
 		@Override
 			public MemberDto login(String memberId, String memberPw) {
@@ -40,8 +38,6 @@ import com.kh.final6.entity.MemberDto;
 				else {
 					return null;
 				}
-				
-			
 		}
 
 		@Override
@@ -61,6 +57,32 @@ import com.kh.final6.entity.MemberDto;
 			
 			return count > 0; 
 					
+		}
+
+		@Override
+		public boolean exit(String memberId, String memberPw) {
+			MemberDto memberDto = this.login(memberId, memberPw);
+			if(memberDto == null) {
+			return false;
+			}
+			else { 
+				int count = sqlSession.delete("member.exit", memberId);
+				return count > 0;
+			}
+			
+		}
+
+		@Override
+		public boolean changeInformation(MemberDto memberDto) {
+			MemberDto findDto = this.login(memberDto.getMemberId(), memberDto.getMemberPw());
+			if(findDto == null) {
+				return false;
+			}
+			else {
+			int count = sqlSession.update("member.changeInformation", memberDto); 
+			return count > 0; 
+			}
+			
 		}
 	}
 	
