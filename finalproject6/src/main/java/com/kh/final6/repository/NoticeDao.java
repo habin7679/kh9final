@@ -10,5 +10,8 @@ public interface NoticeDao {
 	int count(String type, String keyword);
 	
 	NoticeDto one(long noticeNo);
+	
+	long getSequence();
+	long insert(NoticeDto noticeDto);
 
 }
