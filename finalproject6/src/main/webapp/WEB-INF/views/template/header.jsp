@@ -5,11 +5,10 @@
 <c:set var="memberId" value="${login}"></c:set>
 <c:set var="isLogin" value="${memberId != null}"></c:set>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
-<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -19,23 +18,23 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
+  <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
   <!-- Vendor CSS Files -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="vendor/aos/aos.css" rel="stylesheet">
-  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/aos/aos.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="css/main.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Yummy - v1.0.0
@@ -54,18 +53,20 @@
     .oi{
       margin-right: 1000px;
     }
+
 </style>
 
 <body>
 
   <!-- ======= Header ======= -->
+
   <header id="header" class="header fixed-top d-flex align-items-stretch">
     <div class="container d-flex align-items-stretch ">
       
       <nav id="navbar" class="navbar">
         
           <a href="index.html">
-            <img src="img/log.PNG" width="170px" height="120px">
+            <img src="${pageContext.request.contextPath}/img/log.PNG" width="170px" height="120px">
           </a>
         
         <ul>
@@ -103,7 +104,7 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
       <ul>
-        <li class="dropdown"><span>닉네임  </span><i class="fa-solid fa-square-envelope fa-1x"></i>
+        <li class="dropdown"><a href="#"><span>닉네임  </span><i class="fa-solid fa-square-envelope fa-1x"></i></a>
           <ul>
             <li><a href="#">mypage</a></li>
             <li><a href="#">쪽지함</a></li>
