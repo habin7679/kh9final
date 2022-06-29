@@ -30,11 +30,13 @@
  	
  	<insert id="insert" parameterType="ReservationDto">
  		insert into reservation(
- 		 reservationPeople, reservationPrice, reservationContent, reservationTime, storeNo, memberNo,
+ 		 reservation_people, reservation_price, reservation_content, 
+ 		 reservation_time, store_no, member_no, reservation_no, reservation_date
  		) 
  		values(
- 			#{reservationPeople}, #{reservationPrice}, #{reservationContent}, #{reservationTime}, #{storeNo}, #{memberNo}
- 		);
+ 			#{reservationPeople}, #{reservationPrice}, #{reservationContent},
+ 			 #{reservationTime}, #{storeNo}, #{memberNo}, #{reservationNo}, #{reservationDate}
+ 		)
  	</insert>
  	
  	<select id="one" resultType="ReservationDto" parameterType="int">
