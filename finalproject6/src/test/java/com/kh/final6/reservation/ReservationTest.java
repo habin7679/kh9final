@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.kh.final6.entity.ReservationDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.repository.StoreDao;
 
@@ -24,12 +25,13 @@ public class ReservationTest {
 	@Autowired
 	private StoreDao storeDao;
 	
-	@Test
+//	@Test
 	public void test() {
 		int storeNo = 1;
 		StoreDto storeDto = storeDao.one(storeNo);
 		log.debug("storeDto = {}", storeDto);
 		
 	}
+	
 	
 }
