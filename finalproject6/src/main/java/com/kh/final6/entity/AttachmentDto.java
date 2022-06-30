@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class AttachmentDto {
-	private long attachmentNo;
+	private int attachmentNo;
 	private String attachmentUploadname;
 	private String attachmentSavename;
 	private String attachmentType;
-	private String attachmentSize;
+	private long attachmentSize;
 }
