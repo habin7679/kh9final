@@ -27,4 +27,19 @@ public class PaymentDaoImpl implements PaymentDao {
 		int count = sqlSession.update("reservation.status",paymentDto.getReservationNo());
 		if(count < 0) throw new CannotFindException();
 	}
+	
+	@Override
+	public PaymentDto one(int paymentNo) {
+		return sqlSession.selectOne("payment.one", paymentNo);
+	}
+	
+	@Override
+	@Transactional
+	public void cancel(PaymentDto paymentDto) {
+		int countPay = sqlSession.update("payment.cancel", paymentDto.getPaymentNo());
+		int countReservation = sqlSession.update("reservation.cancel", paymentDto.getReservationNo());
+		if(countPay < 0 && countReservation < 0) {
+			throw new CannotFindException();
+		}
+	}
 }

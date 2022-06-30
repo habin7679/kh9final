@@ -51,4 +51,12 @@
  				reservation_no = #{reservationNo}
  	</update>
  	
+ 	<update id="cancel" parameterType="int">
+ 		update reservation
+ 			set
+ 				reservation_status = '취소'
+ 			where 
+ 				reservation_no = #{reservationNo}
+ 	</update>
+ 	
  </mapper>
