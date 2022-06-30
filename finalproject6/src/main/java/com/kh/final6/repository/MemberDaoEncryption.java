@@ -19,6 +19,7 @@ public class MemberDaoEncryption implements MemberDao{
 	@Override
 	public void join(MemberDto memberDto) {
 		
+		//시퀀스 생성 
 		int memberNo = sqlSession.selectOne("member.sequence");
 		memberDto.setMemberNo(memberNo);	
 		
@@ -49,6 +50,11 @@ public class MemberDaoEncryption implements MemberDao{
 	@Override
 	public MemberDto info(String memberId) {
 		return sqlSession.selectOne("member.one", memberId);
+	}
+	
+	@Override
+	public MemberDto oneNo(int memberNo) {
+		return sqlSession.selectOne("member.oneNo", memberNo);
 	}
 
 	@Override
@@ -97,8 +103,6 @@ public class MemberDaoEncryption implements MemberDao{
 		return sqlSession.selectOne("member.findId", memberDto);
 	}
 
-
-	
 }
 
 
