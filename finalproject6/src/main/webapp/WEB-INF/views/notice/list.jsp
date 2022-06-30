@@ -3,13 +3,27 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <div class="container-fluid mt-10">
+    <div class="container-fluid">
 
         <div class="row mt-2">
             <div class="col-md-8 offset-md-2">
                 <div class="p-4 text-light text-center bg-dark rounded">
                     <h1>공지게시판</h1>
                 </div>
+            </div>
+        </div>
+        
+        <div class="row mt-2 text-left">
+            <div class="col-md-8 offset-md-2">
+      	<%--복합 검색 미구현임 --%>
+               <form action="list" method="get">
+                    <select name="type">
+                        <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>제목</option>
+						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>내용</option>
+						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
+                    </select>
+                <input type="submit" value="보기">
+               </form>
             </div>
         </div>
         
@@ -52,19 +66,144 @@
                         </c:forEach>
                     </tbody>
                 </table>
+		            <c:if test="${list.isEmpty()}">
+		            	<div class="row mt-2 text-center">
+		            		<h4>검색 결과가 없습니다.</h4>
+		            	</div>
+		            </c:if>
             </div>
         </div>
-        
-        <div class="row mt-2 text-center">
+
+	<!-- 페이지네이션 -->
+	<div class="row mt-2">
+		<div class="col">
+			<ul class="pagination justify-content-center">
+				<c:if test="${p > 1}">
+					<c:choose>
+						<c:when test="${search}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="list?p=1&s=${s}">&lt;</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+
+				<c:if test="${startBlock > 1}">
+					<c:choose>
+						<c:when test="${search}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="list?p=${startBlock-1}&s=${s}">&laquo;</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+
+				<!-- 숫자 링크 영역 -->
+				<c:forEach var="i" begin="${startBlock}" end="${endBlock}" step="1">
+					<c:choose>
+						<c:when test="${search}">
+							<c:choose>
+								<c:when test="${i == p}">
+									<li class="page-item active"><a class="page-link"
+										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link"
+										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${i == p}">
+									<li class="page-item active"><a class="page-link"
+										href="list?p=${i}&s=${s}">${i}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link"
+										href="list?p=${i}&s=${s}">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<!-- 다음 버튼 영역 -->
+				<c:if test="${endBlock < lastPage}">
+					<c:choose>
+						<c:when test="${search}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="list?p=${endBlock+1}&s=${s}">&gt;</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+
+				<c:if test="${p < lastPage}">
+					<c:choose>
+						<c:when test="${search}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}">&raquo;</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+
+
+
+				<!-- 다음 버튼 영역 -->
+				<c:if test="${endBlock < lastPage}">
+					<c:choose>
+						<c:when test="${search}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="list?p=${endBlock+1}&s=${s}">&gt;</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+
+				<c:if test="${p < lastPage}">
+					<c:choose>
+						<c:when test="${search}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}">&raquo;</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</ul>
+		</div>
+	</div>
+
+
+	<div class="row mt-2 text-center">
             <div class="col-md-8 offset-md-2">
                <!--검색창-->
                <form action="list" method="get">
                     <select name="type">
-                        <option>제목</option>
-                        <option>내용</option>
-                        <option>작성자</option>
+                        <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>제목</option>
+						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>내용</option>
+						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
                     </select>
-                <input type="search" name="keyword" placeholder="검색어 입력" value=${keyword}>
+                <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}">
                 <input type="submit" value="검색">
                </form>
             </div>

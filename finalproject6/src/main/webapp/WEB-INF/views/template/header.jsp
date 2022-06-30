@@ -44,15 +44,17 @@
   ======================================================== -->
 </head>
 <style>
-    .me{
-        margin-left: 500px;
-    }
-    .ru{
-      width: 300px;
-    }
-    .oi{
-      margin-right: 1000px;
-    }
+.me {
+	margin-left: 500px;
+}
+
+.ru {
+	width: 300px;
+}
+
+.oi {
+	margin-right: 1000px;
+}
 
 </style>
 
@@ -66,6 +68,7 @@
       <nav id="navbar" class="navbar">
         
           <a href="${pageContext.request.contextPath}/">
+
             <img src="${pageContext.request.contextPath}/img/log.PNG" width="170px" height="120px">
           </a>
         
@@ -91,8 +94,8 @@
           <li><a href="#">같이가요</a></li>
           <li class="dropdown"><a href="#"><span>게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">문의게시판</a></li>
-              <li><a href="#">공지게시판</a></li>
+              <li><a href="${pageContext.request.contextPath}/qna/list">문의게시판</a></li>
+              <li><a href="${pageContext.request.contextPath}/notice/list">공지게시판</a></li>
             </ul>
           </li>
         </ul>

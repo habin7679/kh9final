@@ -17,7 +17,7 @@
 	    
 	     <div class="row">
 	        <label>닉네임</label>
-	        <input type="text" name="memberNick" autocomplete="off" required class="form-input fill input-round" value="${memberDto.memberName}">
+	        <input type="text" name="memberNick" autocomplete="off" required class="form-input fill input-round" value="${memberDto.memberNick}">
 	    </div>
 	    
 	    <div class="row">
@@ -30,9 +30,12 @@
 	        <input type="tel" name="memberPhone" autocomplete="off" required class="form-input fill input-round" value="${memberDto.memberPhone}">
 	    </div>
 	   
-	    <div class="row">
+	    <div class="row" >
 	        <label>성별</label>
-	        <input type="gender" name="memberGender" autocomplete="off" class="form-input fill input-round" value="${memberDto.memberGender}">
+	        <select name="memberGender" >
+	        	<option >남성</option>
+	        	<option>여성 </option>
+	        </select>
 	    </div>
 	    
 	    <div class="row">

@@ -14,7 +14,11 @@ public interface MemberDao {
 	boolean changePassword(String memberId, String currentPw, String changePw);
 	boolean exit(String memberId, String memberPw);
 	boolean changeInformation(MemberDto memberDto);
+
 	List<MemberDto> list(String type, String keyword, int p, int s);
+
+	String findId(MemberDto memberDto);
+
 
 
 }
