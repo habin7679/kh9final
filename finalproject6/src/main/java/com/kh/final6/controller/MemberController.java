@@ -1,6 +1,8 @@
 package com.kh.final6.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -180,8 +182,38 @@ public class MemberController {
 		else {
 			return "redirect:information?error"; 
 		}
-	
 	}
+	
+	//리스트
+			@GetMapping("/list")
+			public String list(
+					@RequestParam (required = false) String type,
+					@RequestParam (required = false) String keyword,
+					@RequestParam (required = false, defaultValue = "1") int p,
+					@RequestParam (required = false, defaultValue = "10") int s,
+					Model model) {
+				
+				List<MemberDto> list = memberDao.list(type,keyword,p,s);
+				model.addAttribute("list",list);
+				
+				boolean search = type !=null&&keyword != null;
+				model.addAttribute("search",search);
+				
+				
+				
+				int blockSize = 10;
+				int endBlock = (p+blockSize - 1) / blockSize * blockSize;
+				int startBlock = endBlock - (blockSize - 1);
+				
+				model.addAttribute("p",p);
+				model.addAttribute("s",s);
+				model.addAttribute("blockSize",blockSize);
+				model.addAttribute("endBlock",endBlock);
+				model.addAttribute("startBlock",startBlock);
+				model.addAttribute("type",type);
+				model.addAttribute("keyword",keyword);
+				return "member/list";
+			}
 }
 
 

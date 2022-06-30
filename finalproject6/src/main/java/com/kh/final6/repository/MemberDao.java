@@ -1,5 +1,7 @@
 package com.kh.final6.repository;
 
+import java.util.List;
+
 import com.kh.final6.entity.MemberDto;
 
 
@@ -12,6 +14,7 @@ public interface MemberDao {
 	boolean changePassword(String memberId, String currentPw, String changePw);
 	boolean exit(String memberId, String memberPw);
 	boolean changeInformation(MemberDto memberDto);
+	List<MemberDto> list(String type, String keyword, int p, int s);
 
 
 }

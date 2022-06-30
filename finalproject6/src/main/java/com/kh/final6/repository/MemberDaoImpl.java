@@ -1,6 +1,10 @@
 package com.kh.final6.repository;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,6 +92,21 @@ import com.kh.final6.entity.MemberDto;
 			}
 			
 		}
+		//목록
+		@Override
+		public List<MemberDto> list (String type, String keyword, int p, int s){
+			Map<String,Object> param = new HashMap<>();
+			param.put("type", type);
+			param.put("keyword", keyword);
+			
+			int end = p *s;
+			int begin = end - (s-1);
+			
+			param.put("begin", begin);
+			param.put("end", end);
+			return sqlSession.selectList("member.list",param);
+		}
+
 	}
 	
 	

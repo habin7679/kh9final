@@ -120,7 +120,6 @@
 
 
   
-  	  <main id="main">
   	  	<section>
   	  		<article>
 
