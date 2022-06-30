@@ -16,6 +16,23 @@ public class NoticeDaoImpl implements NoticeDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@Override
+	public List<NoticeDto> list(String type, String keyword, int p, int s, String column, String order) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("type", type);
+		param.put("keyword", keyword);
+		param.put("column", column);
+		param.put("order", order);
+		
+		int end = p * s;
+		int begin = end - (s-1);
+		
+		param.put("begin", begin);
+		param.put("end", end);
+		return sqlSession.selectList("notice.list",param);
+		
+	}
+	
 	//목록 조회
 	@Override
 	public List<NoticeDto> list(String type,String keyword, int p, int s) {
