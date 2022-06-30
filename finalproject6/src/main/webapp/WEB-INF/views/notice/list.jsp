@@ -105,7 +105,7 @@
 						<c:when test="${search}">
 							<c:choose>
 								<c:when test="${i == p}">
-									<li class="page-item"><a class="page-link" class="active"
+									<li class="page-item active"><a class="page-link"
 										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:when>
 								<c:otherwise>
@@ -117,7 +117,7 @@
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${i == p}">
-									<li class="page-item"><a class="page-link" class="active"
+									<li class="page-item active"><a class="page-link"
 										href="list?p=${i}&s=${s}">${i}</a></li>
 								</c:when>
 								<c:otherwise>

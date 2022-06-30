@@ -44,15 +44,17 @@
   ======================================================== -->
 </head>
 <style>
-    .me{
-        margin-left: 500px;
-    }
-    .ru{
-      width: 300px;
-    }
-    .oi{
-      margin-right: 1000px;
-    }
+.me {
+	margin-left: 500px;
+}
+
+.ru {
+	width: 300px;
+}
+
+.oi {
+	margin-right: 1000px;
+}
 
 </style>
 
