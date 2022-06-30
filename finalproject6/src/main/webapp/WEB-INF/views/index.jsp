@@ -14,7 +14,6 @@
     </div>
   </section><!-- End Hero Section -->
 
-
     <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu">
       <div class="container" data-aos="fade-up">
@@ -626,7 +625,6 @@
 
       </div>
     </section><!-- End Gallery Section -->
-
 
 
 

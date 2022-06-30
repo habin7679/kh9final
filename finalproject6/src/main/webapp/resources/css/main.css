@@ -10,6 +10,24 @@
 # Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
 --------------------------------------------------------------*/
 /* Fonts */
+.btn1,
+.btn1:focus {
+  font-size: 14px;
+  color: #fff;
+  background: var(--color-primary);
+  padding: 8px 20px;
+  transition: 0.3s;
+  border-radius:4px;
+  border:none;
+}
+
+.btn1:hover,
+.btn1:focus:hover {
+  color: #fff;
+  background: rgba(206, 18, 18, 0.8);
+  border:none;
+}
+
 :root {
   --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-primary: "Amatic SC", sans-serif;
@@ -1621,6 +1639,8 @@ section {
   background-color: #1f1f24;
   padding: 50px 0;
   color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  transform : translateY(0%);
 }
 
 .footer .icon {
