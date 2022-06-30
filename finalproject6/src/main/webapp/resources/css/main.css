@@ -27,6 +27,9 @@
   background: rgba(206, 18, 18, 0.8);
   border:none;
 }
+.top{
+margin-top : 60px;
+}
 
 /* 페이지네이션 */
 .page-link {

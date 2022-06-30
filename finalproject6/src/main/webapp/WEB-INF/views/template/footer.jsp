@@ -3,7 +3,7 @@
 
     		</article>
 		</section>
-  	</main><!-- End #main -->
+  	<!-- End #main -->
 
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

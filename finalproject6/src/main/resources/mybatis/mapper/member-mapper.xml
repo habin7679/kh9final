@@ -85,7 +85,18 @@
 		where
 			member_id = #{memberId}
 	</update>
-	
+	<select id="list" resultType="MemberDto" parameterType="Map">
+		select*from (
+			select rownum rn, TMP.* from(
+				select*from member
+				<if test="type != null and keyword != null">
+	 				<![CDATA[
+	 				where instr (${type},#{keyword}) > 0
+	 				]]>
+	 			</if>
+	 			order by member_no desc)TMP
+ 			) where rn between #{begin} and #{end}
+	</select>
 	
 	
 
