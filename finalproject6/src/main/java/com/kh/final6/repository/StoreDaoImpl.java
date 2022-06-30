@@ -16,4 +16,9 @@ public class StoreDaoImpl implements StoreDao {
 		public StoreDto one(int storeNo) {
 			return sqlSession.selectOne("store.one", storeNo);
 	}	
+	
+	@Override
+	public int selectReservationPrice(int storeNo) {
+		return sqlSession.selectOne("store.price", storeNo);
+	}
 }
