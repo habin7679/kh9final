@@ -104,18 +104,16 @@ public class NoticeController {
 	@PostMapping("/write")
 	public String write(@ModelAttribute NoticeDto noticeDto,
 						//@RequestParam MultipartFile noticeImg,
-						HttpSession session,
-						RedirectAttributes attr) {
+						HttpSession session) {
 		int memberNo= (Integer)session.getAttribute("no");
 		String memberId = (String)session.getAttribute("login");
 		MemberDto memberDto = memberDao.info(memberId);
 		noticeDto.setMemberNo(memberNo);
 		noticeDto.setNoticeWriter(memberDto.getMemberNick());
 		System.out.println(noticeDto);
-		int noticeNo = noticeDao.insert(noticeDto);
-		attr.addAttribute("noticeNo",noticeNo);
+		noticeDao.insert(noticeDto);
 		
-		return "redirect:detail";
+		return "redirect:list";
 		
 	}
 	
