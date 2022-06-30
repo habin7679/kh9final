@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
     <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 
+    
+    		</article>
+		</section>
+  	</main><!-- End #main -->
+
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 

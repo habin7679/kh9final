@@ -49,6 +49,11 @@
 	<select id="one" resultType="MemberDto" parameterType="String">
 		select * from member where member_id = #{memberId}
 	</select>
+	
+		<!-- 단일조회 No-->
+	<select id="oneNo" resultType="MemberDto" parameterType="int">
+		select * from member where member_no = #{memberNo}
+	</select>
 
 	<!-- 비밀번호 변경  -->
 	<update id = "changePassword" parameterType = "MemberDto">
