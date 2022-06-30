@@ -3,12 +3,9 @@ package com.kh.final6.repository;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.kh.final6.entity.MemberDto;
 
-	//@Repository
-	@Service
+	//@Repository // 암호화 페이지꺼 사용  
 	public class MemberDaoImpl implements MemberDao {
 
 		@	Autowired
@@ -88,6 +85,13 @@ import com.kh.final6.entity.MemberDto;
 			}
 			
 		}
+
+			@Override
+			public String findId(MemberDto memberDto) {
+				return sqlSession.selectOne("member.findId", memberDto);
+			}
+
+		
 	}
 	
 	

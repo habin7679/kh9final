@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-
-
 <form action="password" method="post">
 	<div class="container w400 m30">
 	    <div class="row center">
