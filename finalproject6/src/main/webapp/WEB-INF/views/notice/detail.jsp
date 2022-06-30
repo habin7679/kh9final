@@ -19,25 +19,25 @@
     			<table class="table">
     				<tr>
     					<td>
-    						<h2>말머리</h2>
+    						<h3>[${noticeDto.noticeHead }]</h3>
     					</td>
     				</tr>
     				
     				<tr>
-    					<td>사용자</td>
+    					<td>${noticeDto.noticeWriter }</td>
     				</tr>
     				
     				<tr>
     					<td>
-    						<pre>내용</pre>
+    						<pre>${noticeDto.noticeContent }</pre>
     					</td>
     				</tr>
     				
     				<tr>
     					<td>
-    						<a href="#" class="btn btn primary">수정</a>
-    						<a href="#" class="btn btn primary">삭제</a>
-    						<a href="#" class="btn btn primary">목록</a>
+    						<a href="${pageContext.request.contextPath}/notice/edit?noticeNo=${noticeDto.noticeNo}" class="btn btn primary">수정</a>
+    						<a href="${pageContext.request.contextPath}/notice/delete?noticeNo=${noticeDto.noticeNo}" class="btn btn primary">삭제</a>
+    						<a href="${pageContext.request.contextPath}/notice/list" class="btn btn primary">목록</a>
     					</td>
     				</tr>
     			</table>

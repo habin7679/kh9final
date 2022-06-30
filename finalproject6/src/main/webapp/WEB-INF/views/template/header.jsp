@@ -91,8 +91,8 @@
           <li><a href="#">같이가요</a></li>
           <li class="dropdown"><a href="#"><span>게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">문의게시판</a></li>
-              <li><a href="#">공지게시판</a></li>
+              <li><a href="${pageContext.request.contextPath}/qna/list">문의게시판</a></li>
+              <li><a href="${pageContext.request.contextPath}/notice/list">공지게시판</a></li>
             </ul>
           </li>
         </ul>
