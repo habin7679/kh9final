@@ -66,6 +66,11 @@
                         </c:forEach>
                     </tbody>
                 </table>
+		            <c:if test="${list.isEmpty()}">
+		            	<div class="row mt-2 text-center">
+		            		<h4>검색 결과가 없습니다.</h4>
+		            	</div>
+		            </c:if>
             </div>
         </div>
 
