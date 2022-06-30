@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.final6.entity.MemberDto;
 import com.kh.final6.entity.NoticeDto;
+import com.kh.final6.error.CannotFindException;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.NoticeDao;
 
@@ -118,8 +119,37 @@ public class NoticeController {
 		
 	}
 	
-	//@GetMapping("/edit")
-	//@PostMapping("/edit")
-	//@GetMapping("/delete")
+	@GetMapping("/delete")
+	public String delete(@RequestParam int noticeNo) {
+		boolean success = noticeDao.delete(noticeNo);
+		
+		if(success) {
+			return "redirect:list";
+		}
+		else {
+			throw new CannotFindException();
+		}
+	}
+	
+	@GetMapping("/edit")
+	public String edit(@RequestParam int noticeNo,
+						Model model) {
+		NoticeDto noticeDto = noticeDao.one(noticeNo);
+		model.addAttribute(noticeDto);
+		return "notice/edit";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute NoticeDto noticeDto,
+						RedirectAttributes attr) {
+		boolean success = noticeDao.update(noticeDto);
+		if(success) {
+			attr.addAttribute("noticeNo",noticeDto.getNoticeNo());
+			return "redirect:detail";
+		}
+		else {
+			throw new CannotFindException();
+		}
+	}
 	
 }

@@ -3,13 +3,27 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <div class="container-fluid mt-10">
+    <div class="container-fluid">
 
         <div class="row mt-2">
             <div class="col-md-8 offset-md-2">
                 <div class="p-4 text-light text-center bg-dark rounded">
                     <h1>공지게시판</h1>
                 </div>
+            </div>
+        </div>
+        
+        <div class="row mt-2 text-left">
+            <div class="col-md-8 offset-md-2">
+               <!--검색창-->
+               <form action="list" method="get">
+                    <select name="type">
+                        <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>제목</option>
+						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>내용</option>
+						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
+                    </select>
+                <input type="submit" value="보기">
+               </form>
             </div>
         </div>
         
@@ -60,11 +74,11 @@
                <!--검색창-->
                <form action="list" method="get">
                     <select name="type">
-                        <option>제목</option>
-                        <option>내용</option>
-                        <option>작성자</option>
+                        <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>제목</option>
+						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>내용</option>
+						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
                     </select>
-                <input type="search" name="keyword" placeholder="검색어 입력" value=${keyword}>
+                <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}">
                 <input type="submit" value="검색">
                </form>
             </div>
