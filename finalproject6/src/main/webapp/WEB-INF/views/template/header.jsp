@@ -7,6 +7,7 @@
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 
 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -115,5 +116,7 @@
       </nav>
     </div>
 
+
   </header><!-- End Header -->
  
+
