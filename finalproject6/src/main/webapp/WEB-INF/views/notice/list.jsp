@@ -1,23 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>notice List</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-     <style>
- 		 .left{ text-align: left !important; }
-     </style>
-</head>
-<body>
-    <div class="container-fluid">
+    <div class="container-fluid mt-10">
 
         <div class="row mt-2">
             <div class="col-md-8 offset-md-2">
@@ -30,7 +16,7 @@
         <!-- 글쓰기 버튼 -->
          <div class="row mt-2"> 
             <div class="col-md-8 offset-md-2">
-               <a href="write" class="btn btn-primary col-md-1 offset-md-11">글쓰기</a>
+               <a href="write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
             </div>
         </div>
 
@@ -50,7 +36,7 @@
                     	<c:forEach var="noticeDto" items="${list}">
 	                        <tr>
 	                            <td>${noticeDto.noticeNo}</td>
-	                            <td class="left">
+	                            <td style="text-align: left !important">
 	                            <a href="detail?noticeNo=${noticeDto.noticeNo}">
 	                           	<!-- 말머리 -->
 		                            <c:if test="${noticeDto.noticeHead != null}">
@@ -90,5 +76,4 @@
     <script>
         
     </script>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
