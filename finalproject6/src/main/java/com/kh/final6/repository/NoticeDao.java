@@ -13,5 +13,9 @@ public interface NoticeDao {
 	
 	int getSequence();
 	int insert(NoticeDto noticeDto);
+	
+	boolean delete(int noticeNo);
+	
+	boolean update(NoticeDto noticeDto);
 
 }

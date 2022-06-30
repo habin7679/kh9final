@@ -52,6 +52,10 @@
  			where notice_no = #{noticeNo}
  	</select>
  	
+ 	<update id="readcount" parameterType="int">
+ 		update notice set notice_readcount = notice_readcount + 1 where notice_no = #{noticeNo}
+ 	</update>
+ 	
  	<select id="sequence" resultType="int">
  		select notice_seq.nextval from dual
  	</select>
@@ -61,5 +65,15 @@
  			notice_no,member_no,notice_head,notice_title,notice_content,notice_writer)
  		values (#{noticeNo},#{memberNo},#{noticeHead},#{noticeTitle},#{noticeContent},#{noticeWriter})
  	</insert>
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		delete notice where notice_no = #{noticeNo}
+ 	</delete>
+ 	
+ 	<update id="edit" parameterType="NoticeDto">
+ 		update notice set
+ 			notice_head = #{noticeHead} ,notice_title = #{noticeTitle}, notice_content = #{noticeContent}
+ 		where notice_no = #{noticeNo}
+ 	</update>
  	
  </mapper>
