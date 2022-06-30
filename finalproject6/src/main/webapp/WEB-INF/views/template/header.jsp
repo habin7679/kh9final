@@ -68,6 +68,7 @@
       <nav id="navbar" class="navbar">
         
           <a href="${pageContext.request.contextPath}/">
+
             <img src="${pageContext.request.contextPath}/img/log.PNG" width="170px" height="120px">
           </a>
         

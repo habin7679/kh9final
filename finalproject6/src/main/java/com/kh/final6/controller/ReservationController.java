@@ -1,6 +1,7 @@
 package com.kh.final6.controller;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.entity.PaymentDto;
 import com.kh.final6.entity.ReservationDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.error.CannotFindException;
@@ -22,7 +24,12 @@ import com.kh.final6.repository.PaymentDao;
 import com.kh.final6.repository.ReservationDao;
 import com.kh.final6.repository.StoreDao;
 import com.kh.final6.service.KakaoPayService;
+import com.kh.final6.service.PaymentService;
 import com.kh.final6.service.ReservationService;
+import com.kh.final6.vo.KakaoPayApproveRequestVO;
+import com.kh.final6.vo.KakaoPayApproveResponseVO;
+import com.kh.final6.vo.KakaoPayCancelRequestVO;
+import com.kh.final6.vo.KakaoPayCancelResponsetVO;
 import com.kh.final6.vo.KakaoPayReadyRequestVO;
 import com.kh.final6.vo.KakaoPayReadyResponseVO;
 import com.kh.final6.vo.PaymentNoVO;
@@ -46,6 +53,8 @@ public class ReservationController {
 	private KakaoPayService kakaoPayService;
 	@Autowired
 	private PaymentDao paymentDao;
+	@Autowired
+	private PaymentService paymentService;
 
 	
 	@GetMapping("/")
@@ -101,7 +110,92 @@ public class ReservationController {
 
 			KakaoPayReadyResponseVO responseVO =
 			kakaoPayService.ready(requestVO);
+			
+			session.setAttribute("pay", KakaoPayApproveRequestVO.builder()
+					.tid(responseVO.getTid())
+					.partner_order_id(requestVO.getPartner_order_id())
+					.partner_user_id(requestVO.getPartner_user_id())
+				.build()
+				);
+			
+			//paymentNoVO
+			session.setAttribute("paymentNoVO", List.of(paymentNoVO));
+			
+			//결제 번호
+			session.setAttribute("paymentNo", paymentNo);
 		
 		return "redirect:"+responseVO.getNext_redirect_pc_url();
 	}
+	
+	
+	@GetMapping("/pay/approve")
+	public String paySuccess(@RequestParam String pg_token, HttpSession session) throws URISyntaxException {
+
+		KakaoPayApproveRequestVO requestVO = (KakaoPayApproveRequestVO)session.getAttribute("pay");
+		session.removeAttribute("pay");
+		
+		List<PaymentNoVO> paymentNoList = (List<PaymentNoVO>) session.getAttribute("paymentNoVO");
+		session.removeAttribute("paymentNoVO");
+		
+		int paymentNo = (int) session.getAttribute("paymentNo");
+		session.removeAttribute("paymentNo");
+		
+		
+		requestVO.setPg_token(pg_token);
+		KakaoPayApproveResponseVO responseVO = 
+				kakaoPayService.approve(requestVO);
+		
+		
+		paymentService.insert(paymentNo, responseVO, paymentNoList);
+		
+		
+		return "redirect:/reservation/pay/finish";
+	}
+
+		@GetMapping("/pay/finish")
+		public String payFinish()	{
+			return "reservation/payFinish";
+		}
+		
+		@GetMapping("/pay/cancel")
+		public String payCancel(HttpSession session) {
+			session.removeAttribute("pay");
+			session.removeAttribute("paymentNoVO");
+			session.removeAttribute("paymentNo");
+			return "reservation/payCancel";
+		}
+		
+		@GetMapping("/pay/fail")
+		public String payFail(HttpSession session) {
+			session.removeAttribute("pay");
+			session.removeAttribute("paymentNoVO");
+			session.removeAttribute("paymentNo");
+			return "reservation/payFail";
+		}
+
+		
+//		@GetMapping("/cancel")
+//		public String cancelDetail(
+//				@RequestParam int paymentDetailNo
+//				) throws URISyntaxException {
+//			//정보조회
+//			PaymentDto paymentDto = paymentDao.find(paymentDetailDto.getPaymentNo());
+//			if(paymentDto == null) {
+//				//throw new CannotFindException();
+//			}
+//			
+//			
+//			//실제 취소
+//			KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
+//																								.tid(paymentDto.getPaymentTid())
+//																								.cancel_amount(paymentDetailDto.getPaymentTotal())
+//																								.build();
+//			
+//			KakaoPayCancelResponsetVO responseVO = kakaoPayService.cancel(requestVO);
+//			paymentDao.cancelDetail(paymentDetailDto);
+//
+//			return "redirect:more?paymentNo="+paymentDetailDto.getPaymentNo();
+//		}
+//		
 }
+

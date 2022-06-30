@@ -43,4 +43,12 @@
  		select * from reservation where reservation_no = #{reservation}
  	</select>
  	
+ 	<update id="status" parameterType="int">
+ 		update reservation
+ 			set
+ 				reservation_status = '완료'
+ 			where 
+ 				reservation_no = #{reservationNo}
+ 	</update>
+ 	
  </mapper>
