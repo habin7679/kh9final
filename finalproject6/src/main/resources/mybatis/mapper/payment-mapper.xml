@@ -29,4 +29,15 @@
  		select payment_seq.nextval from dual
  	</select>
  	
+	<insert id="insert" parameterType="paymentDto">
+		insert into payment(
+			payment_no, store_no, member_no, payment_tid,
+			payment_price, payment_name, reservation_no
+		) 
+		values( 
+			#{paymentNo}, #{storeNo}, #{memberNo}, #{paymentTid},
+			#{paymentPrice}, #{paymentName}, #{reservationNo}
+		)
+	</insert> 	
+	
  </mapper>

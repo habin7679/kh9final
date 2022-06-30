@@ -16,7 +16,8 @@ public class PaymentDto {
 	private int storeNo;
 	private int reservationNo;
 	private int memberNo;
-	private int paymentTid;
+	private String paymentTid;
 	private Date paymentTime;
 	private int paymentPrice;
+	private String paymentName;
 }
