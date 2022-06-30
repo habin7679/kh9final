@@ -173,29 +173,28 @@ public class ReservationController {
 			return "reservation/payFail";
 		}
 
+//		@GetMapping("/cancelTest")
+//		public String canelTest() {
+//			return "reservation/cancelTest";
+//		}
 		
-//		@GetMapping("/cancel")
-//		public String cancelDetail(
-//				@RequestParam int paymentDetailNo
-//				) throws URISyntaxException {
-//			//정보조회
-//			PaymentDto paymentDto = paymentDao.find(paymentDetailDto.getPaymentNo());
-//			if(paymentDto == null) {
-//				//throw new CannotFindException();
-//			}
-//			
-//			
-//			//실제 취소
-//			KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
-//																								.tid(paymentDto.getPaymentTid())
-//																								.cancel_amount(paymentDetailDto.getPaymentTotal())
-//																								.build();
-//			
-//			KakaoPayCancelResponsetVO responseVO = kakaoPayService.cancel(requestVO);
-//			paymentDao.cancelDetail(paymentDetailDto);
+		@GetMapping("/cancel")
+		public String cancelDetail(
+				@RequestParam int paymentNo
+				) throws URISyntaxException {
+			PaymentDto paymentDto = paymentDao.one(paymentNo);
+					
+			KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
+																								.tid(paymentDto.getPaymentTid())
+																								.cancel_amount(paymentDto.getPaymentPrice())
+																								.build();
+			
+			KakaoPayCancelResponsetVO responseVO = kakaoPayService.cancel(requestVO);
+			paymentDao.cancel(paymentDto);
 //
 //			return "redirect:more?paymentNo="+paymentDetailDto.getPaymentNo();
-//		}
-//		
+			return "redirect:/" ;
+		}
+		
 }
 

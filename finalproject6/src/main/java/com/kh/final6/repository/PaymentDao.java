@@ -8,4 +8,8 @@ public interface PaymentDao {
 
 	void insertPayment(PaymentDto paymentDto);
 
+	PaymentDto one(int paymentNo);
+
+	void cancel(PaymentDto paymentDto);
+
 }

@@ -12,6 +12,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.kh.final6.vo.KakaoPayApproveRequestVO;
 import com.kh.final6.vo.KakaoPayApproveResponseVO;
+import com.kh.final6.vo.KakaoPayCancelRequestVO;
+import com.kh.final6.vo.KakaoPayCancelResponsetVO;
+import com.kh.final6.vo.KakaoPayOrderRequestVO;
+import com.kh.final6.vo.KakaoPayOrderResponseVO;
 import com.kh.final6.vo.KakaoPayReadyRequestVO;
 import com.kh.final6.vo.KakaoPayReadyResponseVO;
 
@@ -82,6 +86,50 @@ public class KakaoPayServiceVersion1 implements KakaoPayService {
 		
 		KakaoPayApproveResponseVO responseVO = 
 				template.postForObject(uri, entity, KakaoPayApproveResponseVO.class);
+		return responseVO;
+	}
+	
+	@Override
+	public KakaoPayOrderResponseVO order(KakaoPayOrderRequestVO requestVO) throws URISyntaxException {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", authorization);
+		headers.add("Content-type", contentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("cid", cid);
+		body.add("tid", requestVO.getTid());
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		URI uri = new URI(urlPrefix + "/order");
+		KakaoPayOrderResponseVO responseVO = 
+				template.postForObject(uri, entity, KakaoPayOrderResponseVO.class);
+		
+		return responseVO;
+	}
+	
+	@Override
+	public KakaoPayCancelResponsetVO cancel(KakaoPayCancelRequestVO requestVO) throws URISyntaxException {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", authorization);
+		headers.add("Content-type", contentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("cid", cid);
+		body.add("tid", requestVO.getTid());
+		body.add("cancel_amount", String.valueOf(requestVO.getCancel_amount()));
+		body.add("cancel_tax_free_amount", "0");
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		URI uri = new URI(urlPrefix + "/cancel");
+		
+		KakaoPayCancelResponsetVO responseVO = 
+				template.postForObject(uri, entity, KakaoPayCancelResponsetVO.class);
+		log.debug("responseVO = {}", responseVO);
+		
 		return responseVO;
 	}
 	
