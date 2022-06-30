@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.final6.entity.AttachmentDto;
 import com.kh.final6.entity.MemberDto;
 import com.kh.final6.entity.NoticeDto;
 import com.kh.final6.error.CannotFindException;
+import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.NoticeAttachDao;
 import com.kh.final6.repository.NoticeDao;
 import com.kh.final6.service.NoticeService;
+
 
 @Controller
 @RequestMapping("/notice")
@@ -39,6 +42,11 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
+	
+	private AttachmentDto attachmentDto;
 	
 	@GetMapping("/list2")
 	public String list2(
@@ -131,9 +139,20 @@ public class NoticeController {
 			model.addAttribute("memberDto",memberDto);
 		}
 		int attachmentNo = noticeAttachDao.info(noticeNo);
-		if(attachmentNo != 0) {
-			model.addAttribute("noticeImgUrl","/attachment/download?attachmentNo="+attachmentNo);
+		AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
+		
+		if(attachmentDto != null) {
+			String attachType = attachmentDto.getAttachmentType();
+			boolean passImg = attachType == "image/jpeg" || attachType == "image/png" || attachType == "image/gif" && attachType == "image/jpg";
+			model.addAttribute("Img",passImg);
 		}
+		boolean noAttach = attachmentNo == 0;
+		model.addAttribute("noAttach",noAttach);
+		model.addAttribute("noticeImgUrl","/attachment/download?attachmentNo="+attachmentNo);
+		
+		String attachName = attachmentDao.name(attachmentNo);
+		model.addAttribute("attachName",attachName);
+		
 		
 		//내 글 여부 확인
 		Integer memberNo = (Integer)session.getAttribute("no");

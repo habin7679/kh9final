@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.final6.error.CannotFindException;
+
 @Repository
 public class NoticeAttachDaoImpl implements NoticeAttachDao{
 
@@ -31,6 +33,7 @@ public class NoticeAttachDaoImpl implements NoticeAttachDao{
 		else {
 			return attachmentNo;
 		}
+		
 	}
 
 }

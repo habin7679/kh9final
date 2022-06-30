@@ -12,4 +12,5 @@ public interface AttachmentDao {
 	int save (MultipartFile attachment) throws IllegalStateException, IOException;
 	AttachmentDto info(int attachmentNo);
 	ByteArrayResource load(String attachmentSavename) throws IOException;
+	String name(int attachmentNo);
 }
