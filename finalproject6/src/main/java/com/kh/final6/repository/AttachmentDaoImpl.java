@@ -55,4 +55,9 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		return resource;
 	}
 
+	@Override
+	public String name(int attachmentNo) {
+		return sqlSession.selectOne("attachment.name",attachmentNo);
+	}
+
 }

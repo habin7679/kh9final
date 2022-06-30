@@ -25,16 +25,29 @@
     				</tr>
     				
     				<tr>
-    					<td>${noticeDto.noticeWriter }</td>
+    					<td>${noticeDto.noticeWriter}</td>
     				</tr>
     				
     				<tr>
     					<td>
-	    					<img src="${pageContext.request.contextPath}${noticeImgUrl}" width="50%">
-    						<pre>${noticeDto.noticeContent }</pre>
+    					<c:choose>
+    						<c:when test="${noAttach == false || passImg}">
+    							<img src="${pageContext.request.contextPath}${noticeImgUrl}" width="50%">
+    							<pre>${noticeDto.noticeContent }</pre>
+    						</c:when>
+    						<c:otherwise>
+    							<pre>${noticeDto.noticeContent }</pre>
+    						</c:otherwise>
+    					</c:choose>
     					</td>
     				</tr>
-    				
+    				<c:if test="${noAttach == false}">
+    				<tr>
+    					<td>
+    						<a class="cursor:pointer;" href="${pageContext.request.contextPath}${noticeImgUrl}">${attachName}</a>
+    					</td>
+    				</tr>
+    				</c:if>
     				<tr>
     					<td>
     						<a href="${pageContext.request.contextPath}/notice/edit?noticeNo=${noticeDto.noticeNo}" class="btn btn primary">수정</a>

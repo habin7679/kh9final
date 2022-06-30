@@ -20,4 +20,8 @@
  		select * from attachment where attachment_no = #{attachmentNo}
  	</select>
  	
+ 	<select id="name" parameterType="int" resultType="String">
+ 		select attachment_uploadname from attachment where attachment_no = #{attachmentNo}
+ 	</select>
+ 	
  </mapper>

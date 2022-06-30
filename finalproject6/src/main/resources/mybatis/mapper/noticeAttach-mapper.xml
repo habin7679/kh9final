@@ -10,7 +10,7 @@
  		insert into notice_attachment (notice_no, attachment_no) values (${noticeNo}, #{attachmentNo})
  	</insert>
  	
- 	<select id="one" parameterType="int" resultType="NoticeAttachDto">
- 		select * from notice_attachment where notice_no = #{noticeNo}
+ 	<select id="one" parameterType="int" resultType="Integer">
+ 		select attachment_no from notice_attachment where notice_no = #{noticeNo}
  	</select>
  </mapper>
