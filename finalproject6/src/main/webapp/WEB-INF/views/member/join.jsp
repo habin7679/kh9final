@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
     <!-- 프로필 이미지를 추가하기 위해 enctype을 multipart/form-data로 변경 -->
-<form action="join" method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
 	<div class="container w450 m30">
 	    
 	    <div class="row center">

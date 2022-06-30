@@ -122,7 +122,7 @@ public class MemberController {
 			@RequestParam String changePw,
 			HttpSession session 
 			){
-			String memberId = (String)session.getAttribute("login");
+			String memberId = String.valueOf(session.getAttribute("login"));
 			boolean success = memberDao.changePassword(memberId, currentPw, changePw);
 			if(success) {
 				return "redirect:mypage";
@@ -130,6 +130,28 @@ public class MemberController {
 			else {
 				return "redirect:password?error"; 
 			}
+	}
+	
+	//아이디 찾기
+	
+	@GetMapping("/find_id")
+	public String findId() {
+		return "member/find_id";
+	}
+	
+	@PostMapping("/find_id")
+	public String findId(
+			@ModelAttribute MemberDto memberDto,
+			HttpSession session,
+			Model model) {
+		String memberId = memberDao.findId(memberDto);
+		if(memberId == null) {
+			return "redirect:find_id?error";
+		}
+		else {
+			model.addAttribute("findUserId", memberId);
+			return "member/find_id_result";
+		}
 	}
 	
 	//탈퇴 
@@ -141,7 +163,7 @@ public class MemberController {
 	@PostMapping("/exit")
 	public String exit(@RequestParam String memberPw, HttpSession session) {
 	
-	String memberId = (String)session.getAttribute("login");
+	String memberId = String.valueOf(session.getAttribute("login"));
 	boolean success =  memberDao.exit(memberId, memberPw);
 	
 	if(success) {

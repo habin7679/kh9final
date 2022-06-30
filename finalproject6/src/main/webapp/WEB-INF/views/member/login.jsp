@@ -4,7 +4,6 @@
 
 <c:set var="saveIdExist" value="${cookie.saveId != null}"></c:set>
 
-
 <form action="login" method="post">
 	<input type="hidden" name="referer" value="${referer}">
 
