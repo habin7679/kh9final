@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.final6.entity.MemberDto;
 import com.kh.final6.entity.NoticeDto;
+import com.kh.final6.error.CannotFindException;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.NoticeDao;
 
@@ -103,23 +104,50 @@ public class NoticeController {
 	@PostMapping("/write")
 	public String write(@ModelAttribute NoticeDto noticeDto,
 						//@RequestParam MultipartFile noticeImg,
-						HttpSession session,
-						RedirectAttributes attr) {
+						HttpSession session) {
 		int memberNo= (Integer)session.getAttribute("no");
 		String memberId = (String)session.getAttribute("login");
 		MemberDto memberDto = memberDao.info(memberId);
 		noticeDto.setMemberNo(memberNo);
 		noticeDto.setNoticeWriter(memberDto.getMemberNick());
 		System.out.println(noticeDto);
-		int noticeNo = noticeDao.insert(noticeDto);
-		attr.addAttribute("noticeNo",noticeNo);
+		noticeDao.insert(noticeDto);
 		
-		return "redirect:detail";
+		return "redirect:list";
 		
 	}
 	
-	//@GetMapping("/edit")
-	//@PostMapping("/edit")
-	//@GetMapping("/delete")
+	@GetMapping("/delete")
+	public String delete(@RequestParam int noticeNo) {
+		boolean success = noticeDao.delete(noticeNo);
+		
+		if(success) {
+			return "redirect:list";
+		}
+		else {
+			throw new CannotFindException();
+		}
+	}
+	
+	@GetMapping("/edit")
+	public String edit(@RequestParam int noticeNo,
+						Model model) {
+		NoticeDto noticeDto = noticeDao.one(noticeNo);
+		model.addAttribute(noticeDto);
+		return "notice/edit";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute NoticeDto noticeDto,
+						RedirectAttributes attr) {
+		boolean success = noticeDao.update(noticeDto);
+		if(success) {
+			attr.addAttribute("noticeNo",noticeDto.getNoticeNo());
+			return "redirect:detail";
+		}
+		else {
+			throw new CannotFindException();
+		}
+	}
 	
 }

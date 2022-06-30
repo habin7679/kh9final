@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-</section><!-- End Gallery Section -->
 
+  </article>
+        </section>
 
+    
+    		</article>
+		</section>
+  	</main><!-- End #main -->
 
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
+    <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
     <div class="container">
@@ -68,15 +71,15 @@
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/aos/aos.js"></script>
-  <script src="vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="vendor/php-email-form/validate.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/aos/aos.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="js/main.js"></script>
+  <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>
 

@@ -41,6 +41,10 @@ import com.kh.final6.entity.MemberDto;
 		public MemberDto info(String memberId) {
 			return sqlSession.selectOne("member.one", memberId); 
 		}
+		@Override
+		public MemberDto oneNo(int memberNo) {
+			return sqlSession.selectOne("member.oneNo", memberNo);
+		}
 
 		@Override
 		public boolean changePassword(String memberId, String currentPw, String changePw) {

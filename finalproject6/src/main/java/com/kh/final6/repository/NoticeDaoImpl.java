@@ -21,7 +21,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	public List<NoticeDto> list(String type,String keyword, int p, int s) {
 		Map<String,Object> param = new HashMap<>();
 		param.put("type", type);
-		param.put("kewyord", keyword);
+		param.put("keyword", keyword);
 		
 		int end = p * s;
 		int begin = end - (s-1);
@@ -42,6 +42,7 @@ public class NoticeDaoImpl implements NoticeDao{
 	//게시글 상세조회
 	@Override
 	public NoticeDto one(int noticeNo) {
+		sqlSession.update("notice.readcount",noticeNo);
 		return sqlSession.selectOne("notice.one",noticeNo);
 	}
 	//게시글 번호(시퀀스) 조회
@@ -57,6 +58,18 @@ public class NoticeDaoImpl implements NoticeDao{
 		
 		sqlSession.insert("notice.write",noticeDto);
 		return noticeNo;
+	}
+	//게시글 삭제
+	@Override
+	public boolean delete(int noticeNo) {
+		int count = sqlSession.delete("notice.delete",noticeNo);
+		return count > 0;
+	}
+	//게시글 수정
+	@Override
+	public boolean update(NoticeDto noticeDto) {
+		int count = sqlSession.update("notice.edit",noticeDto);
+		return count > 0;
 	}
 
 
