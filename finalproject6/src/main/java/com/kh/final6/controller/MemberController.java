@@ -1,6 +1,7 @@
 package com.kh.final6.controller;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.MemberDao;
+import com.kh.final6.repository.MemberProfileDao;
 
 @Controller
 @RequestMapping("/member")
@@ -26,6 +30,12 @@ public class MemberController {
 
 	@	Autowired
 	private MemberDao memberDao; 
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
+	
+	@Autowired
+	private MemberProfileDao memberProfileDao;
 	
 	//회원가입 
 	@GetMapping("/join")
@@ -35,10 +45,17 @@ public class MemberController {
 
 	@PostMapping("/join")
 	public String join(
-			@ModelAttribute MemberDto memberDto) {
+			@ModelAttribute MemberDto memberDto,
+			@RequestParam MultipartFile memberProfile) throws IllegalStateException, IOException {
 		
 		memberDao.join(memberDto);
 		
+		//프로필 등록(실제 저장 + DB) - Attachment, MemberProfile
+		if(!memberProfile.isEmpty()) {
+			int attachmentNo = attachmentDao.save(memberProfile);
+			memberProfileDao.insert(memberDto.getMemberId(), attachmentNo);
+			
+		}
 //		return "redirect:join_success";//상대
 		return "redirect:/member/join_success";//절대
 	}
@@ -206,36 +223,36 @@ public class MemberController {
 		}
 	}
 	
-	//리스트
-			@GetMapping("/list")
-			public String list(
-					@RequestParam (required = false) String type,
-					@RequestParam (required = false) String keyword,
-					@RequestParam (required = false, defaultValue = "1") int p,
-					@RequestParam (required = false, defaultValue = "10") int s,
-					Model model) {
-				
-				List<MemberDto> list = memberDao.list(type,keyword,p,s);
-				model.addAttribute("list",list);
-				
-				boolean search = type !=null&&keyword != null;
-				model.addAttribute("search",search);
-				
-				
-				
-				int blockSize = 10;
-				int endBlock = (p+blockSize - 1) / blockSize * blockSize;
-				int startBlock = endBlock - (blockSize - 1);
-				
-				model.addAttribute("p",p);
-				model.addAttribute("s",s);
-				model.addAttribute("blockSize",blockSize);
-				model.addAttribute("endBlock",endBlock);
-				model.addAttribute("startBlock",startBlock);
-				model.addAttribute("type",type);
-				model.addAttribute("keyword",keyword);
-				return "member/list";
-			}
+////	//리스트
+////			@GetMapping("/list")
+////			public String list(
+////					@RequestParam (required = false) String type,
+////					@RequestParam (required = false) String keyword,
+////					@RequestParam (required = false, defaultValue = "1") int p,
+////					@RequestParam (required = false, defaultValue = "10") int s,
+////					Model model) {
+//				
+//				List<MemberDto> list = memberDao.list(type,keyword,p,s);
+//				model.addAttribute("list",list);
+//				
+//				boolean search = type !=null&&keyword != null;
+//				model.addAttribute("search",search);
+//				
+//				
+//				
+//				int blockSize = 10;
+//				int endBlock = (p+blockSize - 1) / blockSize * blockSize;
+//				int startBlock = endBlock - (blockSize - 1);
+//				
+//				model.addAttribute("p",p);
+//				model.addAttribute("s",s);
+//				model.addAttribute("blockSize",blockSize);
+//				model.addAttribute("endBlock",endBlock);
+//				model.addAttribute("startBlock",startBlock);
+//				model.addAttribute("type",type);
+//				model.addAttribute("keyword",keyword);
+//				return "member/list";
+			
 }
 
 

@@ -48,6 +48,11 @@
 	        	<option>여성 </option>
 	        </select>
 	    </div>
+	    
+	    <div class="row">
+	    	<label>프로필 이미지</label><br>
+	    	<input type="file" name="memberProfile" class="form-input input-round">
+	    </div>
 	     	
 	    <div class="row">
 	        <button type="submit" class="btn btn-primary fill">회원가입</button>
