@@ -18,9 +18,9 @@
       	<%--복합 검색 미구현임 --%>
                <form action="list" method="get">
                     <select name="type">
-                        <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>제목</option>
-						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>내용</option>
-						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
+                        <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>조회수</option>
+						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>최신순</option>
+						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>오래된순</option>
                     </select>
                 <input type="submit" value="보기">
                </form>
@@ -199,6 +199,7 @@
                <!--검색창-->
                <form action="list" method="get">
                     <select name="type">
+                        <option value="notice_head" <c:if test="${type == 'notice_head'}">selected</c:if>>말머리</option>
                         <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>제목</option>
 						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>내용</option>
 						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>

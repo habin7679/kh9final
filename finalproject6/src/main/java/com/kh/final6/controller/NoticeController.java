@@ -1,5 +1,6 @@
 package com.kh.final6.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +20,9 @@ import com.kh.final6.entity.MemberDto;
 import com.kh.final6.entity.NoticeDto;
 import com.kh.final6.error.CannotFindException;
 import com.kh.final6.repository.MemberDao;
+import com.kh.final6.repository.NoticeAttachDao;
 import com.kh.final6.repository.NoticeDao;
+import com.kh.final6.service.NoticeService;
 
 @Controller
 @RequestMapping("/notice")
@@ -31,6 +34,11 @@ public class NoticeController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private NoticeAttachDao noticeAttachDao;
+	
+	@Autowired
+	private NoticeService noticeService;
 
 	@GetMapping("/list")
 	public String list(
@@ -78,6 +86,10 @@ public class NoticeController {
 			MemberDto memberDto = memberDao.info(noticeDto.getNoticeWriter());
 			model.addAttribute("memberDto",memberDto);
 		}
+		int attachmentNo = noticeAttachDao.info(noticeNo);
+		if(attachmentNo != 0) {
+			model.addAttribute("noticeImgUrl","/attachment/download?attachmentNo="+attachmentNo);
+		}
 		
 		//내 글 여부 확인
 		Integer memberNo = (Integer)session.getAttribute("no");
@@ -103,17 +115,19 @@ public class NoticeController {
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute NoticeDto noticeDto,
-						//@RequestParam MultipartFile noticeImg,
-						HttpSession session) {
+						@RequestParam MultipartFile noticeImg,
+						HttpSession session,
+						RedirectAttributes attr) throws IllegalStateException, IOException {
 		int memberNo= (Integer)session.getAttribute("no");
 		String memberId = (String)session.getAttribute("login");
 		MemberDto memberDto = memberDao.info(memberId);
 		noticeDto.setMemberNo(memberNo);
 		noticeDto.setNoticeWriter(memberDto.getMemberNick());
-		System.out.println(noticeDto);
-		noticeDao.insert(noticeDto);
 		
-		return "redirect:list";
+		int noticeNo = noticeService.save(noticeDto, noticeImg);
+		
+		attr.addAttribute("noticeNo",noticeNo);
+		return "redirect:detail";
 		
 	}
 	
