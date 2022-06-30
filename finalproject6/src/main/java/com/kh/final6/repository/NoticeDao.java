@@ -6,7 +6,7 @@ import com.kh.final6.entity.NoticeDto;
 
 public interface NoticeDao {
 
-	List<NoticeDto> list(String type,String keyword, int p, int s);
+	List<NoticeDto> list(String type,String keyword, int p, int ss);
 	int count(String type, String keyword);
 	
 	NoticeDto one(int noticeNo);
@@ -17,5 +17,6 @@ public interface NoticeDao {
 	boolean delete(int noticeNo);
 	
 	boolean update(NoticeDto noticeDto);
+	List<NoticeDto> list(String type, String keyword, int p, int s, String column, String order);
 
 }

@@ -39,6 +39,50 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@GetMapping("/list2")
+	public String list2(
+						@RequestParam (required = false) String type,
+						@RequestParam (required = false) String keyword,
+						@RequestParam (required = false, defaultValue = "1") int p,
+						@RequestParam (required = false, defaultValue = "10") int s,
+						@RequestParam (required = false) String column,
+						@RequestParam (required = false) String order,
+						Model model) {
+		
+		List<NoticeDto> list = noticeDao.list(type,keyword,p,s, column, order);
+		model.addAttribute("list",list);
+		
+		boolean search = type != null && keyword != null;
+		model.addAttribute("search",search);
+		
+		boolean readcountSearch = column == "notice_readcount" && order == "desc";
+		boolean noDescSearch = column == "notice_no" && order == "desc";
+		boolean noAscSearch = column == "notice_no" && order == "asc";
+		model.addAttribute("readcountSearch",readcountSearch);
+		model.addAttribute("noDescSearch",noDescSearch);
+		model.addAttribute("noAscSearch",noAscSearch);
+		
+		int count = noticeDao.count(type,keyword);
+		int lastPage = (count + s - 1) /s;
+		
+		int blockSize = 10;
+		int endBlock = (p + blockSize - 1) / blockSize * blockSize;
+		int startBlock = endBlock - (blockSize - 1);
+		if(endBlock > lastPage){
+			endBlock = lastPage;
+		}
+		model.addAttribute("p",p); 
+		model.addAttribute("s",s);
+		model.addAttribute("blockSize",blockSize);
+		model.addAttribute("endBlock",endBlock);
+		model.addAttribute("startBlock",startBlock);
+		model.addAttribute("type",type);
+		model.addAttribute("keyword",keyword);
+		
+		return "notice/list";
+	}
+	
 
 	@GetMapping("/list")
 	public String list(

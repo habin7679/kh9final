@@ -3,7 +3,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <div class="container-fluid">
+    <div class="container-fluid top">
 
         <div class="row mt-2">
             <div class="col-md-8 offset-md-2">
@@ -16,14 +16,9 @@
         <div class="row mt-2 text-left">
             <div class="col-md-8 offset-md-2">
       	<%--복합 검색 미구현임 --%>
-               <form action="list" method="get">
-                    <select name="type">
-                        <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>조회수</option>
-						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>최신순</option>
-						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>오래된순</option>
-                    </select>
-                <input type="submit" value="보기">
-               </form>
+                    <a href="${pageContext.request.contextPath}/notice/list2?column=notice_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list2?column=notice_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list2?column=notice_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
             </div>
         </div>
         
@@ -76,13 +71,36 @@
 
 	<!-- 페이지네이션 -->
 	<div class="row mt-2">
-		<div class="col">
 			<ul class="pagination justify-content-center">
 				<c:if test="${p > 1}">
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
 								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
+						</c:when>
+						<c:when test="${search && readcountSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">&lt;</a></li>
+						</c:when>
+						<c:when test="${search && noDescSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">&lt;</a></li>
+						</c:when>
+						<c:when test="${search && noAscSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">&lt;</a></li>
+						</c:when>
+						<c:when test="${readcountSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=1&s=${s}&column=notice_readcount&order=desc">&lt;</a></li>
+						</c:when>
+						<c:when test="${noDescSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=1&s=${s}&column=notice_no&order=desc">&lt;</a></li>
+						</c:when>
+						<c:when test="${noAscSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=1&s=${s}&column=notice_no&order=asc">&lt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
@@ -96,6 +114,30 @@
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
 								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
+						</c:when>
+						<c:when test="${search && readcountSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">&laquo;</a></li>
+						</c:when>
+						<c:when test="${search && noDescSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">&laquo;</a></li>
+						</c:when>
+						<c:when test="${search && noAscSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">&laquo;</a></li>
+						</c:when>
+						<c:when test="${readcountSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${startBlock-1}&s=${s}&column=notice_readcount&order=desc">&laquo;</a></li>
+						</c:when>
+						<c:when test="${noDescSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${startBlock-1}&s=${s}&column=notice_no&order=desc">&laquo;</a></li>
+						</c:when>
+						<c:when test="${noAscSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${startBlock-1}&s=${s}&column=notice_no&order=asc">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
@@ -113,6 +155,30 @@
 									<li class="page-item active"><a class="page-link"
 										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:when>
+								<c:when test="${i == p && readcountSearch}">
+									<li class="page-item active"><a class="page-link"
+										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">${i}</a></li>
+								</c:when>
+								<c:when test="${i == p && noDescSearch}">
+									<li class="page-item active"><a class="page-link"
+										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">${i}</a></li>
+								</c:when>
+								<c:when test="${i == p && noAscSearch}">
+									<li class="page-item active"><a class="page-link"
+										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">${i}</a></li>
+								</c:when>
+								<c:when test="${i != p && readcountSearch}">
+									<li class="page-item"><a class="page-link"
+										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">${i}</a></li>
+								</c:when>
+								<c:when test="${i != p && noDescSearch}">
+									<li class="page-item"><a class="page-link"
+										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">${i}</a></li>
+								</c:when>
+								<c:when test="${i != p && noAscSearch}">
+									<li class="page-item"><a class="page-link"
+										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">${i}</a></li>
+								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
 										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
@@ -124,6 +190,30 @@
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
 										href="list?p=${i}&s=${s}">${i}</a></li>
+								</c:when>
+								<c:when test="${i == p && readcountSearch}">
+									<li class="page-item active"><a class="page-link"
+										href="list?p=${i}&s=${s}&column=notice_readcount&order=desc">${i}</a></li>
+								</c:when>
+								<c:when test="${i == p && noDescSearch}">
+									<li class="page-item active"><a class="page-link"
+										href="list?p=${i}&s=${s}&column=notice_no&order=desc">${i}</a></li>
+								</c:when>
+								<c:when test="${i == p && noAscSearch}">
+									<li class="page-item active"><a class="page-link"
+										href="list?p=${i}&s=${s}&column=notice_no&order=asc">${i}</a></li>
+								</c:when>
+								<c:when test="${i != p && noDescSearch}">
+									<li class="page-item"><a class="page-link"
+										href="list?p=${i}&s=${s}&column=notice_no&order=desc">${i}</a></li>
+								</c:when>
+								<c:when test="${i != p && noAscSearch}">
+									<li class="page-item"><a class="page-link"
+										href="list?p=${i}&s=${s}&column=notice_no&order=asc">${i}</a></li>
+								</c:when>
+								<c:when test="${i != p && readcountSearch}">
+									<li class="page-item"><a class="page-link"
+										href="list?p=${i}&s=${s}&column=notice_readcount&order=desc">${i}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
@@ -141,34 +231,29 @@
 							<li class="page-item"><a class="page-link"
 								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
 						</c:when>
-						<c:otherwise>
+						<c:when test="${search && readcountSeasrch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}">&gt;</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-
-				<c:if test="${p < lastPage}">
-					<c:choose>
-						<c:when test="${search}">
-							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
+								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">&gt;</a></li>
 						</c:when>
-						<c:otherwise>
+						<c:when test="${search && noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}">&raquo;</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-
-
-
-				<!-- 다음 버튼 영역 -->
-				<c:if test="${endBlock < lastPage}">
-					<c:choose>
-						<c:when test="${search}">
+								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">&gt;</a></li>
+						</c:when>
+						<c:when test="${search && noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
+								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">&gt;</a></li>
+						</c:when>
+						<c:when test="${readcountSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${endBlock+1}&s=${s}&column=notice_readcount&order=desc">&gt;</a></li>
+						</c:when>
+						<c:when test="${noDescSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${endBlock+1}&s=${s}&column=notice_no&order=desc">&gt;</a></li>
+						</c:when>
+						<c:when test="${noAscSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${endBlock+1}&s=${s}&column=notice_no&order=asc">&gt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
@@ -182,6 +267,30 @@
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
 								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
+						</c:when>
+						<c:when test="${search && readcountSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">&raquo;</a></li>
+						</c:when>
+						<c:when test="${search && noDescSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">&raquo;</a></li>
+						</c:when>
+						<c:when test="${search && noAscSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">&raquo;</a></li>
+						</c:when>
+						<c:when test="${readcountSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}&column=notice_readcount&order=desc">&raquo;</a></li>
+						</c:when>
+						<c:when test="${noDescSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}&column=notice_no&order=desc">&raquo;</a></li>
+						</c:when>
+						<c:when test="${noAscSearch}">
+							<li class="page-item"><a class="page-link"
+								href="list?p=${lastPage}&s=${s}&column=notice_no&order=asc">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
@@ -190,7 +299,6 @@
 					</c:choose>
 				</c:if>
 			</ul>
-		</div>
 	</div>
 
 
