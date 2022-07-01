@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ <mapper namespace="qna">
+ 	
+ 	<select id="list" parameterType="Map" resultType="QnaDto">
+ 		<bind name = "columnExist" value="column != null and !column.equals('')"></bind>
+ 		<bind name = "orderExist" value="order != null and !order.equals('')"></bind>
+ 		select * from (
+ 			select rownum rn, TMP.* from(
+ 			select TM.* from (
+	 			select * from qna
+	 			<if test="type != null and keyword != null">
+	 				<![CDATA[
+	 				where instr (${type},#{keyword}) > 0
+	 				]]>
+	 			</if>
+	 			connect by prior qna_no = super_no
+				start with super_no = 0
+				order siblings by group_no desc, qna_no asc)TM
+	 			<!-- 정렬 -->
+	 			<choose>
+	 				<when test="columnExist and orderExist">
+	 				order by ${column} ${order}
+	 				</when>
+	 				<otherwise>
+	 					order by group_no desc, qna_no asc
+	 				</otherwise>
+	 			</choose>
+	 			)TMP 
+ 			) where rn between #{begin} and #{end}
+ 	</select>
+ 	
+ 	<select id="count" parameterType="Map" resultType="int">
+ 		select count(*) from qna
+ 			<if test="type != null and keyword != null">
+ 				<![CDATA[
+ 				where instr (${type},#{keyword}) > 0
+ 				]]>
+ 			</if>
+ 	</select>
+ 	
+ 	<update id="readcount" parameterType="int">
+ 		update qna set qna_readcount = qna_readcount + 1 where qna_no = #{qnaNo}
+ 	</update>
+ 	
+ 	<select id="one" parameterType="int" resultType="QnaDto">
+ 		select * from qna where qna_no = #{qnaNo}
+ 	</select>
+ 	
+ 	<select id="sequence" resultType="int">
+ 		select qna_seq.nextval from dual
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="QnaDto">
+ 		insert into qna (
+ 			qna_no, member_no, qna_writer, qna_head, qna_title,
+ 			qna_content, group_no, super_no, depth)
+ 		values (#{qnaNo}, #{memberNo}, #{qnaWriter}, #{qnaHead}, #{qnaTitle},
+ 				#{qnaContent}, #{groupNo}, #{superNo}, #{depth})
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="QnaDto">
+ 		update qna set 
+ 			qna_head = #{qnaHead}, qna_title = #{qnaTitle}, qna_content = #{qnaContent}
+ 		where qna_no = #{qnaNo}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		delete qna where qna_no =#{qnaNo}
+ 	</delete>
+ 	
+ </mapper>
