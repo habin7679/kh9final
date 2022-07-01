@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ <mapper namespace="together">
+ 	
+ 	<select id="list" parameterType="Map" resultType="TogetherDto">
+ 	<bind name="columnExist" value="column != null and !column.equals('')"></bind>
+ 	<bind name="orderExist" value="order != null and !order.equals('')"></bind>
+ 		select * from(
+		 	select rownum rn, TMP.* from(
+		 		select * from together
+		 		<if test="type != null and keyword != null">
+		 			<![CDATA[
+		 				where instr (${type},#{keyword}) > 0
+		 			]]>
+		 		</if>
+		 		<choose>
+		 			<when test="columnExist and orderExist">
+		 				order by ${column) ${order}
+		 			</when>
+		 			<otherwise>
+		 				order by together_no desc
+		 			</otherwise>
+		 		</choose>	
+		 			)TMP
+ 		)where rn between #{begin} and #{end}
+ 	</select>
+ 	
+ 	<select id="count" parameterType="Map" resultType="int">
+ 		select count(*) from together
+ 		<if test="type != null and keyword != null">
+ 			<![CDATA[
+ 				where instr (${type}, #{keyword}) > 0
+ 			]]>
+ 		</if>
+ 	</select>
+ 	
+ 	<update id="readcount" parameterType="int">
+ 		update together set together_readcount = together_readcount + 1 where together_no = #{togetherNo}
+ 	</update>
+ 	
+ 	<select id="one" parameterType="int" resultType="TogetherDto">
+ 		select * from together where together_no = #{togetherNo}
+ 	</select>
+ 	
+ 	<select id="sequence" resultType="int">
+ 		select together_seq.nextval from dual
+ 	</select>
+ 	
+ 	<insert id="write" parameterType="TogetherDto">
+ 		insert into together (
+ 			together_no, member_no, together_writer, together_title,together_content)
+ 		values (#{togetherNo}, #{memberNo}, #{togetherWriter}, #{togetherTitle}, #{togetherContent})
+ 	</insert>
+ 	
+ 	<delete id="delete">
+ 		delete together where together_no = #{togetherNo}
+ 	</delete>
+ 		
+ 	<update id="edit" parameterType="TogetherDto">
+ 		update together set 
+ 			together_title = #{togetherTitle}, together_content = #{togetherContent}
+ 		where together_no = #{togetherNo}
+ 	</update>	
+ 		
+ </mapper>
