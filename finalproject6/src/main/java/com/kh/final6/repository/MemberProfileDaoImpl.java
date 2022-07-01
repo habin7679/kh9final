@@ -23,7 +23,7 @@ public class MemberProfileDaoImpl implements MemberProfileDao{
 	
 	@Override
 	public int oneNo(int memberNo) {
-		Integer attachmentNo = sqlSession.selectOne("memberProfile.one", memberNo);
+		Integer attachmentNo = sqlSession.selectOne("memberAttachment.one", memberNo);
 		if(attachmentNo == null) {
 			return 0;
 		}

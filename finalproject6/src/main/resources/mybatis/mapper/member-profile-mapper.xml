@@ -14,7 +14,7 @@
 		)
 	</insert>
 	
-	<select id="one" resultType="Integer" parameterType="int">
+	<select id="one" resultType="MemberDto" parameterType="int">
 		select attachment_no from member_attachment where member_no = #{memberNo}
 	</select>
 	
