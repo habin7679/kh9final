@@ -14,16 +14,16 @@ public class MemberProfileDaoImpl implements MemberProfileDao{
 	private SqlSession sqlSession;
 	
 	@Override
-	public void insert(String memberId, int attachmentNo) {
+	public void insert(int memberNo, int attachmentNo) {
 		Map<String, Object> param = new HashMap<>();
-		param.put("memberId", memberId);
+		param.put("memberNo", memberNo);
 		param.put("attachmentNo", attachmentNo);
-		sqlSession.insert("memberProfile.insert", param);
+		sqlSession.insert("memberAttachment.insert", param);
 	}
 	
 	@Override
-	public int info(String memberId) {
-		Integer attachmentNo = sqlSession.selectOne("memberProfile.one", memberId);
+	public int oneNo(int memberNo) {
+		Integer attachmentNo = sqlSession.selectOne("memberProfile.one", memberNo);
 		if(attachmentNo == null) {
 			return 0;
 		}

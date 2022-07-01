@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
 		//프로필 등록(실제 저장 + DB) - Attachment, MemberProfile / Transaction 
 		if(!memberProfile.isEmpty()) {
 			int attachmentNo = attachmentDao.save(memberProfile);
-			memberProfileDao.insert(memberDto.getMemberId(), attachmentNo);
+			memberProfileDao.insert(memberDto.getMemberNo(), attachmentNo);
 			
 		}
 	} 
