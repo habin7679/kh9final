@@ -42,4 +42,9 @@ public class PaymentDaoImpl implements PaymentDao {
 			throw new CannotFindException();
 		}
 	}
+	
+	@Override
+	public int findSellerNo(int paymentNo) {
+		return sqlSession.selectOne("payment.findSellerNo", paymentNo);
+	}
 }
