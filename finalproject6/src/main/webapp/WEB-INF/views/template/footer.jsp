@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    		</article>
-		</section>
-  	<!-- End #main -->
+
 
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -76,6 +74,7 @@
 
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
+  
 
 </body>
 
