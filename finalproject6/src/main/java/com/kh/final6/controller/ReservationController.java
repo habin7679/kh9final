@@ -65,7 +65,8 @@ public class ReservationController {
 			) {
 		model.addAttribute("storeDto", storeDao.one(storeNo));
 		int memberNo = (int)session.getAttribute("no");
-		model.addAttribute("memberNo", memberNo);
+		MemberDto memberDto = memberDao.oneNo(memberNo);
+		model.addAttribute("memberDto", memberDto);
 		return "reservation/reservation";
 	}
 	
