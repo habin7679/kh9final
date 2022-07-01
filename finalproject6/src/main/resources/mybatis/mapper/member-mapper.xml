@@ -63,6 +63,8 @@
 		where
 			member_id = #{memberId}
 	</update>
+	
+	
 	<select id="list" resultType="MemberDto" parameterType="Map">
 		select*from (
 			select rownum rn, TMP.* from(

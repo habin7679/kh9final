@@ -3,19 +3,19 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="memberProfile">
+<mapper namespace="memberAttachment">
 	
 	<insert id="insert" parameterType="Map">
-		insert into member_profile(
-			member_id, attachment_no
+		insert into member_attachment(
+			member_no, attachment_no
 		)
 		values(
-			#{memberId}, #{attachmentNo}
+			#{memberNo}, #{attachmentNo}
 		)
 	</insert>
 	
-	<select id="one" resultType="Integer" parameterType="String">
-		select attachment_no from member_profile where member_id = #{memberId}
+	<select id="one" resultType="Integer" parameterType="int">
+		select attachment_no from member_attachment where member_no = #{memberNo}
 	</select>
 	
 </mapper> 
