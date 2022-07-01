@@ -12,4 +12,6 @@ public interface PaymentDao {
 
 	void cancel(PaymentDto paymentDto);
 
+	int findSellerNo(int paymentNo);
+
 }
