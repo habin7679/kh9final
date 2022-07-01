@@ -2,7 +2,6 @@ package com.kh.final6.controller;
 
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +22,7 @@ import com.kh.final6.entity.MemberDto;
 import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.MemberProfileDao;
+import com.kh.final6.service.MemberService;
 
 @Controller
 @RequestMapping("/member")
@@ -37,6 +37,9 @@ public class MemberController {
 	@Autowired
 	private MemberProfileDao memberProfileDao;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	//회원가입 
 	@GetMapping("/join")
 	public String join() {
@@ -48,14 +51,9 @@ public class MemberController {
 			@ModelAttribute MemberDto memberDto,
 			@RequestParam MultipartFile memberProfile) throws IllegalStateException, IOException {
 		
-		memberDao.join(memberDto);
+		//Service 관리 
+		memberService.join(memberDto, memberProfile);
 		
-		//프로필 등록(실제 저장 + DB) - Attachment, MemberProfile
-		if(!memberProfile.isEmpty()) {
-			int attachmentNo = attachmentDao.save(memberProfile);
-			memberProfileDao.insert(memberDto.getMemberId(), attachmentNo);
-			
-		}
 //		return "redirect:join_success";//상대
 		return "redirect:/member/join_success";//절대
 	}
