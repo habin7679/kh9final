@@ -120,12 +120,22 @@ public class MemberController {
 	
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
-		String memberId = String.valueOf(session.getAttribute("login"));
+		int memberNo = (int) session.getAttribute("no");
 		
-		MemberDto memberDto = memberDao.info(memberId);
+		MemberDto memberDto = memberDao.oneNo(memberNo);
 		model.addAttribute("memberDto", memberDto);
-		return "member/mypage"; 
+		
+		int attachmentNo = memberProfileDao.oneNo(memberNo);
+		if(attachmentNo == 0) {
+			model.addAttribute("profileUrl", "/image/user.png");
+		}
+		else {
+			model.addAttribute("profileUrl", "/attachment/download?attachmentNo=" + attachmentNo);
+		}
+		
+		return "member/mypage";
 	}
+	
 	
 	/// 비밀번호 변경 
 	@GetMapping("/password")
@@ -252,6 +262,5 @@ public class MemberController {
 //				return "member/list";
 			
 }
-
 
 

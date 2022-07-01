@@ -38,7 +38,8 @@ public class MemberDaoEncryption implements MemberDao{
 			return null;
 		}
 		
-		boolean isPasswordMatch = memberDto.getMemberPw().equals(memberPw);
+		boolean isPasswordMatch = passwordEncoder.matches(memberPw, memberDto.getMemberPw());
+		
 		if(isPasswordMatch) {
 			return memberDto;
 		}
