@@ -103,7 +103,7 @@
               <li><a href="#">꼬치</a></li>
             </ul>
           </li>  
-          <li><a href="#">같이가요</a></li>
+          <li><a href="${pageContext.request.contextPath}/together/list">같이가요</a></li>
           <li class="dropdown"><a href="#"><span>게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="${pageContext.request.contextPath}/qna/list">문의게시판</a></li>
