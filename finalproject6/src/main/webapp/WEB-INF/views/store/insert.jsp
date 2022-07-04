@@ -41,8 +41,9 @@
 	        <label>구</label>    
 	        <input type="text" name="gu" autocomplete="off" required class="form-input fill input-round">
     </div>
+    
     <div>
-	        <label>휴대폰 번호</label>    
+	        <label>판매자번호</label>    
 	        <input type="number" name="sellerNo" autocomplete="off" required class="form-input fill input-round">
     </div>
     <div>
