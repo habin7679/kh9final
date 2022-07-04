@@ -6,8 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Data @AllArgsConstructor @NoArgsConstructor @Builder
+@Data @AllArgsConstructor @NoArgsConstructor @Builder @ToString
 public class StoreDto {
 	private int storeNo; 
 	private String category;
@@ -21,11 +22,11 @@ public class StoreDto {
     private String storeDetailAddress;
     private String storeBossName ;
     private Date storeRegistDate;
-    private int storeLikecount;
+    private int storeLikeCount;
     private String storeContent;
     private String storeLunchTime;
     private String storeDinnerTime;
     private String storeStart;
     private String storeEnd;
-    private int  storeReservationPrice;
+    private int storeReservationPrice;
 }

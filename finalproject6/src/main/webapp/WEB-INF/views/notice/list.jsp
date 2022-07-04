@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+	.b-input{
+		width:100%;
+		padding: 5px;
+	}
+</style>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-    <div class="container-fluid top">
+    <div class="container ma-t-100">
 
-        <div class="row mt-2">
-            <div class="col-md-8 offset-md-2">
-                <div class="p-4 text-light text-center bg-dark rounded">
-                    <h1>공지게시판</h1>
-                </div>
-            </div>
-        </div>
+	<div class="section-header mt-4 col-md-8 offset-md-2" >
+            <h2>Notice</h2>
+            <p><span>공지</span> 게시판</p>
+            <h2>공지 및 이벤트를 확인하세요.</h2>
+       	</div>
         
         <div class="row mt-2 text-left">
             <div class="col-md-8 offset-md-2">
@@ -301,24 +305,29 @@
 			</ul>
 	</div>
 
-
 	<div class="row mt-2 text-center">
             <div class="col-md-8 offset-md-2">
                <!--검색창-->
+               <div class="row">
+               <div class="col-md-3"></div>
+               <div class="col-md-6">
                <form action="list" method="get">
-                    <select name="type">
-                        <option value="notice_head" <c:if test="${type == 'notice_head'}">selected</c:if>>말머리</option>
+               <div class="d-flex justify-content-center" >
+                    <select name="type" class="form-select me-1" style="width:15%;">
                         <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>제목</option>
 						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>내용</option>
 						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
                     </select>
-                <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}">
-                <input type="submit" value="검색">
+                <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" style="width:50%;" autocomplete="off">
+                <input type="submit" value="검색" class="btn btn-outline-danger" style="width:10%;">
+               </div>
                </form>
-            </div>
+               </div>
+               <div class="col-md-3"></div>
+           </div>     
         </div>
-
-    </div>
+</div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
