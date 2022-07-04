@@ -25,7 +25,7 @@ public class ReservationTest {
 	@Autowired
 	private StoreDao storeDao;
 	
-//	@Test
+	//@Test
 	public void test() {
 		int storeNo = 1;
 		StoreDto storeDto = storeDao.one(storeNo);

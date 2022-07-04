@@ -26,7 +26,93 @@
  <mapper namespace="store">
  	
  	<select id="one" resultType="StoreDto" parameterType="int">
- 		select * from store where store_no = #{storeNo}
+ 		select * from store 
+ 		where store_no = #{storeNo}
  	</select>
  	
+ 	<select id="sequence" resultType="int">
+ 		select store_seq.nextval from dual
+ 	</select>
+ 	
+ 	<select id="list" resultType="StoreDto">
+		select * from store order by store_no asc
+	</select>
+ 	
+ 	
+ 	<insert id="insert"  parameterType="StoreDto">
+ 	insert into store 
+ 	(
+	 	store_No, 
+		category,
+		dong,
+		gu,
+		seller_No,
+	    store_Name,
+	    store_Call,
+	    store_Post,
+	    store_Address,
+	    store_Detail_Address,
+	    store_Boss_Name ,
+	     store_Regist_Date,
+	    store_LikeCount,
+	    store_Content,
+	    store_Lunch_Time,
+	    store_Dinner_Time,
+	    store_Start,
+	    store_End,
+	    store_Reservation_Price)
+ 	values(
+		 #{storeNo},
+		 #{category},
+		 #{dong},
+		 #{gu},
+		 #{sellerNo},
+		 #{storeName},
+		 #{storeCall},
+		 #{storePost},
+		 #{storeAddress},
+		 #{storeDetailAddress},
+		 #{storeBossName},
+		 #{storeRegistDate},
+		 #{storeLikeCount},
+		 #{storeContent},
+		 #{storeLunchTime},
+		 #{storeDinnerTime},
+		 #{storeStart},
+    	 #{storeEnd},
+    	 #{storeReservationPrice}
+ 	)
+ 	
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="StoreDto">
+ 	update store
+ 	set
+ 	category = #{category},
+ 	dong = #{dong},
+ 	gu = #{gu},
+ 	select_No = #{sellerNo},
+ 	store_Name = #{storeName},
+ 	store_Call = #{storeCall},
+ 	store_Post = #{storePost},
+ 	store_Address = #{storeAddress},
+ 	store_Detail_Adress = #{storeDetailAddress},
+ 	store_Boss_Name = #{storeBossName},
+ 	store_Regist_Date = #{storeRegistDate},
+ 	store_Likecount = #{storeLikeCount},
+ 	store_Content= #{storeContent},
+ 	store_Lunch_Time = #{storeLunchTime},
+ 	store_Dinner_Time= #{storeDinnerTime},
+ 	store_Start = #{storeStart},
+ 	store_End = #{storeEnd},
+ 	store_Reservation_Price = #{storeReservationPrice}
+ 	where
+ 	store_No = #{storeNo}
+ 	
+ 	</update>
+  	
+  	<delete id="delete" parameterType="int">
+  	delete store where store_No = #{storeNo}
+  	
+  	</delete>
  </mapper>

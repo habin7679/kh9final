@@ -1,8 +1,17 @@
 package com.kh.final6.repository;
 
+import java.util.List;
+
 import com.kh.final6.entity.StoreDto;
 
 public interface StoreDao {
+	
+	List<StoreDto> list();
+	StoreDto one(int storeNo);	
+	void delete(int storeNo);
+	void insert(StoreDto storeDto);	
+	StoreDto update(StoreDto storeDto);
+	
 
-	StoreDto one(int storeNo);
+	
 }
