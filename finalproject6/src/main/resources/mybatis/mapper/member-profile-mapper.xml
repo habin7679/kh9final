@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberAttachment">
+	
+	<insert id="insert" parameterType="Map">
+		insert into member_attachment(
+			member_no, attachment_no
+		)
+		values(
+			#{memberNo}, #{attachmentNo}
+		)
+	</insert>
+	
+	<select id="one" resultType="MemberDto" parameterType="int">
+		select attachment_no from member_attachment where member_no = #{memberNo}
+	</select>
+	
+</mapper> 

@@ -1,6 +1,9 @@
 package com.kh.final6.controller;
 
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,9 +17,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.MemberDao;
+import com.kh.final6.repository.MemberProfileDao;
+import com.kh.final6.service.MemberService;
 
 @Controller
 @RequestMapping("/member")
@@ -24,6 +31,15 @@ public class MemberController {
 
 	@	Autowired
 	private MemberDao memberDao; 
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
+	
+	@Autowired
+	private MemberProfileDao memberProfileDao;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	//회원가입 
 	@GetMapping("/join")
@@ -33,9 +49,11 @@ public class MemberController {
 
 	@PostMapping("/join")
 	public String join(
-			@ModelAttribute MemberDto memberDto) {
+			@ModelAttribute MemberDto memberDto,
+			@RequestParam MultipartFile memberProfile) throws IllegalStateException, IOException {
 		
-		memberDao.join(memberDto);
+		//Service 관리 
+		memberService.join(memberDto, memberProfile);
 		
 //		return "redirect:join_success";//상대
 		return "redirect:/member/join_success";//절대
@@ -103,12 +121,22 @@ public class MemberController {
 	
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
-		String memberId = String.valueOf(session.getAttribute("login"));
+		int memberNo = (int) session.getAttribute("no");
 		
-		MemberDto memberDto = memberDao.info(memberId);
+		MemberDto memberDto = memberDao.oneNo(memberNo);
 		model.addAttribute("memberDto", memberDto);
-		return "member/mypage"; 
+		
+		int attachmentNo = memberProfileDao.oneNo(memberNo);
+		if(attachmentNo == 0) {
+			model.addAttribute("profileUrl", "/image/user.png");
+		}
+		else {
+			model.addAttribute("profileUrl", "/attachment/download?attachmentNo=" + attachmentNo);
+		}
+		
+		return "member/mypage";
 	}
+	
 	
 	/// 비밀번호 변경 
 	@GetMapping("/password")
@@ -122,7 +150,7 @@ public class MemberController {
 			@RequestParam String changePw,
 			HttpSession session 
 			){
-			String memberId = (String)session.getAttribute("login");
+			String memberId = String.valueOf(session.getAttribute("login"));
 			boolean success = memberDao.changePassword(memberId, currentPw, changePw);
 			if(success) {
 				return "redirect:mypage";
@@ -130,6 +158,28 @@ public class MemberController {
 			else {
 				return "redirect:password?error"; 
 			}
+	}
+	
+	//아이디 찾기
+	
+	@GetMapping("/find_id")
+	public String findId() {
+		return "member/find_id";
+	}
+	
+	@PostMapping("/find_id")
+	public String findId(
+			@ModelAttribute MemberDto memberDto,
+			HttpSession session,
+			Model model) {
+		String memberId = memberDao.findId(memberDto);
+		if(memberId == null) {
+			return "redirect:find_id?error";
+		}
+		else {
+			model.addAttribute("findUserId", memberId);
+			return "member/find_id_result";
+		}
 	}
 	
 	//탈퇴 
@@ -141,7 +191,7 @@ public class MemberController {
 	@PostMapping("/exit")
 	public String exit(@RequestParam String memberPw, HttpSession session) {
 	
-	String memberId = (String)session.getAttribute("login");
+	String memberId = String.valueOf(session.getAttribute("login"));
 	boolean success =  memberDao.exit(memberId, memberPw);
 	
 	if(success) {
@@ -180,9 +230,39 @@ public class MemberController {
 		else {
 			return "redirect:information?error"; 
 		}
-	
 	}
-}
+	
+	//리스트
+	@GetMapping("/list")
+	public String list(
+			@RequestParam (required = false) String type,
+			@RequestParam (required = false) String keyword,
+			@RequestParam (required = false, defaultValue = "1") int p,
+			@RequestParam (required = false, defaultValue = "10") int s,
+			Model model) {
 
+		List<MemberDto> list = memberDao.list(type,keyword,p,s);
+		model.addAttribute("list",list);
+
+		boolean search = type !=null&&keyword != null;
+		model.addAttribute("search",search);
+
+
+
+		int blockSize = 10;
+		int endBlock = (p+blockSize - 1) / blockSize * blockSize;
+		int startBlock = endBlock - (blockSize - 1);
+
+		model.addAttribute("p",p);
+		model.addAttribute("s",s);
+		model.addAttribute("blockSize",blockSize);
+		model.addAttribute("endBlock",endBlock);
+		model.addAttribute("startBlock",startBlock);
+		model.addAttribute("type",type);
+		model.addAttribute("keyword",keyword);
+		return "member/list";
+	}
+			
+}
 
 

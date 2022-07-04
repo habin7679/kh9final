@@ -14,8 +14,8 @@
     </div>
   </section><!-- End Hero Section -->
 
-  <main id="main">
     <!-- ======= Menu Section ======= -->
+    <main id="main">
     <section id="menu" class="menu">
       <div class="container" data-aos="fade-up">
 
@@ -626,10 +626,7 @@
 
       </div>
     </section><!-- End Gallery Section -->
-
-
-
-  </main><!-- End #main -->
+    </main>
 
 
 

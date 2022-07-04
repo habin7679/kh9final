@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ <mapper namespace="noticeAttach">
+ 	
+ 	<insert id="insert" parameterType="Map">
+ 		insert into notice_attachment (notice_no, attachment_no) values (${noticeNo}, #{attachmentNo})
+ 	</insert>
+ 	
+ 	<select id="one" parameterType="int" resultType="Integer">
+ 		select attachment_no from notice_attachment where notice_no = #{noticeNo}
+ 	</select>
+ </mapper>

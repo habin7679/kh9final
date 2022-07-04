@@ -13,5 +13,8 @@ public interface StoreDao {
 	StoreDto update(StoreDto storeDto);
 	
 
-	
+
+	int selectReservationPrice(int storeNo);
+
+
 }

@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class NoticeAttachDto {
 	private int noticeNo;
-	private long attachmentNo;
+	private int attachmentNo;
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
+
+
 
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -73,6 +74,7 @@
 
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
+  
 
 </body>
 

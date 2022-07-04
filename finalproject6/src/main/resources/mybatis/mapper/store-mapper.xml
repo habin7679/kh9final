@@ -29,7 +29,7 @@
  		select * from store 
  		where store_no = #{storeNo}
  	</select>
- 	
+ 
  	<select id="sequence" resultType="int">
  		select store_seq.nextval from dual
  	</select>
@@ -115,4 +115,9 @@
   	delete store where store_No = #{storeNo}
   	
   	</delete>
+
+ 	<select id="price" resultType="int" parameterType="int">
+ 		select store_reservation_price from store where store_no = #{storeNo}
+ 	</select>
+
  </mapper>

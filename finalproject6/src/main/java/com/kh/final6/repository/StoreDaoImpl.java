@@ -41,6 +41,11 @@ public class StoreDaoImpl implements StoreDao {
 			throw new CannotFindException();
 	
 	}	
+	
+	@Override
+	public int selectReservationPrice(int storeNo) {
+		return sqlSession.selectOne("store.price", storeNo);
+	}
 }
 	@Override
 	public StoreDto update(StoreDto storeDto) {

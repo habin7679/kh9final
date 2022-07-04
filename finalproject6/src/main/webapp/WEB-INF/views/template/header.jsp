@@ -24,7 +24,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
   <!-- Vendor CSS Files -->
   <link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,22 +42,36 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  
+  <!-- Vuetify CDN-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  
 </head>
 <style>
-    .me{
-        margin-left: 500px;
-    }
-    .ru{
-      width: 300px;
-    }
-    .oi{
-      margin-right: 1000px;
+.me {
+	margin-left: 500px;
+}
+
+.ru {
+	width: 300px;
+}
+
+.oi {
+	margin-right: 1000px;
+}
+
+/*마진 탑 100px*/
+ .ma-t-100{
+      margin-top: 100px;
     }
 
 </style>
 
-<body>
 
+  <body>
   <!-- ======= Header ======= -->
 
   <header id="header" class="header fixed-top d-flex align-items-stretch">
@@ -65,7 +79,8 @@
       
       <nav id="navbar" class="navbar">
         
-          <a href="index.html">
+          <a href="${pageContext.request.contextPath}/">
+
             <img src="${pageContext.request.contextPath}/img/log.PNG" width="170px" height="120px">
           </a>
         
@@ -88,11 +103,11 @@
               <li><a href="#">꼬치</a></li>
             </ul>
           </li>  
-          <li><a href="#">같이가요</a></li>
+          <li><a href="${pageContext.request.contextPath}/together/list">같이가요</a></li>
           <li class="dropdown"><a href="#"><span>게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">문의게시판</a></li>
-              <li><a href="#">공지게시판</a></li>
+              <li><a href="${pageContext.request.contextPath}/qna/list">문의게시판</a></li>
+              <li><a href="${pageContext.request.contextPath}/notice/list">공지게시판</a></li>
             </ul>
           </li>
         </ul>
@@ -115,5 +130,9 @@
       </nav>
     </div>
 
+
   </header><!-- End Header -->
+
+
  
+
