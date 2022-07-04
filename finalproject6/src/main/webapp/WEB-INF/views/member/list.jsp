@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row mt-2">
             <div class="col-md-8 offset-md-2">
                 <table class="table">
@@ -40,7 +40,7 @@
                 </table>
             </div>
         </div>
-        
+
         <div class="row mt-2 text-center">
             <div class="col-md-8 offset-md-2">
                <!--검색창-->
@@ -62,4 +62,4 @@
     <script>
         
     </script>
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 

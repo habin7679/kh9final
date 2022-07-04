@@ -1,5 +1,9 @@
 package com.kh.final6.repository;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -102,6 +106,12 @@ public class MemberDaoEncryption implements MemberDao{
 	@Override
 	public String findId(MemberDto memberDto) {
 		return sqlSession.selectOne("member.findId", memberDto);
+	}
+
+	@Override
+	public List<MemberDto> list(String type, String keyword, int p, int s) {
+		Map<String,Object> param = new HashMap<>();
+		return sqlSession.selectList("member.list",param);
 	}
 
 }

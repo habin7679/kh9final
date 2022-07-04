@@ -10,8 +10,12 @@
 	<input type="hidden" name="referer" value="${referer}">
 
     <div class="container w400 m30">
-        <div class="row center">
-            <h1>로그인</h1>
+        <div class="row mt-10 top" >
+            <div class="col-md-8 offset-md-2">
+                <div class="p-4 text-light text-center bg-dark rounded">
+                    <h1>회원 관리</h1>
+                </div>
+            </div>
         </div>
         <div class="row">
             <label>아이디</label>
