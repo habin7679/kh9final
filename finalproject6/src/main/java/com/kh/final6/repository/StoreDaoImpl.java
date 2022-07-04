@@ -42,15 +42,16 @@ public class StoreDaoImpl implements StoreDao {
 	
 	}	
 	
-	@Override
-	public int selectReservationPrice(int storeNo) {
-		return sqlSession.selectOne("store.price", storeNo);
-	}
 }
 	@Override
 	public StoreDto update(StoreDto storeDto) {
 		int count = sqlSession.update("store.update", storeDto);
 		if(count == 0) throw new CannotFindException();
 		return sqlSession.selectOne("store.one", storeDto.getStoreNo());
+		}
+
+	@Override
+	public int selectReservationPrice(int storeNo) {
+		return sqlSession.selectOne("store.price", storeNo);
 		}
 	}
