@@ -19,14 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.final6.entity.AttachmentDto;
 import com.kh.final6.entity.MemberDto;
 import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.MemberProfileDao;
 import com.kh.final6.service.MemberService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/member")
+@Slf4j
 public class MemberController {
 
 	@	Autowired
@@ -120,19 +124,26 @@ public class MemberController {
 	//MyPage 구현 
 	
 	@GetMapping("/mypage")
-	public String mypage(HttpSession session, Model model) {
-		int memberNo = (int) session.getAttribute("no");
+	public String mypage(@RequestParam int memberNo, 
+			HttpSession session, Model model) {
 		
 		MemberDto memberDto = memberDao.oneNo(memberNo);
 		model.addAttribute("memberDto", memberDto);
 		
-		int attachmentNo = memberProfileDao.oneNo(memberNo);
-		if(attachmentNo == 0) {
-			model.addAttribute("profileUrl", "/image/user.png");
+		int attachmentNo = memberProfileDao.one(memberNo);
+		
+		log.debug("attachment={}",attachmentNo);
+		boolean memberAttach = attachmentNo == 0;
+		
+		model.addAttribute("memberAttach",memberAttach);
+		if(memberAttach){
+			model.addAttribute("profileUrl", "/img/user.png");
 		}
 		else {
-			model.addAttribute("profileUrl", "/attachment/download?attachmentNo=" + attachmentNo);
+		model.addAttribute("profileUrl", "/attachment/download?attachmentNo=" + attachmentNo);
 		}
+		String attachName = attachmentDao.name(attachmentNo);
+		model.addAttribute("attachName",attachName);
 		
 		return "member/mypage";
 	}

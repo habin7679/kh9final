@@ -9,15 +9,13 @@
 <form action="login" method="post">
 	<input type="hidden" name="referer" value="${referer}">
 
-    <div class="container w400 m30">
-        <div class="row mt-10 top" >
-            <div class="col-md-8 offset-md-2">
-                <div class="p-4 text-light text-center bg-dark rounded">
-                    <h1>회원 관리</h1>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+    <div class="section-header mt-4" >
+            
+            <p><span>Login</span></p>
+          </div>
+         <div class="col-md-8 offset-md-2">
+        <div class="row mt-2">
+        
             <label>아이디</label>
     		<input type="text" name="memberId" required class="form-input fill input-round" autocomplete="off" value="${cookie.saveId.value}">
         </div>
@@ -46,6 +44,7 @@
         </div>
         <div class="row center">
             <a href="find_pw" class="link">비밀번호가 기억나지 않아요</a>
+        </div>
         </div>
         
 		<%-- 에러 표시가 있는 경우 메세지를 출력 --%>

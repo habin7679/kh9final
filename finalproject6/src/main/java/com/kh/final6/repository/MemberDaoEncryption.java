@@ -111,7 +111,16 @@ public class MemberDaoEncryption implements MemberDao{
 	@Override
 	public List<MemberDto> list(String type, String keyword, int p, int s) {
 		Map<String,Object> param = new HashMap<>();
+		param.put("type", type);
+		param.put("keyword", keyword);
+
+		int end = p *s;
+		int begin = end - (s-1);
+
+		param.put("begin", begin);
+		param.put("end", end);
 		return sqlSession.selectList("member.list",param);
+		
 	}
 
 }

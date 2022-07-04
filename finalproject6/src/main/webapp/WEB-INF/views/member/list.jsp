@@ -3,8 +3,9 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <div class="container-fluid mt-10">
-        <div class="row mt-10 top" >
+
+    <div class="container-fluid top">
+        <div class="row mt-10 " >
             <div class="col-md-8 offset-md-2">
                 <div class="p-4 text-light text-center bg-dark rounded">
                     <h1>회원 관리</h1>
@@ -55,11 +56,12 @@
                </form>
             </div>
         </div>
-
     </div>
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         
     </script>
+    
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 

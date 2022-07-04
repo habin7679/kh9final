@@ -60,7 +60,8 @@
 }
 
 .oi {
-	margin-right: 1000px;
+	margin-left:290px;
+	position:absolute;
 }
 
 /*마진 탑 100px*/
@@ -74,8 +75,11 @@
   <body>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-stretch">
-    <div class="container d-flex align-items-stretch">
-      <nav id="navbar" class="navbar ">
+
+    <div class="container d-flex align-items-stretch oi ">
+
+      <nav id="navbar" class="navbar">
+
         
           <a href="${pageContext.request.contextPath}/">
 
@@ -128,6 +132,11 @@
       </nav>
     </div>
   </header><!-- End Header -->
+
+
+ <main id="main">
+<section>
+
 
  
 
