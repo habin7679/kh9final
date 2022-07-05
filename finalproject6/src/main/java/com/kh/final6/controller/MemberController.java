@@ -2,9 +2,12 @@ package com.kh.final6.controller;
 
 
 import java.io.IOException;
+
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.Random;
+
+import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
@@ -22,7 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+ 
 import com.kh.final6.entity.CertDto;
+
+import com.kh.final6.entity.AttachmentDto;
+
 import com.kh.final6.entity.MemberDto;
 import com.kh.final6.error.UnauthorizeException;
 import com.kh.final6.repository.AttachmentDao;
@@ -32,8 +39,11 @@ import com.kh.final6.repository.MemberProfileDao;
 import com.kh.final6.service.EmailService;
 import com.kh.final6.service.MemberService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/member")
+@Slf4j
 public class MemberController {
 
 	@	Autowired
@@ -133,20 +143,23 @@ public class MemberController {
 	//MyPage 구현 
 	
 	@GetMapping("/mypage")
-	public String mypage(HttpSession session, Model model) {
-		int memberNo = (int) session.getAttribute("no");
+	public String mypage(@RequestParam int memberNo, 
+			HttpSession session, Model model) {
 		
 		MemberDto memberDto = memberDao.oneNo(memberNo);
 		model.addAttribute("memberDto", memberDto);
 		
 		int attachmentNo = memberProfileDao.one(memberNo);
 		
+
 		if(attachmentNo == 0) {
 			model.addAttribute("profileUrl", "/img/user.png");
 		}
 		else {
-			model.addAttribute("profileUrl", "/attachment/download?attachmentNo=" + attachmentNo);
+		model.addAttribute("profileUrl", "/attachment/download?attachmentNo=" + attachmentNo);
 		}
+		String attachName = attachmentDao.name(attachmentNo);
+		model.addAttribute("attachName",attachName);
 		
 		return "member/mypage";
 	}
@@ -246,6 +259,7 @@ public class MemberController {
 		}
 	}
 	
+
 	@GetMapping("/find_pw")
 	public String findPw() {
 		return "member/find_pw";
@@ -282,6 +296,8 @@ public class MemberController {
 		CertDto certDto = CertDto.builder().certTarget(memberId).certNumber(cert).build();
 		boolean isOk = certDao.check(certDto);
 		if(isOk) {
+
+	
 			
 			//추가 인증번호 생성 및 페이지로 전달
 			String newCert = f.format(r.nextInt(1000000));
@@ -324,6 +340,43 @@ public class MemberController {
 			return "member/reset_success";
 		}
 	}
+  //리스트
+	@GetMapping("/list")
+	public String list(
+			@RequestParam (required = false) String type,
+			@RequestParam (required = false) String keyword,
+			@RequestParam (required = false, defaultValue = "1") int p,
+			@RequestParam (required = false, defaultValue = "10") int s,
+			Model model) {
+
+		List<MemberDto> list = memberDao.list(type,keyword,p,s);
+		model.addAttribute("list",list);
+
+		boolean search = type !=null&&keyword != null;
+		model.addAttribute("search",search);
+		
+		int count = memberDao.count(type,keyword);
+		int lastPage = (count + s - 1) /s;
+
+
+
+		int blockSize = 10;
+		int endBlock = (p+blockSize - 1) / blockSize * blockSize;
+		int startBlock = endBlock - (blockSize - 1);
+		if(endBlock > lastPage){
+			endBlock = lastPage;
+		}
+
+		model.addAttribute("p",p);
+		model.addAttribute("s",s);
+		model.addAttribute("blockSize",blockSize);
+		model.addAttribute("endBlock",endBlock);
+		model.addAttribute("startBlock",startBlock);
+		model.addAttribute("type",type);
+		model.addAttribute("keyword",keyword);
+		return "member/list";
+	}
+
 
 
 

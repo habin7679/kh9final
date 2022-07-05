@@ -1,5 +1,9 @@
 package com.kh.final6.repository;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -105,6 +109,7 @@ public class MemberDaoEncryption implements MemberDao{
 	}
 
 	@Override
+
 	public MemberDto find(MemberDto memberDto) {
 		return sqlSession.selectOne("member.find", memberDto);
 	}
@@ -118,6 +123,30 @@ public class MemberDaoEncryption implements MemberDao{
 		int count = sqlSession.update("member.changePassword", memberDto);
 		return count > 0;
 	}
+
+	public List<MemberDto> list(String type, String keyword, int p, int s) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("type", type);
+		param.put("keyword", keyword);
+
+		int end = p *s;
+		int begin = end - (s-1);
+
+		param.put("begin", begin);
+		param.put("end", end);
+		return sqlSession.selectList("member.list",param);
+		
+	}
+	//게시글 수 조회
+		@Override
+		public int count(String type, String keyword) {
+	 		Map<String,Object> param = new HashMap<>();
+	 		param.put("type", type);
+	 		param.put("keyword", keyword);
+	 		
+	 		return sqlSession.selectOne("member.count",param);
+		}
+
 }
 
 

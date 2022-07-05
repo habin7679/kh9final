@@ -12,11 +12,14 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class RegularPaymentDto {
 	
-	private int RegularPaymentNo;
+	private int regularPaymentNo;
 	private int storeNo;
 	private int sellerNo;
-	private int RegularPaymentTid;
-	private Date RegularPaymentTime;
-	private int RegularPaymentPrice;
+	private String regularPaymentTid;
+	private Date regularPaymentTime;
+	private int regularPaymentPrice;
+	private String regularPaymentSid;
+	private String regularPaymentName;
+	private String regularStatus;
 
 }

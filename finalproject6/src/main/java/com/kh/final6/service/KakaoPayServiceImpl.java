@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class KakaoPayServiceVersion1 implements KakaoPayService {
+public class KakaoPayServiceImpl implements KakaoPayService {
 	
 	private String urlPrefix = "https://kapi.kakao.com/v1/payment";
 	

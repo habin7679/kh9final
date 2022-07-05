@@ -1,6 +1,8 @@
 package com.kh.final6.controller;
 
 import java.net.URISyntaxException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +24,7 @@ import com.kh.final6.error.CannotFindException;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.PaymentDao;
 import com.kh.final6.repository.ReservationDao;
+import com.kh.final6.repository.SellerDao;
 import com.kh.final6.repository.StoreDao;
 import com.kh.final6.service.KakaoPayService;
 import com.kh.final6.service.PaymentService;
@@ -55,6 +58,8 @@ public class ReservationController {
 	private PaymentDao paymentDao;
 	@Autowired
 	private PaymentService paymentService;
+	@Autowired
+	private SellerDao sellerDao;
 
 	
 	@GetMapping("/")
@@ -174,24 +179,58 @@ public class ReservationController {
 			return "reservation/payFail";
 		}
 
-//		@GetMapping("/cancelTest")
-//		public String canelTest() {
-//			return "reservation/cancelTest";
-//		}
+		@GetMapping("/cancelTest")
+		public String canelTest() {
+			return "reservation/cancelTest";
+		}
 		
 		@GetMapping("/cancel")
 		public String cancelDetail(
 				@RequestParam int paymentNo
 				) throws URISyntaxException {
 			PaymentDto paymentDto = paymentDao.one(paymentNo);
-					
-			KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
-																								.tid(paymentDto.getPaymentTid())
-																								.cancel_amount(paymentDto.getPaymentPrice())
-																								.build();
 			
-			KakaoPayCancelResponsetVO responseVO = kakaoPayService.cancel(requestVO);
-			paymentDao.cancel(paymentDto);
+			int sellerNo = paymentDao.findSellerNo(paymentNo);
+			
+			ReservationDto reservationDto = reservationDao.one(paymentDto.getReservationNo());
+			
+			Calendar getToday = Calendar.getInstance();
+			getToday.setTime(new Date()); //금일 날짜
+			
+			Date date = reservationDto.getReservationDate();
+			Calendar cmpDate = Calendar.getInstance();
+			cmpDate.setTime(date); //특정 일자
+			
+			long diffSec = (cmpDate.getTimeInMillis() - getToday.getTimeInMillis() ) / 1000;
+			long diffDays = diffSec / (24*60*60); //일자수 차이
+			
+//			System.out.println("@@@@@@@@@@@diffDays" + diffDays);
+					
+			if(diffDays  >= 7) {
+				KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
+						.tid(paymentDto.getPaymentTid())
+						.cancel_amount(paymentDto.getPaymentPrice())
+						.build();
+				KakaoPayCancelResponsetVO responseVO = kakaoPayService.cancel(requestVO);
+				paymentDao.cancel(paymentDto);
+				
+			} else if(diffDays < 7 && diffDays >= 2) {
+				//50% 환불
+				paymentDto.setPaymentPrice(paymentDto.getPaymentPrice()/2);
+//				System.out.println("%%%%%%%%%%%%%%%%Price" + paymentDto.getPaymentPrice());
+				KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
+						.tid(paymentDto.getPaymentTid())
+						.cancel_amount(paymentDto.getPaymentPrice())
+						.build();
+				
+				KakaoPayCancelResponsetVO responseVO = kakaoPayService.cancel(requestVO);
+				paymentDao.cancel(paymentDto);
+				sellerDao.addPoint(paymentDto.getPaymentPrice(), sellerNo);
+				
+			} else {
+				paymentDao.cancel(paymentDto);
+				sellerDao.addPoint(paymentDto.getPaymentPrice(), sellerNo);
+			}
 //
 //			return "redirect:more?paymentNo="+paymentDetailDto.getPaymentNo();
 			return "redirect:/" ;

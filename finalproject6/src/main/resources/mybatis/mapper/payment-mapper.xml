@@ -48,4 +48,13 @@
 		update payment set payment_status = '취소' where payment_no = #{paymentNo}
 	</update>
 	
+	<select id="findSellerNo" resultType="int" parameterType="int">
+		select
+		 	 S.seller_no   
+		from payment P
+			 left outer join reservation R on P.reservation_no = R.reservation_no
+		 	left outer join store S on R.store_no = S.store_no
+		 where P.payment_no = #{paymentNo}
+	</select>
+	
  </mapper>

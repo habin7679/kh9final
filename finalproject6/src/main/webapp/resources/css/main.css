@@ -13,7 +13,7 @@
 .btn1,
 .btn1:focus {
   font-size: 14px;
-  color: #fff;
+  color: #ffff;
   background: var(--color-primary);
   padding: 8px 20px;
   transition: 0.3s;

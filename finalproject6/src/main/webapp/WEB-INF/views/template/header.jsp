@@ -60,7 +60,8 @@
 }
 
 .oi {
-	margin-right: 1000px;
+	margin-left:290px;
+	position:absolute;
 }
 
 /*마진 탑 100px*/
@@ -73,11 +74,12 @@
 
   <body>
   <!-- ======= Header ======= -->
-
   <header id="header" class="header fixed-top d-flex align-items-stretch">
-    <div class="container d-flex align-items-stretch ">
-      
+
+    <div class="container d-flex align-items-stretch oi ">
+
       <nav id="navbar" class="navbar">
+
         
           <a href="${pageContext.request.contextPath}/">
 
@@ -119,19 +121,23 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
       <ul>
+      
         <li class="dropdown"><a href="#"><span>닉네임  </span><i class="fa-solid fa-square-envelope fa-1x"></i></a>
           <ul>
             <li><a href="#">mypage</a></li>
             <li><a href="#">쪽지함</a></li>
             <li><a href="#">로그아웃</a></li>
+            <li><a href="${pageContext.request.contextPath}/member/list">회원관리</a></li>
           </ul>
         </li>
       </ul>
       </nav>
     </div>
-
-
   </header><!-- End Header -->
+
+
+ <main id="main">
+<section>
 
 
  
