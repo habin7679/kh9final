@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <form action="password" method="post">
-	<div class="container w400 m30">
+	<div class="container-fluid w400 m30">
 	    <div class="row center">
 	        <h1>비밀번호 변경</h1>
 	    </div>
