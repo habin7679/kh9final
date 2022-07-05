@@ -1,7 +1,5 @@
 package com.kh.final6.error;
 
-//404번을 처리하기 위해 새로 만든 예외(신규예외)
-// - RuntimeException을 상속 받으면 예외 전가 생략이 가능
 public class CannotFindException extends RuntimeException{
 	
 	private static final long serialVersionUID = 1L;

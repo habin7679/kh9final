@@ -64,6 +64,25 @@
 			member_id = #{memberId}
 	</update>
 	
+	<!--  비밀번호 찾기 -->
+	<select id="find" resultType="MemberDto" parameterType="MemberDto">
+		select * from member
+		where
+			member_id = #{memberId}
+			and
+			member_nick = #{memberNick}
+			and
+			member_phone = #{memberPhone}
+			and
+			member_birth = #{memberBirth}
+	</select>
+	
+	<update id = "changePasswordOnly" parameterType = "MemberDto">
+		update member
+		set member_pw =#{memberPw}
+		where member_id =#{memberId}
+	</update>
+	
 	
 	<select id="list" resultType="MemberDto" parameterType="Map">
 		select*from (
@@ -78,7 +97,7 @@
  			) where rn between #{begin} and #{end}
 	</select>
 	
-	
+
 
 </mapper> 
 	

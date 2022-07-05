@@ -104,6 +104,20 @@ public class MemberDaoEncryption implements MemberDao{
 		return sqlSession.selectOne("member.findId", memberDto);
 	}
 
+	@Override
+	public MemberDto find(MemberDto memberDto) {
+		return sqlSession.selectOne("member.find", memberDto);
+	}
+
+	@Override
+	public boolean changePassword(MemberDto memberDto) {
+		//암호화를 거친 뒤 등록될 수 있도록 처리
+		String rawPassword = memberDto.getMemberPw();
+		String encryptPassword = passwordEncoder.encode(rawPassword);
+		memberDto.setMemberPw(encryptPassword);
+		int count = sqlSession.update("member.changePassword", memberDto);
+		return count > 0;
+	}
 }
 
 

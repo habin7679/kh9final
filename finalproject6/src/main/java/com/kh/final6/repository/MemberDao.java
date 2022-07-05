@@ -13,6 +13,9 @@ public interface MemberDao {
 	boolean exit(String memberId, String memberPw);
 	boolean changeInformation(MemberDto memberDto);
 	String findId(MemberDto memberDto);
+	MemberDto find(MemberDto memberDto);
+	boolean changePassword(MemberDto memberDto);
+	
 
 
 
