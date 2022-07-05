@@ -13,12 +13,13 @@
 .btn1,
 .btn1:focus {
   font-size: 14px;
-  color: #ffff;
+ color: #fff;
   background: var(--color-primary);
   padding: 8px 20px;
   transition: 0.3s;
   border-radius:4px;
   border:none;
+  color: initial ;
 }
 
 .btn1:hover,
@@ -80,7 +81,7 @@ body {
 }
 
 a {
-  color: var(--color-primary);
+  color: black;
   text-decoration: none;
 }
 

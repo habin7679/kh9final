@@ -374,6 +374,7 @@ public class MemberController {
 		model.addAttribute("startBlock",startBlock);
 		model.addAttribute("type",type);
 		model.addAttribute("keyword",keyword);
+		model.addAttribute("lastPage", lastPage);
 		return "member/list";
 	}
 

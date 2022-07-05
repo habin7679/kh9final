@@ -1,21 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style>
+    
+    <style>
 	.b-input{
 		width:100%;
 		padding: 5px;
 	}
 </style>
-    <div class="container-fluid top">
-        <div class="row mt-10 " >
-            <div class="col-md-8 offset-md-2">
-                <div class="p-4 text-light text-center bg-dark rounded">
-                    <h1>회원 관리</h1>
-                </div>
-            </div>
-        </div>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <div class="container ma-t-100">
+    
+    <div class="section-header mt-4 col-md-8 offset-md-2" >
+            <h2>Member</h2>
+            <p><span>회원</span> 관리</p>
+       	</div>
        
         <div class="row mt-2 text-left">
             <div class="col-md-8 offset-md-2">
@@ -132,6 +131,7 @@
 						</c:otherwise>
 					</c:choose>
 				</c:if>
+				
 				<c:if test="${p < lastPage}">
 					<c:choose>
 						<c:when test="${search}">
@@ -170,8 +170,8 @@
            </div>     
         </div>
 </div>
- </div>
-        
+</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
