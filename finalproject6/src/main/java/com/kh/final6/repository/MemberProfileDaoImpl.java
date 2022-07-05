@@ -31,4 +31,5 @@ public class MemberProfileDaoImpl implements MemberProfileDao{
 			return attachmentNo;
 		}
 	}
+
 }

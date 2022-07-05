@@ -2,8 +2,14 @@ package com.kh.final6.controller;
 
 
 import java.io.IOException;
+
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.Random;
+
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,11 +25,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+ 
+import com.kh.final6.entity.CertDto;
+
 import com.kh.final6.entity.AttachmentDto;
+
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.error.UnauthorizeException;
 import com.kh.final6.repository.AttachmentDao;
+import com.kh.final6.repository.CertDao;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.MemberProfileDao;
+import com.kh.final6.service.EmailService;
 import com.kh.final6.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +57,12 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired 
+	private CertDao certDao;
 	
 	//회원가입 
 	@GetMapping("/join")
@@ -132,11 +151,8 @@ public class MemberController {
 		
 		int attachmentNo = memberProfileDao.one(memberNo);
 		
-		log.debug("attachment={}",attachmentNo);
-		boolean memberAttach = attachmentNo == 0;
-		
-		model.addAttribute("memberAttach",memberAttach);
-		if(memberAttach){
+
+		if(attachmentNo == 0) {
 			model.addAttribute("profileUrl", "/img/user.png");
 		}
 		else {
@@ -243,7 +259,88 @@ public class MemberController {
 		}
 	}
 	
-	//리스트
+
+	@GetMapping("/find_pw")
+	public String findPw() {
+		return "member/find_pw";
+	}
+	
+	@PostMapping("/find_pw")
+	public String findPw(@ModelAttribute MemberDto memberDto) throws MessagingException {
+		MemberDto findDto = memberDao.find(memberDto);
+		if(findDto == null) {
+			return "redirect:find_pw?error";
+		}
+		if(findDto.getMemberId() == null) {
+			return "redirect:email_is_null";
+		}
+		
+		//남은회원들(정보도 맞고 이메일도 있는 회원)에게 이메일 발송
+		emailService.sendPasswordResetMail(findDto);
+		return "redirect:find_pw_send_mail";
+	}
+	
+	@GetMapping("/email_is_null")
+	public String emailIsNull() {
+		return "error/email_is_null";
+	}
+	
+	private Random r = new Random();
+	private Format f = new DecimalFormat("000000");
+	
+	@GetMapping("/reset")
+	public String reset(
+			@RequestParam String memberId, 
+			@RequestParam String cert,
+			Model model) {
+		CertDto certDto = CertDto.builder().certTarget(memberId).certNumber(cert).build();
+		boolean isOk = certDao.check(certDto);
+		if(isOk) {
+
+	
+			
+			//추가 인증번호 생성 및 페이지로 전달
+			String newCert = f.format(r.nextInt(1000000));
+			certDao.insert(CertDto.builder()
+														.certTarget(memberId)
+														.certNumber(newCert)
+													.build());
+			model.addAttribute("cert", newCert);//쿠키로 해도 됨
+			
+			return "member/reset";
+		}
+		else {
+			throw new UnauthorizeException();//401 error
+		}
+	}
+	
+	@PostMapping("/reset")
+	public String reset(
+			@ModelAttribute MemberDto memberDto,
+			@RequestParam String cert) {
+		boolean isOk = certDao.check(CertDto.builder()
+										.certTarget(memberDto.getMemberId())
+										.certNumber(cert)
+										.build());
+		if(isOk) {
+			boolean result = memberDao.changePassword(memberDto);
+			if(result) {
+				return "redirect:reset_success";
+			}
+		}
+		throw new UnauthorizeException();//401
+	}
+		@GetMapping("/find_pw_send_mail")
+		public String findPwSendMail() {
+			return "member/find_pw_send_mail";
+		}
+		
+		@GetMapping("/reset_success")                                        
+		public String resetSuccess() {
+			return "member/reset_success";
+		}
+	}
+  //리스트
 	@GetMapping("/list")
 	public String list(
 			@RequestParam (required = false) String type,
@@ -279,7 +376,7 @@ public class MemberController {
 		model.addAttribute("keyword",keyword);
 		return "member/list";
 	}
-			
-}
+
+
 
 
