@@ -319,7 +319,7 @@
 						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
                     </select>
                 <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" style="width:50%;" autocomplete="off">
-                <input type="submit" value="검색" class="btn btn-outline-danger" style="width:10%;">
+                <input type="submit" value="검색" class="btn btn-outline-danger" style="width:15%;">
                </div>
                </form>
                </div>

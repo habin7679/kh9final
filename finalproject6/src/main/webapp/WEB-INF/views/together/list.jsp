@@ -3,7 +3,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <div class="container ma-t-100">
+    <div class="container-fluid ma-t-100">
 
         <div class="section-header mt-4 col-md-8 offset-md-2" >
             <h2>Together</h2>
@@ -314,7 +314,7 @@
 						<option value="together_writer" <c:if test="${type == 'together_writer'}">selected</c:if>>작성자</option>
                     </select>
                 <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" style="width:50%;" autocomplete="off">
-                <input type="submit" value="검색" class="btn btn-outline-danger" style="width:10%;">
+                <input type="submit" value="검색" class="btn btn-outline-danger" style="width:15%;">
                </div>
                </form>
                </div>

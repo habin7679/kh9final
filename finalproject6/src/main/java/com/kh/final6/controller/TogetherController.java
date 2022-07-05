@@ -68,6 +68,7 @@ public class TogetherController {
 		model.addAttribute("endBlock",endBlock);
 		model.addAttribute("type",type);
 		model.addAttribute("keyword",keyword);
+		model.addAttribute("lastPage",lastPage);
 		
 		return "together/list";
 	}
@@ -96,7 +97,7 @@ public class TogetherController {
 		boolean isAdmin = isLogin && memberGrade.equals("관리자");
 		model.addAttribute("isAdmin",isAdmin);
 		
-		return "together/detail";
+		return "together/detail2";
 	}
 	
 	@GetMapping("/write")

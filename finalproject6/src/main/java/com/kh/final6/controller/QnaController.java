@@ -69,6 +69,7 @@ public class QnaController {
 		model.addAttribute("startBlock",startBlock);
 		model.addAttribute("type",type);
 		model.addAttribute("keyword",keyword);
+		model.addAttribute("lastPage",lastPage);
 		
 		return "qna/list";
 	}
