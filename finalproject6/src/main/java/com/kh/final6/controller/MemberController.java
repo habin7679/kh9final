@@ -339,7 +339,7 @@ public class MemberController {
 		public String resetSuccess() {
 			return "member/reset_success";
 		}
-	}
+	
   //리스트
 	@GetMapping("/list")
 	public String list(
@@ -377,7 +377,7 @@ public class MemberController {
 		model.addAttribute("lastPage", lastPage);
 		return "member/list";
 	}
-
+}
 
 
 
