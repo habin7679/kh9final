@@ -25,13 +25,27 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
  <mapper namespace="regularPayment">
  	
- 	<select resultType="StoreNameMemberNameVO" parameterType="int" id="StoreNameMemberName">
+ 	<select resultType="StoreNameMemberNameVO" parameterType="int" id="storeNameMemberName">
  		select
 		  G.store_name,  M.member_name
 		from seller S
 			left outer join member M on S.member_no = M.member_no
 			left outer join store G on G.seller_no = S.seller_no
-		where M.member_no = #{memberNo};
+		where M.member_no = #{memberNo}
  	</select>
+ 	
+ 	<select id="sequence" resultType="int">
+ 		select regular_payment_seq.nextval from dual
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="RegularPaymentDto">
+ 		insert into regular_payment(
+ 			regular_payment_no, seller_no, store_no, regular_payment_name,
+ 			regular_payment_price, regular_payment_tid, regular_payment_sid
+ 		) values(
+ 			#{regularPaymentNo} , #{sellerNo}, #{storeNo}, #{regularPaymentName} ,
+ 			#{regularPaymentPrice}, #{regularPaymentTid}, #{regularPaymentSid}
+ 		)
+ 	</insert>
  	
  </mapper>

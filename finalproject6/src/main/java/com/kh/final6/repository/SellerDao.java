@@ -7,4 +7,6 @@ public interface SellerDao {
 	void addPoint(int price, int sellerNo);
 
 	SellerDto one (int sellerNo);
+
+	int getSellerNo(int memberNo);
 }

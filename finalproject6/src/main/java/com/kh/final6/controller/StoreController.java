@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.final6.entity.MemberDto;
 import com.kh.final6.entity.StoreDto;
@@ -36,17 +37,20 @@ public class StoreController {
 	
 
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute StoreDto storeDto) {
-		storeDao.insert(storeDto);		
+	public String insert(
+			@ModelAttribute StoreDto storeDto
+			) {
+		storeDao.insert(storeDto);
 		return "store/insert_finsh";
+//		return "redirect:/regularPay/insert";
 	
 	}
 	
-
-	@RequestMapping("/insert_finsh")
-	public String insertFinsh() {
-		return "store/insert_finsh";
-	}
+//
+//	@RequestMapping("/insert_finsh")
+//	public String insertFinsh() {
+//		return "store/insert_finsh";
+//	}
 	
 	
 	
