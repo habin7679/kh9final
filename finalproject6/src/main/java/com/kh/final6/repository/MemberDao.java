@@ -16,6 +16,7 @@ public interface MemberDao {
 	boolean changeInformation(MemberDto memberDto);
 	String findId(MemberDto memberDto);
 	List<MemberDto> list(String type, String keyword, int p, int s);
+	int count(String type, String keyword);
 
 
 

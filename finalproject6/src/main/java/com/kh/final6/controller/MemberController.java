@@ -257,12 +257,18 @@ public class MemberController {
 
 		boolean search = type !=null&&keyword != null;
 		model.addAttribute("search",search);
+		
+		int count = memberDao.count(type,keyword);
+		int lastPage = (count + s - 1) /s;
 
 
 
 		int blockSize = 10;
 		int endBlock = (p+blockSize - 1) / blockSize * blockSize;
 		int startBlock = endBlock - (blockSize - 1);
+		if(endBlock > lastPage){
+			endBlock = lastPage;
+		}
 
 		model.addAttribute("p",p);
 		model.addAttribute("s",s);
