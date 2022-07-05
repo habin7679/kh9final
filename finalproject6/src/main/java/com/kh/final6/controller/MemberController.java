@@ -340,6 +340,7 @@ public class MemberController {
 			return "member/reset_success";
 		}
 
+
   //리스트
 	@GetMapping("/list")
 	public String list(
@@ -378,7 +379,6 @@ public class MemberController {
 		return "member/list";
 	}
 }
-
 
 
 
