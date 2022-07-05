@@ -87,6 +87,7 @@ public class NoticeController {
 		model.addAttribute("startBlock",startBlock);
 		model.addAttribute("type",type);
 		model.addAttribute("keyword",keyword);
+		model.addAttribute("lastPage",lastPage);
 		
 		return "notice/list";
 	}
@@ -122,6 +123,7 @@ public class NoticeController {
 		model.addAttribute("startBlock",startBlock);
 		model.addAttribute("type",type);
 		model.addAttribute("keyword",keyword);
+		model.addAttribute("lastPage",lastPage);
 		
 		return "notice/list";
 	}
