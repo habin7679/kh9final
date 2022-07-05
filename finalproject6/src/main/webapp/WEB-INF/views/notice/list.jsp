@@ -9,7 +9,7 @@
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-    <div class="container ma-t-100">
+    <div class="container-fluid ma-t-100">
 
 	<div class="section-header mt-4 col-md-8 offset-md-2" >
             <h2>Notice</h2>
