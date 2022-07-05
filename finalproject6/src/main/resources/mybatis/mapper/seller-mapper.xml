@@ -33,7 +33,7 @@
  		select * from seller where seller_no = #{sellerNo}
  	</select>
  	
- 	<select id="sellerNo" parameterType="int" resultType="inst">
+ 	<select id="sellerNo" parameterType="int" resultType="int">
  		select seller_no from seller where member_no = #{memberNo}
  	</select>
  	
