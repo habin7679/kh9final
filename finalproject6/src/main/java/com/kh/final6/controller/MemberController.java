@@ -143,13 +143,13 @@ public class MemberController {
 	//MyPage 구현 
 	
 	@GetMapping("/mypage")
-	public String mypage(@RequestParam int memberNo, 
-			HttpSession session, Model model) {
+	public String mypage(HttpSession session, Model model) {
+		int memberNo = (int) session.getAttribute("no");
 		
 		MemberDto memberDto = memberDao.oneNo(memberNo);
 		model.addAttribute("memberDto", memberDto);
 		
-		int attachmentNo = memberProfileDao.one(memberNo);
+		int attachmentNo = memberProfileDao.oneNo(memberNo);
 		
 
 		if(attachmentNo == 0) {
