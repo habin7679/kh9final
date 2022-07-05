@@ -66,17 +66,29 @@
 	
 	
 	<select id="list" resultType="MemberDto" parameterType="Map">
-		select*from (
-			select rownum rn, TMP.* from(
-				select*from member
-				<if test="type != null and keyword != null">
+ 		select * from (
+ 			select rownum rn, TMP.* from(
+	 			select * from member
+	 			<if test="type != null and keyword != null">
 	 				<![CDATA[
 	 				where instr (${type},#{keyword}) > 0
 	 				]]>
 	 			</if>
-	 			order by member_no desc)TMP
+	 			<!-- 정렬 -->
+	 			order by member_no desc 
+	 			)
+						TMP 
  			) where rn between #{begin} and #{end}
-	</select>
+ 	
+ 	</select>
+ 	<select id="count" parameterType="Map" resultType="int">
+ 		select count(*) from member 
+ 		<if test = "type != null and keyword != null">
+ 			<![CDATA[
+ 			where instr (${type},#{keyword}) > 0
+ 			]]>
+ 		</if>
+ 	</select>
 	
 	
 

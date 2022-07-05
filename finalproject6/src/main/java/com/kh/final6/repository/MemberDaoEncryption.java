@@ -122,7 +122,15 @@ public class MemberDaoEncryption implements MemberDao{
 		return sqlSession.selectList("member.list",param);
 		
 	}
-
+	//게시글 수 조회
+		@Override
+		public int count(String type, String keyword) {
+	 		Map<String,Object> param = new HashMap<>();
+	 		param.put("type", type);
+	 		param.put("keyword", keyword);
+	 		
+	 		return sqlSession.selectOne("member.count",param);
+		}
 }
 
 
