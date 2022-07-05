@@ -339,7 +339,8 @@ public class MemberController {
 		public String resetSuccess() {
 			return "member/reset_success";
 		}
-	
+
+
   //리스트
 	@GetMapping("/list")
 	public String list(
