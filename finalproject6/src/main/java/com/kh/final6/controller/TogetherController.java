@@ -86,18 +86,18 @@ public class TogetherController {
 		}
 		
 		//내 글인지 판정
-		Integer memberNo = (Integer)session.getAttribute("no");
-		boolean isLogin = memberNo != null;
-		boolean isOwner = isLogin && memberNo.equals(togetherDto.getMemberNo());
+		int memberNo = (Integer)session.getAttribute("no");
+		boolean isLogin = memberNo != 0;
+		boolean isOwner = isLogin && memberNo==togetherDto.getMemberNo();
 		model.addAttribute("isLogin",isLogin);
 		model.addAttribute("isOwner",isOwner);
 		
 		//관리자인지 판정
-		String memberGrade = (String)session.getAttribute("auth");
-		boolean isAdmin = isLogin && memberGrade.equals("관리자");
+		String memberKind = (String)session.getAttribute("auth");
+		boolean isAdmin = isLogin && memberKind.equals("관리자");
 		model.addAttribute("isAdmin",isAdmin);
 		
-		return "together/detail2";
+		return "together/detail";
 	}
 	
 	@GetMapping("/write")
