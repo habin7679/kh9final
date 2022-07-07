@@ -41,11 +41,32 @@
  	<insert id="insert" parameterType="RegularPaymentDto">
  		insert into regular_payment(
  			regular_payment_no, seller_no, store_no, regular_payment_name,
- 			regular_payment_price, regular_payment_tid, regular_payment_sid
+ 			regular_payment_price, regular_payment_tid, regular_payment_sid, regular_payment_user_id
  		) values(
  			#{regularPaymentNo} , #{sellerNo}, #{storeNo}, #{regularPaymentName} ,
- 			#{regularPaymentPrice}, #{regularPaymentTid}, #{regularPaymentSid}
+ 			#{regularPaymentPrice}, #{regularPaymentTid}, #{regularPaymentSid}, #{regularPaymentUserId}
  		)
+ 	</insert>
+ 	
+ 	<select id="list" resultType="RegularPaymentDto" parameterType="Map">
+ 		select * from regular_payment where to_char(regular_payment_time, 'DD') between to_number(substr(#{beforeHoliday}, -2))+1 and substr(#{today}, -2)
+ 	</select>
+ 	
+ 	
+ 	<!-- 저장소 -->
+ 	<insert id="insertStorage" parameterType="RegularPaymentDto" >
+ 		insert into regular_payment_storage(
+ 			regular_payment_no, regular_payment_storage_name,
+ 			regular_payment_storage_price, regular_payment_storage_tid,
+ 			 regular_payment_storage_sid, regular_payment_storage_user,
+ 			 regular_payment_storage_time
+ 		) values(
+ 			#{regularPaymentNo}, #{regularPaymentName},
+ 			#{regularPaymentPrice}, #{regularPaymentTid}, 
+ 			#{regularPaymentSid}, #{regularPaymentUserId},
+ 			#{regularPaymentTime}
+ 		)
+ 		
  	</insert>
  	
  </mapper>

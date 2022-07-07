@@ -16,20 +16,11 @@
 		<h1>정기결제</h1>
 		<h1>정기결제</h1>
 	</div>
-		<form action="insert" method="post">
-			<c:forEach var="storeNameMemberNameVO" items="${list}">
+		<form action="pay" method="post">
 				<div>
 					<label>결제명</label>
-					<input type="text" name="item_name" value="${storeNameMemberNameVO.memberName}-${storeNameMemberNameVO.storeName} 정기결제" readonly>
+					<input type="text" name="storeNo" value="${storeNo}" readonly>
 				</div>
-				<div>
-					<label>이름</label>
-					<input type="text" name="partner_user_id" value="${memberDto.memberName}" readonly>
-				</div>
-					<input type="hidden" name="partner_order_id" value="${sequence}">
-					<input type="hidden" name="quantity" value="1">
-					<input type="hidden" name="total_amount" value="100000">
-			</c:forEach>
 			<button type="submit" class="btn btn1">결제하기</button>
 		</form>
 	</div>
