@@ -75,11 +75,12 @@
  	<div class="mt-4">
  		<div class="col-md-8 offset-md-2 tb-color rounded">
  		<div class="row mt-2">
-	 		<div class="col-md-10 offset-md-1">
+ 			<div class="col-md-1 offset-md-1 text-center"><label class="mt-2">제목</label></div>
+	 		<div class="col-md-6">
 	 			<input type="text" name="togetherTitle" class="form-control" autocomplete="off" placeholder="제목"
 	 			style="height:50px;">
 	 		</div>	
- 		</div>		
+ 		</div>	
  	<div class="row mt-2">
 	<div class="col-md-10 offset-md-1">
 		<textarea name="togetherContent"></textarea>
@@ -97,5 +98,5 @@
     </form>    
     </div>
     
-
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
     

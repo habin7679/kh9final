@@ -19,9 +19,9 @@
         
         <div class="row mt-2 text-left">
             <div class="col-md-8 offset-md-2">
-                    <a href="${pageContext.request.contextPath}/notice/list2?column=notice_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
-                    <a href="${pageContext.request.contextPath}/notice/list2?column=notice_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
-                    <a href="${pageContext.request.contextPath}/notice/list2?column=notice_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
             </div>
         </div>
         
@@ -314,7 +314,8 @@
                <div class="col-md-6">
                <form action="list" method="get">
                <div class="d-flex justify-content-center" >
-                    <select name="type" class="form-select me-1" style="width:15%;">
+                    <select name="type" class="form-select me-1" style="width:17%;">
+                        <option value="notice_head" <c:if test="${type == 'notice_head'}">selected</c:if>>말머리</option>
                         <option value="notice_title" <c:if test="${type == 'notice_title'}">selected</c:if>>제목</option>
 						<option value="notice_content" <c:if test="${type == 'notice_content'}">selected</c:if>>내용</option>
 						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>

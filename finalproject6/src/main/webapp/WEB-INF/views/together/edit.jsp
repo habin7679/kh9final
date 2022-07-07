@@ -38,7 +38,7 @@
         background-color: #57606f;
         border-radius: 1.2em;
         color: white;
-        padding: 0.4em;
+        padding: 0.5em;
         font-size: 14px;
        }
        .title-size{
@@ -68,11 +68,12 @@
  	<div class="mt-4">
  		<div class="col-md-8 offset-md-2 tb-color rounded">
  		<div class="row mt-2">
-	 		<div class="col-md-10 offset-md-1">
+ 			<div class="col-md-1 offset-md-1 text-center"><label class="mt-2">제목</label></div>
+	 		<div class="col-md-6">
 	 			<input type="text" name="togetherTitle" class="form-control" autocomplete="off" placeholder="제목" value="${togetherDto.togetherTitle}"
 	 			style="height:50px;">
 	 		</div>	
- 		</div>		
+ 		</div>	
  	<div class="row mt-2">
 	<div class="col-md-10 offset-md-1">
 		<textarea name="togetherContent">${togetherDto.togetherContent}</textarea>
