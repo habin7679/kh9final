@@ -80,7 +80,7 @@ public class TogetherController {
 		TogetherDto togetherDto = togetherDao.one(togetherNo);
 		model.addAttribute("togetherDto",togetherDto);
 		
-		if(togetherDto.getTogetherNo() != 0) {
+		if(togetherDto.getTogetherWriter() != null) {
 			MemberDto memberDto = memberDao.info(togetherDto.getTogetherWriter());
 			model.addAttribute("memberDto",memberDto);
 		}

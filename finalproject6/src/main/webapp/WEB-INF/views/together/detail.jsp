@@ -10,6 +10,9 @@
         .fa-cursor{
             cursor: pointer;
         }
+        .fa-solid:hover{
+        	color:red;
+        }
         .a{
             border-collapse: separate;           
         }
@@ -80,7 +83,7 @@
                         </tr>
                         <tr style="text-align: right;">
                            <td style="border-bottom: none;">
-                           <c:if test="${isAdmin || isOwner }">
+                          <c:if test="${isOwner || isAdmin}">
                             <a href="${pageContext.request.contextPath}/together/edit?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">수정</a>
                             <a href="${pageContext.request.contextPath}/together/delete?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">삭제</a>
                            </c:if>
@@ -100,7 +103,7 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-1 text-left mt-1 mb-1 passSpace">
-                                       <span>작성자</span>
+                                       <span class="fw-bold">작성자</span>
                                     </div>
                                     <div class="col-md-7 text-left mt-1 mb-1 passSpace">
                                         <span>댓글 내용</span>

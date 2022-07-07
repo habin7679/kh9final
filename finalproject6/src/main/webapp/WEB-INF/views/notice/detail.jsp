@@ -1,69 +1,115 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상세페이지</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    </style>
-</head>
-<body>
-    <div class="container-fluid">
-    	<div class="row">
-    		<div class="col-md-8 offset-md-2">
-    			<table class="table">
-    				<tr>
-    					<td>
-    						<h3>[${noticeDto.noticeHead }]</h3>
-    					</td>
-    				</tr>
-    				
-    				<tr>
-    					<td>${noticeDto.noticeWriter}</td>
-    				</tr>
-    				
-    				<tr>
-    					<td>
-    					<c:choose>
-    						<c:when test="${noAttach == false || passImg}">
-    							<img src="${pageContext.request.contextPath}${noticeImgUrl}" width="50%">
-    							<pre>${noticeDto.noticeContent }</pre>
-    						</c:when>
-    						<c:otherwise>
-    							<pre>${noticeDto.noticeContent }</pre>
-    						</c:otherwise>
-    					</c:choose>
-    					</td>
-    				</tr>
-    				<c:if test="${noAttach == false}">
-    				<tr>
-    					<td>
-    						<a class="cursor:pointer;" href="${pageContext.request.contextPath}${noticeImgUrl}">${attachName}</a>
-    					</td>
-    				</tr>
-    				</c:if>
-    				<tr>
-    					<td>
-    						<a href="${pageContext.request.contextPath}/notice/edit?noticeNo=${noticeDto.noticeNo}" class="btn btn primary">수정</a>
-    						<a href="${pageContext.request.contextPath}/notice/delete?noticeNo=${noticeDto.noticeNo}" class="btn btn primary">삭제</a>
-    						<a href="${pageContext.request.contextPath}/notice/list" class="btn btn primary">목록</a>
-    					</td>
-    				</tr>
-    			</table>
-    		</div>
-    	</div>
+<style>
+        .passSpace{
+            word-break: break-all;
+        }
+        .fa-cursor{
+            cursor: pointer;
+        }
+        .fa-solid:hover{
+        	color:red;
+        }
+        .a{
+            border-collapse: separate;           
+        }
+        
+        .d{
+            border-bottom-left-radius: 1em;
+            border-bottom-right-radius: 1em;
+        }
+        .e{
+            border-top-left-radius: 1em;
+            border-top-right-radius: 1em;
+        }
+
+        .tb-color{
+            background-color: #f1f2f6;
+        }
+       .circle-head{
+        background-color: #57606f;
+        border-radius: 1.2em;
+        color: white;
+        padding: 0.5em;
+        font-size: 14px;
+       }
+       .title-size{
+        font-size: 22px;
+       }
+     </style>
+     
+ <div id="app" class="container ma-t-100">
+ 	
+ 	<div class="section-header mt-4 col-md-8 offset-md-2" >
+            <h2>notice</h2>
+            <p><span>공지</span> 게시판</p>
+            <h2>공지 및 이벤트를 확인하세요.</h2>
+       	</div>
+ 
+        <div class="row mt-10">
+            <div class="col-md-8 offset-md-2">
+                <table class="table mt-2 ">
+                    <thead>
+                        <tr class="justify-text-center tb-color">
+                            <td class="ps-3 pe-3 pt-3 tb-color e " style="border-bottom: none;">
+	                            <c:if test="${noticeDto.noticeHead != null }">
+	                                <span class="circle-head">${noticeDto.noticeHead}</span>
+	                            </c:if>    
+                                <span class="title-size fw-bold">${noticeDto.noticeTitle}</span>
+                            </td>
+                        </tr>
+                        <tr style="text-align: right;" class="tb-color">
+                            <td class="p-2">
+                            <c:choose>
+                            	<c:when test="${noticeDto.noticeWriter == null }">
+                            		(탈퇴한 사용자)
+                            	</c:when>
+                            	<c:otherwise>
+	                                <span class="me-3">${noticeDto.noticeWriter}</span>
+                            	</c:otherwise>
+                            </c:choose>
+                                <span class="me-3">${noticeDto.noticeTime}</span>
+                            </td>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr height="400" class="tb-color" >
+                            <td class="p-3 d" style="border-bottom: none;">
+	                            <c:choose>
+		    						<c:when test="${noAttach == false || passImg}">
+		    							<img src="${pageContext.request.contextPath}${noticeImgUrl}" width="50%">
+		    							<pre>${noticeDto.noticeContent }</pre>
+		    						</c:when>
+		    						<c:otherwise>
+		    							<pre>${noticeDto.noticeContent }</pre>
+		    						</c:otherwise>
+	    						</c:choose>
+                            </td>
+                        </tr>
+                        <c:if test="${noAttach == false}">
+		    				<tr>
+		    					<td>
+		    						다운로드 : <a class="cursor:pointer; fw-bold" href="${pageContext.request.contextPath}${noticeImgUrl}">${attachName}</a>
+		    					</td>
+		    				</tr>
+	    				</c:if>
+                        <tr style="text-align: right;">
+                           <td style="border-bottom: none;">
+                          <c:if test="${isAdmin}">
+                            <a href="${pageContext.request.contextPath}/notice/edit?noticeNo=${noticeDto.noticeNo}" class="btn0 ms-1">수정</a>
+                            <a href="${pageContext.request.contextPath}/notice/delete?noticeNo=${noticeDto.noticeNo}" class="btn0 ms-1">삭제</a>
+                           </c:if>
+                            <a href="${pageContext.request.contextPath}/notice/list" class="btn0 ms-1">목록</a>
+                           </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <!--lazy loading 배치 - 기능은 다소 늦게 돌아가지만 화면을 먼저 띄울 수 있다 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script>
 
-    </script>
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -9,7 +9,7 @@
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-    <div class="container-fluid ma-t-100">
+    <div class="container ma-t-100">
 
 	<div class="section-header mt-4 col-md-8 offset-md-2" >
             <h2>Notice</h2>
@@ -19,7 +19,6 @@
         
         <div class="row mt-2 text-left">
             <div class="col-md-8 offset-md-2">
-      	<%--복합 검색 미구현임 --%>
                     <a href="${pageContext.request.contextPath}/notice/list2?column=notice_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
                     <a href="${pageContext.request.contextPath}/notice/list2?column=notice_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
                     <a href="${pageContext.request.contextPath}/notice/list2?column=notice_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
@@ -29,7 +28,9 @@
         <!-- 글쓰기 버튼 -->
          <div class="row mt-2"> 
             <div class="col-md-8 offset-md-2">
+            <c:if test="${isAdmin}">
                <a href="write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
+            </c:if>
             </div>
         </div>
 
