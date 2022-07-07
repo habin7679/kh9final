@@ -10,7 +10,7 @@
 	</div>
 	
 	<div class="row">
-		<img src="${pageContext.request.contextPath}/image/404.gif" class="fill img img-shadow">
+		<img src="${pageContext.request.contextPath}/resources/img/404.gif" class="fill img img-shadow">
 	</div>
 	
 </div>
