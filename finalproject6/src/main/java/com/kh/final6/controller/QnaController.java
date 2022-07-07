@@ -37,6 +37,7 @@ public class QnaController {
 						@RequestParam (required = false, defaultValue = "10")int s,
 						@RequestParam (required = false) String column,
 						@RequestParam (required = false) String order,
+						HttpSession session,
 						Model model) {
 		
 		List<QnaDto> list = qnaDao.selectList(type, keyword, p, s, column, order);
@@ -44,6 +45,13 @@ public class QnaController {
 		
 		boolean search = type != null && keyword != null;
 		model.addAttribute("search",search);
+		
+		//관리자 여부 확인
+		int memberNo = (int)session.getAttribute("no");
+		boolean isLogin = memberNo != 0; 
+		String memberKind = (String)session.getAttribute("auth");
+		boolean isAdmin = isLogin && memberKind.equals("관리자"); 
+		model.addAttribute("isAdmin",isAdmin);
 		
 		boolean readcountSearch = column == "notice_readcount" && order == "desc";
 		boolean noDescSearch = column == "notice_no" && order == "desc";

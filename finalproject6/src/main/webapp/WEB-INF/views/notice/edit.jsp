@@ -38,7 +38,7 @@
         background-color: #57606f;
         border-radius: 1.2em;
         color: white;
-        padding: 0.4em;
+        padding: 0.5em;
         font-size: 14px;
        }
        .title-size{

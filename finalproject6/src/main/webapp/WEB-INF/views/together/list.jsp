@@ -308,7 +308,7 @@
                <div class="col-md-6">
                <form action="list" method="get">
                <div class="d-flex justify-content-center" >
-                    <select name="type" class="form-select me-1" style="width:15%;">
+                    <select name="type" class="form-select me-1" style="width:17%;">
                         <option value="together_title" <c:if test="${type == 'together_title'}">selected</c:if>>제목</option>
 						<option value="together_content" <c:if test="${type == 'together_content'}">selected</c:if>>내용</option>
 						<option value="together_writer" <c:if test="${type == 'together_writer'}">selected</c:if>>작성자</option>

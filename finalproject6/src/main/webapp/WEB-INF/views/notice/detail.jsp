@@ -56,7 +56,7 @@
                         <tr class="justify-text-center tb-color">
                             <td class="ps-3 pe-3 pt-3 tb-color e " style="border-bottom: none;">
 	                            <c:if test="${noticeDto.noticeHead != null }">
-	                                <span class="circle-head">${noticeDto.noticeHead}</span>
+	                                <span class="circle-head me-1">${noticeDto.noticeHead}</span>
 	                            </c:if>    
                                 <span class="title-size fw-bold">${noticeDto.noticeTitle}</span>
                             </td>
