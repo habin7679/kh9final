@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 </section>
- </main>
+</main>
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
@@ -59,7 +59,7 @@
 
   </footer><!-- End Footer -->
   <!-- End Footer -->
-
+	
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader"></div>
@@ -74,8 +74,8 @@
 
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
-  
 
+  
 </body>
 
 </html>

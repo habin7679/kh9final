@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="memberId" value="${login}"></c:set>
+<c:set var="no" value="${no}"></c:set>
 <c:set var="isLogin" value="${memberId != null}"></c:set>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 
@@ -35,6 +36,7 @@
 
   <!-- Template Main CSS File -->
   <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
+  
 
   <!-- =======================================================
   * Template Name: Yummy - v1.0.0
@@ -49,7 +51,6 @@
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   
-</head>
 <style>
 .me {
    margin-left: 500px;
@@ -71,8 +72,11 @@
 
 </style>
 
+</head>
+
 
   <body>
+  
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-stretch">
 
@@ -134,8 +138,5 @@
   </header><!-- End Header -->
 
 
- <main id="main">
+<main id="main">
 <section>
-
-
- 

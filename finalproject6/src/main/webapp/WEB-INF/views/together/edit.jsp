@@ -1,50 +1,94 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상세페이지</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+ <!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    </style>
-</head>
-<body>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<form action="edit" method="post">
-<input type="hidden" name="togetherNo" value="${togetherDto.togetherNo}">
+<style>
+        .passSpace{
+            word-break: break-all;
+        }
+        .fa-cursor{
+            cursor: pointer;
+        }
+        .a{
+            border-collapse: separate;           
+        }
+        
+        .d{
+            border-bottom-left-radius: 1em;
+            border-bottom-right-radius: 1em;
+        }
+        .e{
+            border-top-left-radius: 1em;
+            border-top-right-radius: 1em;
+        }
 
-        <div class="container-fluid">
-            <div class="row center">
-                <h1>게시글 수정</h1>
-            </div>
+        .tb-color{
+            background-color: #f1f2f6;
+        }
+       .circle-head{
+        background-color: #57606f;
+        border-radius: 1.2em;
+        color: white;
+        padding: 0.4em;
+        font-size: 14px;
+       }
+       .title-size{
+        font-size: 22px;
+       }
+     </style>
+        
+ <script type="text/javascript">
+ $(function(){
+     $("textarea[name=togetherContent]").summernote({
+         placeholder:"양식에 맞게 수정하여 주세요.",
+         height: 350
+         });
+ });
+</script>
+     
+ <div id="app" class="container ma-t-100">
+ 	
+ 	<div class="section-header mt-4 col-md-8 offset-md-2" >
+            <h2>Together</h2>
+            <p><span>같이가요</span> 게시판</p>
+            <h2>함께 식사할 동행을 구해보세요.</h2>
+       	</div>
+ 
+ 	<form action="edit" method="post">
+ 	<input type="hidden" name="togetherNo" value="${togetherDto.togetherNo}">
+ 	<div class="mt-4">
+ 		<div class="col-md-8 offset-md-2 tb-color rounded">
+ 		<div class="row mt-2">
+	 		<div class="col-md-10 offset-md-1">
+	 			<input type="text" name="togetherTitle" class="form-control" autocomplete="off" placeholder="제목" value="${togetherDto.togetherTitle}"
+	 			style="height:50px;">
+	 		</div>	
+ 		</div>		
+ 	<div class="row mt-2">
+	<div class="col-md-10 offset-md-1">
+		<textarea name="togetherContent">${togetherDto.togetherContent}</textarea>
+	</div>
+ 	</div>
+	 	
+ 		<div class="row mt-2">
+ 			<div class="col-md-8 offset-md-2 text-center">
+	 			<input type="submit" value="수정" class="btn1">
+	 			<a href="${pageContext.request.contextPath}/together/detail?togetherNo=${togetherDto.togetherNo}" class="btn0">취소</a>
+ 			</div>
+ 		</div>
+ 		</div>
+ 	</div>
+    </form>    
+    </div>
+    
 
-            <div class="row">
-                <label>제목</label>
-                <input type="text" name="togetherTitle" value="${togetherDto.togetherTitle }" required size="30" 
-                class="form-control">
-            </div>
-
-            <div class="row">
-                <label>내용</label>
-                <textarea name="togetherContent" required 
-                class="textarea form-input fill" rows="12">${togetherDto.togetherContent }</textarea>
-            </div>
-
-            <div class="row right">
-                <input type="submit" value="수정" class="btn btn-success">
-                <a href="list" class="btn btn-secondary">목록</a>
-            </div>
-        </div>
-    </form>
-    <!--lazy loading 배치 - 기능은 다소 늦게 돌아가지만 화면을 먼저 띄울 수 있다 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script>
-
-    </script>
-</body>
-</html>
+    
