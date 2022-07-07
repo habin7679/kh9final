@@ -1,5 +1,7 @@
 package com.kh.final6.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,5 +21,11 @@ public class ReplyDaoImpl implements ReplyDao{
 		sqlSession.insert("reply.insert",replyDto);
 		return sqlSession.selectOne("reply.one",replyNo);
 	}
+
+	@Override
+	public List<ReplyDto> list(int replyTarget) {
+		return sqlSession.selectList("reply.list",replyTarget);
+	}
+
 
 }

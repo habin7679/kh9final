@@ -10,6 +10,17 @@
  		select reply_seq.nextval from dual
  	</select>
  	
- 	<insert id=""></insert>
+ 	<insert id="insert" parameterType="ReplyDto">
+ 		insert into reply (reply_no, reply_target, member_no, reply_writer, reply_content, reply_time)
+ 			values (#{replyNo}, #{replyTarget}, #{memberNo}, #{replyWriter}, #{replyContent}, #{replyTime})
+ 	</insert>
+ 	
+ 	<select id="one" resultType="ReplyDto" parameterType="int">
+ 		select * from reply where reply_no = #{replyNo}
+ 	</select>
+ 	
+ 	<select id="list" parameterType="int" resultType="ReplyDto">
+ 		select * from reply where reply_target = #{replyTarget}
+ 	</select>
  	
  </mapper>
