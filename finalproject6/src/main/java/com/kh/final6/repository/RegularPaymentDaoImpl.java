@@ -57,4 +57,10 @@ public class RegularPaymentDaoImpl implements RegularPaymentDao {
 	public void insertStorage(RegularPaymentDto regularPaymentDto) {
 		sqlSession.insert("regularPayment.insertStorage", regularPaymentDto);
 	}
+
+	
+	@Override
+	public List<RegularPaymentDto> listSellerNo(int sellerNo) {
+		return sqlSession.selectList("regularPayment.listSellerNo", sellerNo);
+	}
 }

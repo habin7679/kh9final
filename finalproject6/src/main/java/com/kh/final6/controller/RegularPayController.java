@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.entity.RegularPaymentDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.RegularPaymentDao;
@@ -24,7 +25,6 @@ import com.kh.final6.vo.KakaoPayRegularApproveRequestVO;
 import com.kh.final6.vo.KakaoPayRegularApproveResponseVO;
 import com.kh.final6.vo.KakaoPayRegularReadyRequestVO;
 import com.kh.final6.vo.KakaoPayRegularReadyResponseVO;
-import com.kh.final6.vo.StoreNameMemberNameVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -144,4 +144,19 @@ public class RegularPayController {
 			session.removeAttribute("regularpaymentNo");
 			return "regularPay/payFail";
 		}
+	
+		@GetMapping("/info")
+		public String info(
+				@RequestParam int sellerNo,
+				Model model
+				) {
+			
+			List<RegularPaymentDto> list = regularPaymentDao.listSellerNo(sellerNo);
+			model.addAttribute("list", list);
+			
+			return "regularPay/info";
+		}
+		
+
+		
 }
