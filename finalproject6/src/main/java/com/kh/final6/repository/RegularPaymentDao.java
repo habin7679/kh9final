@@ -15,4 +15,5 @@ public interface RegularPaymentDao {
 	List<RegularPaymentDto> list(String beforeHoliday, String today);
 	
 	void insertStorage(RegularPaymentDto regularPaymentDto);
+	List<RegularPaymentDto> listSellerNo (int sellerNo);
 }

@@ -69,4 +69,8 @@
  		
  	</insert>
  	
+ 	<select id="listSellerNo" resultType="RegularPaymentDto" parameterType="int">
+ 		select * from regular_payment where seller_no = #{sellerNo}
+ 	 </select>
+ 	
  </mapper>
