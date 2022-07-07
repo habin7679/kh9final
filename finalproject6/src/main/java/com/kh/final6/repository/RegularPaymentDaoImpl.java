@@ -1,6 +1,8 @@
 package com.kh.final6.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +40,21 @@ public class RegularPaymentDaoImpl implements RegularPaymentDao {
 																														.regularPaymentName(responseVO.getItem_name())
 																														.regularPaymentTid(responseVO.getTid())
 																														.regularPaymentSid(responseVO.getSid())
+																														.regularPaymentUserId(responseVO.getPartner_user_id())
 																													.build();
 		
 		sqlSession.insert("regularPayment.insert", regularPaymentDto);
+	}
+	
+	public List<RegularPaymentDto> list(String beforeHoliday, String today) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("beforeHoliday", beforeHoliday);
+		param.put("today", today);
+		return sqlSession.selectList("regularPayment.list", param);
+	}
+	
+	@Override
+	public void insertStorage(RegularPaymentDto regularPaymentDto) {
+		sqlSession.insert("regularPayment.insertStorage", regularPaymentDto);
 	}
 }

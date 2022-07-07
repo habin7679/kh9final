@@ -1,8 +1,9 @@
 package com.kh.final6.entity;
 
-import java.sql.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+
+
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,7 @@ public class RegularPaymentDto {
 	private int regularPaymentPrice;
 	private String regularPaymentSid;
 	private String regularPaymentName;
-	private String regularStatus;
+	private String regularPaymentUserId;
+	private String regularPaymentStatus;
 
 }
