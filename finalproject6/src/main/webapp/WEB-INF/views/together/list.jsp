@@ -13,7 +13,6 @@
         
         <div class="row mt-2 text-left">
             <div class="col-md-8 offset-md-2">
-      	<%--복합 검색 미구현임 --%>
                     <a href="${pageContext.request.contextPath}/together/list?column=together_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
                     <a href="${pageContext.request.contextPath}/together/list?column=together_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
                     <a href="${pageContext.request.contextPath}/together/list?column=together_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>

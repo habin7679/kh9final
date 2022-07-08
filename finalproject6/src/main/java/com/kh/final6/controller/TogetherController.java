@@ -86,9 +86,9 @@ public class TogetherController {
 		}
 		
 		//내 글인지 판정
-		int memberNo = (Integer)session.getAttribute("no");
-		boolean isLogin = memberNo != 0;
-		boolean isOwner = isLogin && memberNo==togetherDto.getMemberNo();
+		Integer memberNo = (Integer)session.getAttribute("no");
+		boolean isLogin = memberNo != null;
+		boolean isOwner = isLogin && memberNo.equals(togetherDto.getMemberNo());
 		model.addAttribute("isLogin",isLogin);
 		model.addAttribute("isOwner",isOwner);
 		
@@ -151,5 +151,10 @@ public class TogetherController {
 		else {
 			throw new CannotFindException();
 		}
+	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error/notAdmin";
 	}
 }

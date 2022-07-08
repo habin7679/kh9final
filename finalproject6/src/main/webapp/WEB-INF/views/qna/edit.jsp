@@ -49,7 +49,7 @@
  <script type="text/javascript">
  $(function(){
      $("textarea[name=qnaContent]").summernote({
-         height: 350
+         height: 350,
          });
  });
 </script>
