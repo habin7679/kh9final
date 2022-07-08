@@ -3,6 +3,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
     <div class="container ma-t-100">
 
         <div class="section-header mt-4 col-md-8 offset-md-2" >
@@ -22,9 +23,7 @@
         <!-- 글쓰기 버튼 -->
 	         <div class="row mt-2"> 
 	            <div class="col-md-8 offset-md-2">
-        		<c:if test="${isAdmin == false}">
 	               <a href="write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
-        		</c:if>
 	            </div>
 	        </div>
 
@@ -332,9 +331,6 @@
 </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        
-    </script>
+ 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 

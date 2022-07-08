@@ -51,6 +51,7 @@
      $("textarea[name=togetherContent]").summernote({
          placeholder:"양식에 맞게 수정하여 주세요.",
          height: 350
+         
          });
  });
 </script>

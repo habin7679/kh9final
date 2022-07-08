@@ -46,8 +46,6 @@ public class NoticeController {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	private AttachmentDto attachmentDto;
-	
 	@GetMapping("/list")
 	public String list(
 						@RequestParam (required = false) String type,
@@ -56,7 +54,6 @@ public class NoticeController {
 						@RequestParam (required = false, defaultValue = "10") int s,
 						@RequestParam (required = false) String column,
 						@RequestParam (required = false) String order,
-						HttpSession session,
 						Model model) {
 		
 		List<NoticeDto> list = noticeDao.list(type,keyword,p,s, column, order);
@@ -64,13 +61,6 @@ public class NoticeController {
 		
 		boolean search = type != null && keyword != null;
 		model.addAttribute("search",search);
-		
-		//관리자 여부 확인
-		int memberNo = (int)session.getAttribute("no");
-		boolean isLogin = memberNo != 0; 
-		String memberKind = (String)session.getAttribute("auth");
-		boolean isAdmin = isLogin && memberKind.equals("관리자"); 
-		model.addAttribute("isAdmin",isAdmin);
 		
 		boolean readcountSearch = column == "notice_readcount" && order == "desc";
 		boolean noDescSearch = column == "notice_no" && order == "desc";
@@ -167,9 +157,9 @@ public class NoticeController {
 		
 		
 		//내 글 여부 확인
-		int memberNo = (Integer)session.getAttribute("no");
-		boolean isLogin = memberNo != 0; 
-		boolean isOwner = isLogin && memberNo == noticeDto.getMemberNo();
+		Integer memberNo = (Integer)session.getAttribute("no");
+		boolean isLogin = memberNo != null; 
+		boolean isOwner = isLogin && memberNo.equals(noticeDto.getMemberNo());
 		model.addAttribute("isLogin",isLogin);
 		model.addAttribute("isOwner",isOwner);
 		
@@ -238,5 +228,8 @@ public class NoticeController {
 			throw new CannotFindException();
 		}
 	}
-	
+	@GetMapping("/error")
+	public String error() {
+		return "error/notaAdmin";
+	}
 }

@@ -77,7 +77,7 @@
                     </thead>
                     <tbody>
                         <tr height="400" class="tb-color" >
-                            <td class="p-3 d" style="border-bottom: none;">
+                            <td class="p-4 d" style="border-bottom: none;">
                                 <pre>${qnaDto.qnaContent}</pre>
                             </td>
                         </tr>
