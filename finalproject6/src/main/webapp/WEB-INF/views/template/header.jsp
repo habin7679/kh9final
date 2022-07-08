@@ -124,7 +124,7 @@
       
         <li class="dropdown"><a href="#"><span>닉네임  </span><i class="fa-solid fa-square-envelope fa-1x"></i></a>
           <ul>
-            <li><a href="#">mypage</a></li>
+            <li><a href="${pageContext.request.contextPath}/member/mypage">mypage</a></li>
             <li><a href="#">쪽지함</a></li>
             <li><a href="#">로그아웃</a></li>
             <li><a href="${pageContext.request.contextPath}/member/list">회원관리</a></li>

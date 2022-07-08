@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
-
-<div class="container w400 m30">
-	<div class="row center m30">
-		<h1>회원 정보</h1>
-	</div>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="container ma-t-100" style="width:900px;" >
+ <div class="section-header mt-4 col-md-8 offset-md-2" >
+            <h2>mypage</h2>
+            <p><span>회원</span> 정보</p>
+       	</div>
 	
 	<!-- 프로필 이미지 -->
-	<div class="row center m30">
+	 <div class="col-md-8 center offset-md-2" >
+	 <div class="row mt-2 text-center mb-2" >
 		<img src="${pageContext.request.contextPath}${profileUrl}"
-				width="150" class="img img-circle img-shadow">
+				 class="img img-circle img-shadow " style="width:300px; margin-left:150px; height:150px;">
 	</div>
 	
-	<div class="row">
-		<table class="table table-border table-hover">
+	
+	<div class="row text-center">
+		 <table class="table mt-4">
 			<tr>
 				<th width="30%">이메일</th>
 				<td>${memberDto.memberId}</td>
@@ -47,15 +50,14 @@
 		</table>
 	</div>
 	
-	<div class="row center m30">
-		<h2><a href="password">비밀번호 변경</a></h2>
-	</div>
-	<div class="row center m30">
-		<h2><a href="information">개인정보 변경</a></h2>
-	</div>
-	<div class="row center m30">
-		<h2><a href="exit">탈퇴하기</a></h2>
+	<div class="row mt-2 text-center">
+            <div class="col-md-8 offset-md-2">
+		<h2><a href="password"  class="btn btn-secondary" >비밀번호 변경</a></h2>
+		<h2><a href="information"  class="btn btn-secondary" >개인정보 변경</a></h2>
+		<h2><a href="exit"  class="btn btn-secondary" >탈퇴하기</a></h2>
 	</div>
 	
+	</div>
+	</div>
 	</div>
 	
