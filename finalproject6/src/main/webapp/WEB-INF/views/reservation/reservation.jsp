@@ -16,7 +16,7 @@
               <div class="mt-1">
                 <v-app id="inspire">
                   <v-row justify="center">
-                    <v-date-picker v-model="picker" v-model="date" color= var(--color-primary) full-width>
+                    <v-date-picker v-model="picker" v-model="date" color= var(--color-primary) full-width :allowed-dates="allowedDates">
                     </v-date-picker>
                   </v-row>
                 </v-app>
@@ -95,7 +95,7 @@
 
       },
       methods: {
-
+//     	  allowedDates: val => parseInt(val.split('-')[2], 10) === 7
       },
       watch: {
 
