@@ -53,24 +53,25 @@
  	</select>
  	
  	
- 	<!-- 저장소 -->
- 	<insert id="insertStorage" parameterType="RegularPaymentDto" >
- 		insert into regular_payment_storage(
- 			regular_payment_no, regular_payment_storage_name,
- 			regular_payment_storage_price, regular_payment_storage_tid,
- 			 regular_payment_storage_sid, regular_payment_storage_user,
- 			 regular_payment_storage_time
- 		) values(
- 			#{regularPaymentNo}, #{regularPaymentName},
- 			#{regularPaymentPrice}, #{regularPaymentTid}, 
- 			#{regularPaymentSid}, #{regularPaymentUserId},
- 			#{regularPaymentTime}
- 		)
- 		
- 	</insert>
- 	
  	<select id="listSellerNo" resultType="RegularPaymentDto" parameterType="int">
  		select * from regular_payment where seller_no = #{sellerNo}
  	 </select>
+ 	 
+ 	 <delete id="delete" parameterType="int">
+ 	 	delete regular_payment where regular_payment_no = #{regularPaymentNo}
+ 	 </delete>
+ 	
+ 	<select id="listAll" resultType="RegularPaymentDto" parameterType="int">
+ 		select * from regular_payment where regular_payment_no = #{regularPaymentNo}
+ 	</select>
+ 	
+ 	<update id="change" parameterType="Map">
+ 		update regular_payment 
+ 			set
+ 				regular_payment_tid = #{regularPaymentTid},  regular_payment_sid = #{regularPaymentSid}
+ 			where
+ 				regular_payment_no	= #{regularPaymentNo}
+ 			 
+ 	</update>
  	
  </mapper>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.final6.entity.RegularPaymentDto;
+import com.kh.final6.error.CannotFindException;
 import com.kh.final6.vo.KakaoPayRegularApproveResponseVO;
 import com.kh.final6.vo.StoreNameMemberNameVO;
 
@@ -62,5 +63,36 @@ public class RegularPaymentDaoImpl implements RegularPaymentDao {
 	@Override
 	public List<RegularPaymentDto> listSellerNo(int sellerNo) {
 		return sqlSession.selectList("regularPayment.listSellerNo", sellerNo);
+	}
+	
+	@Override
+	public void delete(int regularPaymentNo) {
+		int count = sqlSession.delete("regularPayment.delete", regularPaymentNo);
+		
+		if(count <= 0) {
+			throw new CannotFindException();
+		}
+	}
+	
+	@Override
+	public RegularPaymentDto listAll(int regularPaymentNo) {
+		return sqlSession.selectOne("regularPayment.listAll", regularPaymentNo);
+	}
+	
+	@Override
+	public void update(KakaoPayRegularApproveResponseVO responseVO, int regularPaymentNo) {
+		
+		Map<String, Object> param = new HashMap<>();
+		
+		param.put("regularPaymentTid", responseVO.getTid());
+		param.put("regularPaymentSid", responseVO.getSid());
+		param.put("regularPaymentNo", regularPaymentNo);
+
+		int count = sqlSession.update("regularPayment.change", param);
+		
+		if( count <= 0) {
+			throw new CannotFindException();
+		}
+		
 	}
 }

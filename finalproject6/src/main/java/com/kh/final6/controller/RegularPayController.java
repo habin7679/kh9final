@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,8 @@ import com.kh.final6.repository.StoreDao;
 import com.kh.final6.service.KakaoPayRegularService;
 import com.kh.final6.vo.KakaoPayRegularApproveRequestVO;
 import com.kh.final6.vo.KakaoPayRegularApproveResponseVO;
+import com.kh.final6.vo.KakaoPayRegularCancelRequestVO;
+import com.kh.final6.vo.KakaoPayRegularCancelResponseVO;
 import com.kh.final6.vo.KakaoPayRegularReadyRequestVO;
 import com.kh.final6.vo.KakaoPayRegularReadyResponseVO;
 
@@ -65,12 +68,12 @@ public class RegularPayController {
 		int memberNo = (int)session.getAttribute("no");
 		StoreDto storeDto = storeDao.one(storeNo);
 		MemberDto memberDto = memberDao.oneNo(memberNo);
-		int regularPaymentNo = regularPaymentDao.sequence();
+		int regularPaymentNoSequence = regularPaymentDao.sequence();
 		int sellerNo = sellerDao.getSellerNo(memberNo);
 		KakaoPayRegularReadyRequestVO requestVO =
 										KakaoPayRegularReadyRequestVO.builder()
 											.item_name(storeDto.getStoreName()+"-"+ memberDto.getMemberName())
-											.partner_order_id(String.valueOf(regularPaymentNo))
+											.partner_order_id(String.valueOf(regularPaymentNoSequence))
 											.partner_user_id(memberDto.getMemberName())
 											.quantity(1)
 											.total_amount(100000)
@@ -91,7 +94,7 @@ public class RegularPayController {
 				session.setAttribute("storeNo", storeNo);
 				
 				//결제 번호
-				session.setAttribute("regularPaymentNo", regularPaymentNo);
+				session.setAttribute("regularPaymentNo", regularPaymentNoSequence);
 			
 				log.debug("@@@@@@ pc_url = {}", responseVO.getNext_redirect_pc_url());
 			return "redirect:"+responseVO.getNext_redirect_pc_url();
@@ -152,12 +155,15 @@ public class RegularPayController {
 				Model model
 				) {
 			
-			List<RegularPaymentDto> list = regularPaymentDao.listSellerNo(sellerNo);
-			model.addAttribute("list", list);
+			
+			model.addAttribute("sellerNo", sellerNo);
 			
 			return "regularPay/info";
 		}
 		
 
+		
+
+		
 		
 }
