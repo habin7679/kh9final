@@ -170,4 +170,61 @@ public class KakaoPayRegularServiceImpl implements KakaoPayRegularService {
 		
 		return responseVO;
 	}
+	
+	
+	
+	@Override
+	public KakaoPayRegularReadyResponseVO readyChange(KakaoPayRegularReadyRequestVO requestVO) throws URISyntaxException {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", authorization);
+		headers.add("Content-type", contentType);
+
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("cid", cid);
+		body.add("partner_order_id", requestVO.getPartner_order_id());
+		body.add("partner_user_id", requestVO.getPartner_user_id());
+		body.add("item_name", requestVO.getItem_name());
+		body.add("quantity", String.valueOf(requestVO.getQuantity()));
+		body.add("total_amount", String.valueOf(requestVO.getTotal_amount()));
+		body.add("vat_amount", "0");
+		body.add("tax_free_amount", "0");
+
+		String prefix = "http://localhost:8080/final6/changePay";
+		body.add("approval_url", prefix + "/approve");
+		body.add("cancel_url", prefix + "/cancel");
+		body.add("fail_url", prefix + "/fail");
+
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+
+		URI uri = new URI(urlPrefix + "/ready");
+		KakaoPayRegularReadyResponseVO responseVO = template.postForObject(uri, entity, KakaoPayRegularReadyResponseVO.class);
+
+		return responseVO;
+	}
+	
+	@Override
+	public KakaoPayRegularApproveResponseVO approveChange(KakaoPayRegularApproveRequestVO requestVO)
+			throws URISyntaxException {
+
+		HttpHeaders headers = new HttpHeaders();
+		
+		headers.add("Authorization", authorization);
+		headers.add("Content-type", contentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("cid", cid);
+		body.add("tid", requestVO.getTid()); 
+		body.add("partner_order_id", requestVO.getPartner_order_id()); 
+		body.add("partner_user_id", requestVO.getPartner_user_id());
+		body.add("pg_token", requestVO.getPg_token());
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		URI uri = new URI(urlPrefix+"/approve");
+		
+		KakaoPayRegularApproveResponseVO responseVO = 
+				template.postForObject(uri, entity, KakaoPayRegularApproveResponseVO.class);
+		return responseVO;
+	}
 }
