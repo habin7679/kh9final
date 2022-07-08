@@ -20,4 +20,6 @@ public interface KakaoPayRegularService {
 	KakaoPayRegularRequestResponseVO request(KakaoPayRegularRequestRequestVO requestVO) throws URISyntaxException;
 	KakaoPayRegularCancelResponseVO cancel(KakaoPayRegularCancelRequestVO requestVO) throws URISyntaxException;
 	KakaoPayRegularOrderResponseVO order(KakaoPayRegularOrderRequestVO requestVO) throws URISyntaxException;
+	KakaoPayRegularReadyResponseVO readyChange(KakaoPayRegularReadyRequestVO requestVO) throws URISyntaxException;
+	KakaoPayRegularApproveResponseVO approveChange(KakaoPayRegularApproveRequestVO requestVO) throws URISyntaxException;
 }

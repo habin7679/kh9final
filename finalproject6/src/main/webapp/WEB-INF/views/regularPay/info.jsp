@@ -5,36 +5,102 @@
 <%--  <fmt:formatDate value="${reservationDto.reservationDate }" pattern="y년 M월 d일 E a h시 m분 s초"/></div> --%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<div class="container-fluid top">
-	<div class="row">
-		<div class="col-md-8 offset-md-2">
-			<table class="table table-bordered rounded">
-				<thead>
-					<tr>
-						<th>정기결제 등록명</th>
-						<th>사업자명</th>
-						<th>정기결제 시작일</th>
-						<th>정기결제 가격(월)</th>
-						<th>결제 변경</th>
-						<th>취소</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="regularPaymentDto" items="${list}">
-						<tr>
-							<td>${regularPaymentDto.regularPaymentName}</td>
-							<td>${regularPaymentDto.regularPaymentUserId}</td>
-							<td>${regularPaymentDto.regularPaymentTime}</td>
-							<td>${regularPaymentDto.regularPaymentPrice}</td>
-							<td><a href="#" class="btn btn1">결제변경</a></td>
-							<td><a href="cancel?regularPaymentNo=${regularPaymentDto.regularPaymentNo}" class="btn btn1">취소</a></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
+<div id="app" class="container-fluid ma-t-100">
+        <div class="row mt-2">
+          <div class="col-md-8 offset-md-2">
+            <table class="table table-bordered rounded">
+              <thead class="text-center">
+                <tr>
+                  <th>정기결제 등록명</th>
+                  <th>사업자명</th>
+                  <th>정기결제 시작일</th>
+                  <th>정기결제 가격(월)</th>
+                  <th>결제 변경</th>
+                  <th>취소</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr v-for="(regularPayment,index) in regularPaymentList" v-bind:key="index">
+                  <td>{{regularPayment.regularPaymentName}}</td>
+                  <td>{{regularPayment.regularPaymentUserId}}</td>
+                  <td>{{regularPayment.regularPaymentTime}}</td>
+                  <td>{{regularPayment.regularPaymentPrice}}</td>
+                  <td><a v-bind:href="linkIndex(index)"><i class="fa-solid fa-money-check-dollar"></i></a></td>
+                  <td><i class="fa-solid fa-rectangle-xmark" @click="cancelRegularPayment(index)"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+
+    <!-- vue js도 lazy loading을 사용한다 -->
+    <script src = "https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"> </script>
+    <script>
+        //div[id=app]을 제어할 수 있는 Vue instance를 생성
+        const app = Vue.createApp({
+            //data : 화면을 구현하는데 필요한 데이터를 작성해 둔다
+            data(){
+                return{
+                    regularPaymentList:[],
+
+                    sellerNo:${sellerNo},
+                    
+                    link:"",
+                };
+            },
+             //computed : data를 기반으로 하여 실시간 계산이 필요한 경우 작성한다.
+            // - 3줄보다 많다면 사용하지 않는 것을 권장한다(복잡한 계산시 성능 저하가 발생)
+            // - 반드시 return을 통해 값을 반환해야함
+            computed:{
+
+            },
+            //methods : 애플리케이션 내에서 언제든 호출 가능한 코드 집합이 필요한 경우 작성한다.
+            methods:{
+              loadPage(){
+                axios.get("${pageContext.request.contextPath}/rest/regularPayment/list/"+this.sellerNo)
+                .then(resp=>{
+                    this.regularPaymentList= resp.data;
+                });
+              },
+
+              cancelRegularPayment(index){
+                const choice = window.confirm("정기결제를 취소하시겠습니까?\n 등록된 가게는 삭제됩니다.")
+		          	if(!choice) return;
+
+                const regularPayment = this.regularPaymentList[index]
+                  axios({
+                    url:"${pageContext.request.contextPath}/rest/regularPayment/delete/"+regularPayment.regularPaymentNo,
+                    method : "delete"
+                  })
+                  .then(resp=>{
+                    this.loadPage()
+                  });
+              },
+
+              convertTime(time){
+              	return moment(time).format('YYYY-MM-DD hh:mm:ss');
+              },
+
+              
+              linkIndex(index){
+            	  const regularPayment = this.regularPaymentList[index]
+                  return this.link = "${pageContext.request.contextPath}/changePay/change/"+regularPayment.regularPaymentNo
+              }
+            },
+             //watch : 특정 data를 감시하여 연계 코드를 실행하기 위해 작성한다
+             watch:{
+             
+            },
+            created(){
+              this.loadPage();
+            },
+
+        });
+        app.mount("#app")
+    </script>
 
 
 
