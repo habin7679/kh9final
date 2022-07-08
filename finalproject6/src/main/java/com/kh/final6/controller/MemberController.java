@@ -113,6 +113,7 @@ public class MemberController {
 			session.setAttribute("no", memberDto.getMemberNo());
 			session.setAttribute("login", memberDto.getMemberId());
 			session.setAttribute("auth", memberDto.getMemberKind());
+			session.setAttribute("nick", memberDto.getMemberNick());
 		
 			//쿠키
 			if(remember != null) {//체크하고 로그인 했으면 -> 쿠키 발행
@@ -137,6 +138,7 @@ public class MemberController {
 		session.removeAttribute("no");
 		session.removeAttribute("login");
 		session.removeAttribute("auth");
+		session.removeAttribute("nick");
 		return "redirect:/";
 	}
 	

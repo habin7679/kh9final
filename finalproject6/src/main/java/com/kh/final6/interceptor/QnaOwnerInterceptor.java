@@ -21,12 +21,15 @@ public class QnaOwnerInterceptor implements HandlerInterceptor{
 			throws Exception {
 		String memberKind = (String)request.getSession().getAttribute("auth");
 		int memberNo = (int)request.getSession().getAttribute("no");
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
+		
+		QnaDto qnaDto = qnaDao.one(qnaNo);
 		
 		if(memberKind == null || !memberKind.equals("관리자")) {
 			response.sendRedirect(request.getContextPath()+"/qna/error");
 			return false;
 		}
-		else if(memberKind.equals("관리자")) {
+		else if(memberKind.equals("관리자")|| memberNo == qnaDto.getMemberNo()) {
 			return true;
 		}
 		else {

@@ -15,11 +15,11 @@ public class LoginContinueInterceptor implements HandlerInterceptor {
 		//개발시 로그인계속 유지 하는 인터셉터입니다.!
 		// 오류나면 주석처리 해주세요
 //    
-//		request.getSession().setAttribute("no", 0);
-//		request.getSession().setAttribute("login", "testuser@email.com");
-//		request.getSession().setAttribute("auth", "관리자");
-
-		
+		request.getSession().setAttribute("no", 150);
+		request.getSession().setAttribute("login", "admin00@gmail.com");
+		request.getSession().setAttribute("auth", "관리자");
+//
+//		
 		return true;
 	}
 }
