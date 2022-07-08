@@ -10,10 +10,9 @@
 # Learn more about CSS variables at https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
 --------------------------------------------------------------*/
 /* 버튼 */
-.btn1,
-.btn1:focus {
+.btn1{
   font-size: 14px;
- color: #fff;
+ color: white !important;
   background: var(--color-primary);
   padding: 8px 20px;
   transition: 0.3s;
@@ -22,9 +21,8 @@
   color: initial ;
 }
 
-.btn1:hover,
-.btn1:focus:hover {
-  color: #fff;
+.btn1:hover{
+  color: white;
   background: rgba(206, 18, 18, 0.8);
   border:none;
 }
@@ -133,6 +131,17 @@ section {
 .section-header {
   text-align: center;
   padding-bottom: 30px;
+}
+
+.section-header h1 {
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  color: #7f7f90;
+  text-transform: uppercase;
+  font-family: var(--font-default);
 }
 
 .section-header h2 {
@@ -330,7 +339,7 @@ section {
   background: #fff;
   transition: all 0.5s;
   z-index: 997;
-  height: 130px;
+  height: 135px;
   border-bottom: 1px solid #fff;
 }
 

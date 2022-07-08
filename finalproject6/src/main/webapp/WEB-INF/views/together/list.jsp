@@ -3,7 +3,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <div class="container-fluid ma-t-100">
+    <div class="container ma-t-100">
 
         <div class="section-header mt-4 col-md-8 offset-md-2" >
             <h2>Together</h2>
@@ -13,7 +13,6 @@
         
         <div class="row mt-2 text-left">
             <div class="col-md-8 offset-md-2">
-      	<%--복합 검색 미구현임 --%>
                     <a href="${pageContext.request.contextPath}/together/list?column=together_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
                     <a href="${pageContext.request.contextPath}/together/list?column=together_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
                     <a href="${pageContext.request.contextPath}/together/list?column=together_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
@@ -308,7 +307,7 @@
                <div class="col-md-6">
                <form action="list" method="get">
                <div class="d-flex justify-content-center" >
-                    <select name="type" class="form-select me-1" style="width:15%;">
+                    <select name="type" class="form-select me-1" style="width:17%;">
                         <option value="together_title" <c:if test="${type == 'together_title'}">selected</c:if>>제목</option>
 						<option value="together_content" <c:if test="${type == 'together_content'}">selected</c:if>>내용</option>
 						<option value="together_writer" <c:if test="${type == 'together_writer'}">selected</c:if>>작성자</option>

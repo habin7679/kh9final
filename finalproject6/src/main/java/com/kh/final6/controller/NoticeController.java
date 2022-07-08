@@ -46,10 +46,8 @@ public class NoticeController {
 	@Autowired
 	private AttachmentDao attachmentDao;
 	
-	private AttachmentDto attachmentDto;
-	
-	@GetMapping("/list2")
-	public String list2(
+	@GetMapping("/list")
+	public String list(
 						@RequestParam (required = false) String type,
 						@RequestParam (required = false) String keyword,
 						@RequestParam (required = false, defaultValue = "1") int p,
@@ -93,40 +91,42 @@ public class NoticeController {
 	}
 	
 
-	@GetMapping("/list")
-	public String list(
-						@RequestParam (required = false) String type,
-						@RequestParam (required = false) String keyword,
-						@RequestParam (required = false, defaultValue = "1") int p,
-						@RequestParam (required = false, defaultValue = "10") int s,
-						Model model) {
-		
-		List<NoticeDto> list = noticeDao.list(type,keyword,p,s);
-		model.addAttribute("list",list);
-		
-		boolean search = type != null && keyword != null;
-		model.addAttribute("search",search);
-		
-		int count = noticeDao.count(type,keyword);
-		int lastPage = (count + s - 1) /s;
-		
-		int blockSize = 10;
-		int endBlock = (p + blockSize - 1) / blockSize * blockSize;
-		int startBlock = endBlock - (blockSize - 1);
-		if(endBlock > lastPage){
-			endBlock = lastPage;
-		}
-		model.addAttribute("p",p); 
-		model.addAttribute("s",s);
-		model.addAttribute("blockSize",blockSize);
-		model.addAttribute("endBlock",endBlock);
-		model.addAttribute("startBlock",startBlock);
-		model.addAttribute("type",type);
-		model.addAttribute("keyword",keyword);
-		model.addAttribute("lastPage",lastPage);
-		
-		return "notice/list";
-	}
+//	@GetMapping("/list")
+//	public String list(
+//						@RequestParam (required = false) String type,
+//						@RequestParam (required = false) String keyword,
+//						@RequestParam (required = false, defaultValue = "1") int p,
+//						@RequestParam (required = false, defaultValue = "10") int s,
+//						Model model) {
+//		
+//		List<NoticeDto> list = noticeDao.list(type,keyword,p,s);
+//		model.addAttribute("list",list);
+//		
+//		boolean search = type != null && keyword != null;
+//		model.addAttribute("search",search);
+//		
+//		
+//		
+//		int count = noticeDao.count(type,keyword);
+//		int lastPage = (count + s - 1) /s;
+//		
+//		int blockSize = 10;
+//		int endBlock = (p + blockSize - 1) / blockSize * blockSize;
+//		int startBlock = endBlock - (blockSize - 1);
+//		if(endBlock > lastPage){
+//			endBlock = lastPage;
+//		}
+//		model.addAttribute("p",p); 
+//		model.addAttribute("s",s);
+//		model.addAttribute("blockSize",blockSize);
+//		model.addAttribute("endBlock",endBlock);
+//		model.addAttribute("startBlock",startBlock);
+//		model.addAttribute("type",type);
+//		model.addAttribute("keyword",keyword);
+//		model.addAttribute("lastPage",lastPage);
+//		
+//		return "notice/list";
+//	}
 	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int noticeNo,
@@ -160,13 +160,13 @@ public class NoticeController {
 		Integer memberNo = (Integer)session.getAttribute("no");
 		boolean isLogin = memberNo != null; 
 		boolean isOwner = isLogin && memberNo.equals(noticeDto.getMemberNo());
-		model.addAttribute(isLogin);
-		model.addAttribute(isOwner);
+		model.addAttribute("isLogin",isLogin);
+		model.addAttribute("isOwner",isOwner);
 		
 		//관리자 여부 확인
-		String memberGrade = (String)session.getAttribute("auth");
-		boolean isAdmin = isLogin && memberGrade.equals("관리자"); 
-		model.addAttribute(isAdmin);
+		String memberKind = (String)session.getAttribute("auth");
+		boolean isAdmin = isLogin && memberKind.equals("관리자"); 
+		model.addAttribute("isAdmin",isAdmin);
 		
 		attr.addAttribute("noticeNo",noticeNo);
 		
@@ -228,5 +228,8 @@ public class NoticeController {
 			throw new CannotFindException();
 		}
 	}
-	
+	@GetMapping("/error")
+	public String error() {
+		return "error/notaAdmin";
+	}
 }

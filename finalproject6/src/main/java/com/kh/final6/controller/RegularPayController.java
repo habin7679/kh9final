@@ -8,12 +8,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.entity.RegularPaymentDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.RegularPaymentDao;
@@ -24,7 +26,6 @@ import com.kh.final6.vo.KakaoPayRegularApproveRequestVO;
 import com.kh.final6.vo.KakaoPayRegularApproveResponseVO;
 import com.kh.final6.vo.KakaoPayRegularReadyRequestVO;
 import com.kh.final6.vo.KakaoPayRegularReadyResponseVO;
-import com.kh.final6.vo.StoreNameMemberNameVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,15 +47,11 @@ public class RegularPayController {
 	
 	@GetMapping("/insert")
 	public String insert(
-			HttpSession session,
+			@RequestParam int storeNo,
 			Model model
 			) {
-		List<StoreNameMemberNameVO> list = regularPaymentDao.storeNameMemberName((int)session.getAttribute("no"));
-		MemberDto memberDto = memberDao.oneNo((int)session.getAttribute("no"));
 		
-		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("list", list);
-		model.addAttribute("sequence", regularPaymentDao.sequence());
+		model.addAttribute("storeNo", storeNo);
 		
 		
 		return "regularPay/insert";
@@ -96,10 +93,11 @@ public class RegularPayController {
 				//결제 번호
 				session.setAttribute("regularPaymentNo", regularPaymentNo);
 			
+				log.debug("@@@@@@ pc_url = {}", responseVO.getNext_redirect_pc_url());
 			return "redirect:"+responseVO.getNext_redirect_pc_url();
 	}
 	
-	@GetMapping("/pay/approve")
+	@GetMapping("/approve")
 	public String paySuccess(@RequestParam String pg_token, HttpSession session) throws URISyntaxException {
 
 		KakaoPayRegularApproveRequestVO requestVO = (KakaoPayRegularApproveRequestVO)session.getAttribute("pay");
@@ -110,8 +108,8 @@ public class RegularPayController {
 		session.removeAttribute("sellerNo");
 		session.removeAttribute("storeNo");
 		
-		int regularpaymentNo = (int) session.getAttribute("regularpaymentNo");
-		session.removeAttribute("regularpaymentNo");
+		int regularpaymentNo = (int) session.getAttribute("regularPaymentNo");
+		session.removeAttribute("regularPaymentNo");
 		
 		
 		requestVO.setPg_token(pg_token);
@@ -122,15 +120,15 @@ public class RegularPayController {
 //		paymentService.insert(paymentNo, responseVO, paymentNoList);
 		
 		
-		return "redirect:/regularPay/pay/finish";
+		return "redirect:/regularPay/payfinish";
 	}
 
-		@GetMapping("/pay/finish")
+		@GetMapping("/payfinish") //성공
 		public String payFinish()	{
 			return "regularPay/payFinish";
 		}
 		
-		@GetMapping("/pay/cancel")
+		@GetMapping("/pay/cancel") //취소
 		public String payCancel(HttpSession session) {
 			session.removeAttribute("pay");
 			session.removeAttribute("sellerNo");
@@ -139,7 +137,7 @@ public class RegularPayController {
 			return "regularPay/payCancel";
 		}
 		
-		@GetMapping("/pay/fail")
+		@GetMapping("/pay/fail") //실패
 		public String payFail(HttpSession session) {
 			session.removeAttribute("pay");
 			session.removeAttribute("sellerNo");
@@ -147,4 +145,19 @@ public class RegularPayController {
 			session.removeAttribute("regularpaymentNo");
 			return "regularPay/payFail";
 		}
+	
+		@GetMapping("/info")
+		public String info(
+				@RequestParam int sellerNo,
+				Model model
+				) {
+			
+			List<RegularPaymentDto> list = regularPaymentDao.listSellerNo(sellerNo);
+			model.addAttribute("list", list);
+			
+			return "regularPay/info";
+		}
+		
+
+		
 }

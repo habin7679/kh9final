@@ -32,7 +32,7 @@ public class KakaoPayRegularCancelTest {
 		KakaoPayRegularCancelResponseVO responseVO = 
 				kakaoPayRegularService.cancel(
 								KakaoPayRegularCancelRequestVO.builder()
-								.sid("S2c24e8630bf237a5d1a")
+								.sid("S2c39cba1d3605d4b78e")
 							.build()
 						);
 

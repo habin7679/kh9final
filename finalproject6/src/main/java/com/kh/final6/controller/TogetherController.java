@@ -80,7 +80,7 @@ public class TogetherController {
 		TogetherDto togetherDto = togetherDao.one(togetherNo);
 		model.addAttribute("togetherDto",togetherDto);
 		
-		if(togetherDto.getTogetherNo() != 0) {
+		if(togetherDto.getTogetherWriter() != null) {
 			MemberDto memberDto = memberDao.info(togetherDto.getTogetherWriter());
 			model.addAttribute("memberDto",memberDto);
 		}
@@ -93,11 +93,11 @@ public class TogetherController {
 		model.addAttribute("isOwner",isOwner);
 		
 		//관리자인지 판정
-		String memberGrade = (String)session.getAttribute("auth");
-		boolean isAdmin = isLogin && memberGrade.equals("관리자");
+		String memberKind = (String)session.getAttribute("auth");
+		boolean isAdmin = isLogin && memberKind.equals("관리자");
 		model.addAttribute("isAdmin",isAdmin);
 		
-		return "together/detail2";
+		return "together/detail";
 	}
 	
 	@GetMapping("/write")
@@ -151,5 +151,10 @@ public class TogetherController {
 		else {
 			throw new CannotFindException();
 		}
+	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error/notAdmin";
 	}
 }

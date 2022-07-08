@@ -296,8 +296,6 @@ public class MemberController {
 		CertDto certDto = CertDto.builder().certTarget(memberId).certNumber(cert).build();
 		boolean isOk = certDao.check(certDto);
 		if(isOk) {
-
-	
 			
 			//추가 인증번호 생성 및 페이지로 전달
 			String newCert = f.format(r.nextInt(1000000));

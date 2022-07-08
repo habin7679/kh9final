@@ -156,4 +156,9 @@ public class QnaController {
 			throw new CannotFindException();
 		}
 	}
+	
+	@GetMapping("/error")
+	public String error() {
+		return "error/notAdmin";
+	}
 }
