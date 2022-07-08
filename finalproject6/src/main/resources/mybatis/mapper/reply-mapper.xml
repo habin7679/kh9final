@@ -11,8 +11,8 @@
  	</select>
  	
  	<insert id="insert" parameterType="ReplyDto">
- 		insert into reply (reply_no, reply_target, member_no, reply_writer, reply_content, reply_time)
- 			values (#{replyNo}, #{replyTarget}, #{memberNo}, #{replyWriter}, #{replyContent}, #{replyTime})
+ 		insert into reply (reply_no, reply_target, member_no, reply_writer, reply_content)
+ 			values (#{replyNo}, #{replyTarget}, #{memberNo}, #{replyWriter}, #{replyContent})
  	</insert>
  	
  	<select id="one" resultType="ReplyDto" parameterType="int">
@@ -23,4 +23,24 @@
  		select * from reply where reply_target = #{replyTarget}
  	</select>
  	
+ 	<delete id="delete" parameterType="int">
+ 		delete reply where reply_no = #{replyNo}
+ 	</delete>
+ 	
+ 	<update id="updateCount" parameterType="int">
+ 		update together set together_replycount = (
+ 			select count(*) from reply where reply_target = #{replyTarget}
+ 		)
+ 		where together_no = #{replyTarget}
+ 	</update>
+ 	
+ 	<update id="edit" parameterType="ReplyDto">
+ 		update reply set 
+ 			reply_content = #{replyContent}
+ 		where reply_no = #{replyNo}	
+ 	</update>
+ 	
+ 	<select id="replyCount" parameterType="int" resultType="int" >
+ 		select together_replycount from together where together_no = #{ReplyTarget}
+ 	</select>
  </mapper>
