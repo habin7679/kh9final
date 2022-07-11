@@ -9,7 +9,7 @@ public interface StoreDao {
 	List<StoreDto> list();
 	StoreDto one(int storeNo);	
 	void delete(int storeNo);
-	void insert(StoreDto storeDto);	
+	int insert(StoreDto storeDto);	
 	StoreDto update(StoreDto storeDto);
 	
 
