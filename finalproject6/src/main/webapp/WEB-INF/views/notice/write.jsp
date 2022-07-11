@@ -56,7 +56,7 @@
      
  <div id="app" class="container ma-t-100">
  	
- 	<div class="section-header mt-4 col-md-8 offset-md-2" >
+ 	<div class="section-header mt-4 col-md-6 offset-md-3" >
             <h2>notice</h2>
             <p><span>공지</span> 게시판</p>
             <h2>공지 및 이벤트를 확인하세요.</h2>
@@ -64,7 +64,7 @@
  
  	<form action="write" method="post" enctype="multipart/form-data">
  	<div class="mt-5">
- 		<div class="col-md-8 offset-md-2 tb-color rounded">
+ 		<div class="col-md-6 offset-md-3 tb-color rounded">
  		
  		<div class="row mt-2">
  		<div class="col-md-1 offset-md-1 text-center"><label class="mt-1">말머리</label></div>
@@ -98,7 +98,7 @@
  		</div>
 	 	
  		<div class="row mt-2">
- 			<div class="col-md-8 offset-md-2 text-center">
+ 			<div class="col-md-6 offset-md-3 text-center">
 	 			<input type="submit" value="등록" class="btn1">
 	 			<a href="${pageContext.request.contextPath}/notice/list" class="btn0">취소</a>
  			</div>

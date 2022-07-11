@@ -43,14 +43,14 @@
      
  <div id="app" class="container ma-t-100">
  	
- 	<div class="section-header mt-4 col-md-8 offset-md-2" >
+ 	<div class="section-header mt-4 col-md-6 offset-md-3" >
             <h2>notice</h2>
             <p><span>공지</span> 게시판</p>
             <h2>공지 및 이벤트를 확인하세요.</h2>
        	</div>
  
         <div class="row mt-10">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <table class="table mt-2 ">
                     <thead>
                         <tr class="justify-text-center tb-color">
@@ -78,8 +78,9 @@
                     <tbody>
                         <tr height="400" class="tb-color" >
                             <td class="p-4 d" style="border-bottom: none;">
+                            
 	                            <c:choose>
-		    						<c:when test="${noAttach == false || passImg}">
+		    						<c:when test="${passImg}">			
 		    							<img src="${pageContext.request.contextPath}${noticeImgUrl}" width="50%">
 		    							<pre>${noticeDto.noticeContent }</pre>
 		    						</c:when>

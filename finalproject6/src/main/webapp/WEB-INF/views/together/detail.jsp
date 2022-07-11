@@ -43,14 +43,14 @@
      
  <div id="app" class="container ma-t-100">
  	
- 	<div class="section-header mt-4 col-md-8 offset-md-2" >
+ 	<div class="section-header mt-4 col-md-6 offset-md-3" >
             <h2>Together</h2>
             <p><span>같이가요</span> 게시판</p>
             <h2>함께 식사할 동행을 구해보세요.</h2>
        	</div>
  
         <div class="row mt-10">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <table class="table mt-2 ">
                     <thead>
                         <tr class="justify-text-center tb-color">
@@ -90,7 +90,7 @@
 						<!-- 댓글 개수 -->
                         <tr>
                             <td>
-                                <span>댓글</span>
+                                <span class="me-1">댓글</span>
                                 <span style="color:red;" class="fw-bold">{{replyCount}}</span>
                             </td>
                         </tr>
@@ -99,16 +99,16 @@
 						<!-- 댓글 목록 -->
                             <td v-if="!reply.edit">
                                 <div class="row" >
-                                    <div class="col-md-1 text-left mt-1 mb-1 passSpace">
+                                    <div class="col-md-2 text-left mt-1 mb-1 passSpace">
                                        <span class="fw-bold">{{reply.replyWriter}}</span>
                                     </div>
-                                    <div class="col-md-7 text-left mt-1 mb-1 passSpace">
+                                    <div class="col-md-6 text-left mt-1 mb-1 passSpace">
                                         <span>{{reply.replyContent}}</span>
                                     </div>
-                                    <div class="col-md-2 text-center mt-1 mb-1 passSpace">
+                                    <div class="col-md-3 text-center mt-1 mb-1 passSpace">
                                         <span>{{changeTime(reply.replyTime)}}</span>
                                     </div>
-                                    <div class="col-md-2 text-center mt-1" v-if="isEditAndDelete(memberNo)">
+                                    <div class="col-md-1 text-center mt-1" v-if="isEditAndDelete(memberNo)">
                                         <i class="fa-solid fa-pencil fa-cursor me-3" @click="editMode(index)"></i>
                                         <i class="fa-solid fa-circle-xmark fa-cursor" @click="deleteReply(index)"></i>                                   
                                     </div>                                    
@@ -120,10 +120,10 @@
                                     <div class="col-md-1 text-center mt-3">
                                         <span>댓글 입력</span>
                                     </div>
-                                    <div class="col-md-10 mt-2">
+                                    <div class="col-md-9 mt-2">
                                         <textarea class="form-control" :disabled="isNoneMember" v-model="replyList[index].replyContent"></textarea>
                                     </div>
-                                    <div class="col-md-1 d-grid gap-1">
+                                    <div class="col-md-2 d-grid gap-1">
                                         <button class="btn1" :disabled="isNoneMember" @click="editReply(index)">수정</button>
                                         <button class="btn0" :disabled="isNoneMember" @click="notEditMode(index)">취소</button>
                                     </div>
@@ -138,11 +138,11 @@
                                     <div class="col-md-1 text-center mt-2">
                                         <span>댓글 입력</span>
                                     </div>
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         <textarea class="form-control" v-model="replyContent" :placeholder="textPlaceholder" :disabled="isNoneMember"
                                          v-on:input="replyContent = $event.target.value"></textarea>
                                     </div>
-                                    <div class="col-md-1 text-center d-grid">
+                                    <div class="col-md-2 text-center d-grid">
                                         <button class="btn1" style="font-size: 0.8em;" :disabled="isNoneMember" @click="addReply">{{buttonText}}</button>
                                     </div>
                                 </div>
