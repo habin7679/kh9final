@@ -43,14 +43,14 @@
      
  <div id="app" class="container ma-t-100">
  	
- 	<div class="section-header mt-4 col-md-8 offset-md-2" >
+ 	<div class="section-header mt-4 col-md-6 offset-md-3" >
             <h2>QnA</h2>
             <p><span>문의</span> 게시판</p>
             <h2>관리자의 답변이 필요하시면 문의글을 남겨주세요.</h2>
        	</div>
  
         <div class="row mt-10">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <table class="table mt-2 ">
                     <thead>
                         <tr class="justify-text-center tb-color">

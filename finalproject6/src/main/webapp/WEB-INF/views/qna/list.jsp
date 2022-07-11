@@ -6,14 +6,14 @@
 
     <div class="container ma-t-100">
 
-        <div class="section-header mt-4 col-md-8 offset-md-2" >
+        <div class="section-header mt-4 col-md-6 offset-md-3" >
             <h2>QnA</h2>
             <p><span>문의</span> 게시판</p>
             <h2>관리자의 답변이 필요하시면 문의글을 남겨주세요.</h2>
        	</div>
         
         <div class="row mt-2 text-left">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                     <a href="${pageContext.request.contextPath}/qna/list?column=qna_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
                     <a href="${pageContext.request.contextPath}/qna/list?column=qna_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
                     <a href="${pageContext.request.contextPath}/qna/list?column=qna_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
@@ -22,13 +22,13 @@
         
         <!-- 글쓰기 버튼 -->
 	         <div class="row mt-2"> 
-	            <div class="col-md-8 offset-md-2">
+	            <div class="col-md-6 offset-md-3">
 	               <a href="write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
 	            </div>
 	        </div>
 
         <div class="row mt-2">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <table class="table">
                     <thead class="text-center">
                         <tr>

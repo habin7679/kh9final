@@ -12,7 +12,7 @@
        	</div>
         
         <div class="row mt-2 text-left">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                     <a href="${pageContext.request.contextPath}/together/list?column=together_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
                     <a href="${pageContext.request.contextPath}/together/list?column=together_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
                     <a href="${pageContext.request.contextPath}/together/list?column=together_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
@@ -21,13 +21,13 @@
         
         <!-- 글쓰기 버튼 -->
          <div class="row mt-2"> 
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                <a href="write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
             </div>
         </div>
 
         <div class="row mt-2">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <table class="table">
                     <thead class="text-center">
                         <tr>
@@ -47,7 +47,7 @@
 	                            	${togetherDto.togetherTitle}
 	                            <!-- 댓글 수 출력 -->
 	                            <c:if test="${togetherDto.togetherReplycount != 0}">
-	                            	[${togetherDto.togetherReplycount}]
+	                            	<span class="fw-bold" style="color:gray;">[${togetherDto.togetherReplycount}]</span>
 	                            </c:if>
 	                            </a>
 	                            </td>

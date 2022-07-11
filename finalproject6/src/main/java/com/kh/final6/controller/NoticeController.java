@@ -145,8 +145,8 @@ public class NoticeController {
 		
 		if(attachmentDto != null) {
 			String attachType = attachmentDto.getAttachmentType();
-			boolean passImg = attachType == "image/jpeg" || attachType == "image/png" || attachType == "image/gif" && attachType == "image/jpg";
-			model.addAttribute("Img",passImg);
+			boolean passImg = attachType.equals("image/jpeg") || attachType.equals("image/png") || attachType.equals("image/gif");
+			model.addAttribute("passImg",passImg);
 		}
 		boolean noAttach = attachmentNo == 0;
 		model.addAttribute("noAttach",noAttach);
