@@ -45,6 +45,25 @@
   border:none;
 }
 
+.btn-c{
+  font-size: 14px;
+  color: black;
+  background: #fff;
+  padding: 8px 20px;
+  transition: 0.3s;
+  border-radius:4px;
+  border:1px solid var(--color-primary);
+}
+.btn-c:hover{
+	color:var(--color-primary);
+}
+.btn-c:disabled{
+	cursor:Default;
+	color:#636e72;
+	background:#dfe6e9;
+	border:none;
+}
+
 .top{
 margin-top : 60px;
 }
@@ -294,7 +313,7 @@ section {
   visibility: visible;
   opacity: 100;
   right: 15px;
-  bottom: 88px;
+  bottom: 80px;
   z-index: 99999;
   color: black;
   width: 44px;
