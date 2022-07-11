@@ -27,10 +27,10 @@ public class StoreDaoImpl implements StoreDao {
 	}
 
 	@Override
-	public void insert(StoreDto storeDto) {
+	public int insert(StoreDto storeDto) {
 		int storeNo = sqlSession.selectOne("store.sequence");
 		storeDto.setStoreNo(storeNo);
-		sqlSession.insert("store.insert", storeDto);
+		return sqlSession.insert("store.insert", storeDto);
 		
 	}
 

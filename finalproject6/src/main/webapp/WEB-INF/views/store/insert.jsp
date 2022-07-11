@@ -11,7 +11,7 @@
 	        <button type="submit" class="btn btn-primary fill">삭제하기</button>
 	    </div>
    </form>
-<form action="insert" method="post" >
+<form action="insert" method="post" enctype="multipart/form-data">
 	<div class="container-fluid">
 	    <div class ="row mt-4">
 	    	<div class="p-4 text-light bg-dark rounded">
@@ -21,16 +21,18 @@
 	<div>
 	
 	<div class="row mt-4">
-		<div class="col-md-8 offset-md-2 d-grid gap-2">
-	           
+		<div >
+	           <%--	아이디 로그인후에 바꿔치기 
+	             <input type="hidden" name="storeNo" value="${storeDto.storeNo}">
+	            --%>
 	        <input type="hidden" name="storeNo" autocomplete="off" value='1'   class="form-input fill input-round">
     </div>
     <div>
 	        <label>음식점 종류</label> <br>
-	        <input type="radio" name="category" value="스시" checked required class="form-input fill input-round">스시
-			<input type="radio" name="category" value="한우" required class="form-input fill input-round">한우
-			<input type="radio" name="category" value="꼬치" required class="form-input fill input-round">꼬치
-			<input type="radio" name="category" value="커피"required class="form-input fill input-round">커피   
+	        <input type="radio" name="category" value="스시" checked required >스시
+			<input type="radio" name="category" value="한우" required>한우
+			<input type="radio" name="category" value="꼬치" required>꼬치
+			<input type="radio" name="category" value="커피" required>커피   
 	   
     </div>
     <div>
@@ -66,10 +68,7 @@
 	        <label>사장님이름</label>    
 	        <input type="text" name="storeBossName" autocomplete="off" required class="form-input fill input-round">
     </div>
-    <div>
-	        <label>가게등록일</label>    
-	        <input type="date" name="storeRegistDate" autocomplete="off" required class="form-input fill input-round">
-    </div>
+ 
     <div>
 	        <label>가게컨텐츠</label>    
 	        <input type="text" name="storeContent" autocomplete="off" required class="form-input fill input-round">
@@ -92,16 +91,24 @@
     <div>
 	        <label>가게문닫는시간</label>    
 	        <input type="text" name="storeEnd" autocomplete="off" required class="form-input fill input-round">
+    		<%-- 
+    		
+    		 가게사진 : <input type="file" name="storeImg" accept=".jpg, .png, .gif, .pdf, .ppt, .txt, .hwp">
+    		--%>
     </div>
     <div>
 	        <label>예약금</label>    
 	        <input type="number" name="storeReservationPrice" autocomplete="off" required class="form-input fill input-round">
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     
 	    
 	     	
 	    <div class="row">
-	        <button type="submit" class="btn btn-primary fill">등록하기</button>
+	        <button type="submit" class="btn btn-success">등록하기</button>
 	    </div>
 	    </div>
 	    </div>
