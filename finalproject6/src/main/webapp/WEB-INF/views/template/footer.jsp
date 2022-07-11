@@ -61,7 +61,7 @@
   </footer><!-- End Footer -->
   <!-- End Footer -->
  <span class="chatMsg">Hello!</span>	
-  <a href="#" class="chat-bot d-flex align-items-center justify-content-center"><i class="bi bi-robot"></i></a>
+  <a href="${pageContext.request.contextPath}/chatbot/" class="chat-bot d-flex align-items-center justify-content-center"><i class="bi bi-robot"></i></a>
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader"></div>
