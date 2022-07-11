@@ -259,6 +259,49 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Chat bot button
+--------------------------------------------------------------*/
+.chat-bot {
+  position: fixed;
+  visibility: visible;
+  opacity: 100;
+  right: 15px;
+  bottom: 68px;
+  z-index: 99999;
+  background: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+.chat-bot i {
+  font-size: 44px;
+  color: #c44569;
+  line-height: 0;
+}
+
+.chat-bot:hover {
+  background: #fff;
+  color: #cf6a87;
+}
+
+.chat-bot.active {
+  visibility: visible;
+  opacity: 1;
+}
+.chatMsg {
+  position: fixed;
+  visibility: visible;
+  opacity: 100;
+  right: 15px;
+  bottom: 88px;
+  z-index: 99999;
+  color: black;
+  width: 44px;
+  height: 44px;
+  transition: all 0.4s;
+}
+/*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
 #preloader {
