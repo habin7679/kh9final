@@ -16,7 +16,7 @@
               <div class="mt-1">
                 <v-app id="inspire">
                   <v-row justify="center">
-                    <v-date-picker v-model="picker" v-model="date" color= var(--color-primary) full-width :allowed-dates="allowedDates">
+                    <v-date-picker v-model="picker" v-model="date" color= var(--color-primary) full-width :allowed-dates="allowedDates"  :min="today">
                     </v-date-picker>
                   </v-row>
                 </v-app>
@@ -90,6 +90,7 @@
       data: () => ({
         picker: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
 
+        today : new Date(Date.now()).toISOString().substr(0, 10),
       }),
       computed: {
 
