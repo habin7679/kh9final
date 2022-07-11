@@ -21,6 +21,7 @@ color:#fff;
             <h2>login</h2>
             <p><span>로그인</span></p>
        	</div>
+      
          <div class="col-md-8 offset-md-2">
         <div class="row mt-2 text-left mb-2" >
             <label>아이디</label>
