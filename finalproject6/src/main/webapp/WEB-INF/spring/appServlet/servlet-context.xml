@@ -80,6 +80,8 @@
 		 
 		 <mvc:interceptor>
 		 	<mvc:mapping path="/notice/write*"/>
+		 	<mvc:mapping path="/member/adminChat"/>
+		 	<mvc:mapping path="/admin/chat"/>
 		 	
 		 	
 		 	<ref bean="adminInterceptor"/>
