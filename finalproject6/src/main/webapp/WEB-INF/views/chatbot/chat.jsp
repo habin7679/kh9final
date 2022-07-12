@@ -41,16 +41,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   
 <style>
-	.btn-message{
-		display : block;
-		margin : 10px 0px;
-	}
+	.btn-message {
+	 position: relative;
+    display: inline-block;
+    margin: 1.5em 0 1.5em 15px;
+    padding: 0 5px;
+    min-width: 90px;
+    height: 120px;
+    text-align: center;
+    color: #FFF;
+    font-size: 0.9em;
+    font-weight: bold;
+    background: #ffcc75;
+    border-radius: 15px;
+    box-sizing: border-box;
+  }
+  
+  .btn-message:after {
+     content: "";
+    position: absolute;
+    top: 100%;
+    left: 30px;
+    margin-top: -15px;
+    border: 15px solid transparent;
+    border-right: 15px solid #ffcc75;
+    z-index: 0;
+  }
 	.chat-bg{
 		background:#F2F2F2;
 	}
 	.chat-bg-header{
 		background:var(--color-primary);
 	}
+	.hello{
+	 font-size: 18px;
+	 font-weight: bold;
+	}
+	
 </style>
 </head>
 <body class="chat-bg">
@@ -63,10 +90,10 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-8 offset-md-2 text-center mt-2">
-		<h3 class="fw-bold">고객님, 안녕하세요!</h3>
-		<h3 class="fw-bold">YEAH BOT이 자주하는 문의를 도와드립니다.</h3>
+<div class="row mt-10">
+	<div class="col-md-6 offset-md-3 text-center" style="margin-top:10px;">
+		<h4 class="hello">고객님, 안녕하세요!</h4>
+		<h4 class="hello">YEAH BOT이 자주하는 문의를 도와드립니다.</h4>
 	</div>
 </div>
 
@@ -77,11 +104,11 @@
 	</div>
 	
 	<div class="row mt-1">
-		<div class="col-md-9"></div>
+		<div class="col-md-7"></div>
 		<div class="col-md-3">
 			<button class="btn-prev btn-c">이전</button>
-			<button class="btn-connect btn-c">처음부터</button>
-			<button class="btn-disconnect btn-c">종료</button>
+			<button class="btn-connect btn-cc">처음부터</button>
+			<button class="btn-disconnect btn-cc">종료</button>
 		</div>
 	</div>
 </div>
@@ -99,6 +126,7 @@
 		$(".btn-disconnect").click(function(){
 			socket.close();
 			console.log("종료");
+			window.close();
 		});
 		
 		$(".btn-prev").click(function(){
