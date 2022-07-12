@@ -9,8 +9,8 @@
 		<h1>일시적인 오류가 발생했습니다</h1>
 	</div>
 	
-	<div class="row">
-		<img src="${pageContext.request.contextPath}/resources/img/500.png" class="fill img img-shadow">
+	<div class="row w300 m30">
+		<img src="${pageContext.request.contextPath}/img/500.png" class="fill img img-shadow">
 	</div>
 	
 </div>
