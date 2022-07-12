@@ -3,6 +3,7 @@ package com.kh.final6.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -30,14 +31,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class KakaoPayRegularServiceImpl implements KakaoPayRegularService {
 
-	private String urlPrefix = "https://kapi.kakao.com/v1/payment";
+	@Value("${kakaopay.urlPrefix}")
+	private String urlPrefix;
 
 	private RestTemplate template = new RestTemplate();
 
-	private String authorization = "KakaoAK fbf7ae1aaa6b6d4d7901f226439db3a5"; 
-	private String contentType = "application/x-www-form-urlencoded;charset=utf-8";
+	@Value("${kakaopay.authorization}")
+	private String authorization;
+	
+	@Value("${kakaopay.contentType}")
+	private String contentType;
 
-	private String cid = "TCSUBSCRIP";
+	@Value("${kakaopay.cid}")
+	private String cid;
 
 	@Override
 	public KakaoPayRegularReadyResponseVO ready(KakaoPayRegularReadyRequestVO requestVO) throws URISyntaxException {
