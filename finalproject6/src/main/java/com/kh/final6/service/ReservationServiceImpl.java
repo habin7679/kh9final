@@ -20,11 +20,11 @@ public class ReservationServiceImpl implements ReservationService{
 	private ReservationDao reservationDao;
 	
 	@Override
-	public void insert(ReservationDto reservationDto) {
+	public ReservationDto insert(ReservationDto reservationDto) {
 		StoreDto storeDto = storeDao.one(reservationDto.getStoreNo());
 		int total = reservationDto.getReservationPeople() * storeDto.getStoreReservationPrice();
 		reservationDto.setReservationPrice(total);
-		reservationDao.insert(reservationDto);
+		return reservationDao.insert(reservationDto);
 		
 	}
 	

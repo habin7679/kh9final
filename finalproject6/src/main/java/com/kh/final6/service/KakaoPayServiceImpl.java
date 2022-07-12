@@ -3,6 +3,7 @@ package com.kh.final6.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class KakaoPayServiceImpl implements KakaoPayService {
 	
-	private String urlPrefix = "https://kapi.kakao.com/v1/payment";
+	@Value("${kakaopay.urlPrefix}")
+	private String urlPrefix;
+
+	private RestTemplate template = new RestTemplate();
+
+	@Value("${kakaopay.authorization}")
+	private String authorization;
 	
-	private RestTemplate template = new RestTemplate(); //서버 끼리 요청
-	
-	private String authorization = "KakaoAK fbf7ae1aaa6b6d4d7901f226439db3a5"; //관리자 번호이기 때문에 property에 지정해서 저장소에 안올리게 해야함
-	private String contentType="application/x-www-form-urlencoded;charset=utf-8";
-	
-	private String cid = "TC0ONETIME";
+	@Value("${kakaopay.contentType}")
+	private String contentType;
+
+	@Value("${kakaopay.cid}")
+	private String cid;
 
 	@Override
 	public KakaoPayReadyResponseVO ready(KakaoPayReadyRequestVO requestVO) throws URISyntaxException {
