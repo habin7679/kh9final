@@ -378,6 +378,12 @@ public class MemberController {
 		model.addAttribute("lastPage", lastPage);
 		return "member/list";
 	}
+	
+	//챗봇 메세지 관리 페이지
+	@GetMapping("/adminChat")
+		public String chat() {
+			return "member/adminChatManage";
+		}
 }
 
 
