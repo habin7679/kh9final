@@ -15,8 +15,8 @@
 	        <input type="text" name="memberId" autocomplete="off" required  class="form-control me-1">
 	    </div>
 	    <div class="row mt-2 text-left mb-2" >
-	        <label>닉네임</label>
-	        <input type="text" name="memberNick" autocomplete="off" required  class="form-control me-1">
+	        <label>이름</label>
+	        <input type="text" name="memberName" autocomplete="off" required  class="form-control me-1">
 	    </div>
 	    <div class="row mt-2 text-left mb-2" >
 	        <label>전화번호</label>

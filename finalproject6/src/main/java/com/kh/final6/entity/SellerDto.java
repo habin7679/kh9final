@@ -14,8 +14,8 @@ public class SellerDto {
 	private int memberNo;
 	private Date sellerRegistDate;
 	private String sellerBank;
-	private int sellerAccount;
+	private long sellerAccount;
 	private int sellerPoint;
 	private String sellerType;
-	private int sellerBusinessNum;
+	private long sellerBusinessNum;
 }

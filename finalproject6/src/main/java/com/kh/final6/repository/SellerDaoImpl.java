@@ -36,4 +36,20 @@ public class SellerDaoImpl implements SellerDao{
 	public int getSellerNo(int memberNo) {
 		return sqlSession.selectOne("seller.sellerNo", memberNo);
 	}
+
+@Override
+public void join(SellerDto sellerDto) {
+	
+	       //시퀀스 생성 
+			int sellerNo = sqlSession.selectOne("seller.sequence");
+	        sellerDto.setSellerNo(sellerNo);
+			
+			sqlSession.insert("seller.join", sellerDto);
+			
+}
+
+@Override
+public SellerDto sellerinfo(int sellerNo) {
+	return sqlSession.selectOne("seller.info", sellerNo);
+  }
 }

@@ -37,4 +37,21 @@
  		select seller_no from seller where member_no = #{memberNo}
  	</select>
  	
+ 		<!-- 판매자 시퀀스 -->
+	<select id="sequence" resultType="int">
+		select seller_seq.nextval from dual
+	</select>
+	
+	
+ 	<insert id="join" parameterType="SellerDto">
+		insert into seller(
+		    seller_no, member_no, seller_bank, seller_account, 
+		    seller_business_num
+		)
+		values(
+		     #{sellerNo}, #{memberNo}, #{sellerBank}, #{sellerAccount},
+		     #{sellerBusinessNum} 
+		) 
+	</insert>
+ 	
  </mapper>
