@@ -34,10 +34,30 @@
  		select store_seq.nextval from dual
  	</select>
  	
- 	<select id="list" resultType="StoreDto">
-		select * from store order by store_no asc
+ 	<select id="list" resultType="StoreDto" parameterType="Map">
+		select * from (
+ 			select rownum rn, TMP.* from(
+	 			select * from store
+	 			<if test="type != null and keyword != null">
+	 				<![CDATA[
+	 				where instr (${type},#{keyword}) > 0
+	 				]]>
+	 			</if>
+	 			<!-- 정렬 -->
+	 			order by store_no desc 
+	 			)
+						TMP 
+ 			) where rn between #{begin} and #{end}
 	</select>
  	
+ 	<select id="count" parameterType="Map" resultType="int">
+ 		select count(*) from store 
+ 		<if test = "type != null and keyword != null">
+ 			<![CDATA[
+ 			where instr (${type},#{keyword}) > 0
+ 			]]>
+ 		</if>
+ 	</select>
  	
  	<insert id="insert"  parameterType="StoreDto">
  	insert into store 
