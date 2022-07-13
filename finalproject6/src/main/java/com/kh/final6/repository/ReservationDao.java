@@ -15,4 +15,5 @@ public interface ReservationDao {
 	
 	void visitUpdate(int paymentNo);
 
+	
 }

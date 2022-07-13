@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.final6.entity.SellerDto;
 import com.kh.final6.error.CannotFindException;
+import com.kh.final6.vo.SellerInfoVO;
 
 @Repository
 public class SellerDaoImpl implements SellerDao{
@@ -52,4 +53,9 @@ public void join(SellerDto sellerDto) {
 public SellerDto sellerinfo(int sellerNo) {
 	return sqlSession.selectOne("seller.info", sellerNo);
   }
+
+@Override
+public SellerInfoVO sellerMemberInfoVO(int sellerNo) {
+	return sqlSession.selectOne("seller.sellerInfoVO", sellerNo);
+}
 }
