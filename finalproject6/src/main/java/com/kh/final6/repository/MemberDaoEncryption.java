@@ -123,7 +123,7 @@ public class MemberDaoEncryption implements MemberDao{
 		int count = sqlSession.update("member.changePassword", memberDto);
 		return count > 0;
 	}
-
+	@Override
 	public List<MemberDto> list(String type, String keyword, int p, int s) {
 		Map<String,Object> param = new HashMap<>();
 		param.put("type", type);
