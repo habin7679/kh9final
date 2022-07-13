@@ -1,6 +1,7 @@
 package com.kh.final6.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -49,7 +50,7 @@ public void join(SellerDto sellerDto) {
 }
 
 @Override
-public SellerDto sellerinfo(int sellerNo) {
-	return sqlSession.selectOne("seller.info", sellerNo);
-  }
+public List<SellerDto> list(int sellerNo) {
+	return sqlSession.selectList("seller.list", sellerNo);
+	}
 }

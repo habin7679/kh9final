@@ -29,4 +29,15 @@ public class SellerProfileDaoImpl implements SellerProfileDao {
 		param.put("attachmentNo", attachmentNo);
 		sqlSession.insert("sellerAttachment.insert", param);
 	}
+
+	@Override
+	public int one(int sellerNo) {
+		Integer attachmentNo = sqlSession.selectOne("sellerAttachment.one", sellerNo);
+		if(attachmentNo == null) {
+			return 0;
+		}
+		else {
+			return attachmentNo; 
+		}
+	}
 }

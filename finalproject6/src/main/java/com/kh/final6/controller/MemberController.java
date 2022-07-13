@@ -2,12 +2,10 @@ package com.kh.final6.controller;
 
 
 import java.io.IOException;
-
 import java.text.DecimalFormat;
 import java.text.Format;
-import java.util.Random;
-
 import java.util.List;
+import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
@@ -25,17 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
- 
 import com.kh.final6.entity.CertDto;
-
-import com.kh.final6.entity.AttachmentDto;
-
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.entity.SellerDto;
 import com.kh.final6.error.UnauthorizeException;
 import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.CertDao;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.MemberProfileDao;
+import com.kh.final6.repository.SellerDao;
 import com.kh.final6.service.EmailService;
 import com.kh.final6.service.MemberService;
 
@@ -63,6 +59,9 @@ public class MemberController {
 	
 	@Autowired 
 	private CertDao certDao;
+	
+	@Autowired
+	private SellerDao sellerDao;
 	
 	//회원가입 
 	@GetMapping("/join")
@@ -147,9 +146,10 @@ public class MemberController {
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
 		int memberNo = (int) session.getAttribute("no");
-		
-		MemberDto memberDto = memberDao.oneNo(memberNo);
-		model.addAttribute("memberDto", memberDto);
+
+	MemberDto memberDto = memberDao.oneNo(memberNo);
+	model.addAttribute("memberDto", memberDto);
+
 		
 		int attachmentNo = memberProfileDao.oneNo(memberNo);
 		
@@ -377,6 +377,10 @@ public class MemberController {
 		model.addAttribute("keyword",keyword);
 		model.addAttribute("lastPage", lastPage);
 		return "member/list";
+		
+		
+	
+		
 	}
 }
 
