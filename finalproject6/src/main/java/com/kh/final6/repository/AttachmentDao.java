@@ -13,4 +13,5 @@ public interface AttachmentDao {
 	AttachmentDto info(int attachmentNo);
 	ByteArrayResource load(String attachmentSavename) throws IOException;
 	String name(int attachmentNo);
+	void delete(int attachNo);
 }

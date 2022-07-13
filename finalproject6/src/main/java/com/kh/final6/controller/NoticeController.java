@@ -3,6 +3,7 @@ package com.kh.final6.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.Multipart;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,54 +81,16 @@ public class NoticeController {
 		}
 		model.addAttribute("p",p); 
 		model.addAttribute("s",s);
-		model.addAttribute("blockSize",blockSize);
 		model.addAttribute("endBlock",endBlock);
 		model.addAttribute("startBlock",startBlock);
+		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("type",type);
 		model.addAttribute("keyword",keyword);
-		model.addAttribute("lastPage",lastPage);
 		
 		return "notice/list";
 	}
 	
 
-//	@GetMapping("/list")
-//	public String list(
-//						@RequestParam (required = false) String type,
-//						@RequestParam (required = false) String keyword,
-//						@RequestParam (required = false, defaultValue = "1") int p,
-//						@RequestParam (required = false, defaultValue = "10") int s,
-//						Model model) {
-//		
-//		List<NoticeDto> list = noticeDao.list(type,keyword,p,s);
-//		model.addAttribute("list",list);
-//		
-//		boolean search = type != null && keyword != null;
-//		model.addAttribute("search",search);
-//		
-//		
-//		
-//		int count = noticeDao.count(type,keyword);
-//		int lastPage = (count + s - 1) /s;
-//		
-//		int blockSize = 10;
-//		int endBlock = (p + blockSize - 1) / blockSize * blockSize;
-//		int startBlock = endBlock - (blockSize - 1);
-//		if(endBlock > lastPage){
-//			endBlock = lastPage;
-//		}
-//		model.addAttribute("p",p); 
-//		model.addAttribute("s",s);
-//		model.addAttribute("blockSize",blockSize);
-//		model.addAttribute("endBlock",endBlock);
-//		model.addAttribute("startBlock",startBlock);
-//		model.addAttribute("type",type);
-//		model.addAttribute("keyword",keyword);
-//		model.addAttribute("lastPage",lastPage);
-//		
-//		return "notice/list";
-//	}
-	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int noticeNo,
 						Model model,
@@ -180,7 +143,7 @@ public class NoticeController {
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute NoticeDto noticeDto,
-						@RequestParam MultipartFile noticeImg,
+						@RequestParam (required = false) MultipartFile noticeImg,
 						HttpSession session,
 						RedirectAttributes attr) throws IllegalStateException, IOException {
 		int memberNo= (Integer)session.getAttribute("no");
@@ -208,17 +171,53 @@ public class NoticeController {
 		}
 	}
 	
+//	@GetMapping("/edit")
+//	public String edit(@RequestParam int noticeNo,
+//						Model model) {
+//		NoticeDto noticeDto = noticeDao.one(noticeNo);
+//		model.addAttribute(noticeDto);
+//		return "notice/edit";
+//	}
+	
 	@GetMapping("/edit")
 	public String edit(@RequestParam int noticeNo,
 						Model model) {
 		NoticeDto noticeDto = noticeDao.one(noticeNo);
 		model.addAttribute(noticeDto);
+		
+		int attachmentNo = noticeAttachDao.info(noticeNo);
+		AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
+		
+		boolean noAttach = attachmentNo == 0;
+		model.addAttribute("noAttach",noAttach);
+		
+		model.addAttribute("attachmentDto",attachmentDto);
+		
 		return "notice/edit";
 	}
 	
+//	@PostMapping("/edit")
+//	public String edit(@ModelAttribute NoticeDto noticeDto,
+//						@RequestParam Multipart noticeImg,
+//						RedirectAttributes attr) {
+//		boolean success = noticeDao.update(noticeDto);
+//		if(success) {
+//			attr.addAttribute("noticeNo",noticeDto.getNoticeNo());
+//			return "redirect:detail";
+//		}
+//		else {
+//			throw new CannotFindException();
+//		}
+//	}
+	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute NoticeDto noticeDto,
-						RedirectAttributes attr) {
+						@RequestParam (required=false) MultipartFile noticeImg,
+						RedirectAttributes attr) throws IllegalStateException, IOException {
+		if(noticeImg != null) {
+			int attachNo = noticeAttachDao.info(noticeDto.getNoticeNo());
+			noticeService.edit(noticeDto, noticeImg);
+		}
 		boolean success = noticeDao.update(noticeDto);
 		if(success) {
 			attr.addAttribute("noticeNo",noticeDto.getNoticeNo());
@@ -227,7 +226,9 @@ public class NoticeController {
 		else {
 			throw new CannotFindException();
 		}
+		
 	}
+	
 	@GetMapping("/error")
 	public String error() {
 		return "error/notaAdmin";

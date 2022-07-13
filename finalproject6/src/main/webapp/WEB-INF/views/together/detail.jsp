@@ -140,7 +140,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <textarea class="form-control" v-model="replyContent" :placeholder="textPlaceholder" :disabled="isNoneMember"
-                                         v-on:input="replyContent = $event.target.value"></textarea>
+                                         v-on:input="replyContent = $event.target.value" style="resize:none;"></textarea>
                                     </div>
                                     <div class="col-md-2 text-center d-grid">
                                         <button class="btn1" style="font-size: 0.8em;" :disabled="isNoneMember" @click="addReply">{{buttonText}}</button>
