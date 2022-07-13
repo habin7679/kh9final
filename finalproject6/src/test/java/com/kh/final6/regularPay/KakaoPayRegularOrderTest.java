@@ -32,8 +32,8 @@ public class KakaoPayRegularOrderTest {
 		KakaoPayRegularOrderResponseVO responseVO = 
 				kakaoPayRegularService.order(
 								KakaoPayRegularOrderRequestVO.builder()
-								.sid("S2c67a9730bf237a6ed6")
-								.tid("T2c67a8130bf237a6ed4")
+								.sid("S2c7df9230bf237a72ea")
+								.tid("T2c7df7e30bf237a72e7")
 							.build()
 						);
 		

@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <!-- include libraries(jQuery, bootstrap) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- include summernote css/js -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <style>
         .passSpace{
@@ -56,7 +54,7 @@
      
  <div id="app" class="container ma-t-100">
  	
- 	<div class="section-header mt-4 col-md-8 offset-md-2" >
+ 	<div class="section-header mt-4 col-md-6 offset-md-3" >
             <h2>QnA</h2>
             <p><span>문의</span> 게시판</p>
             <h2>관리자의 답변이 필요하시면 문의글을 남겨주세요.</h2>
@@ -65,7 +63,7 @@
  	<form action="edit" method="post">
  	<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
  	<div class="mt-5">
- 		<div class="col-md-8 offset-md-2 tb-color rounded">
+ 		<div class="col-md-6 offset-md-3 tb-color rounded">
  		
  		<div class="row mt-2">
  		<div class="col-md-1 offset-md-1 text-center"><label class="mt-1">말머리</label></div>
@@ -96,7 +94,7 @@
  	</div>
  	
  		<div class="row mt-2">
- 			<div class="col-md-8 offset-md-2 text-center">
+ 			<div class="col-md-6 offset-md-3 text-center">
 	 			<input type="submit" value="수정" class="btn1">
 	 			<a href="${pageContext.request.contextPath}/qna/detail?qnaNo=${qnaDto.qnaNo}" class="btn0">취소</a>
  			</div>

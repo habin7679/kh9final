@@ -1,6 +1,7 @@
 package com.kh.final6.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.final6.entity.SellerDto;
 import com.kh.final6.error.CannotFindException;
+import com.kh.final6.vo.SellerInfoVO;
 
 @Repository
 public class SellerDaoImpl implements SellerDao{
@@ -36,4 +38,26 @@ public class SellerDaoImpl implements SellerDao{
 	public int getSellerNo(int memberNo) {
 		return sqlSession.selectOne("seller.sellerNo", memberNo);
 	}
+
+@Override
+public void join(SellerDto sellerDto) {
+	
+	       //시퀀스 생성 
+			int sellerNo = sqlSession.selectOne("seller.sequence");
+	        sellerDto.setSellerNo(sellerNo);
+			
+			sqlSession.insert("seller.join", sellerDto);
+			
+}
+
+@Override
+public List<SellerDto> list(int sellerNo) {
+	return sqlSession.selectList("seller.list", sellerNo);
+}
+
+@Override
+public SellerInfoVO sellerMemberInfoVO(int sellerNo) {
+	return sqlSession.selectOne("seller.sellerInfoVO", sellerNo);
+}
+
 }

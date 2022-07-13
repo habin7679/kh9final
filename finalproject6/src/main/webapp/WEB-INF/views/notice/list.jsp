@@ -1,27 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 
     <div class="container ma-t-100">
 
-	<div class="section-header mt-4 col-md-8 offset-md-2" >
+	<div class="section-header mt-4 col-md-6 offset-md-3" >
             <h2>Notice</h2>
             <p><span>공지</span> 게시판</p>
             <h2>공지 및 이벤트를 확인하세요.</h2>
        	</div>
         
         <div class="row mt-2 text-left">
-            <div class="col-md-8 offset-md-2">
-                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
-                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
-                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
+            <div class="col-md-6 offset-md-3">
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_readcount&order=desc&p=${p}&s=${s}" class="btn0" >조회수 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=desc&p=${p}&s=${s}" class="btn0" >최신 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=asc&p=${p}&s=${s}" class="btn0" >오래된 순</a>
             </div>
         </div>
         
         <!-- 글쓰기 버튼 -->
          <div class="row mt-2"> 
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
             <c:if test="${isAdmin}">
                <a href="write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
             </c:if>
@@ -29,7 +30,7 @@
         </div>
 
         <div class="row mt-2">
-            <div class="col-md-8 offset-md-2">
+            <div class="col-md-6 offset-md-3">
                 <table class="table">
                     <thead class="text-center">
                         <tr>

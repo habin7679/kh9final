@@ -20,17 +20,17 @@ public class QnaOwnerInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String memberKind = (String)request.getSession().getAttribute("auth");
-		int memberNo = (int)request.getSession().getAttribute("no");
+		Integer memberNo = (Integer)request.getSession().getAttribute("no");
+		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		
-		if(memberKind == null || !memberKind.equals("관리자")) {
-			response.sendRedirect(request.getContextPath()+"/qna/error");
-			return false;
-		}
-		else if(memberKind.equals("관리자")) {
+		QnaDto qnaDto = qnaDao.one(qnaNo);
+		
+		if(memberKind.equals("관리자")|| memberNo == qnaDto.getMemberNo()) {
 			return true;
 		}
 		else {
-			return true;
+			response.sendRedirect(request.getContextPath()+"/qna/error");
+			return false;
 		}
 	}
 }

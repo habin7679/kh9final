@@ -32,7 +32,7 @@ public class SwaggerCustomConfiguration {
 							.build()
 								.apiInfo( //문서의 대표정보
 										new ApiInfoBuilder()
-														.title("Home REST API")
+														.title("Final6 REST API")
 														.description("제작한 홈페이지 내부 REST API")
 														.version("0.0.1")
 														.license("MIT License")

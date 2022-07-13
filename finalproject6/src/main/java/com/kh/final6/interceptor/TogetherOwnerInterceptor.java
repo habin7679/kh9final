@@ -25,15 +25,12 @@ public class TogetherOwnerInterceptor implements HandlerInterceptor{
 		
 		TogetherDto togetherDto = togetherDao.one(togetherNo);
 		
-		if(memberNo == null || memberKind == null || !memberKind.equals("관리자")) {
-			response.sendRedirect(request.getContextPath()+"/qna/error");
-			return false;
-		}
-		else if(memberNo == togetherDto.getMemberNo()|| memberKind.equals("관리자")) {
+		if(memberNo == togetherDto.getMemberNo()|| memberKind.equals("관리자")) {
 			return true;
 		}
 		else {
-			return true;
+			response.sendRedirect(request.getContextPath()+"/qna/error");
+			return false;
 		}
 	}
 }

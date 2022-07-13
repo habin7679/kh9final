@@ -82,8 +82,8 @@ public class ReservationController {
 			Model model,
 			HttpSession session
 			) {
-			reservationService.insert(reservationDto);
-			ReservationDto reservationNewDto = reservationDao.one(reservationDto.getReservationNo());
+			ReservationDto reservationNewDto =  reservationService.insert(reservationDto);
+//			ReservationDto reservationNewDto = reservationDao.one(reservationDto.getReservationNo());
 			model.addAttribute("reservationDto", reservationNewDto);
 			String memberId = (String)session.getAttribute("login");
 			model.addAttribute("memberDto", memberDao.info(memberId));
@@ -237,5 +237,16 @@ public class ReservationController {
 			return "redirect:/" ;
 		}
 		
+		
+	@GetMapping("/check")
+	public String check(
+			@RequestParam int storeNo,
+			Model model
+			) {
+		model.addAttribute("storeNo", storeNo);
+		return "store/storeMemberCheck";
+	}
+	
+
 }
 

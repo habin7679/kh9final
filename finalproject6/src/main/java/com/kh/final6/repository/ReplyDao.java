@@ -10,5 +10,13 @@ public interface ReplyDao {
 
 	List<ReplyDto> list(int replyTarget);
 
+	void delete(int replyNo);
 
+	void updateReplyCount(int replyTarget);
+
+	ReplyDto edit(ReplyDto replyDto);
+
+	int replyCount(int replyTarget);
+
+	
 }

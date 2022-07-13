@@ -3,6 +3,7 @@ package com.kh.final6.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -30,14 +31,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class KakaoPayRegularServiceImpl implements KakaoPayRegularService {
 
-	private String urlPrefix = "https://kapi.kakao.com/v1/payment";
+	@Value("${kakaopay.urlPrefix}")
+	private String urlPrefix;
 
 	private RestTemplate template = new RestTemplate();
 
-	private String authorization = "KakaoAK fbf7ae1aaa6b6d4d7901f226439db3a5"; 
-	private String contentType = "application/x-www-form-urlencoded;charset=utf-8";
+	@Value("${kakaopay.authorization}")
+	private String authorization;
+	
+	@Value("${kakaopay.contentType}")
+	private String contentType;
 
-	private String cid = "TCSUBSCRIP";
+	@Value("${kakaopay.cid}")
+	private String cid;
 
 	@Override
 	public KakaoPayRegularReadyResponseVO ready(KakaoPayRegularReadyRequestVO requestVO) throws URISyntaxException {
@@ -168,6 +174,63 @@ public class KakaoPayRegularServiceImpl implements KakaoPayRegularService {
 		KakaoPayRegularOrderResponseVO responseVO = 
 				template.postForObject(uri, entity, KakaoPayRegularOrderResponseVO.class);
 		
+		return responseVO;
+	}
+	
+	
+	
+	@Override
+	public KakaoPayRegularReadyResponseVO readyChange(KakaoPayRegularReadyRequestVO requestVO) throws URISyntaxException {
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", authorization);
+		headers.add("Content-type", contentType);
+
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("cid", cid);
+		body.add("partner_order_id", requestVO.getPartner_order_id());
+		body.add("partner_user_id", requestVO.getPartner_user_id());
+		body.add("item_name", requestVO.getItem_name());
+		body.add("quantity", String.valueOf(requestVO.getQuantity()));
+		body.add("total_amount", String.valueOf(requestVO.getTotal_amount()));
+		body.add("vat_amount", "0");
+		body.add("tax_free_amount", "0");
+
+		String prefix = "http://localhost:8080/final6/changePay";
+		body.add("approval_url", prefix + "/approve");
+		body.add("cancel_url", prefix + "/cancel");
+		body.add("fail_url", prefix + "/fail");
+
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+
+		URI uri = new URI(urlPrefix + "/ready");
+		KakaoPayRegularReadyResponseVO responseVO = template.postForObject(uri, entity, KakaoPayRegularReadyResponseVO.class);
+
+		return responseVO;
+	}
+	
+	@Override
+	public KakaoPayRegularApproveResponseVO approveChange(KakaoPayRegularApproveRequestVO requestVO)
+			throws URISyntaxException {
+
+		HttpHeaders headers = new HttpHeaders();
+		
+		headers.add("Authorization", authorization);
+		headers.add("Content-type", contentType);
+		
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
+		body.add("cid", cid);
+		body.add("tid", requestVO.getTid()); 
+		body.add("partner_order_id", requestVO.getPartner_order_id()); 
+		body.add("partner_user_id", requestVO.getPartner_user_id());
+		body.add("pg_token", requestVO.getPg_token());
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		
+		URI uri = new URI(urlPrefix+"/approve");
+		
+		KakaoPayRegularApproveResponseVO responseVO = 
+				template.postForObject(uri, entity, KakaoPayRegularApproveResponseVO.class);
 		return responseVO;
 	}
 }

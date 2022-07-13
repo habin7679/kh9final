@@ -37,4 +37,36 @@
  		select seller_no from seller where member_no = #{memberNo}
  	</select>
  	
+ 		<!-- 판매자 시퀀스 -->
+	<select id="sequence" resultType="int">
+		select seller_seq.nextval from dual
+	</select>
+	
+	
+ 	<insert id="join" parameterType="SellerDto">
+		insert into seller(
+		    seller_no, member_no, seller_bank, seller_account, 
+		    seller_business_num
+		)
+		values(
+		     #{sellerNo}, #{memberNo}, #{sellerBank}, #{sellerAccount},
+		     #{sellerBusinessNum} 
+		) 
+	</insert>
+	
+	<select id = "list" resultType = "SellerDto" parameterType = "int">
+		select * from seller where member_no = #{memberNo} 
+	</select>
+	
+ 	
+ 	<select id="sellerInfoVO" resultType="SellerInfoVO" parameterType="int">
+ 	select 
+		M.member_name, M.member_id, M.member_pw, M.member_phone,
+		s.seller_bank, s.seller_account, s.seller_point
+	from seller S
+		left outer join member M on M.member_no = S.member_no
+	where seller_no = #{sellerNo}
+ 	
+ 	</select>
+ 	
  </mapper>

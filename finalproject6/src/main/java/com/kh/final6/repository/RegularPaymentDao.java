@@ -16,4 +16,7 @@ public interface RegularPaymentDao {
 	
 	void insertStorage(RegularPaymentDto regularPaymentDto);
 	List<RegularPaymentDto> listSellerNo (int sellerNo);
+	void delete(int regularPaymentNo);
+	RegularPaymentDto listAll(int regularPaymentNo);
+	void update(KakaoPayRegularApproveResponseVO responseVO, int regularPaymentNo);
 }

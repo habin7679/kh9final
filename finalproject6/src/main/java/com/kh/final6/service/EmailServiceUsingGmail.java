@@ -86,7 +86,7 @@ public class EmailServiceUsingGmail implements EmailService {
 		String returnUri = ServletUriComponentsBuilder
 												.fromCurrentContextPath()//protocol + host
 												.path("/member/reset")
-												.queryParam("memberi", findDto.getMemberId())
+												.queryParam("memberId", findDto.getMemberId())
 												.queryParam("cert", certString)
 												.toUriString();
 		String content = 

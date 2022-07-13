@@ -49,7 +49,8 @@
 			</tr>
 		</table>
 	</div>
-	
+		
+		
 	<div class="row mt-2 text-center">
             <div class="col-md-8 offset-md-2">
 		<h2><a href="password"  class="btn btn-secondary" >비밀번호 변경</a></h2>
