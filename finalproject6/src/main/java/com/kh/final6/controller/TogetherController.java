@@ -162,4 +162,9 @@ public class TogetherController {
 	public String error() {
 		return "error/notAdmin";
 	}
+	
+	@GetMapping("/sellerError")
+	public String sellerError() {
+		return "error/sellerError";
+	}
 }
