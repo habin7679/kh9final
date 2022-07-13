@@ -17,6 +17,11 @@
 </style>
 
 <div id="app" class="container-fluid ma-t-100">
+
+<div class="section-header mt-4" >
+            <h2>Reservation Confirm</h2>
+            <p><span>예약 확인</span></p>
+          </div>
 	<div class="row mt-2">
 		<div class="col-md-8 offset-md-2">
 			<table class="table table-bordered rounded">
@@ -37,7 +42,7 @@
 						v-bind:key="index">
 						<td>{{storeMemberCheck.memberName}}</td>
 						<td>{{storeMemberCheck.reservationPeople}}</td>
-						<td>{{storeMemberCheck.reservationDate}}</td>
+						<td>{{convertTime(storeMemberCheck.reservationDate)}}</td>
 						<td>{{storeMemberCheck.reservationTime}}</td>
 						<td>{{storeMemberCheck.memberPhone}}</td>
 						<td>{{storeMemberCheck.reservationPrice}}</td>
@@ -111,7 +116,7 @@
               },
 
               convertTime(time){
-              	return moment(time).format('YYYY-MM-DD hh:mm:ss');
+              	return moment(time).format('YYYY-MM-DD');
               },
 
             

@@ -17,6 +17,12 @@
 </style>
 
 <div id="app" class="container-fluid ma-t-100">
+
+		<div class="section-header mt-4" >
+            <h2>RegularPayment</h2>
+            <p><span>정기결제</span> 관리</p>
+          </div>
+
 	<div class="row mt-2">
 		<div class="col-md-8 offset-md-2">
 			<table class="table table-bordered rounded">
