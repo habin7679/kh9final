@@ -24,4 +24,8 @@
  		select attachment_uploadname from attachment where attachment_no = #{attachmentNo}
  	</select>
  	
+ 	<delete id="delete" parameterType="int">
+ 		delete attachment where attachment_no = ${attachmentNo}
+ 	</delete>
+ 	
  </mapper>

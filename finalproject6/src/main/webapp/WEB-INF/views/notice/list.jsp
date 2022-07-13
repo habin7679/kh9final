@@ -76,35 +76,35 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">&lt;</a></li>
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">&lt;</a></li>
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">&lt;</a></li>
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=notice_readcount&order=desc">&lt;</a></li>
+								href="list?p=1&s=${s}&column=notice_readcount&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=notice_no&order=desc">&lt;</a></li>
+								href="list?p=1&s=${s}&column=notice_no&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=notice_no&order=asc">&lt;</a></li>
+								href="list?p=1&s=${s}&column=notice_no&order=asc">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}">&lt;</a></li>
+								href="list?p=1&s=${s}">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>

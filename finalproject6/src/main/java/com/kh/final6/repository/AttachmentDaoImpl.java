@@ -60,4 +60,10 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		return sqlSession.selectOne("attachment.name",attachmentNo);
 	}
 
+	@Override
+	public void delete(int attachNo) {
+		sqlSession.delete("attachment.delete",attachNo);
+		
+	}
+
 }
