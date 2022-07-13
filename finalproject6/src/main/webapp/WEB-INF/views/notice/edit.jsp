@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <!-- include libraries(jQuery, bootstrap) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- include summernote css/js -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <style>
         .passSpace{
@@ -56,7 +54,7 @@
      
  <div id="app" class="container ma-t-100">
  	
- 	<div class="section-header mt-4 col-md-8 offset-md-2" >
+ 	<div class="section-header mt-4 col-md-6 offset-md-3" >
             <h2>notice</h2>
             <p><span>공지</span> 게시판</p>
             <h2>공지 및 이벤트를 확인하세요.</h2>
@@ -65,7 +63,7 @@
  	<form action="edit" method="post" enctype="multipart/form-data">
  	<input type="hidden" name="noticeNo" value="${noticeDto.noticeNo}">
  	<div class="mt-5">
- 		<div class="col-md-8 offset-md-2 tb-color rounded">
+ 		<div class="col-md-6 offset-md-3 tb-color rounded">
  		
  		<div class="row mt-2">
  		<div class="col-md-1 offset-md-1 text-center"><label class="mt-1">말머리</label></div>
@@ -99,7 +97,7 @@
  		</div>
 	 	
  		<div class="row mt-2">
- 			<div class="col-md-8 offset-md-2 text-center">
+ 			<div class="col-md-6 offset-md-3 text-center">
 	 			<input type="submit" value="수정" class="btn1">
 	 			<a href="${pageContext.request.contextPath}/notice/detail?noticeNo=${noticeDto.noticeNo}" class="btn0">취소</a>
  			</div>

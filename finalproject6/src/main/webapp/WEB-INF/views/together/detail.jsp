@@ -281,6 +281,7 @@
                 })
                 .then(resp=>{
                     this.loadReply();
+                    this.loadReplyCount();
                 });
             },
             changeTime(index){
