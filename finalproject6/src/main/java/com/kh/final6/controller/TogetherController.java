@@ -118,7 +118,7 @@ public class TogetherController {
 		int togetherNo = togetherDao.write(togetherDto);
 		
 		attr.addAttribute("togetherNo",togetherNo);
-		return "together/detail";
+		return "redirect:detail";
 	}
 	
 	@GetMapping("/delete")
