@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.entity.ReplyDto;
 import com.kh.final6.entity.TogetherDto;
 import com.kh.final6.error.CannotFindException;
 import com.kh.final6.repository.MemberDao;
+import com.kh.final6.repository.ReplyDao;
 import com.kh.final6.repository.TogetherDao;
 
 @Controller
@@ -29,6 +31,9 @@ public class TogetherController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ReplyDao replyDao;
 
 	@GetMapping("/list")
 	public String list(@RequestParam (required = false) String type,

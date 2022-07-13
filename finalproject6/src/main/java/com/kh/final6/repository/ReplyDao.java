@@ -17,4 +17,6 @@ public interface ReplyDao {
 	ReplyDto edit(ReplyDto replyDto);
 
 	int replyCount(int replyTarget);
+
+	
 }

@@ -1,4 +1,4 @@
-package com.kh.final6.controller;
+package com.kh.final6.rest;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ import springfox.documentation.annotations.ApiIgnore;
 )
 @RestController
 @RequestMapping("/rest/reply")
-public class ReplyController {
+public class ReplyRestController {
 	
 	@Autowired
 	private ReplyDao replyDao;

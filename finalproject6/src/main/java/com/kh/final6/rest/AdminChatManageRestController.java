@@ -1,4 +1,4 @@
-package com.kh.final6.controller;
+package com.kh.final6.rest;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import com.kh.final6.vo.ChatbotVO;
 )
 @RestController
 @RequestMapping("/admin/chat")
-public class AdminChatManageController {
+public class AdminChatManageRestController {
 
 	@Autowired
 	private ChatbotDao chatbotDao;
