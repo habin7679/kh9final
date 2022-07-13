@@ -20,9 +20,11 @@
         	font-size: 12px;
         	color:#636e72;
         }
-        .bd-rounded{
+        .left-rounded{
         	border-top-left-radius: 1em;
-            border-top-right-radius: 1em;
+        }
+        .right-rounded{
+        	border-top-right-radius: 1em;
         }
 </style>
 
@@ -67,13 +69,13 @@
                 </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-7 offset-md-1">
-                    <table class="table">
-                        <thead >
-                            <tr class="text-center bd-rounded" style="background:var(--color-primary); color:#fff;">
-                                <th>일반번호</th>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="text-center" style="background:var(--color-primary); color:#fff;">
+                                <th class="left-rounded">일반번호</th>
                                 <th>그룹번호</th>
                                 <th style="width: 50%;">내용</th>
-                                <th>관리</th>
+                                <th class="right-rounded">관리</th>
                             </tr>
                         </thead>
                         <tbody>
