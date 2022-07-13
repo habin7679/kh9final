@@ -21,6 +21,7 @@ import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.SellerDao;
 import com.kh.final6.repository.SellerProfileDao;
 import com.kh.final6.service.SellerService;
+import com.kh.final6.vo.SellerInfoVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -92,6 +93,7 @@ public class SellerController {
 		model.addAttribute("attachName",attachName);
 		
 		return "seller/mypage";
+
 	
 	}
 
@@ -107,6 +109,20 @@ public class SellerController {
 	
 		return "seller/info";
 		
+ 	}
+
+	@GetMapping("/pointToMoney")
+	public String pointToMoney(
+			HttpSession session,
+			Model model,
+			@RequestParam int sellerNo
+			){
+		SellerInfoVO sellerInfoVO = sellerDao.sellerMemberInfoVO(sellerNo);
+		
+		model.addAttribute("sellerInfoVO", sellerInfoVO);
+		
+		return "seller/pointToMoney";
+
 	}
 }
 

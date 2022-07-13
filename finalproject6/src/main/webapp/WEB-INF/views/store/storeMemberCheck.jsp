@@ -18,35 +18,38 @@
 
 <div id="app" class="container-fluid ma-t-100">
 
-		<div class="section-header mt-4" >
-            <h2>RegularPayment</h2>
-            <p><span>정기결제</span> 관리</p>
+<div class="section-header mt-4" >
+            <h2>Reservation Confirm</h2>
+            <p><span>예약 확인</span></p>
           </div>
-
 	<div class="row mt-2">
 		<div class="col-md-8 offset-md-2">
 			<table class="table table-bordered rounded">
 				<thead class="text-center">
 					<tr>
-						<th>정기결제 등록명</th>
-						<th>사업자명</th>
-						<th>정기결제 시작일</th>
-						<th>정기결제 가격(월)</th>
-						<th>결제 변경</th>
-						<th>취소</th>
+						<th>예약자명</th>
+						<th>예약 인원수</th>
+						<th>예약 날짜</th>
+						<th>예약 시간</th>
+						<th>예약자 번호</th>
+						<th>예약금</th>
+						<th>방문</th>
+						<th>미방문</th>
 					</tr>
 				</thead>
 				<tbody class="text-center">
-					<tr v-for="(regularPayment,index) in regularPaymentList"
+					<tr v-for="(storeMemberCheck,index) in storeMemberCheckList"
 						v-bind:key="index">
-						<td>{{regularPayment.regularPaymentName}}</td>
-						<td>{{regularPayment.regularPaymentUserId}}</td>
-						<td>{{regularPayment.regularPaymentTime}}</td>
-						<td>{{regularPayment.regularPaymentPrice}}</td>
-						<td><a v-bind:href="linkIndex(index)"><i
-								class="fa-solid fa-money-check-dollar"></i></a></td>
-						<td><i class="fa-solid fa-rectangle-xmark"
-							@click="cancelRegularPayment(index)"></i></td>
+						<td>{{storeMemberCheck.memberName}}</td>
+						<td>{{storeMemberCheck.reservationPeople}}</td>
+						<td>{{convertTime(storeMemberCheck.reservationDate)}}</td>
+						<td>{{storeMemberCheck.reservationTime}}</td>
+						<td>{{storeMemberCheck.memberPhone}}</td>
+						<td>{{storeMemberCheck.reservationPrice}}</td>
+						<td><i class="fa-solid fa-square-check"
+							v-on:click="confirmSeller(index)"></i></td>
+						<td><i class="fa-solid fa-square-xmark"
+							v-on:click="cancelSeller(index)"></i></td>
 					</tr>
 				</tbody>
 			</table>
@@ -57,19 +60,16 @@
 <!-- vue js도 lazy loading을 사용한다 -->
 <script src="https://unpkg.com/vue@next"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"> </script>
 <script>
         //div[id=app]을 제어할 수 있는 Vue instance를 생성
         const app = Vue.createApp({
             //data : 화면을 구현하는데 필요한 데이터를 작성해 둔다
             data(){
                 return{
-                    regularPaymentList:[],
+                	storeMemberCheckList:[],
 
-                    sellerNo:${sellerNo},
+                    storeNo:${storeNo}
                     
-                    link:"",
                 };
             },
              //computed : data를 기반으로 하여 실시간 계산이 필요한 경우 작성한다.
@@ -81,35 +81,45 @@
             //methods : 애플리케이션 내에서 언제든 호출 가능한 코드 집합이 필요한 경우 작성한다.
             methods:{
               loadPage(){
-                axios.get("${pageContext.request.contextPath}/rest/regularPayment/list/"+this.sellerNo)
+                axios.get("${pageContext.request.contextPath}/rest/storeMemberCheck/"+this.storeNo)
                 .then(resp=>{
-                    this.regularPaymentList= resp.data;
+                    this.storeMemberCheckList= resp.data;
                 });
               },
 
-              cancelRegularPayment(index){
-                const choice = window.confirm("정기결제를 취소하시겠습니까?\n 등록된 가게는 삭제됩니다.")
+              confirmSeller(index){
+                const choice = window.confirm("해당 이용자가 방문을 하였습니까?")
 		          	if(!choice) return;
 
-                const regularPayment = this.regularPaymentList[index]
+                const storeMemberCheck = this.storeMemberCheckList[index]
                   axios({
-                    url:"${pageContext.request.contextPath}/rest/regularPayment/delete/"+regularPayment.regularPaymentNo,
-                    method : "delete"
+                    url:"${pageContext.request.contextPath}/rest/storeMemberCheck/sellerConfirm/"+storeMemberCheck.paymentNo,
+                    method : "put"
                   })
                   .then(resp=>{
                     this.loadPage()
                   });
               },
+                
+                cancelSeller(index){
+                    const choice = window.confirm("해당 이용자가 방문하지 않았습니까? \n 예약금은 포인트로 반환 됩니다.")
+    		          	if(!choice) return;
 
-              convertTime(time){
-              	return moment(time).format('YYYY-MM-DD hh:mm:ss');
+                    const storeMemberCheck = this.storeMemberCheckList[index]
+                      axios({
+                        url:"${pageContext.request.contextPath}/rest/storeMemberCheck/sellerCancel/"+storeMemberCheck.paymentNo,
+                        method : "put"
+                      })
+                      .then(resp=>{
+                        this.loadPage()
+                      });
               },
 
-              
-              linkIndex(index){
-            	  const regularPayment = this.regularPaymentList[index]
-                  return this.link = "${pageContext.request.contextPath}/changePay/change/"+regularPayment.regularPaymentNo
-              }
+              convertTime(time){
+              	return moment(time).format('YYYY-MM-DD');
+              },
+
+            
             },
              //watch : 특정 data를 감시하여 연계 코드를 실행하기 위해 작성한다
              watch:{
@@ -122,8 +132,6 @@
         });
         app.mount("#app")
     </script>
-
-
 
 
 

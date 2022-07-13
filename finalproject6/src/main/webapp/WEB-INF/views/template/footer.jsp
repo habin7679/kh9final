@@ -75,7 +75,7 @@
   <script>
   	$(function(){
   		$(".chat-bot").click(function(){
-  			window.open("${pageContext.request.contextPath}/chatbot/","ChatBot","width=450,height=500,scrollbars=no,left=1000,top=400")
+  			window.open("${pageContext.request.contextPath}/chatbot/","ChatBot","width=500,height=600,scrollbars=no,left=1000,top=400")
   		});
   	});
   </script>

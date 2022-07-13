@@ -108,9 +108,9 @@
                                     <div class="col-md-3 text-center mt-1 mb-1 passSpace">
                                         <span>{{changeTime(reply.replyTime)}}</span>
                                     </div>
-                                    <div class="col-md-1 text-center mt-1" v-if="isEditAndDelete(memberNo)">
-                                        <i class="fa-solid fa-pencil fa-cursor me-3" @click="editMode(index)"></i>
-                                        <i class="fa-solid fa-circle-xmark fa-cursor" @click="deleteReply(index)"></i>                                   
+                                    <div class="col-md-1 text-center mt-1" v-if="isEditAndDelete(reply.memberNo)">
+                                        <i v-if="!isAdmin" class="fa-solid fa-pencil fa-cursor me-3" @click="editMode(index)"></i>
+                                        <i class="fa-solid fa-circle-xmark fa-cursor" @click="deleteReply(index)"></i>
                                     </div>                                    
                                 </div>
                             </td>
@@ -281,6 +281,7 @@
                 })
                 .then(resp=>{
                     this.loadReply();
+                    this.loadReplyCount();
                 });
             },
             changeTime(index){

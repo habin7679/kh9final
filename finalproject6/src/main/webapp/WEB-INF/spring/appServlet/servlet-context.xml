@@ -80,6 +80,10 @@
 		 
 		 <mvc:interceptor>
 		 	<mvc:mapping path="/notice/write*"/>
+		 	<mvc:mapping path="/notice/edit*"/>
+		 	<mvc:mapping path="/notice/delete*"/>
+		 	<mvc:mapping path="/member/adminChat"/>
+		 	<mvc:mapping path="/admin/chat"/>
 		 	
 		 	
 		 	<ref bean="adminInterceptor"/>
@@ -95,8 +99,8 @@
 		 </mvc:interceptor>
 		 
 		 <mvc:interceptor>
-		 	<mvc:mapping path="/together/edit**"/>
-		 	<mvc:mapping path="/together/delete**"/>
+		 	<mvc:mapping path="/together/edit*"/>
+		 	<mvc:mapping path="/together/delete*"/>
 		 	
 		 	
 		 	<ref bean="togetherOwnerInterceptor"/>
