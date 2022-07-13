@@ -102,8 +102,13 @@
 		 	<mvc:mapping path="/together/edit*"/>
 		 	<mvc:mapping path="/together/delete*"/>
 		 	
-		 	
 		 	<ref bean="togetherOwnerInterceptor"/>
+		 </mvc:interceptor>
+		 
+		 <mvc:interceptor>
+		 	<mvc:mapping path="/together/write*"/>
+		 	
+		 	<ref bean="sellerInterceptor"/>
 		 </mvc:interceptor>
 		 
 	</mvc:interceptors>
