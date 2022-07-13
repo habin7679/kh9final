@@ -53,6 +53,11 @@
 		     #{sellerBusinessNum} 
 		) 
 	</insert>
+	
+	<select id = "list" resultType = "SellerDto" parameterType = "int">
+		select * from seller where member_no = #{memberNo} 
+	</select>
+	
  	
  	<select id="sellerInfoVO" resultType="SellerInfoVO" parameterType="int">
  	select 

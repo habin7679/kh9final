@@ -1,6 +1,7 @@
 package com.kh.final6.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.final6.entity.MemberDto;
 import com.kh.final6.entity.SellerDto;
 import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.MemberDao;
@@ -23,10 +23,12 @@ import com.kh.final6.repository.SellerProfileDao;
 import com.kh.final6.service.SellerService;
 import com.kh.final6.vo.SellerInfoVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Controller
 @RequestMapping("/seller")
-
+@Slf4j
 public class SellerController {
 	
 	@	Autowired
@@ -73,15 +75,40 @@ public class SellerController {
 		int sellerNo = (int) session.getAttribute("no");
 		int memberNo = (int)session.getAttribute("no");
 		
-		SellerDto sellerDto = sellerDao.sellerinfo(sellerNo);
+		SellerDto sellerDto = sellerDao.one(sellerNo);
 		model.addAttribute("sellerDto", sellerDto);
 		
-		MemberDto memberDto = memberDao.oneNo(memberNo);
+		System.out.println("console : mypage()");
 		
-		boolean isSeller = memberDto.getMemberKind() == "판매자";
-		model.addAttribute("isSeller", isSeller);
+		int attachmentNo = sellerProfileDao.one(sellerNo); 
+		
+		
+		if(attachmentNo == 0) {
+			model.addAttribute("profileUrl", "/img/user.png");
+		}
+		else {
+		model.addAttribute("profileUrl", "/attachment/download?attachmentNo=" + attachmentNo);
+		}
+		String attachName = attachmentDao.name(attachmentNo);
+		model.addAttribute("attachName",attachName);
 		
 		return "seller/mypage";
+
+	
+	}
+
+	@GetMapping("/info")
+	public String infoGet(
+			HttpSession session, Model model) {
+
+       int sellerNo = (Integer) session.getAttribute("no");
+		List<SellerDto> list = sellerDao.list(sellerNo);
+		// log.debug("sellseNo = {}",list);
+
+		model.addAttribute("list", list);
+	
+		return "seller/info";
+		
  	}
 
 	@GetMapping("/pointToMoney")
@@ -95,5 +122,12 @@ public class SellerController {
 		model.addAttribute("sellerInfoVO", sellerInfoVO);
 		
 		return "seller/pointToMoney";
+
 	}
 }
+
+
+
+
+
+

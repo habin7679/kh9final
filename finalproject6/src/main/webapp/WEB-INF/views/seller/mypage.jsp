@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
-
+    
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="container ma-t-100" style="width:900px;" >
 <div class="container w400 m30">
 	<div class="row center m30">
 		<h1>판매자 정보</h1>
@@ -35,7 +36,11 @@
 				<td>${sellerDto.sellerType}</td>
 			</tr>
 		</table>
+		
+			 <div class="row mt-2 text-center mb-2" >
+		<img src="${pageContext.request.contextPath}${profileUrl}"
+				 class="img img-circle img-shadow " style="width:300px; margin-left:150px; height:150px;">
 	</div>
-	
+	</div>
 	</div>
 	
