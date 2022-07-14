@@ -21,8 +21,9 @@ public interface MemberDao {
 
 	List<MemberDto> list(String type, String keyword, int p, int s);
 	int count(String type, String keyword);
-
-
-
-
+	
+	MemberDto edit(MemberDto memberDto);
+	MemberDto idcheck(String memberId);
+	
+	
 }
