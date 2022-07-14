@@ -49,6 +49,20 @@
      $("textarea[name=noticeContent]").summernote({
          height: 350
          });
+     
+     console.log($("#ckb").val());
+    
+     $("input[type=checkbox]").on("input",function(){
+ 		if($(this).is(":checked") ==true){
+ 			$(this).val(1);
+ 			console.log($(this).val());
+ 		}
+ 		else{
+ 			$(this).val(0);
+ 			console.log($(this).val());
+ 		}
+ 	});
+   
  });
 </script>
      
@@ -74,8 +88,24 @@
                     <option <c:if test="${noticeDto.noticeHead=='이벤트'}">selected</c:if>>이벤트</option>
                 </select>
             </div>
-            <div class="col-md-7"></div>
+            
+            <div class="col-md-3 mt-2 form-check form-switch">
+            	<label class="form-check-label">
+            	<c:choose>
+	            	<c:when test="${noticeDto.pin == 1 }">
+	            		<input type="checkbox" name="pin" value="${noticeDto.pin}" id="ckb" checked> 상단고정
+	            	</c:when>
+	            	<c:otherwise>
+	            		<input type="checkbox" name="pin" value="${noticeDto.pin}" id="ckb"> 상단고정
+	            	</c:otherwise>
+            	</c:choose>
+            	</label>
+            </div>
+            
+            <div class="col-md-4"></div>
  		</div>
+ 		
+ 		
  		
  		<div class="row mt-2">
  			<div class="col-md-1 offset-md-1 text-center"><label class="mt-2">제목</label></div>
@@ -117,10 +147,10 @@
     </form>    
     </div>
  
- <c:if test="${attachmentDto != null }">
  <script src="https://unpkg.com/vue@next"></script>
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+ <c:if test="${attachmentDto != null }">
  <script>
         //div[id=app]을 제어할 수 있는 Vue instance를 생성
         const app = Vue.createApp({
@@ -136,6 +166,8 @@
 				isNoneAttach(){
 					return this.attachmentNo == 0 || this.attachmentNo == null;
 				},
+				
+				
             },
             
              methods:{
@@ -166,7 +198,8 @@
             		   console.log(resp);
             		   this.attachmentName = resp.data.attachmentUploadname;
             	   });
-               }
+               },
+               
             },
             
             created(){
@@ -180,5 +213,6 @@
         app.mount("#app");
     </script>
 </c:if> 
+
     
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

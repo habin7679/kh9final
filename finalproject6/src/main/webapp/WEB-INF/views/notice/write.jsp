@@ -49,6 +49,17 @@
      $("textarea[name=noticeContent]").summernote({
          height: 350
          });
+     
+    	$("input[type=checkbox]").on("input",function(){
+    		if($(this).is(":checked") ==true){
+    			$(this).val(1);
+    			console.log($(this).val());
+    		}
+    		else{
+    			$(this).val(0);
+    			console.log($(this).val());
+    		}
+    	});
  });
 </script>
      
@@ -73,7 +84,14 @@
                     <option>이벤트</option>
                 </select>
             </div>
-            <div class="col-md-7"></div>
+            
+            <div class="col-md-3 mt-2 form-check form-switch">
+            	<label class="form-check-label">
+            	<input type="checkbox" name="pin" value=0> 상단고정
+            	</label>
+            </div>
+ 		
+ 			<div class="col-md-4"></div>
  		</div>
  		
  		<div class="row mt-2">
@@ -105,5 +123,8 @@
  	</div>
     </form>    
     </div>
-    
+ 
+ 
+ 
+ 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

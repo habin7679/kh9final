@@ -3,7 +3,15 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
-
+<style>
+	.circle-head{
+        background-color: #57606f;
+        border-radius: 1.2em;
+        color: white;
+        padding: 0.5em;
+        font-size: 10px;
+       }
+</style>
     <div class="container ma-t-100">
 
 	<div class="section-header mt-4 col-md-6 offset-md-3" >
@@ -46,6 +54,9 @@
 	                        <tr>
 	                            <td>${noticeDto.noticeNo}</td>
 	                            <td style="text-align: left !important">
+	                            <c:if test="${noticeDto.pin==1}">
+		                    	<span class="circle-head">중요</span>
+		                    	</c:if> 
 	                            <a href="detail?noticeNo=${noticeDto.noticeNo}">
 	                           	<!-- 말머리 -->
 		                            <c:if test="${noticeDto.noticeHead != null}">

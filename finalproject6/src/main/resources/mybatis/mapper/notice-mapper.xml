@@ -22,11 +22,11 @@
 	 				order by ${column} ${order}
 	 				</when>
 	 				<otherwise>
-	 					order by notice_no desc
+	 					order by pin desc, notice_time desc
 	 				</otherwise>
 	 			</choose>)
 						TMP 
- 			) where rn between #{begin} and #{end}
+ 			) where rn between #{begin} and #{end} 
  	
  	</select>
  	
@@ -54,8 +54,8 @@
  	
  	<insert id="write" parameterType="NoticeDto">
  		insert into notice (
- 			notice_no,member_no,notice_head,notice_title,notice_content,notice_writer)
- 		values (#{noticeNo},#{memberNo},#{noticeHead},#{noticeTitle},#{noticeContent},#{noticeWriter})
+ 			notice_no,member_no,notice_head,notice_title,notice_content,notice_writer,pin)
+ 		values (#{noticeNo},#{memberNo},#{noticeHead},#{noticeTitle},#{noticeContent},#{noticeWriter},#{pin})
  	</insert>
  	
  	<delete id="delete" parameterType="int">
@@ -64,7 +64,8 @@
  	
  	<update id="edit" parameterType="NoticeDto">
  		update notice set
- 			notice_head = #{noticeHead} ,notice_title = #{noticeTitle}, notice_content = #{noticeContent}
+ 			notice_head = #{noticeHead} ,notice_title = #{noticeTitle}, 
+ 			notice_content = #{noticeContent}, pin = #{pin}
  		where notice_no = #{noticeNo}
  	</update>
  	
