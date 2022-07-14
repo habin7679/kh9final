@@ -35,6 +35,7 @@ import com.kh.final6.vo.KakaoPayCancelRequestVO;
 import com.kh.final6.vo.KakaoPayCancelResponsetVO;
 import com.kh.final6.vo.KakaoPayReadyRequestVO;
 import com.kh.final6.vo.KakaoPayReadyResponseVO;
+import com.kh.final6.vo.MyReservationVO;
 import com.kh.final6.vo.PaymentNoVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -160,7 +161,11 @@ public class ReservationController {
 	}
 
 		@GetMapping("/pay/finish")
-		public String payFinish()	{
+		public String payFinish(
+				HttpSession session,
+				Model model
+				)	{
+			model.addAttribute("memberNo", (int)session.getAttribute("no"));
 			return "reservation/payFinish";
 		}
 		
@@ -208,6 +213,7 @@ public class ReservationController {
 //			System.out.println("@@@@@@@@@@@diffDays" + diffDays);
 					
 			if(diffDays  >= 7) {
+				//전액 환불
 				KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
 						.tid(paymentDto.getPaymentTid())
 						.cancel_amount(paymentDto.getPaymentPrice())
@@ -218,7 +224,6 @@ public class ReservationController {
 			} else if(diffDays < 7 && diffDays >= 2) {
 				//50% 환불
 				paymentDto.setPaymentPrice(paymentDto.getPaymentPrice()/2);
-//				System.out.println("%%%%%%%%%%%%%%%%Price" + paymentDto.getPaymentPrice());
 				KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
 						.tid(paymentDto.getPaymentTid())
 						.cancel_amount(paymentDto.getPaymentPrice())
@@ -229,12 +234,13 @@ public class ReservationController {
 				sellerDao.addPoint(paymentDto.getPaymentPrice(), sellerNo);
 				
 			} else {
+				// 환불 못하고 사장님 포인트로 변환
 				paymentDao.cancel(paymentDto);
 				sellerDao.addPoint(paymentDto.getPaymentPrice(), sellerNo);
 			}
 //
 //			return "redirect:more?paymentNo="+paymentDetailDto.getPaymentNo();
-			return "redirect:/" ;
+			return "redirect:/member/mypage" ;
 		}
 		
 		
@@ -246,6 +252,21 @@ public class ReservationController {
 		model.addAttribute("storeNo", storeNo);
 		return "store/storeMemberCheck";
 	}
+	
+	
+	@GetMapping("/memberCheck")
+	public String memberCheck(
+			@RequestParam int memberNo,
+			Model model
+			
+			) {
+		
+		List<MyReservationVO> list = reservationDao.myReservation(memberNo);
+		model.addAttribute("list", list);
+		
+		return "reservation/myReservation";
+	}
+	
 	
 
 }

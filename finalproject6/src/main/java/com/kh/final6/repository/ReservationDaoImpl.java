@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.final6.entity.ReservationDto;
 import com.kh.final6.error.CannotFindException;
+import com.kh.final6.vo.MyReservationVO;
 import com.kh.final6.vo.ReservationMemberCheckVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,4 +45,10 @@ public class ReservationDaoImpl implements ReservationDao {
 			throw new CannotFindException();
 		}
 	}
+	
+	@Override
+	public List<MyReservationVO> myReservation(int memberNo) {
+		return sqlSession.selectList("reservation.myReservation", memberNo);
+	}
+	
 }
