@@ -146,6 +146,7 @@ public class MemberDaoEncryption implements MemberDao{
 	 		
 	 		return sqlSession.selectOne("member.count",param);
 		}
+		
 
 }
 

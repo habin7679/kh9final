@@ -5,17 +5,16 @@ import java.util.List;
 import com.kh.final6.entity.StoreDto;
 
 public interface StoreDao {
-	
-	List<StoreDto> list(String type, String keyword, int p, int s);
-	int count(String type, String keyword);
-	StoreDto one(int storeNo);	
-	void delete(int storeNo);
-	int insert(StoreDto storeDto);	
-	StoreDto update(StoreDto storeDto);
-	
+   
+   List<StoreDto> list();
+   StoreDto one(int storeNo);   
+   void delete(int storeNo);
+   int insert(StoreDto storeDto);   
+   StoreDto update(StoreDto storeDto);
+   
 
  
-	int selectReservationPrice(int storeNo);
+   int selectReservationPrice(int storeNo);
 
 
 }
