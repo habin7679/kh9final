@@ -14,6 +14,13 @@
 	color: rgba(206, 18, 18, 0.8);
 	background: white;
 }
+
+.left-rounded{
+    border-top-left-radius: 1em;
+        }
+.right-rounded{
+     border-top-right-radius: 1em;
+        }
 </style>
 
 <div id="app" class="container-fluid ma-t-100">
@@ -23,18 +30,18 @@
             <p><span>예약 확인</span></p>
           </div>
 	<div class="row mt-2">
-		<div class="col-md-8 offset-md-2">
-			<table class="table table-bordered rounded">
-				<thead class="text-center">
-					<tr>
-						<th>예약자명</th>
+		<div class="col-md-6 offset-md-3">
+			<table class="table rounded  table-striped">
+				<thead >
+					<tr class="text-center" style="background:var(--color-primary); color:#fff;">
+						<th class="left-rounded">예약자명</th>
 						<th>예약 인원수</th>
 						<th>예약 날짜</th>
 						<th>예약 시간</th>
 						<th>예약자 번호</th>
 						<th>예약금</th>
 						<th>방문</th>
-						<th>미방문</th>
+						<th class="right-rounded">미방문</th>
 					</tr>
 				</thead>
 				<tbody class="text-center">
