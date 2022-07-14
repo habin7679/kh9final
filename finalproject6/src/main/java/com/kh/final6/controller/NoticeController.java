@@ -60,6 +60,9 @@ public class NoticeController {
 		List<NoticeDto> list = noticeDao.list(type,keyword,p,s, column, order);
 		model.addAttribute("list",list);
 		
+		List<NoticeDto> noticeList = noticeDao.noticeList();
+		model.addAttribute("noticeList",noticeList);
+		
 		boolean search = type != null && keyword != null;
 		model.addAttribute("search",search);
 		

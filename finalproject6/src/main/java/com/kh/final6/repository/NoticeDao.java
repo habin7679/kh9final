@@ -18,5 +18,7 @@ public interface NoticeDao {
 	
 	boolean update(NoticeDto noticeDto);
 	List<NoticeDto> list(String type, String keyword, int p, int s, String column, String order);
+	
+	List<NoticeDto> noticeList(); //상단 고정 게시글만 보기
 
 }

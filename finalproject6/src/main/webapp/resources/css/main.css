@@ -79,9 +79,42 @@
   border:none;
 }
 
+.btn-s{
+  font-size: 14px;
+  color: black;
+  background: #fff;
+  padding: 8px 20px;
+  transition: 0.3s;
+  border-radius:4px;
+  border:1px solid var(--color-primary) ;
+  color: initial ;
+}
+.btn-s:hover{
+	color: #fff;
+	background:var(--color-primary);
+	border: none;
+}
+/* 말머리 */
+.circle-head{
+        background-color: #57606f;
+        border-radius: 1.2em;
+        color: white;
+        padding: 0.5em;
+        font-size: 10px;
+       }
+/* 게시판 폰트 사이즈 */
+    .fix-font{
+    	font-size: 15px;
+    }
+    .normal-font{
+    	font-size: 14px;
+    }
+
 .top{
 margin-top : 60px;
 }
+
+
 
 /* 페이지네이션 */
 .page-link {
