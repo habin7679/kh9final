@@ -3,6 +3,8 @@
     
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <div class="container ma-t-100" style="width:900px;" >
 <div class="container w400 m30">
 	<div class="col-md-8 offset-md-4">
@@ -38,4 +40,5 @@
 	</div>
 	</div>
 	</div>
-	
+
+	 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -25,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.final6.entity.CertDto;
 import com.kh.final6.entity.MemberDto;
-import com.kh.final6.entity.SellerDto;
 import com.kh.final6.error.UnauthorizeException;
 import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.CertDao;
@@ -377,10 +376,7 @@ public class MemberController {
 		model.addAttribute("keyword",keyword);
 		model.addAttribute("lastPage", lastPage);
 		return "member/list";
-		
-		
 	
-		
 	}
 	
 	//챗봇 메세지 관리 페이지
