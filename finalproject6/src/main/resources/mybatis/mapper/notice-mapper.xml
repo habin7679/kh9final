@@ -20,17 +20,18 @@
 	 				where instr (${type},#{keyword}) > 0  
   	 				]]>  
 	 			</if>
-<!-- 	 			정렬 -->
-	 			<choose>
+<!-- 	 			정렬 --> order by notice_no desc
+	 			)
+						TMP 
+ 			) where rn between #{begin} and #{end} 
+ 			<choose>
 	 				<when test="columnExist and orderExist">
 	 				order by ${column} ${order}
 	 				</when>
 	 				<otherwise>
 	 					order by notice_no desc
 	 				</otherwise>
-	 			</choose>)
-						TMP 
- 			) where rn between #{begin} and #{end} 
+	 			</choose>
  	
  	</select>
 
