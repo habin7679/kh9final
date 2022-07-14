@@ -2,7 +2,13 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<style>
+/* 	 table tr:first-child th:first-child {border-top-left-radius: 1em} */
+/*          table tr:first-child th:last-child {border-top-right-radius: 1em} */
+/*          table tr:last-child td:first-child {border-bottom-left-radius: 1em} */
+/*          table tr:last-child td:last-child {border-bottom-right-radius: 1em} */
+/*          table tr:last-child td {border:none} */
+</style>
 
     <div class="container ma-t-100">
 

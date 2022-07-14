@@ -3,26 +3,11 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-/* 	 .tl{ */
-/*             border-top-left-radius: 1em; */
-            
-/*         } */
-/*         .tr{ */
-/*         	border-top-right-radius: 1em; */
-/*         } */
-/*         .bl{ */
-/*             border-bottom-left-radius: 1em; */
-/*         } */
-/*         .br{ */
-/*         	border-bottom-right-radius: 1em; */
-/*         } */
-/*         .no-b-border{ */
-/*         	border-bottom : none; */
-/*         } */
-         table thead tr:first-child td:first-child {border-top-left-radius: 1em}
-         table tr:last-child td:first-child {border-bottom-left-radius: 1em}
-         table tr:last-child td:last-child {border-bottom-right-radius: 1em}
-         table tr:last-child td {border:none}
+/*        table tr:first-child th:first-child {border-top-left-radius: 1em} */
+/*        table tr:first-child th:last-child {border-top-right-radius: 1em} */
+/*        table tr:last-child td:first-child {border-bottom-left-radius: 1em} */
+/*        table tr:last-child td:last-child {border-bottom-right-radius: 1em} */
+/*        table tr:last-child td {border:none} */
 </style>
     <div class="container ma-t-100">
 
@@ -49,7 +34,7 @@
 
         <div class="row mt-2">
             <div class="col-md-6 offset-md-3">
-                <table class="table table-light">
+                <table class="table">
                     <thead class="text-center">
                         <tr>
                             <th>NO</th>
@@ -61,7 +46,7 @@
                     </thead>
                     <tbody class="text-center">
                     	<c:forEach var="togetherDto" items="${list}">
-	                        <tr class="normal-font">
+	                        <tr class="normal-font" style="background-color:white;">
 	                            <td>${togetherDto.togetherNo}</td>
 	                            <td style="text-align: left !important">
 	                            <a href="detail?togetherNo=${togetherDto.togetherNo}">
