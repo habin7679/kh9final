@@ -1,141 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- 
-	mapper 파일은 특정 테이블에 대한 SQL 구문을 보관하는 파일이다.
-	- myBatis를 이용하는 개발자는 이곳에 저장된 SQL구문을 '아이디'를 이용해서 호출한다.
-	- 파일마다 동일한 아이디로 인해 발생하는 충돌을 방지하기 위해 고유한 namespace를 사용한다.
- 	- 만약 namespace가 olympic이고 구문 ID가 list라면 외부에서는 olympic.list로 호출한다.
- 	- 일반적으로 namespace는 테이블명으로 한다.
- 	- mapper 내부에는 다음 종류 태그로 구문을 저장할 수 있다.
- 		- <insert>
- 		- <update>
- 		- <select>
- 		- <delete>
- 	- 각 구문은 반드시 아이디를 가져야 한다.
- 	- 각 구문에는 다음과 같은 속성을 작성할 수 있다.
- 		- parameterType : 해당 구문이 실행되기 위해 필요한 데이터의 자료형(1개만 작성 가능, 선택)
- 		- resultType : 해당 구문의 실행 결과를 변환하기 위한 자료형(1개만 작성 가능, 필수)
- 			- (주의) List이든 아니든 DTO의 형태를 작성한다(모르는 부분을 알려준다, 매핑되는 객체의 형태)
- 	- 각 구문에는 데이터를 다음과 같이 바인딩 할 수 있다.
- 		- 정적 바인딩 : ${이름} 형태로 작성하면 어떠한 추가 작업도 없이 해당 위치에 데이터가 그대로 작성된다.
- 		- 동적 바인딩 : #{이름} 형태로 작성하면 자동으로 자료형에 맞게 해당 데이터를 추출하여 작성해준다.(DTO 변수명)
+   mapper 파일은 특정 테이블에 대한 SQL 구문을 보관하는 파일이다.
+   - myBatis를 이용하는 개발자는 이곳에 저장된 SQL구문을 '아이디'를 이용해서 호출한다.
+   - 파일마다 동일한 아이디로 인해 발생하는 충돌을 방지하기 위해 고유한 namespace를 사용한다.
+    - 만약 namespace가 olympic이고 구문 ID가 list라면 외부에서는 olympic.list로 호출한다.
+    - 일반적으로 namespace는 테이블명으로 한다.
+    - mapper 내부에는 다음 종류 태그로 구문을 저장할 수 있다.
+       - <insert>
+       - <update>
+       - <select>
+       - <delete>
+    - 각 구문은 반드시 아이디를 가져야 한다.
+    - 각 구문에는 다음과 같은 속성을 작성할 수 있다.
+       - parameterType : 해당 구문이 실행되기 위해 필요한 데이터의 자료형(1개만 작성 가능, 선택)
+       - resultType : 해당 구문의 실행 결과를 변환하기 위한 자료형(1개만 작성 가능, 필수)
+          - (주의) List이든 아니든 DTO의 형태를 작성한다(모르는 부분을 알려준다, 매핑되는 객체의 형태)
+    - 각 구문에는 데이터를 다음과 같이 바인딩 할 수 있다.
+       - 정적 바인딩 : ${이름} 형태로 작성하면 어떠한 추가 작업도 없이 해당 위치에 데이터가 그대로 작성된다.
+       - 동적 바인딩 : #{이름} 형태로 작성하면 자동으로 자료형에 맞게 해당 데이터를 추출하여 작성해준다.(DTO 변수명)
  -->
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
  <mapper namespace="store">
- 	
- 	<select id="one" resultType="StoreDto" parameterType="int">
- 		select * from store 
- 		where store_no = #{storeNo}
- 	</select>
+    
+    <select id="one" resultType="StoreDto" parameterType="int">
+       select * from store 
+       where store_no = #{storeNo}
+    </select>
  
- 	<select id="sequence" resultType="int">
- 		select store_seq.nextval from dual
- 	</select>
- 	
- 	<select id="list" resultType="StoreDto" parameterType="Map">
-		select * from (
- 			select rownum rn, TMP.* from(
-	 			select * from store
-	 			<if test="type != null and keyword != null">
-	 				<![CDATA[
-	 				where instr (${type},#{keyword}) > 0
-	 				]]>
-	 			</if>
-	 			<!-- 정렬 -->
-	 			order by store_no desc 
-	 			)
-						TMP 
- 			) where rn between #{begin} and #{end}
-	</select>
- 	
- 	<select id="count" parameterType="Map" resultType="int">
- 		select count(*) from store 
- 		<if test = "type != null and keyword != null">
- 			<![CDATA[
- 			where instr (${type},#{keyword}) > 0
- 			]]>
- 		</if>
- 	</select>
- 	
- 	<insert id="insert"  parameterType="StoreDto">
- 	insert into store 
- 	(
-	 	store_No, 
-		category,
-		dong,
-		gu,
-		seller_No,
-	    store_Name,
-	    store_Call,
-	    store_Post,
-	    store_Address,
-	    store_Detail_Address,
-	    store_Boss_Name ,
-	    store_LikeCount,
-	    store_Content,
-	    store_Lunch_Time,
-	    store_Dinner_Time,
-	    store_Start,
-	    store_End,
-	    store_Reservation_Price)
- 	values(
-		 #{storeNo},
-		 #{category},
-		 #{dong},
-		 #{gu},
-		 #{sellerNo},
-		 #{storeName},
-		 #{storeCall},
-		 #{storePost},
-		 #{storeAddress},
-		 #{storeDetailAddress},
-		 #{storeBossName},
-		 #{storeLikeCount},
-		 #{storeContent},
-		 #{storeLunchTime},
-		 #{storeDinnerTime},
-		 #{storeStart},
-    	 #{storeEnd},
-    	 #{storeReservationPrice}
- 	)
- 	
- 	</insert>
- 	
- 	<update id="update" parameterType="StoreDto">
- 	update store
- 	set
- 	category = #{category},
- 	dong = #{dong},
- 	gu = #{gu},
- 	select_No = #{sellerNo},
- 	store_Name = #{storeName},
- 	store_Call = #{storeCall},
- 	store_Post = #{storePost},
- 	store_Address = #{storeAddress},
- 	store_Detail_Adress = #{storeDetailAddress},
- 	store_Boss_Name = #{storeBossName},
- 	store_Regist_Date = #{storeRegistDate},
- 	store_Likecount = #{storeLikeCount},
- 	store_Content= #{storeContent},
- 	store_Lunch_Time = #{storeLunchTime},
- 	store_Dinner_Time= #{storeDinnerTime},
- 	store_Start = #{storeStart},
- 	store_End = #{storeEnd},
- 	store_Reservation_Price = #{storeReservationPrice}
- 	where
- 	store_No = #{storeNo}
- 	
- 	</update>
-  	
-  	<delete id="delete" parameterType="int">
-  	delete store where store_No = #{storeNo}
-  	
-  	</delete>
+    <select id="sequence" resultType="int">
+       select store_seq.nextval from dual
+    </select>
+    
+    <select id="list" resultType="StoreDto">
+      select * from store order by store_no asc
+   </select>
+    
+    
+    <insert id="insert"  parameterType="StoreDto">
+    insert into store 
+    (
+       store_No, 
+      category,
+      dong,
+      gu,
+      seller_No,
+       store_Name,
+       store_Call,
+       store_Post,
+       store_Address,
+       store_Detail_Address,
+       store_Boss_Name ,
+       store_LikeCount,
+       store_Content,
+       store_Lunch_Time,
+       store_Dinner_Time,
+       store_Start,
+       store_End,
+       store_Reservation_Price)
+    values(
+       #{storeNo},
+       #{category},
+       #{dong},
+       #{gu},
+       #{sellerNo},
+       #{storeName},
+       #{storeCall},
+       #{storePost},
+       #{storeAddress},
+       #{storeDetailAddress},
+       #{storeBossName},
+       #{storeLikeCount},
+       #{storeContent},
+       #{storeLunchTime},
+       #{storeDinnerTime},
+       #{storeStart},
+        #{storeEnd},
+        #{storeReservationPrice}
+    )
+    
+    </insert>
+    
+    <update id="update" parameterType="StoreDto">
+    update store
+    set
+    category = #{category},
+    dong = #{dong},
+    gu = #{gu},
+    select_No = #{sellerNo},
+    store_Name = #{storeName},
+    store_Call = #{storeCall},
+    store_Post = #{storePost},
+    store_Address = #{storeAddress},
+    store_Detail_Adress = #{storeDetailAddress},
+    store_Boss_Name = #{storeBossName},
+    store_Regist_Date = #{storeRegistDate},
+    store_Likecount = #{storeLikeCount},
+    store_Content= #{storeContent},
+    store_Lunch_Time = #{storeLunchTime},
+    store_Dinner_Time= #{storeDinnerTime},
+    store_Start = #{storeStart},
+    store_End = #{storeEnd},
+    store_Reservation_Price = #{storeReservationPrice}
+    where
+    store_No = #{storeNo}
+    
+    </update>
+     
+     <delete id="delete" parameterType="int">
+     delete store where store_No = #{storeNo}
+     
+     </delete>
 
- 	<select id="price" resultType="int" parameterType="int">
- 		select store_reservation_price from store where store_no = #{storeNo}
- 	</select>
+    <select id="price" resultType="int" parameterType="int">
+       select store_reservation_price from store where store_no = #{storeNo}
+    </select>
 
  </mapper>

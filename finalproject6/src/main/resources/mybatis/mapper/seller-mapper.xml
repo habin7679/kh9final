@@ -68,5 +68,51 @@
 	where seller_no = #{sellerNo}
  	
  	</select>
+ 	<select id="adminlist" resultType="SellerMemberVO" parameterType="Map">
+ 		select * from (
+ 			select rownum rn, TMP.* from(
+	 			select * from seller S
+           		 left outer join member M on M.member_no = S.member_no
+	 			<if test="type != null and keyword != null">
+	 				<![CDATA[
+	 				where instr (M.${type},#{keyword}) > 0
+	 				]]>
+	 			</if>
+	 			<!-- 정렬 -->
+	 			order by seller_no desc 
+	 			)
+						TMP 
+ 			) where rn between #{begin} and #{end}
  	
+ 	</select>
+ 	<select id="count" parameterType="Map" resultType="int">
+ 		select count(*) from seller S
+           		 left outer join member M on M.member_no = S.member_no
+ 		<if test = "type != null and keyword != null">
+ 			<![CDATA[
+ 			where instr (M.${type},#{keyword}) > 0
+ 			]]>
+ 		</if>
+ 	</select>
+ 	<update id="edit" parameterType="int">
+ 		update seller set
+ 			seller_type = '완료'
+ 		where seller_no = ${sellerNo}
+ 	</update>
+ 	
+ 	<select id="memberNo" parameterType="int" resultType="int">
+ 		select member_no from seller where seller_no = ${sellerNo}
+ 	</select>
+ 	
+ 	<update id="memberEdit" parameterType="int">
+ 	update member set
+ 			member_kind = '판매자'
+ 		where member_no = ${memberNo}
+ 	</update>
+	<update id="cancel" parameterType="int">
+	update seller set
+	seller_type = '취소'
+	where seller_no = ${sellerNo}
+	</update>
+	
  </mapper>
