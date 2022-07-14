@@ -24,21 +24,21 @@
           </div>
 
 	<div class="row mt-2">
-		<div class="col-md-8 offset-md-2">
-			<table class="table table-bordered rounded">
+		<div class="col-md-6 offset-md-3">
+			<table class="table rounded  table-striped">
 				<thead class="text-center">
 					<tr>
-						<th>정기결제 등록명</th>
+						<th class="left-rounded">정기결제 등록명</th>
 						<th>사업자명</th>
 						<th>정기결제 시작일</th>
 						<th>정기결제 가격(월)</th>
 						<th>결제 변경</th>
-						<th>취소</th>
+						<th class="right-rounded">취소</th>
 					</tr>
 				</thead>
 				<tbody class="text-center">
 					<tr v-for="(regularPayment,index) in regularPaymentList"
-						v-bind:key="index">
+						v-bind:key="index" style="background:var(--color-primary); color:#fff;">
 						<td>{{regularPayment.regularPaymentName}}</td>
 						<td>{{regularPayment.regularPaymentUserId}}</td>
 						<td>{{regularPayment.regularPaymentTime}}</td>
