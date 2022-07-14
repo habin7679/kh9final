@@ -89,5 +89,10 @@ public class NoticeDaoImpl implements NoticeDao{
 		return count > 0;
 	}
 
+	@Override
+	public List<NoticeDto> noticeList() {
+		return sqlSession.selectList("notice.noticeList");
+	}
+
 
 }
