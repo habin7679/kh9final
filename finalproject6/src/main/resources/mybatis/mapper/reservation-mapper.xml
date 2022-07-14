@@ -70,4 +70,19 @@
 		update reservation set reservation_visit_state = 1 where reservation_no = #{reservationNo}
 	</update>
 
+
+	<select id="myReservation" resultType="MyReservationVO" parameterType="int">
+	select
+	R.reservation_date, R.reservation_people, R.reservation_time,
+	M.member_name, M.member_phone, M.member_nick, R.reservation_price,
+	R.reservation_visit_state, P.payment_no, S.store_name,
+	R.reservation_content,
+	s.store_address, s.store_post, s.store_detail_address
+	from reservation R 
+	    left outer join member M on M.member_no = R.member_no
+	    left outer join store S on R.store_no = S.store_no
+	    left outer join payment P on P.reservation_no = R.reservation_no 
+	    where R.member_no = ${memberNo} and R.reservation_status = '완료' and P.payment_status = '완료' and r.reservation_visit_state = 0
+	order by reservation_date desc
+	</select>
 </mapper>
