@@ -12,7 +12,7 @@
 /* 버튼 */
 .btn1{
   font-size: 14px;
- color: white !important;
+  color: white !important;
   background: var(--color-primary);
   padding: 8px 20px;
   transition: 0.3s;
