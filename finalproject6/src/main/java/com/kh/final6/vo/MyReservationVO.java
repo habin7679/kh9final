@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class MyReservationVO {
 
 	private String memberName;
+	private String memberNick;
 	private String memberPhone;
 	private String memberId;
 	private String reservationTime;
