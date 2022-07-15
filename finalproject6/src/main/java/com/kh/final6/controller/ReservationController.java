@@ -1,10 +1,12 @@
 package com.kh.final6.controller;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import com.kh.final6.repository.PaymentDao;
 import com.kh.final6.repository.ReservationDao;
 import com.kh.final6.repository.SellerDao;
 import com.kh.final6.repository.StoreDao;
+import com.kh.final6.service.EmailService;
 import com.kh.final6.service.KakaoPayService;
 import com.kh.final6.service.PaymentService;
 import com.kh.final6.service.ReservationService;
@@ -61,7 +64,9 @@ public class ReservationController {
 	private PaymentService paymentService;
 	@Autowired
 	private SellerDao sellerDao;
-
+	@Autowired
+	private EmailService emailService;
+	
 	
 	@GetMapping("/")
 	public String reservation(
@@ -137,7 +142,7 @@ public class ReservationController {
 	
 	
 	@GetMapping("/pay/approve")
-	public String paySuccess(@RequestParam String pg_token, HttpSession session) throws URISyntaxException {
+	public String paySuccess(@RequestParam String pg_token, HttpSession session) throws URISyntaxException, MessagingException, IOException {
 
 		KakaoPayApproveRequestVO requestVO = (KakaoPayApproveRequestVO)session.getAttribute("pay");
 		session.removeAttribute("pay");
@@ -155,6 +160,9 @@ public class ReservationController {
 		
 		
 		paymentService.insert(paymentNo, responseVO, paymentNoList);
+		
+		emailService.sendReservationInfo(paymentNo);
+		
 		
 		
 		return "redirect:/reservation/pay/finish";

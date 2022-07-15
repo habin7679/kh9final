@@ -18,5 +18,6 @@ public interface ReservationDao {
 
 	List<MyReservationVO> myReservation(int memberNo);
 
+	MyReservationVO myReservationInfo(int paymentNo);
 	
 }
