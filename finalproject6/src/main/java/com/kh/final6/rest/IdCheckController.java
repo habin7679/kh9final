@@ -32,6 +32,17 @@ public class IdCheckController {
 	return "000"; 
 }
 
+	@GetMapping("/nickcheck/{memberNick}")
+	public String  nickCheck(@PathVariable String memberNick) {
+		
+	MemberDto memberDto = memberDao.nickcheck(memberNick);
+	
+	if(memberDto == null){
+		return "2222";
+	}
+		return "3333";
+		
+	}
 
 
 }

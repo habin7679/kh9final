@@ -248,11 +248,26 @@
                    this.pwAgainClassObject["is-valid"] = this.member.memberPw == this.member.memberPwAgain;
                    this.pwAgainClassObject["is-invalid"] = !(this.member.memberPw == this.member.memberPwAgain);
                 },
-
+					
                 nickValidation(){
-                    this.nickClassObject["is-valid"] = this.member.memberNickValid;
-                    this.nickClassObject["is-invalid"] = !this.member.memberNickValid;
-                },
+                        	this.nickClassObject["is-valid"] = this.member.memberNickValid;
+                            if(this.member.memberNickValid){
+                                axios.get("${pageContext.request.contextPath}/rest/member/nickcheck/"+this.member.memberNick)
+                             .then(resp=>{
+                            	 console.log(resp.data);
+                                 if(resp.data == "2222"){
+                                     this.nickClassObject["is-valid"] = true;
+                                     this.nickClassObject["is-invalid"] = false;     
+                                 } else{
+                                	this.nickClassObject["is-valid"] = false;
+                                    this.nickClassObject["is-invalid"] = true;                	 
+                                 }
+                             
+                            });
+                            
+                            }
+                            this.nickClassObject["is-invalid"] = !this.member.memberNickValid;
+                        },
 
                 nameValidation(){
                     this.nameClassObject["is-valid"] = this.member.memberNameValid;

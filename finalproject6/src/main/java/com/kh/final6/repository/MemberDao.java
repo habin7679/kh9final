@@ -24,6 +24,8 @@ public interface MemberDao {
 	
 	MemberDto edit(MemberDto memberDto);
 	MemberDto idcheck(String memberId);
+	MemberDto nickcheck(String memberNick);
+	
 	
 	
 }

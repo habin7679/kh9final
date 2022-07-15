@@ -161,7 +161,12 @@ public class MemberDaoEncryption implements MemberDao{
 		@Override
 		public MemberDto idcheck(String memberId) {
 		return sqlSession.selectOne("member.idcheck", memberId);
+		}
 		
+		//nick 중복검사
+		@Override
+		public MemberDto nickcheck(String memberNick) {
+			return sqlSession.selectOne("member.nickcheck", memberNick);
 		}
 }
 
