@@ -56,7 +56,7 @@
 						placeholder="" class="form-control me-1" autocomplete="off"
 						v-bind:class="nameClassObject" v-model="member.memberName"
 						v-on:blur="nameValidation">
-					<div class="valid-feedback">합격</div>
+					<div class="valid-feedback"></div>
 					<div class="invalid-feedback">한글만 입력이 가능합니다</div>
 				</div>
 
@@ -302,3 +302,4 @@
     </script>
 
 </html>
+  <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
