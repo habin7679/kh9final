@@ -141,31 +141,31 @@
                         
                         get memberIdValid(){
                             const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                            return regex.test(this.memberId);
+                            return this.memberId.length > 0 && regex.test(this.memberId);
                         },
                         get memberPwValid(){
                             const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%])[A-Za-z0-9!@#$%]{8,16}$/;
-                            return regex.test(this.memberPw);
+                            return this.memberPw.length > 0 && regex.test(this.memberPw);
                         },
 
                         get memberNameValid(){
                             const regex = /^[가-힣]{2,7}$/;
-                            return regex.test(this.memberName);
+                            return this.memberName.length > 0 && regex.test(this.memberName);
                         },
 
                         get memberNickValid(){
                             const regex = /^[가-힣0-9]{2,10}$/;
-                            return regex.test(this.memberNick)
+                            return this.memberNick.length > 0 && regex.test(this.memberNick)
                         },
 
                         get memberPhoneValid(){
                             const regex = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/; 
-                            return regex.test(this.memberPhone);
+                            return this.memberPhone.length > 0 && regex.test(this.memberPhone);
                         },
 
                         get memberBirthValid(){
                             const regex = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; 
-                            return regex.test(this.memberBirth);
+                            return this.memberBirth.length > 0 && regex.test(this.memberBirth);
                         },
 
 
@@ -286,8 +286,10 @@
                 
 
                 sendForm(e){
-                    if(this.isForm)
+                    if((this.member. memberIdValid && this.member.memberPwValid && this.member.memberNameValid &&
+                    	this.member.memberNickValid && this.member.memberPhoneValid && this.member.memberBirthValid) == false){
                     e.preventDefault();
+                    }
                 },
 				
                 

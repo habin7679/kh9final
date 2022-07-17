@@ -65,7 +65,7 @@ color:#fff;
 		<%-- 에러 표시가 있는 경우 메세지를 출력 --%>
 		<c:if test="${param.error != null}">
 		<div class="row center">
-			<h3 style="color:red;">로그인 정보가 일치하지 않습니다</h3>	
+			<h3 style="color:red;" class="mt-2 offset-md-3">로그인 정보가 일치하지 않습니다</h3>	
 		</div>
 		</c:if>
     </div>
