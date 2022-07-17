@@ -95,4 +95,9 @@ public class RegularPaymentDaoImpl implements RegularPaymentDao {
 		}
 		
 	}
+	
+	@Override
+	public int getSellerNo(int regularpaymentNo) {
+		return sqlSession.selectOne("regularPayment.sellerNo", regularpaymentNo);
+	}
 }

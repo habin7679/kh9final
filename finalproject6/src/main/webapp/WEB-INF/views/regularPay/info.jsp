@@ -27,7 +27,7 @@
 		<div class="col-md-6 offset-md-3">
 			<table class="table rounded  table-striped">
 				<thead class="text-center">
-					<tr>
+					<tr style="background:var(--color-primary); color:#fff;">
 						<th class="left-rounded">정기결제 등록명</th>
 						<th>사업자명</th>
 						<th>정기결제 시작일</th>
@@ -38,12 +38,12 @@
 				</thead>
 				<tbody class="text-center">
 					<tr v-for="(regularPayment,index) in regularPaymentList"
-						v-bind:key="index" style="background:var(--color-primary); color:#fff;">
+						v-bind:key="index" >
 						<td>{{regularPayment.regularPaymentName}}</td>
 						<td>{{regularPayment.regularPaymentUserId}}</td>
-						<td>{{regularPayment.regularPaymentTime}}</td>
+						<td>{{convertTime(regularPayment.regularPaymentTime)}}</td>
 						<td>{{regularPayment.regularPaymentPrice}}</td>
-						<td><a v-bind:href="linkIndex(index)"><i
+						<td><a @click="change" v-bind:href="linkIndex(index)"><i
 								class="fa-solid fa-money-check-dollar"></i></a></td>
 						<td><i class="fa-solid fa-rectangle-xmark"
 							@click="cancelRegularPayment(index)"></i></td>
@@ -102,13 +102,17 @@
               },
 
               convertTime(time){
-              	return moment(time).format('YYYY-MM-DD hh:mm:ss');
-              },
+                	return moment(time).format('YYYY-MM-DD');
+                },
 
               
               linkIndex(index){
-            	  const regularPayment = this.regularPaymentList[index]
-                  return this.link = "${pageContext.request.contextPath}/changePay/change/"+regularPayment.regularPaymentNo
+            	  const regularPayment = this.regularPaymentList[index];
+                  return this.link = "${pageContext.request.contextPath}/changePay/change/"+regularPayment.regularPaymentNo;
+              },
+              change(){
+            	  const choice = window.confirm(" 정기결제 방법 변경시 변경된 카드로 0원이 결제 됩니다. \n 정기 결제일은 결제방법 변경일과 매달 같은 일에  결제됩니다. \n 결제방법을 변경하시겠습니까?")
+  		          if(!choice) return;
               }
             },
              //watch : 특정 data를 감시하여 연계 코드를 실행하기 위해 작성한다

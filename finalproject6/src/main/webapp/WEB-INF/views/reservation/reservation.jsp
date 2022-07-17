@@ -3,6 +3,48 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>  경량형!-->
+
+    <style>
+        .btn_bg{
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 10px;
+            width: 70px;
+            height: 35px;
+            font-size: 15px;
+        }
+        .checkBtn {
+            border: 4px solid #CE1212;
+            background-color: #CE1212;
+            color: white;
+        }
+        #lunch{
+            display: none;
+        }
+        #dinner{
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $(".dinner_btn").click(function () {
+                $(".rad1").attr("checked", false)
+                $(".lunch_btn").removeClass("checkBtn")
+                $(".dinner_btn").addClass("checkBtn");
+                $(".rad2").attr("checked", true)
+            });
+
+            $(".lunch_btn").click(function () {
+                $(".rad2").attr("checked", false)
+                $(".dinner_btn").removeClass("checkBtn")
+                $(".lunch_btn").addClass("checkBtn");
+                $(".rad1").attr("checked", true)
+            });
+        })
+    </script>
+
 <div class="container ma-t-100" data-aos="fade-up" id="app"> 
 
           <div class="section-header mt-4" >
@@ -27,14 +69,14 @@
               <form action="insert" method="post" class="php-email-form" data-aos="fade-up"data-aos-delay="100">
                 <div class="row">
                   <div class="col-lg-4 col-md-6">
-                    <input type="radio" name=reservationTime value="${storeDto.storeLunchTime }">
-                    <label>${storeDto.storeLunchTime }</label>
-                    <div class="validate">점심</div>
-                  </div>
-                  <div class="col-lg-4 col-md-6">
-                   <input type="radio"name=reservationTime value="${storeDto.storeDinnerTime }">
-                   <label>${storeDto.storeDinnerTime }</label>
-                    <div class="validate">저녁</div>
+			        <input type="radio" name=reservationTime value="${storeDto.storeLunchTime}" id="lunch" class="rad1">
+			        <label for="lunch"><button type="button" class="lunch_btn btn_bg">${storeDto.storeLunchTime}</button></label>
+			        <div class="validate">점심</div>
+			    </div>
+			    <div class="col-lg-4 col-md-6">
+			        <input type="radio" name=reservationTime value="${storeDto.storeDinnerTime}" id="dinner" class="rad2">
+			        <label for="dinner"><button type="button" class="dinner_btn btn_bg">${storeDto.storeDinnerTime}</button></label>
+			        <div class="validate">저녁</div>
                   </div>
                   <div class="col-lg-4 col-md-6">
                   </div>
