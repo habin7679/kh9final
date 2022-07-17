@@ -36,8 +36,8 @@ public class SellerDaoImpl implements SellerDao{
 	}
 	
 @Override
-	public int getSellerNo(int memberNo) {
-		return sqlSession.selectOne("seller.sellerNo", memberNo);
+	public int getSellerNo(int storeNo) {
+		return sqlSession.selectOne("seller.sellerNo", storeNo);
 	}
 
 @Override

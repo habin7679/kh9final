@@ -42,7 +42,7 @@ public class KakaoPayRegularServiceImpl implements KakaoPayRegularService {
 	@Value("${kakaopay.contentType}")
 	private String contentType;
 
-	@Value("${kakaopay.cid}")
+	@Value("${kakaoPay.regularCid}")
 	private String cid;
 
 	@Override
