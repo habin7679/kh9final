@@ -288,7 +288,7 @@
                 });
             },
             changeTime(index){
-            	return moment(index).format('YYYY-MM-DD hh:mm');
+            	return moment(index).format('YYYY-MM-DD HH:mm');
             },
             
             linkIndex(index){

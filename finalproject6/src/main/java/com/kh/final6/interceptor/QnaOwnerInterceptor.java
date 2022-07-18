@@ -1,5 +1,7 @@
 package com.kh.final6.interceptor;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,12 +22,13 @@ public class QnaOwnerInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String memberKind = (String)request.getSession().getAttribute("auth");
-		Integer memberNo = (Integer)request.getSession().getAttribute("no");
+		int memberNo = (Integer)request.getSession().getAttribute("no");
 		int qnaNo = Integer.parseInt(request.getParameter("qnaNo"));
 		
 		QnaDto qnaDto = qnaDao.one(qnaNo);
+		List<Integer> list = qnaDao.reList(memberNo);
 		
-		if(memberKind.equals("관리자")|| memberNo == qnaDto.getMemberNo()) {
+		if(memberKind.equals("관리자")|| memberNo == qnaDto.getMemberNo() || list.contains(qnaDto.getGroupNo())) {
 			return true;
 		}
 		else {

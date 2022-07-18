@@ -72,4 +72,8 @@
  		delete qna where qna_no =#{qnaNo}
  	</delete>
  	
+ 	<select id="reOne" parameterType="int" resultType="Integer">
+ 		select group_no from qna where member_no = #{memberNo}
+ 	</select>
+ 	
  </mapper>
