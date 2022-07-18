@@ -35,8 +35,8 @@ public ReviewDto one(int reviewNo) {
 
 
 	@Override
-	public boolean update(ReviewDto reviewDto) {
-		int count = sqlSession.update("review.update",reviewDto);
+	public boolean edit(ReviewDto reviewDto) {
+		int count = sqlSession.update("review.edit",reviewDto);
 		return count > 0;
 		
 	}

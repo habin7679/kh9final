@@ -19,4 +19,5 @@ public interface RegularPaymentDao {
 	void delete(int regularPaymentNo);
 	RegularPaymentDto listAll(int regularPaymentNo);
 	void update(KakaoPayRegularApproveResponseVO responseVO, int regularPaymentNo);
+	int getSellerNo(int regularpaymentNo);
 }

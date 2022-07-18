@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberProfileDao memberProfileDao;
+	
 	
 	@Autowired
 	private MemberService memberService;
@@ -96,6 +98,8 @@ public class MemberController {
 		return "member/login"; 
 	}	
 	
+	
+	
 	@PostMapping("/login")
 	public String login(
 			
@@ -105,7 +109,11 @@ public class MemberController {
 			@RequestParam(required=false) String remember,
 			HttpSession session, 
 			HttpServletResponse response) {
+		
 		MemberDto memberDto = memberDao.login( memberId, memberPw);
+		
+		
+		
 		if(memberDto != null) {//로그인 성공
 			//세션
 			
@@ -114,6 +122,16 @@ public class MemberController {
 			session.setAttribute("auth", memberDto.getMemberKind());
 			session.setAttribute("nick", memberDto.getMemberNick());
 		
+			//판매자 번호
+			if(memberDto.getMemberKind()=="판매자") {
+				int sellerNo = sellerDao.getSellerNo(memberDto.getMemberNo());
+				session.setAttribute("sellerNo", sellerNo);
+			}
+				
+				
+			
+			
+			
 			//쿠키
 			if(remember != null) {//체크하고 로그인 했으면 -> 쿠키 발행
 				Cookie ck = new Cookie("saveId", memberDto.getMemberId());
@@ -377,10 +395,7 @@ public class MemberController {
 		model.addAttribute("keyword",keyword);
 		model.addAttribute("lastPage", lastPage);
 		return "member/list";
-		
-		
 	
-		
 	}
 	
 	//챗봇 메세지 관리 페이지

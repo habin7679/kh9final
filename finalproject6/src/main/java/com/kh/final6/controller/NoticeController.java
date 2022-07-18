@@ -60,6 +60,9 @@ public class NoticeController {
 		List<NoticeDto> list = noticeDao.list(type,keyword,p,s, column, order);
 		model.addAttribute("list",list);
 		
+		List<NoticeDto> noticeList = noticeDao.noticeList();
+		model.addAttribute("noticeList",noticeList);
+		
 		boolean search = type != null && keyword != null;
 		model.addAttribute("search",search);
 		
@@ -148,7 +151,9 @@ public class NoticeController {
 						RedirectAttributes attr) throws IllegalStateException, IOException {
 		int memberNo= (Integer)session.getAttribute("no");
 		String memberId = (String)session.getAttribute("login");
+		
 		MemberDto memberDto = memberDao.info(memberId);
+		
 		noticeDto.setMemberNo(memberNo);
 		noticeDto.setNoticeWriter(memberDto.getMemberNick());
 		

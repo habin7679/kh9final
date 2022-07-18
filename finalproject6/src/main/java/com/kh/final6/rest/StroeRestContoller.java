@@ -4,6 +4,7 @@ package com.kh.final6.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,55 +21,97 @@ import com.kh.final6.entity.RoomDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.repository.RoomDao;
 import com.kh.final6.repository.StoreDao;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rest/store")
 
 public class StroeRestContoller {
-   @Autowired
-   private StoreDao storeDao;
-   
-   @Autowired
-   private RoomDao roomDao;
-   
-   @GetMapping("/")
-   public List<StoreDto> list(){
-      return storeDao.list();
-   }
-   
-   @GetMapping("/{storeNo}")
-   public StoreDto one(@PathVariable int storeNo){
-      System.out.println("스토어 넘버"+storeNo);
-      return storeDao.one(storeNo);
-   }
-   //@PostMapping("/")
-//   public StoreDto insert(@RequestBody StoreDto storeDto) {
-//      return storeDao.insert(storeDto);
-//   }
-   
-   @PutMapping("/")
-   public StoreDto update(@RequestBody StoreDto storeDto) {
-      return storeDao.update(storeDto);
-   }
-   
-   @DeleteMapping("/{storeNo}")
-   public void deletie(@PathVariable int storeNo) {
-      storeDao.delete(storeNo);
-   }
-   
-   
- 
-   
-   
-//   @GetMapping("/bar")
-//   public List<BarDto> barlist(){
-//      return barDao.list();
-//   }
-//   
-//   @GetMapping("/store/{storeNO}")
-//   public List<StoreDto> selectone(@PathVariable int storeNo){
-//      return storeDao.one(storeNo);
-//   }
+	@Autowired
+	private StoreDao storeDao;
+	private StoreDto storeDto;
+	@Autowired
+	private RoomDao roomDao;
+	
+	@GetMapping("/")
+	public List<StoreDto> list(){
+		return storeDao.list();
+	}
+	
+	
+	@GetMapping("/{storeNo}")
+	public StoreDto one(@PathVariable int storeNo){
+		System.out.println("스토어 넘버"+storeNo);
+		return storeDao.one(storeNo);
+	}
+	//@PostMapping("/")
+//	public StoreDto insert(@RequestBody StoreDto storeDto) {
+//		return storeDao.insert(storeDto);
+//	}
+	
+	@PutMapping("/")
+	public StoreDto update(@RequestBody StoreDto storeDto) {
+		return storeDao.update(storeDto);
+	}
+	
+	@DeleteMapping("/{storeNo}")
+	public void deletie(@PathVariable int storeNo) {
+		storeDao.delete(storeNo);
+	}
+	
+	
+	@GetMapping("/room")
+	public List<RoomDto> roomlist(){
+		return roomDao.list();
+	}
+	@DeleteMapping("/room/{storeNo}")
+	public void roomdelete(@PathVariable int storeNo) {
+		roomDao.delete(storeNo);
+	}
+	@PostMapping("/room")
+	public RoomDto insert(@RequestBody RoomDto roomDto) {
+		roomDto.setStoreNo(storeDto.getStoreNo());
+		return roomDao.insert(roomDto);
+	}
+	
+	@PutMapping("/room")
+	public RoomDto update(@RequestBody RoomDto roomDto) {
+		return roomDao.update(roomDto);
+	}
+//	
+//	@GetMapping("/bar")
+//	public List<BarDto> barlist(){
+//		return barDao.list();
+//	}
+//	@DeleteMapping("/bar/{storeNo}")
+//	public void bardelete(@PathVariable int storeNo) {
+//		barDao.delete(storeNo);
+//	}
+//	@PostMapping("/bar")
+//	public barDto insert(@RequestBody BarDto barDto) {
+//		barDto.setStoreNo(storeDto.getStoreNo());
+//		return barDao.insert(barDto);
+//	}S
+//	
+//	@PutMapping("/bar")
+//	public barDto update(@RequestBody BarDto barDto)bar {
+//		return barDao.update(barDto);
+//	}
+//	
+	
+	
+	
+	
+	
+	
+//	@GetMapping("/bar")
+//	public List<BarDto> barlist(){
+//		return barDao.list();
+//	}
+//	
+//	@GetMapping("/store/{storeNO}")
+//	public List<StoreDto> selectone(@PathVariable int storeNo){
+//		return storeDao.one(storeNo);
+//	}
 
-   
+	
 }

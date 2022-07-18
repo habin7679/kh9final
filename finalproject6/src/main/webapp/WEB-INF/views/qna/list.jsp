@@ -2,7 +2,13 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<style>
+/* 	 table tr:first-child th:first-child {border-top-left-radius: 1em} */
+/*          table tr:first-child th:last-child {border-top-right-radius: 1em} */
+/*          table tr:last-child td:first-child {border-bottom-left-radius: 1em} */
+/*          table tr:last-child td:last-child {border-bottom-right-radius: 1em} */
+/*          table tr:last-child td {border:none} */
+</style>
 
     <div class="container ma-t-100">
 
@@ -41,7 +47,7 @@
                     </thead>
                     <tbody class="text-center">
                     	<c:forEach var="qnaDto" items="${list}">
-	                        <tr>
+	                        <tr class="normal-font">
 	                            <td>${qnaDto.qnaNo}</td>
 	                            <td style="text-align: left !important">
 	                            <c:if test="${qnaDto.depth > 0}">
@@ -321,7 +327,7 @@
 						<option value="qna_writer" <c:if test="${type == 'qna_writer'}">selected</c:if>>작성자</option>
                     </select>
                 <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" style="width:50%;" autocomplete="off">
-                <input type="submit" value="검색" class="btn btn-outline-danger" style="width:15%;">
+                <input type="submit" value="검색" class="btn-s" style="width:15%;">
                </div>
                </form>
                </div>

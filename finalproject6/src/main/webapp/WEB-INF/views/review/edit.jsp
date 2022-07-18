@@ -1,67 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상세페이지</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <!-- include libraries(jQuery, bootstrap) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- include summernote css/js -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-    </style>
-</head>
-<body>
+<style>
+        .passSpace{
+            word-break: break-all;
+        }
+        .fa-cursor{
+            cursor: pointer;
+        }
+        .a{
+            border-collapse: separate;           
+        }
+        
+        .d{
+            border-bottom-left-radius: 1em;
+            border-bottom-right-radius: 1em;
+        }
+        .e{
+            border-top-left-radius: 1em;
+            border-top-right-radius: 1em;
+        }
 
-<form action="edit" method="post" enctype="multipart/form-data">
- 			<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}"> 
-	        <input type="hidden" name="memberNo" value="${memberDto.memberNo}"> 
-	        <input type="hidden" name="storeNo" value="${storeDto.storeNo}"> 
-	        <input type="hidden" name="reviewWriter" value="${reviewDto.reviewWriter}"> 
-
-        <div class="container-fluid">
-            <div class="row center">
-                <h1>리뷰 수정</h1>
-            </div>
-          
-
-           
-
-            <div class="row">
-                <label>내용</label>
-                <textarea name="reviewContent" required 
-                class="textarea form-input fill" rows="12">${reviewDto.reviewContent}</textarea>
-               
-               <label>리뷰번호</label>
-                <textarea name="reviewContent" required 
-                class="textarea form-input fill" rows="12">${reviewDto.reviewNo}</textarea>
-               
-                  <label>멤버번호</label>
-                <textarea name="reviewContent" required 
-                class="textarea form-input fill" rows="12">${memberDto.memberNo}</textarea>
-               
-                <label>가게번호</label>
-                <textarea name="reviewContent" required 
-                class="textarea form-input fill" rows="12">${storeDto.storeNo}</textarea>
-               <label>글쓴이</label>
-                <textarea name="reviewContent" required 
-                class="textarea form-input fill" rows="12">${reviewDto.reviewWriter}</textarea>
-               
-               
-               
-               
-                <div class="row mt-2">
- 			<div class="col-md-4 offset-md-1">
- 				<input type="file" name="reviewImg" accept=".jpg, .png, .gif, .pdf, .ppt, .txt, .hwp">
- 			</div>
- 		</div>
-                
-                
-                
-            </div>
-              <div class="row">
+        .tb-color{
+            background-color: #f1f2f6;
+        }
+       .circle-head{
+        background-color: #57606f;
+        border-radius: 1.2em;
+        color: white;
+        padding: 0.5em;
+        font-size: 14px;
+       }
+       .title-size{
+        font-size: 22px;
+       }
+     </style>
+        
+ <script>
+ $(function(){
+     $("textarea[name=reviewContent]").summernote({
+         height: 350
+         });
+     
+     console.log($("#ckb").val());
+    
+     $("input[type=checkbox]").on("input",function(){
+ 		if($(this).is(":checked") ==true){
+ 			$(this).val(1);
+ 			console.log($(this).val());
+ 		}
+ 		else{
+ 			$(this).val(0);
+ 			console.log($(this).val());
+ 		}
+ 	});
+   
+ });
+</script>
+     
+ <div id="app" class="container ma-t-100">
+ 	
+ 	<div class="section-header mt-4 col-md-6 offset-md-3" >
+            <h2>review</h2>
+            <p><span>리뷰</span> 게시판</p>
+            <h2>리뷰확인하세요.</h2>
+       	</div>
+ 
+ 	<form action="edit" method="post" enctype="multipart/form-data">
+ 	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
+ 	<div class="mt-5">
+ 		<div class="col-md-6 offset-md-3 tb-color rounded">
+	
+ 	<div class="row mt-2">
+	<div class="col-md-10 offset-md-1">
+		<textarea name="reviewContent">${reviewDto.reviewContent}</textarea>
+	</div>
+ 	</div>
+ 	
+    <div>
 	        <label>평점</label> <br>
 	        <input type="radio" name="reviewScore" value="1" checked required class="form-input fill input-round">1점
 			<input type="radio" name="reviewScore" value="2" required class="form-input fill input-round">2점
@@ -70,17 +94,99 @@
 			<input type="radio" name="reviewScore" value="5"required class="form-input fill input-round">5점   
 	   
     </div>
-
-            <div class="row right">
-                <input type="submit" value="수정" class="btn btn-success">
-                <a href="#" class="btn btn-secondary">취소하기</a>
-            </div>
-        </div>
-    </form>
-    <!--lazy loading 배치 - 기능은 다소 늦게 돌아가지만 화면을 먼저 띄울 수 있다 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script>
-
+ 	<c:if test="${attachmentDto != null }">
+ 		<div class="row mt-2" v-if="!isNoneAttach" >
+ 			<div class="col-md-4 offset-md-1">
+ 				<span>{{attachmentName}}</span>
+ 				<button type="button" class="btn0" @click="deleteAttach">삭제</button>
+ 			</div>
+ 		</div>
+ 	</c:if>	
+ 	
+ 	<div class="row mt-2">
+ 			<div class="col-md-4 offset-md-1">
+ 				<input type="file" name="reviewImg" accept=".jpg, .png, .gif, .pdf, .ppt, .txt, .hwp">
+ 			</div>
+ 		</div>
+	 	
+ 		<div class="row mt-2">
+ 			<div class="col-md-6 offset-md-3 text-center">
+	 			<input type="submit" value="수정" class="btn1">
+	 			<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${reviewDto.reviewNo}" class="btn0">취소</a>
+ 			</div>
+ 		</div>
+ 		
+ 		</div>
+ 	</div>
+    </form>    
+    </div>
+ 
+ <script src="https://unpkg.com/vue@next"></script>
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+ <c:if test="${attachmentDto != null }">
+ <script>
+        //div[id=app]을 제어할 수 있는 Vue instance를 생성
+        const app = Vue.createApp({
+            //data : 화면을 구현하는데 필요한 데이터를 작성해둔다
+            data(){
+                return {
+                   attachmentNo:${attachmentDto.attachmentNo},
+                   attachmentName:"",
+                };
+            },
+            
+            computed:{
+				isNoneAttach(){
+					return this.attachmentNo == 0 || this.attachmentNo == null;
+				},
+				
+				
+            },
+            
+             methods:{
+               deleteAttach(){
+            	   if(this.attachmentNo == null) return;
+            	   
+            	   let choice = window.confirm("정말 삭제하시겠습니까?");
+            	   if(!choice) return;
+            	   
+            	   axios({
+            		   url:"${pageContext.request.contextPath}/rest/reviewAttach/"+this.attachmentNo,
+            		   method:"delete",
+            	   })
+            	   .then(resp=>{
+            		   this.loadAttach();
+            	   });
+               },
+               
+               loadAttach(){
+            	   if(this.attachmentNo == null) return;
+            	   
+            	   axios({
+            		 url:"${pageContext.request.contextPath}/rest/reviewAttach/"+this.attachmentNo,
+            		 method:"get",
+            		 
+            	   })
+            	   .then(resp=>{
+            		   console.log(resp);
+            		   this.attachmentName = resp.data.attachmentUploadname;
+            	   });
+               },
+               
+            },
+            
+            created(){
+            	this.loadAttach();
+            },
+            
+             watch:{
+               
+            },
+        });
+        app.mount("#app");
     </script>
-</body>
-</html>
+</c:if> 
+
+    
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

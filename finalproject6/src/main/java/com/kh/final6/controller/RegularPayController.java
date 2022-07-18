@@ -69,7 +69,7 @@ public class RegularPayController {
 		StoreDto storeDto = storeDao.one(storeNo);
 		MemberDto memberDto = memberDao.oneNo(memberNo);
 		int regularPaymentNoSequence = regularPaymentDao.sequence();
-		int sellerNo = sellerDao.getSellerNo(memberNo);
+		int sellerNo = sellerDao.getSellerNo(storeNo);
 		KakaoPayRegularReadyRequestVO requestVO =
 										KakaoPayRegularReadyRequestVO.builder()
 											.item_name(storeDto.getStoreName()+"-"+ memberDto.getMemberName())
@@ -118,16 +118,20 @@ public class RegularPayController {
 		requestVO.setPg_token(pg_token);
 		KakaoPayRegularApproveResponseVO responseVO = 
 				kakaoPayRegularService.approve(requestVO);
+		log.error("@@@@@@@@@@@@@@@@responseVO = {}", responseVO);
 		
 		regularPaymentDao.insert(regularpaymentNo,responseVO, sellerNo, storeNo);
 //		paymentService.insert(paymentNo, responseVO, paymentNoList);
 		
-		
+		session.setAttribute("sellerNo", sellerNo);
 		return "redirect:/regularPay/payfinish";
 	}
 
 		@GetMapping("/payfinish") //성공
-		public String payFinish()	{
+		public String payFinish(HttpSession session, Model model)	{
+			int sellerNo = (int)session.getAttribute("sellerNo");
+			session.removeAttribute("sellerNo");
+			model.addAttribute("sellerNo", sellerNo);
 			return "regularPay/payFinish";
 		}
 		

@@ -4,13 +4,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 <style>
-	.circle-head{
-        background-color: #57606f;
-        border-radius: 1.2em;
-        color: white;
-        padding: 0.5em;
-        font-size: 10px;
-       }
 </style>
     <div class="container ma-t-100">
 
@@ -50,13 +43,36 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                    	<c:forEach var="noticeDto" items="${list}">
-	                        <tr>
+                    <!-- 상단 고정 게시글 보기 -->
+                    	<c:forEach var="noticeDto" items="${noticeList}">
+	                        <tr style="background-color: #fef4f2;" class="fix-font">
 	                            <td>${noticeDto.noticeNo}</td>
 	                            <td style="text-align: left !important">
 	                            <c:if test="${noticeDto.pin==1}">
 		                    	<span class="circle-head">중요</span>
 		                    	</c:if> 
+	                            <a href="detail?noticeNo=${noticeDto.noticeNo}">
+	                           	<!-- 말머리 -->
+		                            <c:if test="${noticeDto.noticeHead != null}">
+		                            	[${noticeDto.noticeHead}]
+		                            </c:if>
+	                            	${noticeDto.noticeTitle}
+	                            </a>
+	                            </td>
+	                            <td>${noticeDto.noticeWriter}</td><!-- 작성자 닉네임 클릭 시 쪽지 -->
+	                            <td>${noticeDto.noticeTime}</td>
+	                            <td>${noticeDto.noticeReadcount }</td>
+	                        </tr>
+                        </c:forEach>
+                    
+                    <!-- 일반 게시글 목록 -->
+                    	<c:forEach var="noticeDto" items="${list}">
+	                        <tr class="normal-font">
+	                            <td>${noticeDto.noticeNo}</td>
+	                            <td style="text-align: left !important">
+<%-- 	                            <c:if test="${noticeDto.pin==1}"> --%>
+<!-- 		                    	<span class="circle-head">중요</span> -->
+<%-- 		                    	</c:if>  --%>
 	                            <a href="detail?noticeNo=${noticeDto.noticeNo}">
 	                           	<!-- 말머리 -->
 		                            <c:if test="${noticeDto.noticeHead != null}">
@@ -327,7 +343,7 @@
 						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
                     </select>
                 <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" style="width:50%;" autocomplete="off">
-                <input type="submit" value="검색" class="btn btn-outline-danger" style="width:15%;">
+                <input type="submit" value="검색" class="btn-s" style="width:15%;">
                </div>
                </form>
                </div>

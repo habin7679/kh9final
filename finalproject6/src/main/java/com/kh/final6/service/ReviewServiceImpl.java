@@ -31,4 +31,13 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		return reviewNo;
 	}
+
+	@Override
+	public void edit(ReviewDto reviewDto, MultipartFile reviewImg) throws IllegalStateException, IOException {
+		if(!reviewImg.isEmpty()) {
+			int attachmentNo = attachmentDao.save(reviewImg);
+			reviewAttachDao.insert(reviewDto.getReviewNo(), attachmentNo);
+		}
+		
+	}
 }

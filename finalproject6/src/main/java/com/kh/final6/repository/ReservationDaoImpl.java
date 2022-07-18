@@ -51,4 +51,8 @@ public class ReservationDaoImpl implements ReservationDao {
 		return sqlSession.selectList("reservation.myReservation", memberNo);
 	}
 	
+	@Override
+	public MyReservationVO myReservationInfo(int paymentNo) {
+		return sqlSession.selectOne("reservation.myReservationInfo", paymentNo);
+	}
 }
