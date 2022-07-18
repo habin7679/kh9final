@@ -132,24 +132,28 @@
           </li>
         </ul>
       
-      
-    
+<c:choose>      
+    <c:when test="${no == null }">
       <a href="${pageContext.request.contextPath}/member/login" class="btn-book-a-table me">로그인</a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
+</c:when>
+<c:otherwise>
       <ul>
-        <li class="dropdown"><a href="#"><span>닉네임  </span><i class="fa-solid fa-square-envelope fa-1x"></i></a>
+        <li class="dropdown"><a href="#"><span>${nick}</span><i class="fa-solid fa-square-envelope fa-1x"></i></a>
           <ul>
 
 
             <li><a href="${pageContext.request.contextPath}/member/mypage?memberId=${memberId}">mypage</a></li>
 
-            <li><a href="#">쪽지함</a></li>
+            <li><a href="${pageContext.request.contextPath}/msg/sendBox">보낸쪽지함</a></li>
+            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
             <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
           </ul>
         </li>
       </ul>
+      </c:otherwise>
+      </c:choose>
       </nav>
     </div>
   </header><!-- End Header -->

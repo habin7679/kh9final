@@ -388,6 +388,8 @@ public class MemberController {
 		public String chat() {
 			return "member/adminChatManage";
 		}
+	
+	
 }
 
 

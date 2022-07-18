@@ -51,7 +51,8 @@
 	                            </c:if>
 	                            </a>
 	                            </td>
-	                            <td>${togetherDto.togetherWriter}</td><!-- 작성자 닉네임 클릭 시 쪽지 -->
+	                            <td> <a href="${pageContext.request.contextPath}/msg/send?memberRecvNo=${togetherDto.memberNo}">
+	                            ${togetherDto.togetherWriter}</a></td><!-- 작성자 닉네임 클릭 시 쪽지 -->
 	                            <td>${togetherDto.togetherTime}</td>
 	                            <td>${togetherDto.togetherReadcount }</td>
 	                        </tr>
