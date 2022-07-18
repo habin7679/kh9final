@@ -33,7 +33,7 @@
 					<label>비밀번호</label> <input v-bind:type="passwordInputType"
 						name="memberPw" required placeholder="" class="form-control me-1"
 						v-bind:class="pwClassObject" v-model="member.memberPw"
-						v-on:blur="pwValidation">
+						v-on:blur="pwValidation" maxlength="16" >
 					<div class="valid-feedback">올바른 비밀번호입니다</div>
 					<div class="invalid-feedback">비밀번호는 영문 대문자,소문자,숫자,특수문자가 반드시
 						1개 이상 포함된 8~16자 이내여야 합니다</div>
@@ -41,8 +41,8 @@
 
 				<div class="row text-left mb-2">
 					<label>비밀번호 재확인</label> <input v-bind:type="passwordInputType"
-						placeholder="" class="form-control me-1"
-						v-model="member.memberPwAgain" v-on:blur="pwAgainValidation">
+						placeholder="" class="form-control me-1" v-bind:class="pwAgainClassObject"
+						v-model="member.memberPwAgain" maxlength="16" v-on:blur="pwAgainValidation" >
 					<div class="valid-feedback">비밀번호가 일치합니다</div>
 					<div class="invalid-feedback">비밀번호가 불일치합니다</div>
 				 <div>
@@ -56,7 +56,7 @@
 						placeholder="" class="form-control me-1" autocomplete="off"
 						v-bind:class="nameClassObject" v-model="member.memberName"
 						v-on:blur="nameValidation">
-					<div class="valid-feedback">합격</div>
+					<div class="valid-feedback"></div>
 					<div class="invalid-feedback">한글만 입력이 가능합니다</div>
 				</div>
 
@@ -65,7 +65,7 @@
 					<label>닉네임</label> <input type="text" name="memberNick" required
 						placeholder="" autocomplete="off" class="form-control me-1"
 						v-bind:class="nickClassObject" v-model="member.memberNick"
-						v-on:blur="nickValidation">
+						v-on:blur="nickValidation" maxlength="10" >
 					<div class="valid-feedback">적합한 닉네임입니다</div>
 					<div class="invalid-feedback">닉네임은 한글과 숫자로 2~10자 이내로만 작성
 						가능합니다</div>
@@ -86,7 +86,7 @@
 						autocomplete="off" v-bind:class="phoneClassObject"
 						v-model="member.memberPhone"
 						v-on:input="member.memberPhone = $event.target.value"
-						v-on:blur="phoneValidation">
+						v-on:blur="phoneValidation" maxlength="11">
 					<div class="valid-feedback">올바른 형식입니다</div>
 					<div class="invalid-feedback">적합하지 않은 형식입니다</div>
 				</div>
@@ -141,31 +141,36 @@
                         
                         get memberIdValid(){
                             const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                            return regex.test(this.memberId);
+                            return this.memberId.length > 0 && regex.test(this.memberId);
                         },
                         get memberPwValid(){
                             const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%])[A-Za-z0-9!@#$%]{8,16}$/;
-                            return regex.test(this.memberPw);
+                            return this.memberPw.length > 0 && regex.test(this.memberPw);
+                        },
+                        
+                        get memberPwAgainValid(){
+                            const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%])[A-Za-z0-9!@#$%]{8,16}$/;
+                            return this.memberPwAgain.length > 0 && regex.test(this.memberPwAgain);
                         },
 
                         get memberNameValid(){
                             const regex = /^[가-힣]{2,7}$/;
-                            return regex.test(this.memberName);
+                            return this.memberName.length > 0 && regex.test(this.memberName);
                         },
 
                         get memberNickValid(){
                             const regex = /^[가-힣0-9]{2,10}$/;
-                            return regex.test(this.memberNick)
+                            return this.memberNick.length > 0 && regex.test(this.memberNick)
                         },
 
                         get memberPhoneValid(){
                             const regex = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/; 
-                            return regex.test(this.memberPhone);
+                            return this.memberPhone.length > 0 && regex.test(this.memberPhone);
                         },
 
                         get memberBirthValid(){
                             const regex = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; 
-                            return regex.test(this.memberBirth);
+                            return this.memberBirth.length > 0 && regex.test(this.memberBirth);
                         },
 
 
@@ -286,8 +291,10 @@
                 
 
                 sendForm(e){
-                    if(this.isForm)
+                    if((this.member. memberIdValid && this.member.memberPwValid && this.member.memberNameValid &&
+                    	this.member.memberNickValid && this.member.memberPhoneValid && this.member.memberBirthValid) == false){
                     e.preventDefault();
+                    }
                 },
 				
                 
@@ -300,3 +307,4 @@
     </script>
 
 </html>
+  <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

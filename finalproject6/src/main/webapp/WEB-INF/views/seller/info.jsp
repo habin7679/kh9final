@@ -8,7 +8,7 @@
 <div class="container ma-t-100" style="width:900px;" >
 <div class="container w400 m30">
 	<div class="col-md-8 offset-md-4">
-		<h1>판매자 정보</h1>
+		<h1>내가 신청한 판매자 정보</h1>
 	</div>
 	<br><br>
 	<div class="row">
