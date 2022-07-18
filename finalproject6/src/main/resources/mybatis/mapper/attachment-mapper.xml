@@ -27,8 +27,5 @@
  		delete attachment where attachment_no = ${attachmentNo}
  	</delete>
  	
- 	<delete id="delete" parameterType="int">
- 		delete attachment where attachment_no = ${attachmentNo}
- 	</delete>
  	
  </mapper>

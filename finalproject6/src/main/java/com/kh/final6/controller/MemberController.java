@@ -52,8 +52,6 @@ public class MemberController {
 	@Autowired
 	private MemberProfileDao memberProfileDao;
 	
-	@Autowired
-	private SellerDao sellerDao;
 	
 	@Autowired
 	private MemberService memberService;
