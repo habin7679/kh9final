@@ -22,6 +22,7 @@
     					<td>
     						<h3>나의 리뷰</h3>
     					</td>
+    					<c:if test="1=1"></c:if>
     				</tr>
     				
     				<tr>
@@ -34,10 +35,12 @@
     					<c:choose>
     						<c:when test="${reviewAttach == false || passImg}">
     							<img src="${pageContext.request.contextPath}${reviewImgUrl}" width="50%">
-    							<pre>${reviewDto.reviewContent }</pre>
+    							<pre>${reviewDto.reviewContent}</pre>
+    							<pre>평점: ${reviewDto.reviewScore}</pre>
     						</c:when>
     						<c:otherwise>
-    							<pre>${reviewDto.reviewContent }</pre>
+    							<pre>${reviewDto.reviewContent}</pre>
+    							<pre>평점: ${reviewDto.reviewScore}</pre>
     						</c:otherwise>
     					</c:choose>
     					</td>

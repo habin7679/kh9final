@@ -39,7 +39,7 @@
 	</select>
  	
  	
- 	<insert id="insert"  parameterType="StoreDto">
+ 	<insert id="insert"  parameterType="BarRoomStoreDto">
  	insert into store 
  	(
 	 	store_No, 

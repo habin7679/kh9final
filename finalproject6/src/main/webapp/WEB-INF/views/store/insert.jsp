@@ -24,8 +24,10 @@
 		<div >
 	           <%--	아이디 로그인후에 바꿔치기 
 	             <input type="hidden" name="storeNo" value="${storeDto.storeNo}">
+	              <input type="hidden" name="storeNo" autocomplete="off" value=''>
+	         <input type="hidden" name="seo" autocomplete="off" value="${sellerDto.sellerNo}">
 	            --%>
-	        <input type="hidden" name="storeNo" autocomplete="off" value='1'   class="form-input fill input-round">
+	       
     </div>
     <div>
 	        <label>음식점 종류</label> <br>
@@ -43,11 +45,16 @@
 	        <label>구</label>    
 	        <input type="text" name="gu" autocomplete="off" required class="form-input fill input-round">
     </div>
-    
-    <div>
-	        <label>판매자번호</label>    
-	        <input type="number" name="sellerNo" autocomplete="off" required class="form-input fill input-round">
-    </div>
+     <%--
+     
+     
+       <label>판매자번호뭐지</label>
+                <textarea name="sellerNo" required 
+                class="textarea form-input fill" rows="12">판매자번호:${sellerDto.sellerNo}</textarea>
+               
+     
+      --%>
+  
     <div>
 	        <label>가게이름</label>    
 	        <input type="text" name="storeName" autocomplete="off" required class="form-input fill input-round">
@@ -89,12 +96,59 @@
 	        <input type="text" name="storeStart" autocomplete="off" required class="form-input fill input-round">
     </div>
     <div>
+	        <label>휴무일</label> <br>
+	        <input type="radio" name="offKind" value="정기" checked required >정기
+			<input type="radio" name="offKind" value="수동" required>수동
+    </div>
+    <div>
+	        <label>시작일</label>    
+	        <input type="date" name="offStart" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    <div>
+	        <label>종료일</label>    
+	        <input type="date" name="offEnd" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    <div>
+	        <label>바 가격</label>    
+	        <input type="number" name="barPrice" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    <div>
+	        <label>바 인원수</label>    
+	        <input type="number" name="barCount" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    <div>
+	        <label>룸가격</label>    
+	        <input type="number" name="roomPrice" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    <div>
+	        <label>룸 인원수</label>    
+	        <input type="number" name="roomCount" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    <div>
+	        <label>4인실 개수</label>    
+	        <input type="number" name="roomFour" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    <div>
+	        <label>6인실</label>    
+	        <input type="number" name="roomSix" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    <div>
+	        <label>8인실</label>    
+	        <input type="number" name="roomEight" autocomplete="off" required class="form-input fill input-round">
+    </div>
+    
+    
+    <div>
 	        <label>가게문닫는시간</label>    
 	        <input type="text" name="storeEnd" autocomplete="off" required class="form-input fill input-round">
-    		<%-- 
+    	
+    		  가게사진 : <input type="file" name="storeImg" accept=".jpg, .png, .gif, .pdf, .ppt, .txt, .hwp">
     		
-    		 가게사진 : <input type="file" name="storeImg" accept=".jpg, .png, .gif, .pdf, .ppt, .txt, .hwp">
-    		--%>
+    		<%--
+    		
+    		
+    		 --%>
+    		
     </div>
     <div>
 	        <label>예약금</label>    

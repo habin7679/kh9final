@@ -23,16 +23,51 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
- <mapper namespace="reviewAttach">
- 	<insert id="insert" parameterType="Map">
- 	insert into review_attachment (review_no, attachment_no) values (#{reviewNo}, #{attachmentNo})
- 	</insert>
-
-
+ <mapper namespace="room">
  	
- 	<select id="one" parameterType="int" resultType="Integer">
- 		select attachment_no from review_attachment where review_no = #{reviewNo}
+ 	
+ 	<select id="one" resultType="RoomDto" parameterType="int">
+ 		select * from room 
+ 		where store_no = #{storeNo}
+ 	</select>
+ 
+ 	<select id="sequence" resultType="int">
+ 		select room_seq.nextval from dual
  	</select>
  	
+ 	<select id="list" resultType="RoomDto">
+		select * from room order by store_no asc
+	</select>
  	
+ 	<delete id="delete" parameterType="int">
+  	delete room where store_No = #{storeNo}
+  	
+  	</delete>
+ 	
+	<insert id ="insert" parameterType="BarRoomStoreDto">
+	insert into room(store_no, room_price, room_count, room_four, room_six, room_eight)
+		values(#{storeNo}, #{roomPrice}, #{roomCount}, #{roomFour}, #{roomSix}, #{roomEight})
+	
+	</insert>
+
+	<update id="update" parameterType="RoomDto">
+		update room 
+			set
+				room_price = #{roomPrice}, room_count = #{roomCount},
+				room_four = #{roomFour} , room_six = #{roomSix},
+				room_eight = #{roomEight}
+			where
+				store_No = #{storeNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
  </mapper>

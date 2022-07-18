@@ -26,7 +26,7 @@
         <div class="row mt-4">
             <div class="col-md-8 offset-md-2">
                 <div class="p-4 text-light bg-dark rounded">
-                    <h1>가게등록</h1>
+                    <h1>룸등록</h1>
                 </div>
             </div>
         </div>
@@ -37,56 +37,21 @@
                 <input type="number" class="form-control" v-model.number="currentData.storeNo" readonly placeholder="가게번호">
             </div>
             <div>
-                <input type="text" class="form-control" v-model="currentData.category" placeholder="카테고리">
+                <input type="number" class="form-control" v-model="currentData.roomPrice" placeholder="가격">
             </div>
             <div>
-                <input type="text" class="form-control" v-model.number="currentData.dong" placeholder="동">
+                <input type="number" class="form-control" v-model.number="currentData.roomCount" placeholder="룸 개수">
             </div>
 			<div>
-                <input type="text" class="form-control" v-model.number="currentData.gu" placeholder="구">
+                <input type="number" class="form-control" v-model.number="currentData.roomFour" placeholder="4인실">
 			</div>
 			<div>
-                <input type="number" class="form-control" v-model.number="currentData.sellerNo" placeholder="판매자번호">	
+                <input type="number" class="form-control" v-model.number="currentData.roomSix" placeholder="6인실">	
 			</div>
 			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeName" placeholder="가게이름">               			
+                <input type="number" class="form-control" v-model.number="currentData.roomEight" placeholder="8인실">               			
 			</div>
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeCall" placeholder="가게전화번호">			
-			</div>		
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storePost" placeholder="가게POST">
-			</div>
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeAddress" placeholder="가게주소">			
-			</div>
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeDetailAddress" placeholder="가게상세주소">			
-			</div>
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeBossName" placeholder="사장님이름">			
-			</div>
-			<div>
-                <input type="date" class="form-control" v-model.number="currentData.storeRegistDate" placeholder="등록일">		
-			</div>
-			<div>
-                <input type="number" class="form-control" v-model.number="currentData.storeLikecount" placeholder="좋아요수">			
-			</div>
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeLunchTime" placeholder="점심시간">			
-			</div>
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeDinnerime" placeholder="저녁시간">			
-			</div>
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeStart" placeholder="가게시작시간">			
-			</div>
-			<div>
-                <input type="text" class="form-control" v-model.number="currentData.storeEnd" placeholder="가게문닫는시간">			
-			</div>
-			<div>
-                <input type="number" class="form-control" v-model.number="currentData.storeReservationPrice" placeholder="예약금">			
-			</div>
+			
 			<div class="row">
 				<button class="btn btn-primary fill" v-on:click="addItem">{{mode}}</button>
 			</div>
@@ -99,41 +64,23 @@
 				<thead>
 					<tr>
 						<th>가게번호</th>
-						<th>카테고리</th>
-						<th>동</th>
-						<th>구</th>
-						<th>판매자번호</th>
-						<th>가게전화번호</th>
-						<th>가게POST</th>
-						<th>가게주소</th>
-						<th>가게상세주소</th>
-						<th>사장님이름</th>
-						<th>등록일</th>
-						<th>점심시간</th>
-						<th>저녁시간</th>
-						<th>가게시작시간</th>
-						<th>가게문닫는시간</th>				
+						<th>가격</th>
+						<th>룸개수</th>
+						<th>4인실</th>
+						<th>6인실</th>
+						<th>8인실</th>
+									
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="(store, index) in dataList" v-bind:key="index">
 						<td>{{store.storeNo}}</td>
-						<td>{{store.category}}</td>
-						<td>{{store.dong}}</td>
-						<td>{{store.gu}}</td>
-						<td>{{store.sellerNo}}</td>
-						<td>{{store.storeName}}</td>
-						<td>{{store.storePost}}</td>
-						<td>{{store.storeAddress}}</td>
-						<td>{{store.storeDetailAddress}}</td>					
-						<td>{{store.storeBossName}}</td>					
-						<td>{{store.storeRegistDate}}</td>
-						<td>{{store.storeLikecount}}</td>
-						<td>{{store.storeLunchTime}}</td>
-						<td>{{store.storeDinnerTime}}</td>
-						<td>{{store.storeStart}}</td>
-						<td>{{store.storeEnd}}</td>
-						<td>{{store.storeReservationPrice}}</td>
+						<td>{{store.roomPrice}}</td>
+						<td>{{store.roomCount}}</td>
+						<td>{{store.roomFour}}</td>
+						<td>{{store.roomSix}}</td>
+						<td>{{store.roomEight}}</td>
+						
 						
 						<td>
 							<!-- .prevent 를 붙이면 기본 이벤트가 자동 제거(e.preventDefault() 효과) -->
@@ -145,6 +92,13 @@
 			</table>
 		</div>
         </div>
+
+
+
+
+
+<%--store --%>
+
 
         
     </div>
@@ -158,23 +112,11 @@
 				dataList:[],
 				currentData:{
 					storeNo:"",
-					category:"",
-					dong:"",
-					gu:"",
-					sellerNo:"",
-					storeName:"",
-					storeCall:"",
-					storePost:"",
-					storeAddress:"",
-					storeDetailAddress:"",
-					storeBossName:"",
-					storeRegistDate:"",
-					storeLikecount:"",
-					storeLunchTime:"",
-					storeDinnerime:"",
-					storeStart:"",
-					storeEnd:"",
-					storeReservationPrice:"",
+					roomPrice:"",
+					roomCount:"",
+					roomFour:"",
+					roomSix:"",
+					roomEight:"",
 				},
 				index:-1,
 			};
@@ -197,7 +139,7 @@
 				
 				const storeNo = this.dataList[index].storeNo;
 				axios({
-					url:"${pageContext.request.contextPath}/rest/store/"+storeNo,
+					url:"${pageContext.request.contextPath}/rest/store/room/"+storeNo,
 					method:"delete"
 				})
 				.then(()=>{
@@ -213,23 +155,11 @@
 			clearItem(){
 				this.currentData = {
 						storeNo:"",
-						category:"",
-						dong:"",
-						gu:"",
-						sellerNo:"",
-						storeName:"",
-						storeCall:"",
-						storePost:"",
-						storeAddress:"",
-						storeDetailAddress:"",
-						storeBossName:"",
-						storeRegistDate:"",
-						storeLikecount:"",
-						storeLunchTime:"",
-						storeDinnerime:"",
-						storeStart:"",
-						storeEnd:"",
-						storeReservationPrice:"",
+						roomPrice:"",
+						roomCount:"",
+						roomFour:"",
+						roomSix:"",
+						roomEight:"",
 				}
 				this.index = -1;
 			},
@@ -246,7 +176,7 @@
 				if(!type) return;
 				
 			axios({
-					url:"${pageContext.request.contextPath}/rest/store/",
+					url:"${pageContext.request.contextPath}/rest/store/room/",
 					method:type,//계산된 method(POST/PUT)
 					data: this.currentData
 				})
@@ -266,6 +196,15 @@
 		created(){
 				
 			//axios({옵션}).then(성공롤백).catch(에러콜백);
+			//룸
+			axios({
+					url:"${pageContext.request.contextPath}/rest/store/room/",
+					method:"get"
+				})
+				.then((resp)=>{
+					this.dataList.push(...resp.data);
+				})
+			//store
 			axios({
 					url:"${pageContext.request.contextPath}/rest/store/",
 					method:"get"
@@ -273,6 +212,12 @@
 				.then((resp)=>{
 					this.dataList.push(...resp.data);
 				})
+				
+				
+				
+				
+				
+				
 		},
 		
 	});

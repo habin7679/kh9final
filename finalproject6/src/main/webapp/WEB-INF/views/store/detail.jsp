@@ -27,7 +27,7 @@
             <div class="col-md-8 offset-md-1">
                 <div class="p-4 text-light bg-dark rounded">
                     <h1>더미가게</h1>
-                    <img src="https://via.placeholder.com/300"/>
+                    <img src="${pageContext.request.contextPath}${storeImgUrl}" width="100" height="100">
                     <img src="https://via.placeholder.com/300"/>
                     <img src="https://via.placeholder.com/300"/>
                     <img src="https://via.placeholder.com/300"/>
@@ -35,35 +35,78 @@
                 </div>
             </div>
         </div>
-        
-       
-            	<div class="float-left" style="width:70%">
-                    <div v-for="(store, index) in dataList" v-bind:key="index">
-						<div>{{store.storeNo}}</div>
-						<div>{{store.category}}</div>
-						<div>{{store.dong}}</div>
-						<div>{{store.gu}}</div>
-						<div>{{store.sellerNo}}</div>
-						<div>{{store.storeName}}</div>
-						<div>{{store.storePost}}</div>
-						<div>{{store.storeAddress}}</div>
-						<div>{{store.storeDetailAddress}}</div>					
-						<div>{{store.storeBossName}}</div>					
-						<div>{{store.storeRegistDate}}</div>
-						<div>{{store.storeLikecount}}</div>
-						<div>{{store.storeLunchTime}}</div>
-						<div>{{store.storeDinnerTime}}</div>
-						<div>{{store.storeStart}}</div>
-						<div>{{store.storeEnd}}</div>
-						<div>{{store.storeReservationPrice}}</div>
-						
-						
-				
-		</div>	
-		</div>
-        </div>
+         <div class="container-fluid">
+    	<div class="row">
+    		<div class="col-md-8 offset-md-2">
+    			<table class="table">
+    				<tr>
+    					<td>
+    						<h3>가게정보</h3>
+    					</td>
+    				</tr>
+    					<td>
+    					<c:choose>
+    						<c:when test="${storeAttach == false || passImg}">
+    							<img src="${pageContext.request.contextPath}${storeImgUrl}" width="50%">
+    						
+    					<pre>가게번호: ${storeDto.storeNo}</pre>
+						<pre>카테고리:${storeDto.category}</pre>
+						<pre>동:${storeDto.dong}</pre>
+						<pre>구:${storeDto.gu}</pre>
+						<pre>판매자번호:${storeDto.sellerNo}</pre>
+						<pre>가게이름:${storeDto.storeName}</pre>
+						<pre>post:${storeDto.storePost}</pre>
+						<pre>주소:${storeDto.storeAddress}</pre>
+						<pre>상세주소:${storeDto.storeDetailAddress}</pre>					
+						<pre>사장님이름:${storeDto.storeBossName}</pre>					
+						<pre>등록일:${storeDto.storeRegistDate}</pre>
+						<pre>좋아요수:${storeDto.storeLikeCount}</pre>
+						<pre>점심시간:${storeDto.storeLunchTime}</pre>
+						<pre>시작시간:${storeDto.storeStart}</pre>
+						<pre>종료시간:${storeDto.storeEnd}</pre>
+						<pre>예약가격:${storeDto.storeReservationPrice}</pre>
+    						</c:when>
+    						<c:otherwise>
+    					<pre>가게번호: ${storeDto.storeNo}</pre>
+						<pre>카테고리:${storeDto.category}</pre>
+						<pre>동:${storeDto.dong}</pre>
+						<pre>구:${storeDto.gu}</pre>
+						<pre>판매자번호:${storeDto.sellerNo}</pre>
+						<pre>가게이름:${storeDto.storeName}</pre>
+						<pre>post:${storeDto.storePost}</pre>
+						<pre>주소:${storeDto.storeAddress}</pre>
+						<pre>상세주소:${storeDto.storeDetailAddress}</pre>					
+						<pre>사장님이름:${storeDto.storeBossName}</pre>					
+						<pre>등록일:${storeDto.storeRegistDate}</pre>
+						<pre>좋아요수:${storeDto.storeLikeCount}</pre>
+						<pre>점심시간:${storeDto.storeLunchTime}</pre>
+						<pre>시작시간:${storeDto.storeStart}</pre>
+						<pre>종료시간:${storeDto.storeEnd}</pre>
+						<pre>예약가격:${storeDto.storeReservationPrice}</pre>
+    						</c:otherwise>
+    					</c:choose>
+    					</td>
+    				</tr>
+    				<c:if test="${storeAttach == false}">
+    				<tr>
+    					<td>
+    						<a class="cursor:pointer;" href="${pageContext.request.contextPath}${storeImgUrl}">${attachName}</a>
+    					</td>
+    				</tr>
+    				</c:if>
+    				<tr>
+    					<td>
+    						<a href="#" class="btn btn primary">예약하러가기</a>
+    						<a href="#" class="btn btn primary">목록으로 돌아가기</a>
+    						<a href="${pageContext.request.contextPath}/review/insert?reviewNo=${reviewDto.reviewNo}" class="btn btn primary">리뷰쓰러가기</a>
+    					</td>
+    				</tr>
+    			</table>
+    		</div>
+    	</div>
+    </div>    
+          </div>
 
-        
     <div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85dadd42b9eaa3324f969eda3e18fe08&libraries=services"></script>
@@ -105,16 +148,22 @@ geocoder.addressSearch('서울 영등포구 선유동2로 57', function(result, 
     } 
 
 });    
+
 </script>
  <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     
 <script>
+
+
+
+
+
+			<%--
+console.log('Script dded succesfully!');
 	const app = Vue.createApp({
 		data(){
 			return{
-				dataList:[],
-				currentData:{
 					storeNo:"",
 					category:"",
 					dong:"",
@@ -133,26 +182,29 @@ geocoder.addressSearch('서울 영등포구 선유동2로 57', function(result, 
 					storeStart:"",
 					storeEnd:"",
 					storeReservationPrice:"",
-				},
 			
 			};
 		},
 		created(){
-				
+			
+			
 			//axios({옵션}).then(성공롤백).catch(에러콜백);
 			axios({
-					url:"${pageContext.request.contextPath}/rest/store/",
+					url:"${pageContext.request.contextPath}/rest/store/"+storeNo,
 					method:"get"
 				})
 				.then((resp)=>{
 					this.dataList.push(...resp.data);
 				})
 		},
+			
+			
 		
 	});
 		
 	 
 app.mount("#app")
+			--%>	
 </script>
 
 

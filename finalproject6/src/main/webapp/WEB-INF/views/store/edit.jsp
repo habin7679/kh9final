@@ -69,7 +69,7 @@
  <div id="app" class="container ma-t-100">
  	
  	<div class="section-header mt-4 col-md-6 offset-md-3" >
-            <h2>review</h2>
+            <h2>reivew</h2>
             <p><span>리뷰</span> 게시판</p>
             <h2>리뷰확인하세요.</h2>
        	</div>
@@ -85,15 +85,6 @@
 	</div>
  	</div>
  	
-    <div>
-	        <label>평점</label> <br>
-	        <input type="radio" name="reviewScore" value="1" checked required class="form-input fill input-round">1점
-			<input type="radio" name="reviewScore" value="2" required class="form-input fill input-round">2점
-			<input type="radio" name="reviewScore" value="3" required class="form-input fill input-round">3점
-			<input type="radio" name="reviewScore" value="4"required class="form-input fill input-round">4점
-			<input type="radio" name="reviewScore" value="5"required class="form-input fill input-round">5점   
-	   
-    </div>
  	<c:if test="${attachmentDto != null }">
  		<div class="row mt-2" v-if="!isNoneAttach" >
  			<div class="col-md-4 offset-md-1">
@@ -112,7 +103,7 @@
  		<div class="row mt-2">
  			<div class="col-md-6 offset-md-3 text-center">
 	 			<input type="submit" value="수정" class="btn1">
-	 			<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${reviewDto.reviewNo}" class="btn0">취소</a>
+	 			<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${reveiwDto.reviewNo}" class="btn0">취소</a>
  			</div>
  		</div>
  		
