@@ -143,7 +143,13 @@
           <ul>
 
 
-            <li><a href="${pageContext.request.contextPath}/member/mypage?memberId=${memberId}">mypage</a></li>
+
+            <li><a href="${pageContext.request.contextPath}/member/mypage?memberId=${memberId}">내 정보</a></li>
+            <li><a href="#">쪽지함</a></li>
+            <li><a href="#">내 예약</a></li>
+            <li><a href="${pageContext.request.contextPath}/member/ownerReply">내 댓글 확인</a></li>
+            <li><a href="#">내 결제</a></li>
+
 
             <li><a href="${pageContext.request.contextPath}/msg/sendBox">보낸쪽지함</a></li>
             <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>

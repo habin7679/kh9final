@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.final6.entity.NoticeDto;
+import com.kh.final6.vo.BoardVO;
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao{
@@ -56,6 +57,7 @@ public class NoticeDaoImpl implements NoticeDao{
  		
  		return sqlSession.selectOne("notice.count",param);
 	}
+	
 	//게시글 상세조회
 	@Override
 	public NoticeDto one(int noticeNo) {
@@ -88,11 +90,13 @@ public class NoticeDaoImpl implements NoticeDao{
 		int count = sqlSession.update("notice.edit",noticeDto);
 		return count > 0;
 	}
-
+	
+	//게시판 상단 고정 리스트 조회
 	@Override
 	public List<NoticeDto> noticeList() {
 		return sqlSession.selectList("notice.noticeList");
 	}
+	
 
 
 }
