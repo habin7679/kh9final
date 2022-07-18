@@ -1,13 +1,21 @@
 package com.kh.final6.service;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Random;
+import java.util.Scanner;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -17,6 +25,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.kh.final6.entity.CertDto;
 import com.kh.final6.entity.MemberDto;
 import com.kh.final6.repository.CertDao;
+import com.kh.final6.repository.ReservationDao;
+import com.kh.final6.vo.MyReservationVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +39,8 @@ public class EmailServiceUsingGmail implements EmailService {
 	
 	@Autowired
 	private CertDao certDao;
+	@Autowired
+	private ReservationDao reservationDao;
 	
 	//tip : 등록된 properties에서 값을 불러오는 설정
 	//@Value("${project.port}")
@@ -36,6 +48,7 @@ public class EmailServiceUsingGmail implements EmailService {
 	
 	private Random r = new Random();
 	private Format f = new DecimalFormat("000000");
+	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	public void sendCertification(String email) {
@@ -86,7 +99,7 @@ public class EmailServiceUsingGmail implements EmailService {
 		String returnUri = ServletUriComponentsBuilder
 												.fromCurrentContextPath()//protocol + host
 												.path("/member/reset")
-												.queryParam("memberi", findDto.getMemberId())
+												.queryParam("memberId", findDto.getMemberId())
 												.queryParam("cert", certString)
 												.toUriString();
 		String content = 
@@ -103,5 +116,67 @@ public class EmailServiceUsingGmail implements EmailService {
 									.build());
 	}
 	
+	
+	@Override
+	public void sendReservationInfo(int paymentNo) throws MessagingException, IOException {
+		
+		MyReservationVO myReservationVO = reservationDao.myReservationInfo(paymentNo);
+		
+		
+		ClassPathResource template = new ClassPathResource("email/reservation-template.html");
+		
+		StringBuffer buffer = new StringBuffer();
+		try (Scanner sc = new Scanner(template.getFile());){ //예외전가가 있어서 catch 안써도 됨
+			while(sc.hasNextLine()) {
+				buffer.append(sc.nextLine());
+			}
+		}
+		String html = buffer.toString(); 
+		
+		//만약 HTML에 바꿔야 할 내용(ex : 아이디)이 존재한다면 사용할 수 있는 방법은 2가지 정도
+		// 1. String의 replace() 사용
+		// 2. Jsoup과 같은 외부 라이브러리 사용 (자바에서 html을 읽을 수 있게 도와주는 도구)
+		Document doc = Jsoup.parse(html);	
+		Elements elements = doc.getElementsByClass("memberNick");
+		for(Element element : elements) {
+			element.text(myReservationVO.getMemberNick());
+		}
+		Elements elements1 = doc.getElementsByClass("memberName");
+		for(Element element : elements1) {
+			element.text(myReservationVO.getMemberName());
+		}
+		Elements elements2 = doc.getElementsByClass("reservationPrice");
+		for(Element element : elements2) {
+			element.text(String.valueOf(myReservationVO.getReservationPrice()));
+		}
+		Elements elements3 = doc.getElementsByClass("reservationPeople");
+		for(Element element : elements3) {
+			element.text(String.valueOf(myReservationVO.getReservationPeople()));
+		}
+		Elements elements4 = doc.getElementsByClass("reservationTime");
+		for(Element element : elements4) {
+			element.text(myReservationVO.getReservationTime());
+		}
+		Elements elements5 = doc.getElementsByClass("storeName");
+		for(Element element : elements5) {
+			element.text(myReservationVO.getStoreName());
+		}
+		
+		String reservationDate = simpleDateFormat.format(myReservationVO.getReservationDate());
+		Elements elements6 = doc.getElementsByClass("reservationDate");
+		for(Element element : elements6) {
+			element.text(reservationDate);
+		}
+		
+		//마임 메세지
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, false, "UTF-8");
+		
+		helper.setTo("zdx456@naver.com");
+		helper.setSubject("[예야쿠] 예약 정보확인 입니다.");
+		helper.setText(doc.toString(), true);
+		
+		mailSender.send(message);
+	}
 }
 

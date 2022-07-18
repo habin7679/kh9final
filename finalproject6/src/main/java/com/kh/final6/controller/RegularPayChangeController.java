@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,14 +93,21 @@ public class RegularPayChangeController {
 		
 		regularPaymentDao.update(responseVO, regularpaymentNo);
 		
+		int sellerNo = regularPaymentDao.getSellerNo(regularpaymentNo);
 		
+		
+		session.setAttribute("sellerNo", sellerNo);
 		return "redirect:/changePay/changePayFinish";
 		
 		
 	}
 	
 	@GetMapping("/changePayFinish") //성공
-	public String payFinish()	{
+	public String payFinish(HttpSession session, Model model)	{
+		int sellerNo = (int) session.getAttribute("sellerNo");
+		session.removeAttribute("sellerNo");
+		
+		model.addAttribute("sellerNo",sellerNo);
 		return "regularPay/changePayFinish";
 	}
 	

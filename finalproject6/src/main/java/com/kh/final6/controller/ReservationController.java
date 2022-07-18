@@ -1,10 +1,12 @@
 package com.kh.final6.controller;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import com.kh.final6.repository.PaymentDao;
 import com.kh.final6.repository.ReservationDao;
 import com.kh.final6.repository.SellerDao;
 import com.kh.final6.repository.StoreDao;
+import com.kh.final6.service.EmailService;
 import com.kh.final6.service.KakaoPayService;
 import com.kh.final6.service.PaymentService;
 import com.kh.final6.service.ReservationService;
@@ -35,6 +38,7 @@ import com.kh.final6.vo.KakaoPayCancelRequestVO;
 import com.kh.final6.vo.KakaoPayCancelResponsetVO;
 import com.kh.final6.vo.KakaoPayReadyRequestVO;
 import com.kh.final6.vo.KakaoPayReadyResponseVO;
+import com.kh.final6.vo.MyReservationVO;
 import com.kh.final6.vo.PaymentNoVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +64,9 @@ public class ReservationController {
 	private PaymentService paymentService;
 	@Autowired
 	private SellerDao sellerDao;
-
+	@Autowired
+	private EmailService emailService;
+	
 	
 	@GetMapping("/")
 	public String reservation(
@@ -82,8 +88,8 @@ public class ReservationController {
 			Model model,
 			HttpSession session
 			) {
-			reservationService.insert(reservationDto);
-			ReservationDto reservationNewDto = reservationDao.one(reservationDto.getReservationNo());
+			ReservationDto reservationNewDto =  reservationService.insert(reservationDto);
+//			ReservationDto reservationNewDto = reservationDao.one(reservationDto.getReservationNo());
 			model.addAttribute("reservationDto", reservationNewDto);
 			String memberId = (String)session.getAttribute("login");
 			model.addAttribute("memberDto", memberDao.info(memberId));
@@ -136,7 +142,7 @@ public class ReservationController {
 	
 	
 	@GetMapping("/pay/approve")
-	public String paySuccess(@RequestParam String pg_token, HttpSession session) throws URISyntaxException {
+	public String paySuccess(@RequestParam String pg_token, HttpSession session) throws URISyntaxException, MessagingException, IOException {
 
 		KakaoPayApproveRequestVO requestVO = (KakaoPayApproveRequestVO)session.getAttribute("pay");
 		session.removeAttribute("pay");
@@ -155,12 +161,19 @@ public class ReservationController {
 		
 		paymentService.insert(paymentNo, responseVO, paymentNoList);
 		
+		emailService.sendReservationInfo(paymentNo);
+		
+		
 		
 		return "redirect:/reservation/pay/finish";
 	}
 
 		@GetMapping("/pay/finish")
-		public String payFinish()	{
+		public String payFinish(
+				HttpSession session,
+				Model model
+				)	{
+			model.addAttribute("memberNo", (int)session.getAttribute("no"));
 			return "reservation/payFinish";
 		}
 		
@@ -208,6 +221,7 @@ public class ReservationController {
 //			System.out.println("@@@@@@@@@@@diffDays" + diffDays);
 					
 			if(diffDays  >= 7) {
+				//전액 환불
 				KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
 						.tid(paymentDto.getPaymentTid())
 						.cancel_amount(paymentDto.getPaymentPrice())
@@ -218,7 +232,6 @@ public class ReservationController {
 			} else if(diffDays < 7 && diffDays >= 2) {
 				//50% 환불
 				paymentDto.setPaymentPrice(paymentDto.getPaymentPrice()/2);
-//				System.out.println("%%%%%%%%%%%%%%%%Price" + paymentDto.getPaymentPrice());
 				KakaoPayCancelRequestVO requestVO =  KakaoPayCancelRequestVO.builder()
 						.tid(paymentDto.getPaymentTid())
 						.cancel_amount(paymentDto.getPaymentPrice())
@@ -229,13 +242,40 @@ public class ReservationController {
 				sellerDao.addPoint(paymentDto.getPaymentPrice(), sellerNo);
 				
 			} else {
+				// 환불 못하고 사장님 포인트로 변환
 				paymentDao.cancel(paymentDto);
 				sellerDao.addPoint(paymentDto.getPaymentPrice(), sellerNo);
 			}
 //
 //			return "redirect:more?paymentNo="+paymentDetailDto.getPaymentNo();
-			return "redirect:/" ;
+			return "redirect:/member/mypage" ;
 		}
 		
+		
+	@GetMapping("/check")
+	public String check(
+			@RequestParam int storeNo,
+			Model model
+			) {
+		model.addAttribute("storeNo", storeNo);
+		return "store/storeMemberCheck";
+	}
+	
+	
+	@GetMapping("/memberCheck")
+	public String memberCheck(
+			@RequestParam int memberNo,
+			Model model
+			
+			) {
+		
+		List<MyReservationVO> list = reservationDao.myReservation(memberNo);
+		model.addAttribute("list", list);
+		
+		return "reservation/myReservation";
+	}
+	
+	
+
 }
 

@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <!-- include libraries(jQuery, bootstrap) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- include summernote css/js -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <style>
         .passSpace{
@@ -51,6 +49,17 @@
      $("textarea[name=noticeContent]").summernote({
          height: 350
          });
+     
+    	$("input[type=checkbox]").on("input",function(){
+    		if($(this).is(":checked") ==true){
+    			$(this).val(1);
+    			console.log($(this).val());
+    		}
+    		else{
+    			$(this).val(0);
+    			console.log($(this).val());
+    		}
+    	});
  });
 </script>
      
@@ -75,19 +84,25 @@
                     <option>이벤트</option>
                 </select>
             </div>
-            <div class="col-md-7"></div>
+            
+            <div class="col-md-3 mt-2 form-check form-switch">
+            	<label class="form-check-label">
+            	<input type="checkbox" name="pin" value=0> 상단고정
+            	</label>
+            </div>
+ 		
+ 			<div class="col-md-4"></div>
  		</div>
  		
  		<div class="row mt-2">
  			<div class="col-md-1 offset-md-1 text-center"><label class="mt-2">제목</label></div>
 	 		<div class="col-md-6">
-	 			<input type="text" name="noticeTitle" class="form-control" autocomplete="off" placeholder="제목" value="${noticeDto.noticeTitle}"
-	 			style="height:50px;">
+	 			<input type="text" name="noticeTitle" class="form-control" autocomplete="off" placeholder="제목" style="height:50px;">
 	 		</div>	
  		</div>		
  	<div class="row mt-2">
 	<div class="col-md-10 offset-md-1">
-		<textarea name="noticeContent">${noticeDto.noticeContent}</textarea>
+		<textarea name="noticeContent"></textarea>
 	</div>
  	</div>
  	
@@ -108,5 +123,8 @@
  	</div>
     </form>    
     </div>
-    
+ 
+ 
+ 
+ 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

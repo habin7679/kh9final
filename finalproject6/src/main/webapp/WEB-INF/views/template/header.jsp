@@ -50,8 +50,11 @@
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
   
+  
+ 
 <style>
 .me {
    margin-left: 500px;
@@ -72,15 +75,14 @@
     }
 
 </style>
-
-
-  <!-- Vendor JS Files -->
+<!-- Vendor JS Files -->
   <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="${pageContext.request.contextPath}/vendor/aos/aos.js"></script>
   <script src="${pageContext.request.contextPath}/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="${pageContext.request.contextPath}/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="${pageContext.request.contextPath}/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="${pageContext.request.contextPath}/vendor/php-email-form/validate.js"></script>
+
 
 </head>
 
@@ -151,6 +153,6 @@
     </div>
   </header><!-- End Header -->
 
-
 <main id="main">
 <section>
+

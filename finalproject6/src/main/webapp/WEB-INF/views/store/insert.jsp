@@ -144,10 +144,7 @@
     	
     		  가게사진 : <input type="file" name="storeImg" accept=".jpg, .png, .gif, .pdf, .ppt, .txt, .hwp">
     		
-    		<%--
     		
-    		
-    		 --%>
     		
     </div>
     <div>

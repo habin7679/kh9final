@@ -14,7 +14,7 @@
 	<input type="hidden" name="cert" value="${cert}">
 	<input type="hidden" name="memberId" value="${param.memberId}">
 	<div class="row mt-2 text-left mb-2" >
-	<label>바꿀 비밀번호</label>
+	<label>변경할 비밀번호를 입력해주세요</label>
 	<input type="password" name="memberPw" required  class="form-control me-1">
 	</div>
 	 <div class="row mb-2">

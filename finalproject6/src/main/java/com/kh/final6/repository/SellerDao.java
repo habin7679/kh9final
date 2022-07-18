@@ -1,6 +1,10 @@
 package com.kh.final6.repository;
 
+import java.util.List;
+
 import com.kh.final6.entity.SellerDto;
+import com.kh.final6.vo.SellerInfoVO;
+import com.kh.final6.vo.SellerMemberVO;
 
 public interface SellerDao {
 
@@ -8,5 +12,24 @@ public interface SellerDao {
 
 	SellerDto one (int sellerNo);
 
-	int getSellerNo(int memberNo);
+	int getSellerNo(int storeNo);
+	
+	void join(SellerDto sellerDto);
+
+	List<SellerDto> list(int sellerNo);
+	
+	SellerInfoVO sellerMemberInfoVO(int sellerNo);
+	List<SellerMemberVO> adminlist(String type, String keyword, int p, int s);
+	int count(String type, String keyword);
+
+	void gradeEdit(int sellerNo);
+
+	int sellerMemberNo(int sellerNo);
+
+	void gradeMemberEdit(int memberNo);
+
+	void gradeCancel(int sellerNo);
+
+	
+	
 }

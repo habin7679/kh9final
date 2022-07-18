@@ -3,6 +3,7 @@
 
 </section>
 </main>
+
     <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
@@ -59,7 +60,9 @@
 
   </footer><!-- End Footer -->
   <!-- End Footer -->
-	
+<!--  <span class="chatMsg">Hello!</span>	 -->
+<h6 class="chatMsg text-center">Hello!</h6>
+  <a href="#" class="chat-bot d-flex align-items-center justify-content-center"><i class="bi bi-robot"></i></a>
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader"></div>
@@ -69,7 +72,13 @@
   <!-- Template Main JS File -->
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
 
-  
+  <script>
+  	$(function(){
+  		$(".chat-bot").click(function(){
+  			window.open("${pageContext.request.contextPath}/chatbot/","ChatBot","width=500,height=600,scrollbars=no,left=1000,top=400")
+  		});
+  	});
+  </script>
 </body>
 
 </html>

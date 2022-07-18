@@ -3,7 +3,8 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
-
+<style>
+</style>
     <div class="container ma-t-100">
 
 	<div class="section-header mt-4 col-md-6 offset-md-3" >
@@ -14,9 +15,9 @@
         
         <div class="row mt-2 text-left">
             <div class="col-md-6 offset-md-3">
-                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_readcount&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >조회수 순</a>
-                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=desc&p=${p}&s=${s}" class="btn btn-secondary" >최신 순</a>
-                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=asc&p=${p}&s=${s}" class="btn btn-secondary" >오래된 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_readcount&order=desc&p=${p}&s=${s}" class="btn0" >조회수 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=desc&p=${p}&s=${s}" class="btn0" >최신 순</a>
+                    <a href="${pageContext.request.contextPath}/notice/list?column=notice_no&order=asc&p=${p}&s=${s}" class="btn0" >오래된 순</a>
             </div>
         </div>
         
@@ -42,10 +43,36 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                    	<c:forEach var="noticeDto" items="${list}">
-	                        <tr>
+                    <!-- 상단 고정 게시글 보기 -->
+                    	<c:forEach var="noticeDto" items="${noticeList}">
+	                        <tr style="background-color: #fef4f2;" class="fix-font">
 	                            <td>${noticeDto.noticeNo}</td>
 	                            <td style="text-align: left !important">
+	                            <c:if test="${noticeDto.pin==1}">
+		                    	<span class="circle-head">중요</span>
+		                    	</c:if> 
+	                            <a href="detail?noticeNo=${noticeDto.noticeNo}">
+	                           	<!-- 말머리 -->
+		                            <c:if test="${noticeDto.noticeHead != null}">
+		                            	[${noticeDto.noticeHead}]
+		                            </c:if>
+	                            	${noticeDto.noticeTitle}
+	                            </a>
+	                            </td>
+	                            <td>${noticeDto.noticeWriter}</td><!-- 작성자 닉네임 클릭 시 쪽지 -->
+	                            <td>${noticeDto.noticeTime}</td>
+	                            <td>${noticeDto.noticeReadcount }</td>
+	                        </tr>
+                        </c:forEach>
+                    
+                    <!-- 일반 게시글 목록 -->
+                    	<c:forEach var="noticeDto" items="${list}">
+	                        <tr class="normal-font">
+	                            <td>${noticeDto.noticeNo}</td>
+	                            <td style="text-align: left !important">
+<%-- 	                            <c:if test="${noticeDto.pin==1}"> --%>
+<!-- 		                    	<span class="circle-head">중요</span> -->
+<%-- 		                    	</c:if>  --%>
 	                            <a href="detail?noticeNo=${noticeDto.noticeNo}">
 	                           	<!-- 말머리 -->
 		                            <c:if test="${noticeDto.noticeHead != null}">
@@ -76,35 +103,35 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">&lt;</a></li>
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_readcount&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">&lt;</a></li>
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">&lt;</a></li>
+								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=notice_no&order=asc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=notice_readcount&order=desc">&lt;</a></li>
+								href="list?p=1&s=${s}&column=notice_readcount&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=notice_no&order=desc">&lt;</a></li>
+								href="list?p=1&s=${s}&column=notice_no&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=notice_no&order=asc">&lt;</a></li>
+								href="list?p=1&s=${s}&column=notice_no&order=asc">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}">&lt;</a></li>
+								href="list?p=1&s=${s}">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -316,7 +343,7 @@
 						<option value="notice_writer" <c:if test="${type == 'notice_writer'}">selected</c:if>>작성자</option>
                     </select>
                 <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" style="width:50%;" autocomplete="off">
-                <input type="submit" value="검색" class="btn btn-outline-danger" style="width:15%;">
+                <input type="submit" value="검색" class="btn-s" style="width:15%;">
                </div>
                </form>
                </div>

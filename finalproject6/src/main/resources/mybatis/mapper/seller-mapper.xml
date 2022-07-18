@@ -34,7 +34,85 @@
  	</select>
  	
  	<select id="sellerNo" parameterType="int" resultType="int">
- 		select seller_no from seller where member_no = #{memberNo}
+ 		select seller_no from store where store_no = #{storeNo}
  	</select>
  	
+ 		<!-- 판매자 시퀀스 -->
+	<select id="sequence" resultType="int">
+		select seller_seq.nextval from dual
+	</select>
+	
+	
+ 	<insert id="join" parameterType="SellerDto">
+		insert into seller(
+		    seller_no, member_no, seller_bank, seller_account, 
+		    seller_business_num
+		)
+		values(
+		     #{sellerNo}, #{memberNo}, #{sellerBank}, #{sellerAccount},
+		     #{sellerBusinessNum} 
+		) 
+	</insert>
+	
+	<select id = "list" resultType = "SellerDto" parameterType = "int">
+		select * from seller where member_no = #{memberNo} 
+	</select>
+	
+ 	
+ 	<select id="sellerInfoVO" resultType="SellerInfoVO" parameterType="int">
+ 	select 
+		M.member_name, M.member_id, M.member_pw, M.member_phone,
+		s.seller_bank, s.seller_account, s.seller_point
+	from seller S
+		left outer join member M on M.member_no = S.member_no
+	where seller_no = #{sellerNo}
+ 	
+ 	</select>
+ 	<select id="adminlist" resultType="SellerMemberVO" parameterType="Map">
+ 		select * from (
+ 			select rownum rn, TMP.* from(
+	 			select * from seller S
+           		 left outer join member M on M.member_no = S.member_no
+	 			<if test="type != null and keyword != null">
+	 				<![CDATA[
+	 				where instr (M.${type},#{keyword}) > 0
+	 				]]>
+	 			</if>
+	 			<!-- 정렬 -->
+	 			order by seller_no desc 
+	 			)
+						TMP 
+ 			) where rn between #{begin} and #{end}
+ 	
+ 	</select>
+ 	<select id="count" parameterType="Map" resultType="int">
+ 		select count(*) from seller S
+           		 left outer join member M on M.member_no = S.member_no
+ 		<if test = "type != null and keyword != null">
+ 			<![CDATA[
+ 			where instr (M.${type},#{keyword}) > 0
+ 			]]>
+ 		</if>
+ 	</select>
+ 	<update id="edit" parameterType="int">
+ 		update seller set
+ 			seller_type = '완료'
+ 		where seller_no = ${sellerNo}
+ 	</update>
+ 	
+ 	<select id="memberNo" parameterType="int" resultType="int">
+ 		select member_no from seller where seller_no = ${sellerNo}
+ 	</select>
+ 	
+ 	<update id="memberEdit" parameterType="int">
+ 	update member set
+ 			member_kind = '판매자'
+ 		where member_no = ${memberNo}
+ 	</update>
+	<update id="cancel" parameterType="int">
+	update seller set
+	seller_type = '취소'
+	where seller_no = ${sellerNo}
+	</update>
+	
  </mapper>

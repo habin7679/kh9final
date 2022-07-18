@@ -56,5 +56,8 @@ public class ReplyDaoImpl implements ReplyDao{
 		return sqlSession.selectOne("reply.replyCount",replyTarget);
 	}
 
+
+
+
 	
 }

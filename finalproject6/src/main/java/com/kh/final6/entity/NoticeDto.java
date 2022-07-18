@@ -17,4 +17,5 @@ public class NoticeDto {
 	private String noticeContent;
 	private Date noticeTime;
 	private int noticeReadcount;
+	private int pin;
 }

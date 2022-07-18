@@ -12,7 +12,7 @@
 /* 버튼 */
 .btn1{
   font-size: 14px;
- color: white !important;
+  color: white !important;
   background: var(--color-primary);
   padding: 8px 20px;
   transition: 0.3s;
@@ -45,9 +45,76 @@
   border:none;
 }
 
+.btn-c{
+  font-size: 14px;
+  color: black;
+  background: #fff;
+  padding: 8px 20px;
+  transition: 0.3s;
+  border-radius:4px;
+  border:1px solid var(--color-primary);
+}
+.btn-c:hover{
+	color:var(--color-primary);
+	
+}
+.btn-c:disabled{
+	cursor:Default;
+	color:#636e72;
+	background:#dfe6e9;
+	border:none;
+}
+.btn-cc{
+	font-size: 14px;
+  color: #fff;
+  background: var(--color-primary);
+  padding: 8px 20px;
+  transition: 0.3s;
+  border-radius:4px;
+  border:1px solid var(--color-primary);
+}
+.btn-cc:hover{
+	color: white;
+  background: rgba(206, 18, 18, 0.8);
+  border:none;
+}
+
+.btn-s{
+  font-size: 14px;
+  color: black;
+  background: #fff;
+  padding: 8px 20px;
+  transition: 0.3s;
+  border-radius:4px;
+  border:1px solid var(--color-primary) ;
+  color: initial ;
+}
+.btn-s:hover{
+	color: #fff;
+	background:var(--color-primary);
+	border: none;
+}
+/* 말머리 */
+.circle-head{
+        background-color: #57606f;
+        border-radius: 1.2em;
+        color: white;
+        padding: 0.5em;
+        font-size: 10px;
+       }
+/* 게시판 폰트 사이즈 */
+    .fix-font{
+    	font-size: 15px;
+    }
+    .normal-font{
+    	font-size: 14px;
+    }
+
 .top{
 margin-top : 60px;
 }
+
+
 
 /* 페이지네이션 */
 .page-link {
@@ -258,6 +325,49 @@ section {
   opacity: 1;
 }
 
+/*--------------------------------------------------------------
+# Chat bot button
+--------------------------------------------------------------*/
+.chat-bot {
+  position: fixed;
+  visibility: visible;
+  opacity: 100;
+  right: 15px;
+  bottom: 68px;
+  z-index: 99999;
+  background: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+.chat-bot i {
+  font-size: 44px;
+  color: var(--color-primary);
+  line-height: 0;
+}
+
+.chat-bot:hover {
+  background: #fff;
+  color: #cf6a87;
+}
+
+.chat-bot.active {
+  visibility: visible;
+  opacity: 1;
+}
+.chatMsg {
+  position: fixed;
+  visibility: visible;
+  opacity: 100;
+  right: 15px;
+  bottom: 80px;
+  z-index: 99999;
+  color: black;
+  width: 44px;
+  height: 44px;
+  transition: all 0.4s;
+}
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/

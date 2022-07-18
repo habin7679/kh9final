@@ -11,7 +11,7 @@
 	</div>
 	<div class="row center m30">
 		
-		<a href="https://www.naver.com"><img src="<%=request.getContextPath()%>/image/error.png" width="50" height="50"></a>
+		<img src="<%=request.getContextPath()%>/img/error.png" width="50" height="50"></a>
 	</div>
 </div>
 

@@ -8,4 +8,7 @@ import com.kh.final6.entity.NoticeDto;
 
 public interface NoticeService {
 	int save(NoticeDto noticeDto, MultipartFile noticeImg) throws IllegalStateException, IOException;
+
+	void edit(NoticeDto noticeDto, MultipartFile noticeImg) throws IllegalStateException, IOException;
 }
+ 

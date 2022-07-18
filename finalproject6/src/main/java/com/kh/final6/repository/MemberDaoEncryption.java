@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.error.CannotFindException;
 
 @Repository
 public class MemberDaoEncryption implements MemberDao{
@@ -123,7 +124,7 @@ public class MemberDaoEncryption implements MemberDao{
 		int count = sqlSession.update("member.changePassword", memberDto);
 		return count > 0;
 	}
-
+	@Override
 	public List<MemberDto> list(String type, String keyword, int p, int s) {
 		Map<String,Object> param = new HashMap<>();
 		param.put("type", type);
@@ -146,8 +147,29 @@ public class MemberDaoEncryption implements MemberDao{
 	 		
 	 		return sqlSession.selectOne("member.count",param);
 		}
+		
 
+		//등급변경
+		@Override
+		public MemberDto edit(MemberDto memberDto) {
+			int count = sqlSession.update("member.edit", memberDto);
+			if(count ==0) throw new CannotFindException();
+			return sqlSession.selectOne("member.oneNo", memberDto.getMemberKind());
+		}
+		
+		//id 중복검사 
+		@Override
+		public MemberDto idcheck(String memberId) {
+		return sqlSession.selectOne("member.idcheck", memberId);
+		}
+		
+		//nick 중복검사
+		@Override
+		public MemberDto nickcheck(String memberNick) {
+			return sqlSession.selectOne("member.nickcheck", memberNick);
+		}
 }
+
 
 
 
