@@ -150,6 +150,9 @@
             <li><a href="#">내 결제</a></li>
             <li><a href="${pageContext.request.contextPath}/msg/sendBox">보낸쪽지함</a></li>
             <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
+            <c:if test="${isAdmin}">
+            	<li><a href="${pageContext.request.contextPath}/member/adminChat">챗봇메세지 관리</a></li>
+            </c:if>
             <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
           </ul>
         </li>

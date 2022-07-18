@@ -42,6 +42,25 @@
 			console.log(dataList);
 		});
 		
+		//fb삭제
+		$(".fa-solid").click(function(){
+			let replyNo = $(this).val();
+			console.log(replyNo);
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/reply/"+replyNo,
+				type:"delete",
+				success:function(resp){
+					alert("삭제되었습니다.");
+					location.replace("ownerReply");
+				},
+				error:function(){
+					alert("삭제 실패하였습니다.");
+				}
+				
+			});
+		});
+		
 		//삭제
 		$("#dbt").click(function(){
 			if($(".select-item").filter(":checked").length == 0){
@@ -91,12 +110,12 @@
 						let input1 = $("<input type=checkbox>").addClass("select-item").val(resp[i].replyNo).attr("name","replyNo");
 						td1.append(input1);
 						
-						let td2 = $("<td>").text(resp[i].replyContent);
+						let td2 = $("<td>").text(resp[i].replyContent).css("text-align","left");
 						
-						let td3 = $("<td>").text(resp[i].replyTime);
+						let td3 = $("<td>").text(moment(resp[i].replyTime).format('YYYY-MM-DD hh:mm'));
 						
 						let td4 = $("<td>");
-						let editcon = $("<i>").addClass("fa-solid fa-circle-xmark fa-cursor");
+						let editcon = $("<i>").addClass("fa-solid fa-circle-xmark fa-cursor").val(resp[i].replyNo);
 						
 						td4.append(editcon);
 						

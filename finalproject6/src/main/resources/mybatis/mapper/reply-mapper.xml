@@ -20,7 +20,7 @@
  	</select>
  	
  	<select id="list" parameterType="int" resultType="ReplyDto">
- 		select * from reply where reply_target = #{replyTarget}
+ 		select * from reply where reply_target = #{replyTarget} order by reply_time asc
  	</select>
  	
  	<delete id="delete" parameterType="int">
@@ -36,7 +36,8 @@
  	
  	<update id="edit" parameterType="ReplyDto">
  		update reply set 
- 			reply_content = #{replyContent}
+ 			reply_content = #{replyContent},
+ 			reply_time = sysdate
  		where reply_no = #{replyNo}	
  	</update>
  	
