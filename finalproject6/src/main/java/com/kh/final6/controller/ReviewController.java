@@ -62,8 +62,6 @@ public class ReviewController {
 		String memberId = (String)session.getAttribute("login");
 		MemberDto memberDto = memberdao.info(memberId);
 		reviewDto.setMemberNo(memberNo);
-		System.out.println("멤버no"+memberNo);
-		System.out.println("리뷰디티오"+reviewDto);
 		reviewDto.setReviewWriter(memberDto.getMemberNick());
 		
 		int reviewNo = reviewService.save(reviewDto, reviewImg);
@@ -78,6 +76,16 @@ public class ReviewController {
 	public String edit(@RequestParam int reviewNo,Model model) {
 		ReviewDto reviewDto = reviewDao.one(reviewNo);
 		model.addAttribute(reviewDto);
+		
+		int attachmentNo = reviewAttachDao.info(reviewNo);
+		AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
+		
+		boolean reviewAttach = attachmentNo == 0;
+		model.addAttribute("reviewAttach",reviewAttach);
+		
+		model.addAttribute("attachmentDto",attachmentDto);
+		
+		
 		return "review/edit";
 	}
 	
@@ -85,15 +93,31 @@ public class ReviewController {
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute ReviewDto reviewDto,
-						RedirectAttributes attr) {
-		boolean success = reviewDao.update(reviewDto);
+						@RequestParam (required=false) MultipartFile reviewImg,
+						HttpSession session,
+						Model model,
+						RedirectAttributes attr) throws IllegalStateException, IOException {
+		if(reviewImg != null) {
+			int attachNo = reviewAttachDao.info(reviewDto.getReviewNo());
+			reviewService.edit(reviewDto, reviewImg);
+		}
+		//내글여부확인
+		Integer memberNo = (Integer)session.getAttribute("no");
+		boolean isLogin = memberNo != null; 
+		boolean isOwner = isLogin && memberNo.equals(reviewDto.getMemberNo());
+		model.addAttribute("isLogin",isLogin);
+		model.addAttribute("isOwner",isOwner);
+		
+		
+		boolean success = reviewDao.edit(reviewDto);
 		if(success) {
 			attr.addAttribute("reviewNo",reviewDto.getReviewNo());
-			return "redirect:detail";
+			return "redirect:/review/list";
 		}
 		else {
 			throw new CannotFindException();
 		}
+		
 	}
 	
 	

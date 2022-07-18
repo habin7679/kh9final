@@ -7,8 +7,6 @@
 <c:set var="isLogin" value="${memberId != null}"></c:set>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 <c:set var="nick" value="${nick}"></c:set>
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -133,15 +131,17 @@
           </li>
         </ul>
       
-      
-    
+<c:choose>      
+    <c:when test="${no == null }">
       <a href="${pageContext.request.contextPath}/member/login" class="btn-book-a-table me">로그인</a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
+</c:when>
+<c:otherwise>
       <ul>
-        <li class="dropdown"><a href="#"><span>닉네임  </span><i class="fa-solid fa-square-envelope fa-1x"></i></a>
+        <li class="dropdown"><a href="#"><span>${nick}</span><i class="fa-solid fa-square-envelope fa-1x"></i></a>
           <ul>
+
 
 
             <li><a href="${pageContext.request.contextPath}/member/mypage?memberId=${memberId}">내 정보</a></li>
@@ -149,10 +149,16 @@
             <li><a href="#">내 예약</a></li>
             <li><a href="${pageContext.request.contextPath}/member/ownerReply">내 댓글 확인</a></li>
             <li><a href="#">내 결제</a></li>
+
+
+            <li><a href="${pageContext.request.contextPath}/msg/sendBox">보낸쪽지함</a></li>
+            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
             <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
           </ul>
         </li>
       </ul>
+      </c:otherwise>
+      </c:choose>
       </nav>
     </div>
   </header><!-- End Header -->

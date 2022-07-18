@@ -96,21 +96,19 @@
             },
 
             methods:{
-            	 rightPassword(){
-                     axios.get("${pageContext.request.contextPath}/rest/payToMoney/memberId/"+this.memberId+"/memberPw/"+this.memberPw)
-                     .then(resp=>{
-                    	 console.log(resp.data);
-                         if(resp.data == '111111'){
-                        	 this.isPassword = true;
-                        	 this.rightPwObject["is-valid"] =  true;
-                        	 this.rightPwObject["is-invalid"] = false;      
-                         } else{
-                        	 this.isPassword = false;
-                        	 this.rightPwObject["is-valid"] =  false;
-                             this.rightPwObject["is-invalid"] = true;                        	 
-                         }
-                         
-                     });
+            	 async rightPassword(){
+            		 // destructuring assignment (구조분해할당)
+                    const {status, data} = await axios.get("${pageContext.request.contextPath}/rest/payToMoney/memberId/"+this.memberId+"/memberPw/"+this.memberPw);
+                   	 console.log(data);
+                        if(data == '111111'){
+                       	 this.isPassword = true;
+                       	 this.rightPwObject["is-valid"] =  true;
+                       	 this.rightPwObject["is-invalid"] = false;      
+                        } else{
+                       	 this.isPassword = false;
+                       	 this.rightPwObject["is-valid"] =  false;
+                            this.rightPwObject["is-invalid"] = true;                        	 
+                        }
                    },
             },
              watch:{
