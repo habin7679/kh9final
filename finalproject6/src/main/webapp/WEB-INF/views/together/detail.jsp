@@ -65,7 +65,8 @@
                             		(탈퇴한 사용자)
                             	</c:when>
                             	<c:otherwise>
-	                                <span class="me-3">${togetherDto.togetherWriter}</span>
+                            	<a href="${pageContext.request.contextPath}/msg/send?memberRecvNo=${togetherDto.memberNo}">
+	                                <span class="me-3">${togetherDto.togetherWriter}</span></a>
                             	</c:otherwise>
                             </c:choose>
                                 <span class="me-3">${togetherDto.togetherTime}</span>
@@ -100,7 +101,8 @@
                             <td v-if="!reply.edit">
                                 <div class="row" >
                                     <div class="col-md-2 text-left mt-1 mb-1 passSpace">
-                                       <span class="fw-bold">{{reply.replyWriter}}</span>
+                                       <a v-bind:href="linkIndex(index)">
+                                       <span class="fw-bold">{{reply.replyWriter}}</span></a>
                                     </div>
                                     <div class="col-md-6 text-left mt-1 mb-1 passSpace">
                                         <span>{{reply.replyContent}}</span>
@@ -171,6 +173,7 @@
                 replyContent:"",
                 replyList:[],
                 replyCount:0,
+                link:""
             };
         },
         
@@ -286,6 +289,11 @@
             },
             changeTime(index){
             	return moment(index).format('YYYY-MM-DD hh:mm');
+            },
+            
+            linkIndex(index){
+            	const reply = this.replyList[index];
+            	return this.link = "${pageContext.request.contextPath}/msg/send?memberRecvNo="+reply.memberNo;
             },
         },
             //watch : 특정 data를 감시하여 연계 코드를 실행하기 위해 작성한다

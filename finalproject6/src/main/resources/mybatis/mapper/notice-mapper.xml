@@ -99,4 +99,15 @@
  		where notice_no = #{noticeNo}
  	</update>
  	
+<!--  	<select id="allRead" parameterType="Map" resultType="BoardVO" > -->
+<!--  		select * from ( -->
+<!-- 			select rownum rn, TMP.* from( -->
+<!-- 			select qna_no,member_no,qna_title, qna_content, qna_writer,qna_time from qna where member_no = ${memberNo} -->
+<!-- 			union all -->
+<!-- 			select together_no,member_no,together_title,together_content,together_writer,together_time from  -->
+<!-- 			together where member_no = ${memberNo} order by qna_time desc)TMP) -->
+<!-- 		where rn between ${begin} and ${end} -->
+
+<!--  	</select> -->
+ 	
  </mapper>

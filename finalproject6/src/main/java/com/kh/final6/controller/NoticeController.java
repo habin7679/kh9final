@@ -151,7 +151,9 @@ public class NoticeController {
 						RedirectAttributes attr) throws IllegalStateException, IOException {
 		int memberNo= (Integer)session.getAttribute("no");
 		String memberId = (String)session.getAttribute("login");
+		
 		MemberDto memberDto = memberDao.info(memberId);
+		
 		noticeDto.setMemberNo(memberNo);
 		noticeDto.setNoticeWriter(memberDto.getMemberNick());
 		
@@ -236,4 +238,5 @@ public class NoticeController {
 	public String error() {
 		return "error/notaAdmin";
 	}
+	
 }

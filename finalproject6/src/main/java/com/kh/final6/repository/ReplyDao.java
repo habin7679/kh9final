@@ -18,5 +18,11 @@ public interface ReplyDao {
 
 	int replyCount(int replyTarget);
 
+	List<ReplyDto> ownerList(int p, int s, String type, String keyword, int memberNo);
+	
+	int count(String type, String keyword,int memberNo);
+
+	int rdelelte(int replyNo);
+
 	
 }

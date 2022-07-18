@@ -26,6 +26,7 @@ public class StoreServiceImpl implements StoreService{
 	@Override
 	public int save(StoreDto storeDto, MultipartFile storeImg) throws IllegalStateException, IOException {
 		int storeNo = storeDao.insert(storeDto);
+		System.out.println("스토어넘버"+storeNo);
 		if(!storeImg.isEmpty()) {
 			int attachmentNo = attachmentDao.save(storeImg);
 			storeAttachDao.insert(storeDto.getStoreNo(), attachmentNo);

@@ -34,7 +34,7 @@
  	</select>
  	
  	<select id="sellerNo" parameterType="int" resultType="int">
- 		select seller_no from seller where member_no = #{memberNo}
+ 		select seller_no from store where store_no = #{storeNo}
  	</select>
  	
  		<!-- 판매자 시퀀스 -->

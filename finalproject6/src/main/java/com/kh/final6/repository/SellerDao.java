@@ -12,7 +12,7 @@ public interface SellerDao {
 
 	SellerDto one (int sellerNo);
 
-	int getSellerNo(int memberNo);
+	int getSellerNo(int storeNo);
 	
 	void join(SellerDto sellerDto);
 
