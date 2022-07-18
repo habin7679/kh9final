@@ -23,6 +23,10 @@ public interface MsgDao {
 
 	boolean delete1(int msgNo);
 
+	SendMsgVO senddetail(int msgNo);
+
+	RecvMsgVO recvdetail(int msgNo);
+
 
 
 

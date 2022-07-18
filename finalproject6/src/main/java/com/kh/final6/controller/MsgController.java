@@ -151,6 +151,22 @@ public String delete1(@RequestParam int msgNo ) {
 		throw new CannotFindException();
 	}
 }
+@GetMapping("/senddetail")
+public String senddetail(@RequestParam int msgNo,
+		Model model,
+		HttpSession session) {
+	SendMsgVO sendMsgVO = msgDao.senddetail(msgNo);
+	model.addAttribute("sendMsgVO",sendMsgVO);
+	return "msg/senddetail";
+}
+@GetMapping("/recvdetail")
+public String recvdetail(@RequestParam int msgNo,
+		Model model,
+		HttpSession session) {
+	RecvMsgVO recvMsgVO = msgDao.recvdetail(msgNo);
+	model.addAttribute("recvMsgVO",recvMsgVO);
+	return "msg/recvdetail";
+}
 
 
 }
