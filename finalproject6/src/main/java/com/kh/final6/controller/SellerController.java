@@ -103,8 +103,8 @@ public class SellerController {
 	public String infoGet(
 			HttpSession session, Model model) {
 
-       int sellerNo = (int) session.getAttribute("no");
-		List<SellerDto> list = sellerDao.list(sellerNo);
+       int memberNo = (int) session.getAttribute("no");
+		List<SellerDto> list = sellerDao.list(memberNo);
 		// log.debug("sellseNo = {}",list);
 
 		model.addAttribute("list", list);

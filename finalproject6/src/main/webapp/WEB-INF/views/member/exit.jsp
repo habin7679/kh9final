@@ -20,6 +20,13 @@
 	<div class="row mb-2">
 		<button type="submit" class= "btn1">탈퇴하겠습니다</button>
 	</div>
+	
+	<c:if test="${param.error != null}">
+		<div class="row center">
+			<h3 style="color:red;" class="mt-2 offset-md-1">비밀번호 정보가 일치하지 않습니다</h3>	
+		</div>
+		</c:if>
+    </div>
 </div>
 </form>
 </section>

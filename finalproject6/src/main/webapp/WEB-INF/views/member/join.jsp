@@ -33,7 +33,7 @@
 					<label>비밀번호</label> <input v-bind:type="passwordInputType"
 						name="memberPw" required placeholder="" class="form-control me-1"
 						v-bind:class="pwClassObject" v-model="member.memberPw"
-						v-on:blur="pwValidation">
+						v-on:blur="pwValidation" maxlength="16" >
 					<div class="valid-feedback">올바른 비밀번호입니다</div>
 					<div class="invalid-feedback">비밀번호는 영문 대문자,소문자,숫자,특수문자가 반드시
 						1개 이상 포함된 8~16자 이내여야 합니다</div>
@@ -41,8 +41,8 @@
 
 				<div class="row text-left mb-2">
 					<label>비밀번호 재확인</label> <input v-bind:type="passwordInputType"
-						placeholder="" class="form-control me-1"
-						v-model="member.memberPwAgain" v-on:blur="pwAgainValidation">
+						placeholder="" class="form-control me-1" v-bind:class="pwAgainClassObject"
+						v-model="member.memberPwAgain" maxlength="16" v-on:blur="pwAgainValidation" >
 					<div class="valid-feedback">비밀번호가 일치합니다</div>
 					<div class="invalid-feedback">비밀번호가 불일치합니다</div>
 				 <div>
@@ -65,7 +65,7 @@
 					<label>닉네임</label> <input type="text" name="memberNick" required
 						placeholder="" autocomplete="off" class="form-control me-1"
 						v-bind:class="nickClassObject" v-model="member.memberNick"
-						v-on:blur="nickValidation">
+						v-on:blur="nickValidation" maxlength="10" >
 					<div class="valid-feedback">적합한 닉네임입니다</div>
 					<div class="invalid-feedback">닉네임은 한글과 숫자로 2~10자 이내로만 작성
 						가능합니다</div>
@@ -86,7 +86,7 @@
 						autocomplete="off" v-bind:class="phoneClassObject"
 						v-model="member.memberPhone"
 						v-on:input="member.memberPhone = $event.target.value"
-						v-on:blur="phoneValidation">
+						v-on:blur="phoneValidation" maxlength="11">
 					<div class="valid-feedback">올바른 형식입니다</div>
 					<div class="invalid-feedback">적합하지 않은 형식입니다</div>
 				</div>
@@ -146,6 +146,11 @@
                         get memberPwValid(){
                             const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%])[A-Za-z0-9!@#$%]{8,16}$/;
                             return this.memberPw.length > 0 && regex.test(this.memberPw);
+                        },
+                        
+                        get memberPwAgainValid(){
+                            const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%])[A-Za-z0-9!@#$%]{8,16}$/;
+                            return this.memberPwAgain.length > 0 && regex.test(this.memberPwAgain);
                         },
 
                         get memberNameValid(){
