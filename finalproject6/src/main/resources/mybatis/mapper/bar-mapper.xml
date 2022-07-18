@@ -23,16 +23,15 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
- <mapper namespace="reviewAttach">
- 	<insert id="insert" parameterType="Map">
- 	insert into review_attachment (review_no, attachment_no) values (#{reviewNo}, #{attachmentNo})
- 	</insert>
-
-
+ <mapper namespace="bar">
  	
- 	<select id="one" parameterType="int" resultType="Integer">
- 		select attachment_no from review_attachment where review_no = #{reviewNo}
- 	</select>
- 	
- 	
- </mapper>
+	<insert id ="insert" parameterType="BarRoomStoreDto">
+	insert into bar(store_no, bar_price, bar_count)
+		values(#{storeNo}, #{barPrice}, #{barCount})
+	
+	</insert>
+ 	 
+ 	 
+ 	 
+ 	 
+ 	 </mapper>

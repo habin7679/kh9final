@@ -7,8 +7,6 @@
 <c:set var="isLogin" value="${memberId != null}"></c:set>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 <c:set var="nick" value="${nick}"></c:set>
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>

@@ -8,5 +8,7 @@ import com.kh.final6.entity.ReviewDto;
 
 public interface ReviewService {
 	int save(ReviewDto reviewDto, MultipartFile reviewImg) throws IllegalStateException, IOException;
+
+	void edit(ReviewDto reviewDto, MultipartFile reviewImg)throws IllegalStateException, IOException;
 }
 
