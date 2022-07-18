@@ -25,11 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.final6.entity.CertDto;
 import com.kh.final6.entity.MemberDto;
+import com.kh.final6.entity.ReplyDto;
 import com.kh.final6.error.UnauthorizeException;
 import com.kh.final6.repository.AttachmentDao;
 import com.kh.final6.repository.CertDao;
 import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.MemberProfileDao;
+import com.kh.final6.repository.ReplyDao;
 import com.kh.final6.repository.SellerDao;
 import com.kh.final6.service.EmailService;
 import com.kh.final6.service.MemberService;
@@ -61,6 +63,9 @@ public class MemberController {
 	
 	@Autowired
 	private SellerDao sellerDao;
+	
+	@Autowired
+	private ReplyDao replyDao;
 	
 	//회원가입 
 	@GetMapping("/join")
@@ -384,6 +389,44 @@ public class MemberController {
 		public String chat() {
 			return "member/adminChatManage";
 		}
+	
+	//내가 쓴 댓글 확인
+	@GetMapping("/ownerReply") 
+	public String ownerReply(@RequestParam (required = false, defaultValue = "1") int p,
+							@RequestParam (required = false, defaultValue = "10") int s,
+							@RequestParam (required = false) String type,
+							@RequestParam (required = false) String keyword,
+							HttpSession session,
+							Model model) {
+		
+		int memberNo = (Integer)session.getAttribute("no");
+		List<ReplyDto> list = replyDao.ownerList(p,s,type,keyword,memberNo);
+		model.addAttribute("replyList",list);
+		
+		boolean search = type != null || keyword != null;
+		model.addAttribute("search",search);
+		
+		int count = replyDao.count(type,keyword,memberNo);
+		int lastPage = (count + s - 1) /s;
+		
+		int blockSize = 10;
+		int endBlock = (p + blockSize - 1) / blockSize * blockSize;
+		int startBlock = endBlock - (blockSize - 1);
+		if(endBlock > lastPage){
+			endBlock = lastPage;
+		}
+		model.addAttribute("p",p); 
+		model.addAttribute("s",s);
+		model.addAttribute("endBlock",endBlock);
+		model.addAttribute("startBlock",startBlock);
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("type",type);
+		model.addAttribute("keyword",keyword);
+		
+		return "member/ownerReplyList";
+	}
+	
+	
 }
 
 

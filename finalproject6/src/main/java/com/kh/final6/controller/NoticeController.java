@@ -236,4 +236,5 @@ public class NoticeController {
 	public String error() {
 		return "error/notaAdmin";
 	}
+	
 }

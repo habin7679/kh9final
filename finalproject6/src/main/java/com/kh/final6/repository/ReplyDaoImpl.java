@@ -1,6 +1,8 @@
 package com.kh.final6.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +58,37 @@ public class ReplyDaoImpl implements ReplyDao{
 		return sqlSession.selectOne("reply.replyCount",replyTarget);
 	}
 
+	@Override
+	public List<ReplyDto> ownerList(int p, int s, String type, String keyword, int memberNo) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("type", type);
+		param.put("keyword", keyword);
+		param.put("memberNo", memberNo);
+		
+		int end = p * s;
+		int begin = end - (s-1);
+		
+		param.put("begin", begin);
+		param.put("end", end);
+		
+		return sqlSession.selectList("reply.ownerList",param);
+	}
 
 
+	@Override
+	public int count(String type, String keyword, int memberNo) {
+		Map<String,Object> param = new HashMap<>();
+		param.put("type", type);
+		param.put("keyword", keyword);
+		param.put("memberNo", memberNo);
+		
+		return sqlSession.selectOne("reply.count",param);
+	}
 
-	
+	@Override
+	public int rdelelte(int replyNo) {
+		int count = sqlSession.delete("reply.delete",replyNo);
+		if(count == 0) throw new CannotFindException();
+		return count;
+	}	
 }
