@@ -3,10 +3,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="memberId" value="${login}"></c:set>
+<c:set var="memberNo" value="${no}"></c:set>
 <c:set var="no" value="${no}"></c:set>
 <c:set var="isLogin" value="${memberId != null}"></c:set>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
-<c:set var="isSeller" value="${auth == '판매자'}"></c:set>
 <c:set var="nick" value="${nick}"></c:set>
 <!DOCTYPE html>
 <html lang="ko">
@@ -173,18 +173,12 @@ function onMessage(evt){
 
 
             <li><a href="${pageContext.request.contextPath}/member/mypage?memberId=${memberId}">내 정보</a></li>
-            <li><a href="#">내 예약</a></li>
+            <li><a href="${pageContext.request.contextPath}/reservation/memberCheck?memberNo=${memberNo}">내 예약</a></li>
             <li><a href="${pageContext.request.contextPath}/member/ownerReply">내 댓글 확인</a></li>
-            <li><a href="#">내 결제</a></li>
             <li><a href="${pageContext.request.contextPath}/msg/sendBox">보낸쪽지함</a></li>
             <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
             <c:if test="${isAdmin}">
             	<li><a href="${pageContext.request.contextPath}/member/adminChat">챗봇메세지 관리</a></li>
-            </c:if>
-            <c:if test="${isSeller}">
-            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
-            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
-            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
             </c:if>
             <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
           </ul>
