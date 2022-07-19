@@ -11,7 +11,7 @@ import com.kh.final6.entity.AttachmentDto;
 public interface AttachmentDao {
 
 	int save (MultipartFile storeImg) throws IllegalStateException, IOException;
-	//int savelist(List<MultipartFile> storeImg) throws IllegalStateException, IOException;
+	int savelist(MultipartFile storeImg) throws IllegalStateException, IOException;
 	AttachmentDto info(int attachmentNo);
 	ByteArrayResource load(String attachmentSavename) throws IOException;
 	String name(int attachmentNo);

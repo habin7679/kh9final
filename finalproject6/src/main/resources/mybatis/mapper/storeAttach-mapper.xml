@@ -30,7 +30,7 @@
 
 
  	
- 	<select id="one" parameterType="int" resultType="Integer">
+ 	<select id="one" parameterType="int" resultType="Map">
  		select attachment_no from store_attachment where store_no = #{storeNo}
  	</select>
  	

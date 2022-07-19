@@ -21,7 +21,8 @@
     				
     					<td>
     						<c:when test="${storeAttach == false || passImg}">
-    							<img src="${pageContext.request.contextPath}${storeImgUrl}" width="50%" height="750">
+    							<img src="${pageContext.request.contextPath}${storeImgUrl}" width="50%" height="50">
+    							<img src="${pageContext.request.contextPath}${storeImgUrl}" width="50%" height="50">
 						</td>
 						<td>
 						<pre>가게이름:${storeDto.storeName}</pre>
@@ -60,7 +61,7 @@
     		</div>
     	</div>
     </div>    
-
+<a herf =></a>
     <div id="map" style="width:100%;height:350px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85dadd42b9eaa3324f969eda3e18fe08&libraries=services"></script>
@@ -69,7 +70,7 @@
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 2 // 지도의 확대 레벨
+        level: 2 
     };  
 // 지도를 생성합니다    
 
