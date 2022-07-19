@@ -1,7 +1,9 @@
 package com.kh.final6.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -145,8 +147,20 @@ public class StoreController {
 			Model model
 			) {
 		List<StoreDto> list = storeDao.complexSearch(keyword);
-		model.addAttribute("list", list);
-		return "store/search";
+		   List<AttachmentDto> AttachList = new ArrayList<>();
+		   
+		   for(StoreDto storeDto : list) {
+		         
+		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
+		         AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
+		         AttachList.add(attachmentDto);
+		         model.addAttribute("sAttach",attachmentNo);
+		      }
+		      model.addAttribute("AttachList",AttachList);
+		      boolean NoAttach = AttachList.isEmpty();
+		      model.addAttribute("noAttach",NoAttach);
+		      model.addAttribute("list", list);
+		      return "store/search";
 	}
 	
 	
