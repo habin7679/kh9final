@@ -1,6 +1,7 @@
 package com.kh.final6.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,4 +59,25 @@ public class BarRoomStoreServiceImpl implements BarRoomStoreService{
 		System.out.println("휴무"+result3);
 		return storeNo;
 	}
+
+
+//	@Override
+//	public int savelist(BarRoomStoreDto barRoomStoreDto, List<MultipartFile> storeImg) throws IllegalStateException, IOException {
+//		int storeNo = barRoomStoreDao.save(barRoomStoreDto);
+//		
+//		if(!storeImg.isEmpty()) {
+//			for(MultipartFile list :storeImg) {
+//			int attachmentNo = attachmentDao.savelist(storeImg);
+//			storeAttachDao.insert(barRoomStoreDto.getStoreNo(), attachmentNo);
+//		}
+//		}
+//		
+//		int result1 = barRoomStoreDao.saveRoom(barRoomStoreDto);
+//		int result2 = barRoomStoreDao.saveBar(barRoomStoreDto);
+//		int result3 = barRoomStoreDao.saveOff(barRoomStoreDto);
+//		System.out.println("룸"+result1);
+//		System.out.println("바"+result2);
+//		System.out.println("휴무"+result3);
+//		return storeNo;
+//	}
 }
