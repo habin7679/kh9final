@@ -6,6 +6,7 @@
 <c:set var="no" value="${no}"></c:set>
 <c:set var="isLogin" value="${memberId != null}"></c:set>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
+<c:set var="isSeller" value="${auth == '판매자'}"></c:set>
 <c:set var="nick" value="${nick}"></c:set>
 <!DOCTYPE html>
 <html lang="ko">
@@ -143,10 +144,10 @@ function onMessage(evt){
           </li>
           <li class="dropdown"><a href="#"><span>카테고리</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">스시</a></li>
-              <li><a href="#">디저트</a></li>
-              <li><a href="#">소</a></li>
-              <li><a href="#">꼬치</a></li>
+              <li><a href="${pageContext.request.contextPath}/store/category?category=스시">스시</a></li>
+              <li><a href="${pageContext.request.contextPath}/store/category?category=디저트">디저트</a></li>
+              <li><a href="${pageContext.request.contextPath}/store/category?category=한우">한우</a></li>
+              <li><a href="${pageContext.request.contextPath}/store/category?category=꼬치">꼬치</a></li>
             </ul>
           </li>  
           <li><a href="${pageContext.request.contextPath}/together/list">같이가요</a></li>
@@ -179,6 +180,11 @@ function onMessage(evt){
             <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
             <c:if test="${isAdmin}">
             	<li><a href="${pageContext.request.contextPath}/member/adminChat">챗봇메세지 관리</a></li>
+            </c:if>
+            <c:if test="${isSeller}">
+            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
+            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
+            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
             </c:if>
             <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
           </ul>
