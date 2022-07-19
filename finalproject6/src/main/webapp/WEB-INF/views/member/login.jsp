@@ -10,6 +10,7 @@ color:var(--color-primary);
 color:#fff;
 }
 </style>
+
 <c:set var="saveIdExist" value="${cookie.saveId != null}"></c:set>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
