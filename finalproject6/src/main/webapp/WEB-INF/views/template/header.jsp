@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="memberId" value="${login}"></c:set>
+<c:set var="memberNo" value="${no}"></c:set>
 <c:set var="no" value="${no}"></c:set>
 <c:set var="isLogin" value="${memberId != null}"></c:set>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
@@ -63,7 +64,7 @@ $(document).ready(function(){
 
     // 데이터를 전달 받았을때 
     sock.onmessage = onMessage; // toast 생성
-    ...
+   
 });
 
 // toast생성 및 추가
@@ -143,10 +144,10 @@ function onMessage(evt){
           </li>
           <li class="dropdown"><a href="#"><span>카테고리</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">스시</a></li>
-              <li><a href="#">디저트</a></li>
-              <li><a href="#">소</a></li>
-              <li><a href="#">꼬치</a></li>
+              <li><a href="${pageContext.request.contextPath}/store/category?category=스시">스시</a></li>
+              <li><a href="${pageContext.request.contextPath}/store/category?category=디저트">디저트</a></li>
+              <li><a href="${pageContext.request.contextPath}/store/category?category=한우">한우</a></li>
+              <li><a href="${pageContext.request.contextPath}/store/category?category=꼬치">꼬치</a></li>
             </ul>
           </li>  
           <li><a href="${pageContext.request.contextPath}/together/list">같이가요</a></li>
@@ -172,9 +173,8 @@ function onMessage(evt){
 
 
             <li><a href="${pageContext.request.contextPath}/member/mypage?memberId=${memberId}">내 정보</a></li>
-            <li><a href="#">내 예약</a></li>
+            <li><a href="${pageContext.request.contextPath}/reservation/memberCheck?memberNo=${memberNo}">내 예약</a></li>
             <li><a href="${pageContext.request.contextPath}/member/ownerReply">내 댓글 확인</a></li>
-            <li><a href="#">내 결제</a></li>
             <li><a href="${pageContext.request.contextPath}/msg/sendBox">보낸쪽지함</a></li>
             <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
             <c:if test="${isAdmin}">

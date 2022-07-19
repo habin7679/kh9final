@@ -63,6 +63,8 @@
                     <h2><a href="password" class="btn btn-secondary">비밀번호 변경</a></h2>
                     <h2><a href="information" class="btn btn-secondary">개인정보 변경</a></h2>
                     <h2><a href="exit" class="btn btn-secondary">탈퇴하기</a></h2>
+                    <h2><a href="<%=request.getContextPath()%>/seller/join" class="btn btn-secondary">판매자 신청</a></h2>
+                	                    <h2><a href="<%=request.getContextPath()%>/seller/info" class="btn btn-secondary">판매자 정보</a></h2>
                 </div>
             </div>
 	</div>

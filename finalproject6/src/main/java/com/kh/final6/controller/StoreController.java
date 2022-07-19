@@ -94,9 +94,8 @@ public class StoreController {
 		System.out.println(">> barRoomStoreDto" + barRoomStoreDto.toString());
 		//int storeNo = barRoomStoreService.savelist(barRoomStoreDto, storeImg);
 		int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
-		attr.addAttribute("storeNo",storeNo);
 		
-	return "redirect:/regularPay/pay?"+storeNo;
+	return "redirect:/regularPay/pay?storeNo="+storeNo;
 	}
 	
 	
@@ -164,7 +163,15 @@ public class StoreController {
 		      return "store/search";
 	}
 	
-	
+	@GetMapping("/category")
+	public String category(
+			@RequestParam String category,
+			Model model
+			) {
+		List<StoreDto> list = storeDao.categorySearch(category);
+		model.addAttribute("list", list);
+		return "store/search";
+	}
 	
 	
 	

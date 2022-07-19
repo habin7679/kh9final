@@ -136,8 +136,6 @@ public class MemberController {
 				session.setAttribute("sellerNo", sellerNo);
 			}
 				
-				
-			
 			
 			
 			//쿠키
@@ -164,6 +162,7 @@ public class MemberController {
 		session.removeAttribute("login");
 		session.removeAttribute("auth");
 		session.removeAttribute("nick");
+		session.removeAttribute("sellerNo");
 		return "redirect:/";
 	}
 	

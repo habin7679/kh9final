@@ -22,6 +22,6 @@ OffDayDto offDayOne(int storeNo);
 BarRoomVO cntBarRoom(String reservationDate, int storeNo);
 
 List<StoreDto> complexSearch(String keyword);
-
+List<StoreDto> categorySearch(String category);
 
 }
