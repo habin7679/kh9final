@@ -134,8 +134,8 @@ function onMessage(evt){
           <li class="dropdown me"><i class="fa-solid fa-magnifying-glass fa-1x"></i>
             <ul>
               <li>
-                <form class="d-flex">
-                  <input class="form-control me-sm-1 ru " type="text" placeholder="Search">
+                <form class="d-flex" action="${pageContext.request.contextPath}/store/search" method="get">
+                  <input class="form-control me-sm-1 ru " type="text" placeholder="Search" name="keyword">
                   <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
               </li>

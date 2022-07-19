@@ -10,6 +10,7 @@ import com.kh.final6.entity.OffDayDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.error.CannotFindException;
 import com.kh.final6.vo.BarRoomVO;
+import com.kh.final6.vo.StoreComplexSearchVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -97,5 +98,11 @@ public class StoreDaoImpl implements StoreDao {
 	public int selectReservationPrice(int storeNo) {
 		return sqlSession.selectOne("store.price", storeNo);
 		}
+	
+	@Override
+	public List<StoreDto> complexSearch(String keyword) {
+		List<StoreDto> list = sqlSession.selectList("store.complexSearch", keyword);
+		return list;
+	}
 	}
 
