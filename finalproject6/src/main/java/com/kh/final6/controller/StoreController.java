@@ -149,7 +149,15 @@ public class StoreController {
 		return "store/search";
 	}
 	
-	
+	@GetMapping("/category")
+	public String category(
+			@RequestParam String category,
+			Model model
+			) {
+		List<StoreDto> list = storeDao.categorySearch(category);
+		model.addAttribute("list", list);
+		return "store/search";
+	}
 	
 	
 	

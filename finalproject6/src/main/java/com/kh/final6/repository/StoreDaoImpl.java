@@ -104,5 +104,11 @@ public class StoreDaoImpl implements StoreDao {
 		List<StoreDto> list = sqlSession.selectList("store.complexSearch", keyword);
 		return list;
 	}
+	
+	@Override
+	public List<StoreDto> categorySearch(String category) {
+		List<StoreDto> list = sqlSession.selectList("store.catergory", category);
+		return list;
+	}
 	}
 
