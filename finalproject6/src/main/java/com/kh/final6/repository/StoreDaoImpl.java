@@ -1,9 +1,6 @@
 package com.kh.final6.repository;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +10,6 @@ import com.kh.final6.entity.OffDayDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.error.CannotFindException;
 import com.kh.final6.vo.BarRoomVO;
-import com.kh.final6.vo.OffDaysVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,22 +44,10 @@ public class StoreDaoImpl implements StoreDao {
 		int count = sqlSession.delete("store.delete",storeNo);
 		if(count == 0) {
 			throw new CannotFindException();
-	
 	}	
 	
 }
 
-   @Override
-   public StoreDto update(StoreDto storeDto) {
-      int count = sqlSession.update("store.update", storeDto);
-      if(count == 0) throw new CannotFindException();
-      return sqlSession.selectOne("store.one", storeDto.getStoreNo());
-      }
-
-   @Override
-   public int selectReservationPrice(int storeNo) {
-      return sqlSession.selectOne("store.price", storeNo);
-      }
    
    @Override
 	public BarRoomVO barRoom(int storeNo) {
@@ -101,7 +85,6 @@ public class StoreDaoImpl implements StoreDao {
 		return barRoomVO;
 	}
    
-   }
    
 	@Override
 	public StoreDto update(StoreDto storeDto) {
