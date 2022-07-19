@@ -19,18 +19,18 @@
 	 <div class="col-md-8 offset-md-2">
        <div class="row mt-2 text-left mb-2" >
 	       <label>이름</label>
-	       <input type="text" name="memberName" autocomplete="off" required class= "form-control me-1" v-bind:class="nameClassObject" v-model="member.memberName"
-						v-on:blur="nameValidation" value="${memberDto.memberName}">
+	       <input type="text" value="${memberDto.memberName}" name="memberName" autocomplete="off" required class= "form-control me-1" v-bind:class="nameClassObject" v-model="member.memberName"
+						v-on:blur="nameValidation" >
 				<div class="valid-feedback"></div>
 				<div class="invalid-feedback">한글만 입력이 가능합니다</div>
 		</div>
 	    
 	     <div class="row mt-2 text-left mb-2" >
 	        <label>닉네임</label>
-	        <input type="text" name="memberNick" autocomplete="off" required class="form-control me-1" value="${memberDto.memberNick}" v-bind:class="nickClassObject" v-model="member.memberNick"
+	        <input type="text" name="memberNick" autocomplete="off" required class="form-control me-1"  v-bind:class="nickClassObject" v-model="member.memberNick"
 						v-on:blur="nickValidation" maxlength="10">
 	    		<div class="valid-feedback">적합한 닉네임입니다</div>
-				<div class="invalid-feedback">
+				<div class="invalid-feedback" >
 					이미 존재하거나 형식에 어긋난 닉네임 입니다. 
 					닉네임은 한글과 숫자로 2~10자 이내로 작성 가능합니다
 				</div>
@@ -56,7 +56,7 @@
 	   
 	     <div class="row mt-2 text-left mb-2" >
 	        <label>성별</label>
-	        <select name="memberGender"  class="form-select me-1">
+	        <select name="memberGender"  class="form-select me-1"  value="${memberDto.memberGender}">
 	        	<option >남성</option>
 	        	<option>여성 </option>
 	        </select>
@@ -94,10 +94,10 @@
                 return {
 
                     member:{
-                        memberName:"",
-                        memberNick:"",
-                        memberPhone:"",
-                        memberBirth:"",
+                        memberName:"${memberDto.memberName}",
+                        memberNick: "${memberDto.memberNick}",
+                        memberPhone:"${memberDto.memberPhone}",
+                        memberBirth:"${memberDto.memberBirth}",
  
                         get memberNameValid(){
                             const regex = /^[가-힣]{2,7}$/;

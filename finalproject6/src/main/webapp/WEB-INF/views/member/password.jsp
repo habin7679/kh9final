@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <button type="submit" class="btn1 ">비밀번호 변경하기</button>
+                        <button type="submit" class="btn1">비밀번호 변경하기</button>
                     </div>
                   
     
@@ -100,8 +100,12 @@
                     
                     passwordInputType(){
                         return this.showPassword ? "text" : "password";
-                        }
+                        },
                  
+                    isSame(){
+                    	return (this.member.currentPw == this.member.changePw);
+                    }
+                    
                 },
                 //methods : 애플리케이션 내에서 언제든 호출 가능한 코드 집합이 필요한 경우 작성한다.
                 methods:{
@@ -112,7 +116,6 @@
                     },
     
                     changePwValidation() {
-                        
                         if(this.member.currentPw == this.member.changePw || !this.member.changePwValid){
                             this.changePwClassObject["is-invalid"] = true;
                             this.changePwClassObject["is-valid"] = false;
@@ -121,20 +124,14 @@
                             this.changePwClassObject["is-invalid"] = false;
                             this.changePwClassObject["is-valid"] = true;
                         }
-                    
                     },
                     
-                        
-
-
                     sendForm(e){
-                    if((this.member.currentPwValid && this.member.changePwValid) == false) {
-                        e.preventDefault();
+                    if((this.member.currentPwValid && this.member.changePwValid && !(this.member.currentPw == this.member.changePw)) == false) {
+                    	e.preventDefault();
                       }
-
                     },
-            
-                }, 
+                },
             });
             app.mount("#app");
     
