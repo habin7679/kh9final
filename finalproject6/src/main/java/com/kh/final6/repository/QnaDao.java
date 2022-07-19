@@ -16,5 +16,9 @@ public interface QnaDao {
 	boolean update(QnaDto qnaDto);
 	
 	boolean delete(int qnaNo);
+	
+	//관리자 답글 확인을 위한 조회
+	List<Integer> reList(int memberNo);
+	
 
 }

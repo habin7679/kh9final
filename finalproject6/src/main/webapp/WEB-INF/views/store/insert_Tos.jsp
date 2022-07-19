@@ -64,10 +64,9 @@
 
         <div class="row mt-4">
             <div class="col-md-8 offset-md-2 d-grid">
-                <button class="btn btn-primary rounded" v-bind:disabled="agreeAll == false">다음 단계로 이동</button>
+                <button onclick="location.href='insert';" class="btn btn-primary rounded" v-bind:disabled="agreeAll == false">다음 단계로 이동</button>
             </div>
         </div>
-
         <div class="mt-5 mb-5"></div>
 
     </div>
@@ -82,9 +81,9 @@
             //data : 화면을 구현하는데 필요한 데이터를 작성한다.
             data(){
                 return {
-                    agree1Text:"어쩌구저쩌구",
-                    agree2Text:"어쩌구저쩌구",
-                    agree3Text:"어쩌구저쩌구",
+                    agree1Text:"예약할꺼니깐 동의해주세요",
+                    agree2Text:"지도쓸꺼니깐 동의해주세요",
+                    agree3Text:"개인정보 동의해주세요",
                     agree1:false,//첫 번째 이용약관 동의여부
                     agree2:false,//두 번째 이용약관 동의여부
                     agree3:false,//세 번째 이용약관 동의여부

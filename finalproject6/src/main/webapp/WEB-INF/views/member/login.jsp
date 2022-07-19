@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <style>
 .b{
 color:var(--color-primary);
@@ -61,14 +62,68 @@ color:#fff;
             <a href="join" class="b" >새로 오셨나요?</a>
         </div>
         </div>
+
         
 		<%-- 에러 표시가 있는 경우 메세지를 출력 --%>
 		<c:if test="${param.error != null}">
 		<div class="row center">
-			<h3 style="color:red;">로그인 정보가 일치하지 않습니다</h3>	
+			<h3 style="color:red;" class="mt-2 offset-md-3">로그인 정보가 일치하지 않습니다</h3>	
 		</div>
 		</c:if>
     </div>
 </form>
 </section>
+
+<ul>
+	<li onclick="kakaoLogin();">
+      <a href="javascript:void(0)">
+          <span>카카오 로그인</span>
+      </a>
+	</li>
+	<li onclick="kakaoLogout();">
+      <a href="javascript:void(0)">
+          <span>카카오 로그아웃</span>
+      </a>
+	</li>
+</ul>
+<!-- 카카오 스크립트 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('c3a809c61341b987c8ae920f2f4bbf57'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
+</script>
     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

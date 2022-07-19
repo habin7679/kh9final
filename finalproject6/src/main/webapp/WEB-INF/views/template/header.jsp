@@ -7,8 +7,6 @@
 <c:set var="isLogin" value="${memberId != null}"></c:set>
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 <c:set var="nick" value="${nick}"></c:set>
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -54,7 +52,34 @@
   
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
-  
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script>
+// 전역변수 설정
+var socket  = null;
+$(document).ready(function(){
+    // 웹소켓 연결
+    sock = new SockJS("<c:url value="/echo-ws"/>");
+    socket = sock;
+
+    // 데이터를 전달 받았을때 
+    sock.onmessage = onMessage; // toast 생성
+    ...
+});
+
+// toast생성 및 추가
+function onMessage(evt){
+    var data = evt.data;
+    // toast
+    let toast = "<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>";
+    toast += "<div class='toast-header'><i class='fas fa-bell mr-2'></i><strong class='mr-auto'>알림</strong>";
+    toast += "<small class='text-muted'>just now</small><button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>";
+    toast += "<span aria-hidden='true'>&times;</span></button>";
+    toast += "</div> <div class='toast-body'>" + data + "</div></div>";
+    $("#msgStack").append(toast);   // msgStack div에 생성한 toast 추가
+    $(".toast").toast({"animation": true, "autohide": false});
+    $('.toast').toast('show');
+};	
+</script>
   
  
 <style>
@@ -133,24 +158,34 @@
           </li>
         </ul>
       
-      
-    
+<c:choose>      
+    <c:when test="${no == null }">
       <a href="${pageContext.request.contextPath}/member/login" class="btn-book-a-table me">로그인</a>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
+</c:when>
+<c:otherwise>
       <ul>
-        <li class="dropdown"><a href="#"><span>닉네임  </span><i class="fa-solid fa-square-envelope fa-1x"></i></a>
+        <li class="dropdown"><a href="#"><span>${nick}</span><i class="fa-solid fa-square-envelope fa-1x" id="msgStack"></i></a>
           <ul>
 
 
-            <li><a href="${pageContext.request.contextPath}/member/mypage?memberId=${memberId}">mypage</a></li>
 
-            <li><a href="#">쪽지함</a></li>
+            <li><a href="${pageContext.request.contextPath}/member/mypage?memberId=${memberId}">내 정보</a></li>
+            <li><a href="#">내 예약</a></li>
+            <li><a href="${pageContext.request.contextPath}/member/ownerReply">내 댓글 확인</a></li>
+            <li><a href="#">내 결제</a></li>
+            <li><a href="${pageContext.request.contextPath}/msg/sendBox">보낸쪽지함</a></li>
+            <li><a href="${pageContext.request.contextPath}/msg/recvBox">받은쪽지함</a></li>
+            <c:if test="${isAdmin}">
+            	<li><a href="${pageContext.request.contextPath}/member/adminChat">챗봇메세지 관리</a></li>
+            </c:if>
             <li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
           </ul>
         </li>
       </ul>
+      </c:otherwise>
+      </c:choose>
       </nav>
     </div>
   </header><!-- End Header -->

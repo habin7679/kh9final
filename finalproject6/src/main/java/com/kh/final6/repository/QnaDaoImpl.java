@@ -79,5 +79,10 @@ public class QnaDaoImpl implements QnaDao{
 		int count = sqlSession.delete("qna.delete",qnaNo);
 		return count > 0;
 	}
+	
+	@Override
+	public List<Integer> reList(int memberNo) {
+		return sqlSession.selectList("qna.reOne",memberNo);
+	}
 
 }

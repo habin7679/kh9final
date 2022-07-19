@@ -20,7 +20,7 @@
  	</select>
  	
  	<select id="list" parameterType="int" resultType="ReplyDto">
- 		select * from reply where reply_target = #{replyTarget}
+ 		select * from reply where reply_target = #{replyTarget} order by reply_time asc
  	</select>
  	
  	<delete id="delete" parameterType="int">
@@ -36,11 +36,35 @@
  	
  	<update id="edit" parameterType="ReplyDto">
  		update reply set 
- 			reply_content = #{replyContent}
+ 			reply_content = #{replyContent},
+ 			reply_time = sysdate
  		where reply_no = #{replyNo}	
  	</update>
  	
  	<select id="replyCount" parameterType="int" resultType="int" >
  		select together_replycount from together where together_no = #{ReplyTarget}
  	</select>
+ 	
+ 	<select id="ownerList" parameterType="Map" resultType="ReplyDto">
+ 	select * from (
+	 	select rownum rn, TMP.* from (
+	 		select * from reply where member_no = #{memberNo}
+	 			<if test="keyword != null">
+	 			 <![CDATA[
+					and instr (reply_content,#{keyword}) > 0	 			 
+	 			 ]]>
+	 			</if>
+	 		)TMP
+	 	)where rn between ${begin} and #{end}
+ 	</select> 
+ 	
+ 	<select id="count" parameterType="Map" resultType="int">
+ 		select count(*) from reply where member_no = #{memberNo}
+ 			<if test="type!= null || keyword != null">
+ 				<![CDATA[
+					and instr (${type},#{keyword}) > 0 			
+ 				]]>
+ 			</if>
+ 	</select>
+ 	
  </mapper>

@@ -147,7 +147,12 @@ public class MemberDaoEncryption implements MemberDao{
 	 		
 	 		return sqlSession.selectOne("member.count",param);
 		}
-		
+		 
+		 @Override
+		public String oneNick(int memberNo) {
+			 
+			 return sqlSession.selectOne("member.nick",memberNo);
+		}
 
 		//등급변경
 		@Override

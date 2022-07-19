@@ -50,6 +50,7 @@
  	
  	</select>
  	
+ 	
  
  
  	<select id="one" resultType="ReviewDto" parameterType="int">
@@ -70,7 +71,7 @@
  	
  	<update id="edit" parameterType="reviewDto">
  		update review set 
- 			store_no = #{storeNo}, member_no = #{memberNo}, review_content = #{reviewContent}, review_score = #{reviewScore},review_writer = #{reviewWriter}
+ 			 review_content = #{reviewContent}, review_score = #{reviewScore}
  		where review_no = #{reviewNo}
  	</update>
  	

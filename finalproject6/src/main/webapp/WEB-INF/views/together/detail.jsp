@@ -41,6 +41,15 @@
        }
      </style>
      
+<script type="text/javascript">
+	$(function(){
+		let memberRecvNo = $(".msgMem").val();
+		$(".msgNick").click(function(){
+			window.open("${pageContext.request.contextPath}/msg/send?memberRecvNo="+memberRecvNo,"Message","width=500,height=600,scrollbars=no,left=1000,top=400")
+		});
+	});
+</script>     
+     
  <div id="app" class="container ma-t-100">
  	
  	<div class="section-header mt-4 col-md-6 offset-md-3" >
@@ -65,7 +74,9 @@
                             		(탈퇴한 사용자)
                             	</c:when>
                             	<c:otherwise>
-	                                <span class="me-3">${togetherDto.togetherWriter}</span>
+		                        <input type="hidden" class="msgMem" value="${togetherDto.memberNo}">
+                            	<a href="#">
+	                                <span class="me-3 msgNick">${togetherDto.togetherWriter}</span></a>
                             	</c:otherwise>
                             </c:choose>
                                 <span class="me-3">${togetherDto.togetherTime}</span>
@@ -80,8 +91,11 @@
                         </tr>
                         <tr style="text-align: right;">
                            <td style="border-bottom: none;">
-                          <c:if test="${isOwner || isAdmin}">
+                          <c:if test="${isOwner}">
                             <a href="${pageContext.request.contextPath}/together/edit?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">수정</a>
+                            <a href="${pageContext.request.contextPath}/together/delete?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">삭제</a>
+                           </c:if>
+                           <c:if test="${isAdmin}">
                             <a href="${pageContext.request.contextPath}/together/delete?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">삭제</a>
                            </c:if>
                             <a href="${pageContext.request.contextPath}/together/list" class="btn0 ms-1">목록</a>
@@ -100,7 +114,9 @@
                             <td v-if="!reply.edit">
                                 <div class="row" >
                                     <div class="col-md-2 text-left mt-1 mb-1 passSpace">
-                                       <span class="fw-bold">{{reply.replyWriter}}</span>
+		                            <input type="hidden" value="{{reply.memberNo}}" class="msgMem">
+                                       <a href="#">
+                                       <span class="fw-bold msgNick">{{reply.replyWriter}}</span></a>
                                     </div>
                                     <div class="col-md-6 text-left mt-1 mb-1 passSpace">
                                         <span>{{reply.replyContent}}</span>
@@ -118,7 +134,7 @@
                             <td style="border-bottom: none;" v-else>
                                 <div class="row">
                                     <div class="col-md-1 text-center mt-3">
-                                        <span>댓글 입력</span>
+                                        <span class="normal-font">댓글<br>입력</span>
                                     </div>
                                     <div class="col-md-9 mt-2">
                                         <textarea class="form-control" :disabled="isNoneMember" v-model="replyList[index].replyContent"></textarea>
@@ -136,7 +152,7 @@
                             <td style="border-top-width: 0.1em; border-bottom: none;">
                                 <div class="row">
                                     <div class="col-md-1 text-center mt-2">
-                                        <span>댓글 입력</span>
+                                        <span class="normal-font">댓글<br>입력</span>
                                     </div>
                                     <div class="col-md-9">
                                         <textarea class="form-control" v-model="replyContent" :placeholder="textPlaceholder" :disabled="isNoneMember"
@@ -171,6 +187,7 @@
                 replyContent:"",
                 replyList:[],
                 replyCount:0,
+                link:""
             };
         },
         
@@ -285,7 +302,12 @@
                 });
             },
             changeTime(index){
-            	return moment(index).format('YYYY-MM-DD hh:mm');
+            	return moment(index).format('YYYY-MM-DD HH:mm');
+            },
+            
+            linkIndex(index){
+            	const reply = this.replyList[index];
+            	return this.link = "${pageContext.request.contextPath}/msg/send?memberRecvNo="+reply.memberNo;
             },
         },
             //watch : 특정 data를 감시하여 연계 코드를 실행하기 위해 작성한다

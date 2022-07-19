@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class MsgDto {
-	private int sendNo;
-	private int memberNo;
-	private String sendNote;
+	private int msgNo;
+	private String msgNote;
 	private Date sendDate;
-	private String sendNick;
-	private String recvNick;
+	private int smemberNo;
+	private int rmemberNo;
 }
