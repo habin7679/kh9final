@@ -176,22 +176,47 @@ public class ReviewController {
 		return "review/detail";
 	}
 	
-	
-	
 	@GetMapping("/list")
-	public String list(@RequestParam (required = false) String type,
+	public String list(
+			@RequestParam int reviewNo,
+			RedirectAttributes attr,
+			@RequestParam (required = false) String type,
 			@RequestParam (required = false) String keyword,
 			@RequestParam (required = false, defaultValue = "1") int p,
 			@RequestParam (required = false, defaultValue = "10") int s,
 			Model model) {
+		ReviewDto reviewDto = reviewDao.one(reviewNo);
+		model.addAttribute("reviewDto",reviewDto);
+		
+		int attachmentNo = reviewAttachDao.info(reviewNo);
+		AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
+		
+		if (attachmentDto != null) {
+			String attachType = attachmentDto.getAttachmentType();
+			boolean passImg = attachType == "image/jpeg" || attachType == "image/png"
+					|| attachType == "image/gif" && attachType == "image/jpg";
+			model.addAttribute("Img", passImg);
+		}
+		boolean reviewAttach = attachmentNo == 0;
+		model.addAttribute("reviewAttach", reviewAttach);
+		model.addAttribute("reviewImgUrl", "/attachment/download?attachmentNo=" + attachmentNo);
+
+		String attachName = attachmentDao.name(attachmentNo);
+		model.addAttribute("attachName", attachName);
+
 		
 		List<ReviewDto> list = reviewDao.list(type,keyword,p,s);
 		model.addAttribute("list",list);
 		
-		
+
+		attr.addAttribute("reviewNo", reviewNo);
 		return "review/list";
 	}
 	
 	
+	@GetMapping("/error")
+	public String error() {
+		return "error/notaAdmin";
+	}
 }
 
