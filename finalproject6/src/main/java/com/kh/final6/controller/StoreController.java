@@ -92,9 +92,8 @@ public class StoreController {
 		System.out.println(">> barRoomStoreDto" + barRoomStoreDto.toString());
 		//int storeNo = barRoomStoreService.savelist(barRoomStoreDto, storeImg);
 		int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
-		attr.addAttribute("storeNo",storeNo);
 		
-	return "redirect:/regularPay/pay?"+storeNo;
+	return "redirect:/regularPay/pay?storeNo="+storeNo;
 	}
 	
 	
