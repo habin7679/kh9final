@@ -16,11 +16,10 @@
 
             <div class="row gy-5">
 			<c:forEach var="storeDto" items="${list}">
-			<input type="hidden" value="${storeDto.storeNo}">
               <div class="col-lg-4 menu-item">
               <c:choose>
               <c:when test="${!noAttach }">
-              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${sAttach}" class="menu-img img-fluid">
+              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${sAttach}" class="menu-img img-fluid" >
               </c:when>
               <c:otherwise>
               <img src="${pageContext.request.contextPath}/resources/img/logog.PNG" width="50%" height="750">

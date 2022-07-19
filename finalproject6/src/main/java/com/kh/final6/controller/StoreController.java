@@ -159,6 +159,7 @@ public class StoreController {
 		      model.addAttribute("AttachList",AttachList);
 		      boolean NoAttach = AttachList.isEmpty();
 		      model.addAttribute("noAttach",NoAttach);
+		      
 		      model.addAttribute("list", list);
 		      return "store/search";
 	}
