@@ -32,6 +32,7 @@ import com.kh.final6.service.EmailService;
 import com.kh.final6.service.KakaoPayService;
 import com.kh.final6.service.PaymentService;
 import com.kh.final6.service.ReservationService;
+import com.kh.final6.vo.BarRoomVO;
 import com.kh.final6.vo.KakaoPayApproveRequestVO;
 import com.kh.final6.vo.KakaoPayApproveResponseVO;
 import com.kh.final6.vo.KakaoPayCancelRequestVO;
@@ -79,18 +80,25 @@ public class ReservationController {
 		System.out.println(memberNo);
 		MemberDto memberDto = memberDao.oneNo(memberNo);
 		model.addAttribute("memberDto", memberDto);
+		BarRoomVO barRoomVO = storeDao.barRoom(storeNo);
+		model.addAttribute("barRoomVO",barRoomVO);
 		return "reservation/reservation";
 	}
 	
 	@PostMapping("/insert")
 	public String insert(
 			@ModelAttribute ReservationDto reservationDto,
+			@ModelAttribute BarRoomVO barRoomVO,
 			Model model,
 			HttpSession session
 			) {
-			ReservationDto reservationNewDto =  reservationService.insert(reservationDto);
+		log.debug("@@@@@@@@@@@@@@@@@@@@barRoomVO = {} ", barRoomVO);
+			ReservationDto reservationNewDto =  reservationService.insert(reservationDto, barRoomVO);
 //			ReservationDto reservationNewDto = reservationDao.one(reservationDto.getReservationNo());
+			
 			model.addAttribute("reservationDto", reservationNewDto);
+			
+			
 			String memberId = (String)session.getAttribute("login");
 			model.addAttribute("memberDto", memberDao.info(memberId));
 			model.addAttribute("storeDto", storeDao.one(reservationNewDto.getStoreNo()));

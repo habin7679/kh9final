@@ -30,6 +30,8 @@ public interface SellerDao {
 
 	void gradeCancel(int sellerNo);
 
+	void removePoint(int sellerNo);
+
 	
 	
 }

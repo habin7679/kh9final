@@ -31,7 +31,7 @@
 			<div><label>홈으로</label></div>
 		</div>
 		<div class="col-md-3">
-		<a href="${pageContext.request.contextPath}/reservation/memberCheck?memberNo=${memberNo}" >
+		&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/reservation/memberCheck?memberNo=${memberNo}" >
 			<i class="fa-solid fa-id-card fa-3x"></i> 
 		</a>
 			<div><label>예약 확인하기</label></div>

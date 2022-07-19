@@ -31,7 +31,7 @@
 			<div><label>홈으로</label></div>
 		</div>
 		<div class="col-md-3">
-		<a href="${pageContext.request.contextPath}/regularPay/info?sellerNo=${sellerNo}" >
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/regularPay/info?sellerNo=${sellerNo}" >
 			<i class="fa-solid fa-money-check-dollar fa-3x"></i>
 		</a>
 			<div><label>정기결제 관리 하기</label></div>

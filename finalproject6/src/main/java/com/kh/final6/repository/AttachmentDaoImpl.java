@@ -2,6 +2,7 @@ package com.kh.final6.repository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -65,5 +66,24 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		sqlSession.delete("attachment.delete",attachNo);
 		
 	}
+//
+//	@Override
+//	public int savelist(List<MultipartFile> storeImg) throws IllegalStateException, IOException {
+//		int attachmentNo = sqlSession.selectOne("attachment.sequence");
+//		
+//		String fileName = String.valueOf(attachmentNo);
+//		File target = new File(directory, fileName);
+//		attachment.transferTo(target);
+//		
+//		sqlSession.insert("attachment.insert",AttachmentDto.builder()
+//														.attachmentNo(attachmentNo)
+//														.attachmentUploadname(attachment.getOriginalFilename())
+//														.attachmentSavename(fileName)
+//														.attachmentType(attachment.getContentType())
+//														.attachmentSize(attachment.getSize())
+//															.build());
+//		return attachmentNo;
+//	}
 
+	
 }

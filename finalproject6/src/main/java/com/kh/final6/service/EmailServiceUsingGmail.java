@@ -172,7 +172,7 @@ public class EmailServiceUsingGmail implements EmailService {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, false, "UTF-8");
 		
-		helper.setTo("zdx456@naver.com");
+		helper.setTo(myReservationVO.getMemberId());
 		helper.setSubject("[예야쿠] 예약 정보확인 입니다.");
 		helper.setText(doc.toString(), true);
 		

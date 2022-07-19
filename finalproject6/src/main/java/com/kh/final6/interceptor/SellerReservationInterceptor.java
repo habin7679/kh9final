@@ -5,21 +5,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+@Component
+public class SellerReservationInterceptor implements HandlerInterceptor{
 
-@Component	
-public class MemberLoginInterceptor  implements HandlerInterceptor {
-
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-		throws Exception{ 
-		String memberId = (String) request.getSession().getAttribute("login");
-		if(memberId == null) {
-			response.sendRedirect(request.getContextPath()+"/member/login");
+			throws Exception {
+		String memberKind = (String)request.getSession().getAttribute("auth");
+		
+		if(!memberKind.equals("판매자")) {
+			response.sendRedirect(request.getContextPath()+"/seller/sellerError");
 			return false;
 		}
 		else {
-			return true; 
+			return true;
 		}
 	}
 }
-

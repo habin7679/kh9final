@@ -23,4 +23,5 @@ public class ReservationDto {
 	private String reservationTime;
 	private String reservationContent;
 	
+	
 }

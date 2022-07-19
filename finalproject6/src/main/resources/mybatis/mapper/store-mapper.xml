@@ -118,4 +118,35 @@
  		select store_reservation_price from store where store_no = #{storeNo}
  	</select>
 
+
+	<select id="barRoom" resultType="BarRoomVO" parameterType="int">
+		 select * from store S
+		    left outer join room R on S.store_no = R.store_no
+		    left outer join bar B on B.store_no = S.store_no
+	    where S.store_no = #{storeNo}
+	</select>
+	
+	<select id="offDayOne" resultType="OffDayDto" parameterType="int">
+		select * from off where store_no = #{storeNo}
+	</select>
+	
+	<select id="barCnt" resultType="int" parameterType="String">
+		select sum(reservation_people) from reservation where reservation_date = #{reservationDate} and bar = 1 and reservation_status = '완료'
+	</select>
+	<select id="roomFourCnt" resultType="int" parameterType="String">
+		select count(room_four) from reservation where reservation_date = #{reservationDate} and room_four = 1 and reservation_status = '완료'
+	</select>
+	<select id="roomSixCnt" resultType="int" parameterType="String">
+		select count(room_six) from reservation where reservation_date = #{reservationDate} and room_six = 1 and reservation_status = '완료'
+	</select>
+	<select id="roomEightCnt" resultType="int" parameterType="String">
+		select count(room_eight) from reservation where reservation_date = #{reservationDate} and room_eight = 1 and reservation_status = '완료'
+	</select>
+	
+	<select id="complexSearch" resultType="StoreDto" parameterType="String">
+		select * from store where instr(store_name, #{keyword})>0 or instr(dong, #{keyword})> 0 or instr(gu, #{keyword})>0 
+		or instr(category, #{keyword})>0 or instr(store_address, #{keyword})>0 order by store_likecount desc
+	
+	</select>
+	
  </mapper>

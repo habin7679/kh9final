@@ -33,6 +33,7 @@ import com.kh.final6.repository.StoreAttachDao;
 import com.kh.final6.repository.StoreDao;
 import com.kh.final6.service.BarRoomStoreService;
 import com.kh.final6.service.StoreService;
+import com.kh.final6.vo.StoreComplexSearchVO;
 
 
 
@@ -44,6 +45,12 @@ public class StoreController {
 	
 	@Autowired
 	private BarRoomStoreService barRoomStoreService;
+	
+	@Autowired
+	private StoreAttachDao storeAttachDao;
+	
+	@Autowired
+	private AttachmentDao attachmentDao;
 	
 
 	@GetMapping("/insert_Tos")
@@ -71,23 +78,23 @@ public class StoreController {
 			@ModelAttribute SellerDto sellerDto, 
 			@ModelAttribute BarRoomStoreDto barRoomStoreDto,
 			@RequestParam MultipartFile storeImg,
+		//	@RequestParam List<MultipartFile> storeImg,
 			HttpSession session,
 			RedirectAttributes attr) throws IllegalStateException, IOException
 			 {
 		
-	//	int sellerNo = (Integer)session.getAttribute("sellerNo");
+		//int sellerNo = (Integer)session.getAttribute("sellerNo");
 		//	판매자 안될경우
 		int sellerNo1 = 66;
 		barRoomStoreDto.setSellerNo(sellerNo1);
 		
 		//int storeNo = storeService.save(storeDto, storeImg);
 		System.out.println(">> barRoomStoreDto" + barRoomStoreDto.toString());
+		//int storeNo = barRoomStoreService.savelist(barRoomStoreDto, storeImg);
 		int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
-		
 		attr.addAttribute("storeNo",storeNo);
 		
-		return "store/list";
-	//return "redirect:/regularPay/insert";
+	return "redirect:/regularPay/pay?"+storeNo;
 	}
 	
 	
@@ -120,13 +127,6 @@ public class StoreController {
 		return "store/list";
 	}
 	
-	@GetMapping("/detail")
-	public String detail(
-			@RequestParam int storeNo, Model medel) {
-		StoreDto storeDto = storeDao.one(storeNo);
-		medel.addAttribute("storeDto",storeDto);
-		return "store/detail";
-	}
 	
 	
 	@GetMapping("/detail/{storeNo}")
@@ -139,42 +139,46 @@ public class StoreController {
 	}
 		
 	
+	@GetMapping("/search")
+	public String complexSearch(
+			@RequestParam String keyword,
+			Model model
+			) {
+		List<StoreDto> list = storeDao.complexSearch(keyword);
+		model.addAttribute("list", list);
+		return "store/search";
+	}
 	
 	
 	
 	
-//	
-////	@GetMapping("/detail")
-////	public String detail(@RequestParam int storeNo, Model model, HttpSession session, RedirectAttributes attr) {
-////		StoreDto storeDto = storeDao.one(storeNo);
-////		model.addAttribute("storeDto", storeDto);
-////
-////		if (storeDto.getStoreNo() != 0) {
-////			MemberDto memberDto = memberDao.info(storeDto.getStoreName());
-////			model.addAttribute("memberDto", memberDto);
-////		}
-////		int attachmentNo = storeAttachDao.info(storeNo);
-////		AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
-////
-////		if (attachmentDto != null) {
-////			String attachType = attachmentDto.getAttachmentType();
-////			boolean passImg = attachType == "image/jpeg" || attachType == "image/png"
-////					|| attachType == "image/gif" && attachType == "image/jpg";
-////			model.addAttribute("Img", passImg);
-////		}
-////		boolean storeAttach = attachmentNo == 0;
-////		model.addAttribute("storeAttach", storeAttach);
-////		model.addAttribute("storeImgUrl", "/attachment/download?attachmentNo=" + attachmentNo);
-////
-////		String attachName = attachmentDao.name(attachmentNo);
-////		model.addAttribute("attachName", attachName);
-////
-////
-////
-////		return "store/detail";
-////	}
-////	
-//	
+	
+	@GetMapping("/detail")
+	public String detail(@RequestParam int storeNo, Model model, HttpSession session, RedirectAttributes attr) {
+		StoreDto storeDto = storeDao.one(storeNo);
+		model.addAttribute("storeDto", storeDto);
+
+		
+		int attachmentNo = storeAttachDao.info(storeNo);
+		AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
+
+		if (attachmentDto != null) {
+			String attachType = attachmentDto.getAttachmentType();
+			boolean passImg = attachType == "image/jpeg" || attachType == "image/png"
+					|| attachType == "image/gif" && attachType == "image/jpg";
+			model.addAttribute("Img", passImg);
+		}
+		boolean storeAttach = attachmentNo == 0;
+		model.addAttribute("storeAttach", storeAttach);
+		model.addAttribute("storeImgUrl", "/attachment/download?attachmentNo=" + attachmentNo);
+
+		String attachName = attachmentDao.name(attachmentNo);
+		model.addAttribute("attachName", attachName);
+
+		return "store/detail";
+	}
+
+	
 	
 	
 	
