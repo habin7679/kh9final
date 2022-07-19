@@ -143,4 +143,10 @@
 		select count(room_eight) from reservation where reservation_date = #{reservationDate} and room_eight = 1 and reservation_status = '완료'
 	</select>
 	
+	<select id="complexSearch" resultType="StoreDto" parameterType="String">
+		select * from store where instr(store_name, #{keyword})>0 or instr(dong, #{keyword})> 0 or instr(gu, #{keyword})>0 
+		or instr(category, #{keyword})>0 or instr(store_address, #{keyword})>0 order by store_likecount desc
+	
+	</select>
+	
  </mapper>

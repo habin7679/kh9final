@@ -33,6 +33,7 @@ import com.kh.final6.repository.StoreAttachDao;
 import com.kh.final6.repository.StoreDao;
 import com.kh.final6.service.BarRoomStoreService;
 import com.kh.final6.service.StoreService;
+import com.kh.final6.vo.StoreComplexSearchVO;
 
 
 
@@ -138,6 +139,15 @@ public class StoreController {
 	}
 		
 	
+	@GetMapping("/search")
+	public String complexSearch(
+			@RequestParam String keyword,
+			Model model
+			) {
+		List<StoreDto> list = storeDao.complexSearch(keyword);
+		model.addAttribute("list", list);
+		return "store/search";
+	}
 	
 	
 	
