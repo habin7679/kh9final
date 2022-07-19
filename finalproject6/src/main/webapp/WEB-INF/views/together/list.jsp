@@ -9,6 +9,14 @@
 /*        table tr:last-child td:last-child {border-bottom-right-radius: 1em} */
 /*        table tr:last-child td {border:none} */
 </style>
+<script type="text/javascript">
+	$(function(){
+		let memberRecvNo = $("#msgNick").val();
+		$(".msgNick").click(function(){
+			window.open("${pageContext.request.contextPath}/msg/send?memberRecvNo="+memberRecvNo,"Message","width=500,height=600,scrollbars=no,left=1000,top=400")
+		});
+	});
+</script>
     <div class="container ma-t-100">
 
         <div class="section-header mt-4 col-md-8 offset-md-2" >
@@ -46,7 +54,9 @@
                     </thead>
                     <tbody class="text-center">
                     	<c:forEach var="togetherDto" items="${list}">
+                    	<input type="hidden" value="${togetherDto.memberNo}" id="msgNick">
 	                        <tr class="normal-font" style="background-color:white;">
+	                        
 	                            <td>${togetherDto.togetherNo}</td>
 	                            <td style="text-align: left !important">
 	                            <a href="detail?togetherNo=${togetherDto.togetherNo}">
@@ -57,7 +67,7 @@
 	                            </c:if>
 	                            </a>
 	                            </td>
-	                            <td> <a href="${pageContext.request.contextPath}/msg/send?memberRecvNo=${togetherDto.memberNo}">
+	                            <td> <a class="msgNick" href="#">
 	                            ${togetherDto.togetherWriter}</a></td><!-- 작성자 닉네임 클릭 시 쪽지 -->
 	                            <td>${togetherDto.togetherTime}</td>
 	                            <td >${togetherDto.togetherReadcount }</td>

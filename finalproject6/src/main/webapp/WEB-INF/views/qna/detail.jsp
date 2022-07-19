@@ -96,11 +96,12 @@
                         
                         <tr style="text-align: right;">
                            <td style="border-bottom: none;">
-                          <c:if test="${isOwner || isAdmin}">
+                          <c:if test="${isOwner}">
                             <a href="${pageContext.request.contextPath}/qna/edit?qnaNo=${qnaDto.qnaNo}" class="btn1 ms-1">수정</a>
                             <a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a>
                            </c:if>
                            <c:if test="${isAdmin}">
+                           	<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a>
                             <a href="${pageContext.request.contextPath}/qna/write?superNo=${qnaDto.qnaNo}" class="btn1 ms-1">답글</a>
                            </c:if>
                             <a href="${pageContext.request.contextPath}/qna/list" class="btn0 ms-1">목록</a>
