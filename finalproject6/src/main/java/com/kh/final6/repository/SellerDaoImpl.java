@@ -105,4 +105,9 @@ public List<SellerMemberVO> adminlist(String type, String keyword, int p, int s)
 		if(count <= 0) throw new CannotFindException();
 	}
 	
+	@Override
+	public void removePoint(int sellerNo) {
+		int count = sqlSession.update("seller.removePoint", sellerNo);
+		if(count <= 0 ) throw new CannotFindException();
+	}
 }

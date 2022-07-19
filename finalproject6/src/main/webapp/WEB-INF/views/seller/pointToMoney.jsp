@@ -43,7 +43,6 @@
 			</table>
 		</div>
 	</div>
-	<form action="" method="post">
 		<div class="row mt-2">
 			<div class="col-md-4 offset-md-4">
 				<label>비밀번호 확인</label> <input type="password" name=memberPw
@@ -54,12 +53,14 @@
 			</div>
 		</div>
 		<div class="row mt-2">
+	<form action="pointToMoney" method="post">
 			<div class="col-md-4 offset-md-4 d-grid">
-				<button class="btn1" v-bind:disabled="!isRight">현금으로
+			<input type="hidden" name="sellerNo" value="${param.sellerNo}">
+				<button type="submit" class="btn1" v-bind:disabled="!isRight">현금으로
 					변환하기</button>
 			</div>
-		</div>
 	</form>
+		</div>
 </div>
 
 <!-- vue js도 lazy loading을 사용한다 -->

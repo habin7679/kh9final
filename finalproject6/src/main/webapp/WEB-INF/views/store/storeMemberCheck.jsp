@@ -6,11 +6,11 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
-.fa-solid {
+.point {
 	cursor: Pointer !important;
 }
 
-.fa-solid:hover {
+.point:hover {
 	color: rgba(206, 18, 18, 0.8);
 	background: white;
 }
@@ -21,6 +21,10 @@
 .right-rounded{
      border-top-right-radius: 1em;
         }
+        
+ .barRoom{
+ 	color: rgba(206, 18, 18, 0.8);
+ }
 </style>
 
 <div id="app" class="container-fluid ma-t-100">
@@ -40,6 +44,7 @@
 						<th>예약 시간</th>
 						<th>예약자 번호</th>
 						<th>예약금</th>
+						<th>Bar or Room</th>
 						<th>방문</th>
 						<th class="right-rounded">미방문</th>
 					</tr>
@@ -53,9 +58,11 @@
 						<td>{{storeMemberCheck.reservationTime}}</td>
 						<td>{{storeMemberCheck.memberPhone}}</td>
 						<td>{{storeMemberCheck.reservationPrice}}</td>
-						<td><i class="fa-solid fa-square-check"
+						<td v-if="isBar(index)"><i class="fa-solid fa-martini-glass barRoom"></i></td>
+						<td v-else ><i class="fa-solid fa-door-open barRoom"></i></td>
+						<td><i class="fa-solid fa-square-check point"
 							v-on:click="confirmSeller(index)"></i></td>
-						<td><i class="fa-solid fa-square-xmark"
+						<td><i class="fa-solid fa-square-xmark point"
 							v-on:click="cancelSeller(index)"></i></td>
 					</tr>
 				</tbody>
@@ -84,6 +91,8 @@
             // - 반드시 return을 통해 값을 반환해야함
             computed:{
 
+    
+            	
             },
             //methods : 애플리케이션 내에서 언제든 호출 가능한 코드 집합이 필요한 경우 작성한다.
             methods:{
@@ -126,6 +135,14 @@
               	return moment(time).format('YYYY-MM-DD');
               },
 
+          	isBar(index){
+          		const storeMemberCheck = this.storeMemberCheckList[index];
+          		if(storeMemberCheck.bar == 1){
+          			return true;
+          		} else{
+          			return false;
+          		}
+          	},
             
             },
              //watch : 특정 data를 감시하여 연계 코드를 실행하기 위해 작성한다

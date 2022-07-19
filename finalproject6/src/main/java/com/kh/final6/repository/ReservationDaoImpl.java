@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.final6.entity.ReservationDto;
 import com.kh.final6.error.CannotFindException;
+import com.kh.final6.vo.BarRoomVO;
 import com.kh.final6.vo.MyReservationVO;
 import com.kh.final6.vo.ReservationMemberCheckVO;
 
@@ -21,11 +22,22 @@ public class ReservationDaoImpl implements ReservationDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public ReservationDto insert(ReservationDto reservationDto) {
+	public ReservationDto insert(ReservationDto reservationDto, BarRoomVO barRoomVO) {
 		int reservationNo = sqlSession.selectOne("reservation.sequence");
 		reservationDto.setReservationNo(reservationNo);
 		System.out.println("테스트 = " +reservationDto);
 		sqlSession.insert("reservation.insert", reservationDto);
+		
+		if(barRoomVO.getBarCount() != 0 ) {
+			sqlSession.update("reservation.barUpdate", reservationNo);
+		} else if(barRoomVO.getRoomFour() != 0) {
+			sqlSession.update("reservation.roomFourUpdate",reservationNo);
+		} else if(barRoomVO.getRoomSix() != 0) {
+			sqlSession.update("reservation.roomSixUpdate",reservationNo);
+		} else if(barRoomVO.getRoomEight() != 0) {
+			sqlSession.update("reservation.roomEightUpdate", reservationNo);
+		}
+		
 		return  sqlSession.selectOne("reservation.one", reservationNo);
 	}
 	

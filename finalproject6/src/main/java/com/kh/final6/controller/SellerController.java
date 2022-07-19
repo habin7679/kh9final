@@ -126,6 +126,17 @@ public class SellerController {
 		return "seller/pointToMoney";
 
 	}
+	
+	@PostMapping("/pointToMoney")
+	public String updatePoint(
+			@RequestParam int sellerNo
+			) {
+		sellerDao.removePoint(sellerNo);
+		return "seller/info";
+	}
+	
+	
+	
 	@GetMapping("/adminlist")
 	public String adminlist(
 			@RequestParam (required = false) String type,
@@ -207,6 +218,10 @@ public class SellerController {
 		return "redirect:detail?sellerNo="+sellerNo;
 	}
 	
+	@GetMapping("/sellerError")
+	public String error() {
+		return "error/sellerReservationError";
+	}
 	
 }
 

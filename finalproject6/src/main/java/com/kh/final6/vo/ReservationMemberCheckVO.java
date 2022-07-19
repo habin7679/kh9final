@@ -22,4 +22,8 @@ public class ReservationMemberCheckVO {
 	private int storeNo;
 	private int paymentNo;
 	private int reservationNo;
+	private int bar;
+	private int roomFour;
+	private int roomSix;
+	private int roomEight;
 }

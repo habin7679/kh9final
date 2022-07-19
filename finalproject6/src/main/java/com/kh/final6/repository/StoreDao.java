@@ -1,8 +1,12 @@
 package com.kh.final6.repository;
 
+import java.util.Date;
 import java.util.List;
 
+import com.kh.final6.entity.OffDayDto;
 import com.kh.final6.entity.StoreDto;
+import com.kh.final6.vo.BarRoomVO;
+import com.kh.final6.vo.OffDaysVO;
 
 public interface StoreDao {
    
@@ -15,6 +19,9 @@ public interface StoreDao {
 
  
    int selectReservationPrice(int storeNo);
+BarRoomVO barRoom(int storeNo);
+OffDayDto offDayOne(int storeNo);
+BarRoomVO cntBarRoom(String reservationDate, int storeNo);
 
 
 }
