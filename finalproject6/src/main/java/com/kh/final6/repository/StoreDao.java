@@ -15,8 +15,6 @@ public interface StoreDao {
 	void delete(int storeNo);
 	int insert(StoreDto storeDto);	
 	StoreDto update(StoreDto storeDto);
-	
-
  
 
    int selectReservationPrice(int storeNo);
@@ -24,7 +22,6 @@ BarRoomVO barRoom(int storeNo);
 OffDayDto offDayOne(int storeNo);
 BarRoomVO cntBarRoom(String reservationDate, int storeNo);
 
-	int selectReservationPrice(int storeNo);
 
 
 }
