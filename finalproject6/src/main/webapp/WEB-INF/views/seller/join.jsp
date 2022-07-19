@@ -131,8 +131,9 @@
                     
             
                     sendForm(e){
-                        if(this.isForm)
-                        e.preventDefault();
+                        if((this.seller.sellerBankValid && this.seller.sellerAccountValid && this.seller.sellerBusinessNumValid) == false){
+                        	e.preventDefault();	
+                        }
                     },
                 
             },
