@@ -23,11 +23,18 @@
 		let s = 10;
 		let memberNo = ${no};
 		loadReply(p,s);
+		let replyNo = $(".select-item").val();
+		
+		$(".btn-more").click(function(){
+			p++;
+			loadReply(p,s);
+		});
 		
 		//전체체크를 하면 모든 체크박스 체크됨
 		$(".select-all").on("input",function(){
 			$(".select-item").prop("checked",$(this).prop("checked"));
 		});
+		
 		//체크박스의 개수 체크, value 값을 알아냄
 		$(".select-item").on("input",function(){
 			let count = $(".select-item").filter(":checked").length;
@@ -43,8 +50,8 @@
 		});
 		
 		//fb삭제
-		$(".fa-solid").click(function(){
-			let replyNo = $(this).val();
+		$(".fb").click(function(){
+			
 			console.log(replyNo);
 			
 			$.ajax({
@@ -95,6 +102,7 @@
 		});
 		
 		function loadReply(p,s){
+			
 			$.ajax({
 				url:"${pageContext.request.contextPath}/ajax/list",
 				type:"post",
@@ -104,6 +112,10 @@
 					s:s
 				},
 				success:function(resp){
+					if(resp.length < s){
+						$(".btn-more").remove();
+					}
+					
 					for(let i=0; i < resp.length; i++){
 						let tr = $("<tr>").addClass("normal-font");
 						let td1 = $("<td>");
@@ -112,10 +124,10 @@
 						
 						let td2 = $("<td>").text(resp[i].replyContent).css("text-align","left");
 						
-						let td3 = $("<td>").text(moment(resp[i].replyTime).format('YYYY-MM-DD hh:mm'));
+						let td3 = $("<td>").text(moment(resp[i].replyTime).format('YYYY-MM-DD HH:mm'));
 						
 						let td4 = $("<td>");
-						let editcon = $("<i>").addClass("fa-solid fa-circle-xmark fa-cursor").val(resp[i].replyNo);
+						let editcon = $("<i>").addClass("fb fa-solid fa-circle-xmark fa-cursor");
 						
 						td4.append(editcon);
 						
@@ -147,7 +159,7 @@
                             <th class="w-50">내용</th>
                             <th>작성일</th>
                             <th>
-                            	<button type="button" class="btn0" id="dbt" >삭제</button>
+                            	<button  class="btn0" id="dbt" >삭제</button>
                             </th>
                         </tr>
                     </thead>
@@ -187,11 +199,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
+								href="ownerReply?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}">&lt;</a></li>
+								href="ownerReply?p=1&s=${s}">&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -200,11 +212,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
+								href="ownerReply?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}">&laquo;</a></li>
+								href="ownerReply?p=${startBlock-1}&s=${s}">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -216,11 +228,11 @@
 							<c:choose>
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+										href="ownerReply?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+										href="ownerReply?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -228,11 +240,11 @@
 							<c:choose>
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}">${i}</a></li>
+										href="ownerReply?p=${i}&s=${s}">${i}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}">${i}</a></li>
+										href="ownerReply?p=${i}&s=${s}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -244,11 +256,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
+								href="ownerReply?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}">&gt;</a></li>
+								href="ownerReply?p=${endBlock+1}&s=${s}">&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -257,17 +269,23 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
+								href="ownerReply?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}">&raquo;</a></li>
+								href="ownerReply?p=${lastPage}&s=${s}">&raquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
 			</ul>
 	</div>
 
+	<div class="row mt-2 text-center">
+	
+		<div class="col-md-8 offset-md-2">
+			<button class="btn-more btn0">더보기</button>
+		</div>
+	</div>
 
 	<div class="row mt-2 text-center">
             <div class="col-md-8 offset-md-2">
@@ -280,7 +298,7 @@
                     <select name="type" class="form-select me-1" style="width:17%;">
 						<option value="reply_content">내용</option>
                     </select>
-                <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" style="width:50%;" autocomplete="off">
+                <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" id="rk" style="width:50%;" autocomplete="off">
                 <input type="submit" value="검색" class="btn-s" style="width:15%;">
                </div>
                </form>

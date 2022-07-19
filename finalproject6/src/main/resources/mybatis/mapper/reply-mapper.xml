@@ -49,9 +49,9 @@
  	select * from (
 	 	select rownum rn, TMP.* from (
 	 		select * from reply where member_no = #{memberNo}
-	 			<if test="type != null and keyword != null">
+	 			<if test="keyword != null">
 	 			 <![CDATA[
-					and instr (${type},#{keyword}) > 0	 			 
+					and instr (reply_content,#{keyword}) > 0	 			 
 	 			 ]]>
 	 			</if>
 	 		)TMP
