@@ -1,16 +1,25 @@
 package com.kh.final6.repository;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.final6.entity.OffDayDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.error.CannotFindException;
+import com.kh.final6.vo.BarRoomVO;
+import com.kh.final6.vo.OffDaysVO;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 @Repository
+@Slf4j
 public class StoreDaoImpl implements StoreDao {
 
 	@Autowired
@@ -43,6 +52,57 @@ public class StoreDaoImpl implements StoreDao {
 	}	
 	
 }
+
+   @Override
+   public StoreDto update(StoreDto storeDto) {
+      int count = sqlSession.update("store.update", storeDto);
+      if(count == 0) throw new CannotFindException();
+      return sqlSession.selectOne("store.one", storeDto.getStoreNo());
+      }
+
+   @Override
+   public int selectReservationPrice(int storeNo) {
+      return sqlSession.selectOne("store.price", storeNo);
+      }
+   
+   @Override
+	public BarRoomVO barRoom(int storeNo) {
+		return sqlSession.selectOne("store.barRoom", storeNo);
+	}
+   
+   @Override
+	public OffDayDto offDayOne(int storeNo) {
+		return sqlSession.selectOne("store.offDayOne",storeNo);
+	}
+   
+   @Override
+	public BarRoomVO cntBarRoom(String reservationDate, int storeNo) {
+	   
+	   Integer bar = sqlSession.selectOne("store.barCnt", reservationDate);
+	   if(bar == null) {
+		   bar = 0;
+	   }
+	   int roomFour = sqlSession.selectOne("store.roomFourCnt", reservationDate);
+	   int roomSix = sqlSession.selectOne("store.roomSixCnt", reservationDate);
+	   int roomEight = sqlSession.selectOne("store.roomEightCnt", reservationDate);
+	   log.debug("@@@@ bar = {}", bar);
+	   log.debug("@@@@ roomFour = {}", roomFour);
+	   log.debug("@@@@ roomSix = {}", roomSix);
+	   log.debug("@@@@ roomEight = {}", roomEight);
+	   
+	   BarRoomVO barRoomVO = barRoom(storeNo);
+	   barRoomVO.setBarCount(bar);
+	   barRoomVO.setRoomFour(roomFour);
+	   barRoomVO.setRoomSix(roomSix);
+	   barRoomVO.setRoomEight(roomEight);
+	   
+	   log.debug("@@@@@@@@@@@@@@@@@@@@@ barRoomVO = {}", barRoomVO);
+	   
+		return barRoomVO;
+	}
+   
+   }
+   
 	@Override
 	public StoreDto update(StoreDto storeDto) {
 		int count = sqlSession.update("store.update", storeDto);
@@ -55,3 +115,4 @@ public class StoreDaoImpl implements StoreDao {
 		return sqlSession.selectOne("store.price", storeNo);
 		}
 	}
+

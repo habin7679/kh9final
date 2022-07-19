@@ -60,6 +60,7 @@
 			<mvc:mapping path="/qna/write*"/>
 			<mvc:mapping path="/together/detail*"/>
 			<mvc:mapping path="/qna/detail*"/>
+			<mvc:mapping path="/reservation/**"/>
 			
 			<mvc:exclude-mapping path="/member/login"/>
 			<mvc:exclude-mapping path="/member/join*"/>
@@ -109,6 +110,14 @@
 		 	<mvc:mapping path="/together/write*"/>
 		 	
 		 	<ref bean="sellerInterceptor"/>
+		 </mvc:interceptor>
+		 
+		 <mvc:interceptor>
+		 	<mvc:mapping path="/reservation/check*"/>
+		 	<mvc:mapping path="/seller/pointToMoney*"/>
+		 	<mvc:mapping path="/regularPay/**"/>
+		 	
+		 	<ref bean="sellerReservationInterceptor"/>
 		 </mvc:interceptor>
 		 
 	</mvc:interceptors>

@@ -54,7 +54,8 @@
 		select
 			R.reservation_date, R.reservation_people, R.reservation_time,
 			M.member_name, M.member_phone, M.member_id, R.reservation_price,
-			R.reservation_visit_state, R.store_no, p.payment_no, R.reservation_no
+			R.reservation_visit_state, R.store_no, p.payment_no, R.reservation_no,
+			R.bar, R.room_four, R.room_six, R.room_eight
 		from reservation R 
 		    left outer join member M on M.member_no = R.member_no
 		    left outer join payment P on R.reservation_no = P.reservation_no
@@ -99,4 +100,18 @@
 	    left outer join payment P on P.reservation_no = R.reservation_no 
 	    where P.payment_no = #{paymentNo} and R.reservation_status = '완료' and P.payment_status = '완료'
 	</select>
+	
+	<update id="barUpdate" parameterType="int">
+		update reservation set bar = 1 where reservation_no = #{reservationNo}
+	</update>
+	<update id="roomFourUpdate" parameterType="int">
+		update reservation set room_four = 1 where reservation_no = #{reservationNo}
+	</update>
+	<update id="roomSixUpdate" parameterType="int">
+		update reservation set room_six = 1 where reservation_no = #{reservationNo}
+	</update>
+	<update id="roomEightUpdate" parameterType="int">
+		update reservation set room_eight = 1 where reservation_no = #{reservationNo}
+	</update>
+	
 </mapper>

@@ -7,6 +7,7 @@ import com.kh.final6.entity.ReservationDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.repository.ReservationDao;
 import com.kh.final6.repository.StoreDao;
+import com.kh.final6.vo.BarRoomVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,11 +21,11 @@ public class ReservationServiceImpl implements ReservationService{
 	private ReservationDao reservationDao;
 	
 	@Override
-	public ReservationDto insert(ReservationDto reservationDto) {
+	public ReservationDto insert(ReservationDto reservationDto, BarRoomVO barRoomVO) {
 		StoreDto storeDto = storeDao.one(reservationDto.getStoreNo());
 		int total = reservationDto.getReservationPeople() * storeDto.getStoreReservationPrice();
 		reservationDto.setReservationPrice(total);
-		return reservationDao.insert(reservationDto);
+		return reservationDao.insert(reservationDto,  barRoomVO);
 		
 	}
 	

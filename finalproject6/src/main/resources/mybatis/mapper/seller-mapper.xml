@@ -115,4 +115,8 @@
 	where seller_no = ${sellerNo}
 	</update>
 	
+	<update id="removePoint" parameterType="int">
+		update seller set seller_point = 0 where seller_no = #{sellerNo}
+	</update>
+	
  </mapper>

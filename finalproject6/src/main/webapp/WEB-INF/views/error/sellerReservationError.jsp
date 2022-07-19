@@ -6,7 +6,7 @@
 	
 	<div class="section-header mt-4 col-md-8 offset-md-2" >
             <h1>warning</h1>
-            <p><span>결제</span>가 취소되었습니다.</p>
+            <p><span>판매자</span>만 이용가능합니다.</p>
        	</div>
      <div class="row text-center">
     	<div class="mt-4 col-md-8 offset-md-2" >

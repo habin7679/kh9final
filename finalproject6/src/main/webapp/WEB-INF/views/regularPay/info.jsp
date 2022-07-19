@@ -14,6 +14,13 @@
 	color: rgba(206, 18, 18, 0.8);
 	background: white;
 }
+
+.left-rounded{
+    border-top-left-radius: 1em;
+        }
+.right-rounded{
+     border-top-right-radius: 1em;
+        }
 </style>
 
 <div id="app" class="container-fluid ma-t-100">
@@ -89,8 +96,10 @@
 
               cancelRegularPayment(index){
                 const choice = window.confirm("정기결제를 취소하시겠습니까?\n 등록된 가게는 삭제됩니다.")
-		          	if(!choice) return;
-
+		          	if(!choice){
+		          		return;
+		          	}
+		          	else{
                 const regularPayment = this.regularPaymentList[index]
                   axios({
                     url:"${pageContext.request.contextPath}/rest/regularPayment/delete/"+regularPayment.regularPaymentNo,
@@ -99,6 +108,7 @@
                   .then(resp=>{
                     this.loadPage()
                   });
+		          	}
               },
 
               convertTime(time){
@@ -111,8 +121,8 @@
                   return this.link = "${pageContext.request.contextPath}/changePay/change/"+regularPayment.regularPaymentNo;
               },
               change(){
-            	  const choice = window.confirm(" 정기결제 방법 변경시 변경된 카드로 0원이 결제 됩니다. \n 정기 결제일은 결제방법 변경일과 매달 같은 일에  결제됩니다. \n 결제방법을 변경하시겠습니까?")
-  		          if(!choice) return;
+            	  window.alert(" 정기결제 방법 변경시 변경된 카드로 0원이 결제 됩니다. \n 정기 결제일은 결제방법 변경일과 매달 같은 일에 결제 됩니다. \n 결제방법을 변경하시겠습니까?")
+  		          
               }
             },
              //watch : 특정 data를 감시하여 연계 코드를 실행하기 위해 작성한다
