@@ -2,13 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <script type="text/javascript">
- 	$(function(){
- 		if($("#msg").length>16){
- 			$(this).substring(1,15);
- 		}
- 	};)
- </script>
+
  <style>
  .d{
  	margin-left:150px;
@@ -32,21 +26,23 @@
        	
        	<div class="row mt-2">
             <div class="col-md-6 offset-md-3">
-                <table class="table">
+               <table class="table" style="table-layout:fixed" width="300">
                     <thead class="text-center">
                         <tr>
                             <th style="width:300px;">내용</th>
                             <th >보낸사람</th>
                             <th style="width:100px;">보낸날짜</th>
+                            <th>상태</th>
                             <th>삭제</th>
                         </tr>
                     </thead>
                      <tbody class="text-center">
                     	<c:forEach var="RecvMsgVO" items="${recvBox}">
 	                        <tr>
-	                            <td id="msgCon">${RecvMsgVO.msgNote}</td>
-	                            <td>${RecvMsgVO.memberNick}</td>
+	                            <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"><a href="${pageContext.request.contextPath}/msg/recvdetail?msgNo=${RecvMsgVO.msgNo}">${RecvMsgVO.msgNote}</a></td>
+	                            <td><a href="${pageContext.request.contextPath}/msg/send?memberRecvNo=${RecvMsgVO.smemberNo}">${RecvMsgVO.memberNick}</a></td>
 	                            <td>${RecvMsgVO.sendDate}</td>
+	                            <td>${RecvMsgVO.read}</td>
 	                            <td><a href="${pageContext.request.contextPath}/msg/delete1?msgNo=${RecvMsgVO.msgNo}"> 
 	                            <img src = "${pageContext.request.contextPath}/img/delete.png" class="imge"></a>
                          </td>

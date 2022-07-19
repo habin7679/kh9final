@@ -89,4 +89,14 @@ public class MsgDaoImpl implements MsgDao{
 		int count = sqlSession.delete("msg.delete1",msgNo);
 		return count>0;
 	}
+	@Override
+	public SendMsgVO senddetail(int msgNo) {
+		sqlSession.update("msg.sendupdate",msgNo);
+		return sqlSession.selectOne("msg.senddetail",msgNo);
+	}
+	@Override
+	public RecvMsgVO recvdetail(int msgNo) {
+		sqlSession.update("msg.recvupdate",msgNo);
+		return sqlSession.selectOne("msg.recvdetail",msgNo);
+	}
 }

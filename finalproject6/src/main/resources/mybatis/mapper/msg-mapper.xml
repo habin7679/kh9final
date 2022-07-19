@@ -97,4 +97,27 @@ values(
 	<delete id="delete1" parameterType="int">
 	delete recv where msg_no = #{msgNo}
 	</delete>
+	<select id="senddetail" parameterType="int" resultType="SendMsgVO">
+	select * from send S
+		left outer join msg M on M.msg_no  = S.msg_no 
+		inner join member M on S.rmember_no = M.member_no
+		where S.msg_no = #{msgNo}
+	</select>
+	<select id="recvdetail" parameterType="int" resultType="RecvMsgVO">
+	select * from recv R
+		left outer join msg M on M.msg_no  = R.msg_no 
+		inner join member M on R.smember_no = M.member_no
+		where R.msg_no = #{msgNo}
+	</select>
+	<update id="sendupdate"  parameterType="int">
+	update send set
+	read = '읽음'
+	where msg_no = ${msgNo}
+	</update>
+	<update id="recvupdate"  parameterType="int">
+	update recv set
+	read = '읽음'
+	where msg_no = ${msgNo}
+	</update>
+	
 </mapper>

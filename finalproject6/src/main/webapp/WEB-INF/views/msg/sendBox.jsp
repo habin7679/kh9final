@@ -2,13 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <script type="text/javascript">
- 	$(function(){
- 		if($("#msg").length>16){
- 			$(this).substring(1,15);
- 		}
- 	};)
- </script>
+ 
  <style>
  .d{
  	margin-left:150px;
@@ -17,6 +11,11 @@
  	width:20px;
  	height:20px;
  }
+ .maxi{
+	text-overflow: ellipsis;
+	white-sapce:nowrap;
+	max-width: 100px;
+	}
  </style>
   <div class="container ma-t-100">
         <div class="section-header mt-4 col-md-8 offset-md-2" >
@@ -32,22 +31,24 @@
        	
        	<div class="row mt-2">
             <div class="col-md-6 offset-md-3">
-                <table class="table">
+                <table class="table" style="table-layout:fixed" width="300">
                     <thead class="text-center">
                         <tr>
                             <th style="width:300px;">내용</th>
                             <th >받는사람</th>
                             <th style="width:100px;">보낸날짜</th>
+                            <th>상태</th>
                             <th>삭제</th>
                         </tr>
                     </thead>
                      <tbody class="text-center">
                     	<c:forEach var="SendMsgVO" items="${sendBox}">
 	                        <tr>
-	                            <td id="msgCon">${SendMsgVO.msgNote}</td>
-	                            <td>${SendMsgVO.memberNick}</td>
-	                            <td>${SendMsgVO.sendDate}</td>
-	                            <td><a href="${pageContext.request.contextPath}/msg/delete?msgNo=${SendMsgVO.msgNo}"> 
+	                            <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"><a href="${pageContext.request.contextPath}/msg/senddetail?msgNo=${SendMsgVO.msgNo}">${SendMsgVO.msgNote}</a></td>
+	                            <td><a href="${pageContext.request.contextPath}/msg/send?memberRecvNo=${SendMsgVO.rmemberNo}">${SendMsgVO.memberNick}</a></td>
+	                            <td >${SendMsgVO.sendDate}</td>
+	                            <td>${SendMsgVO.read}</td>
+	                            <td style="width:200px;"><a href="${pageContext.request.contextPath}/msg/delete?msgNo=${SendMsgVO.msgNo}"> 
 	                            <img src = "${pageContext.request.contextPath}/img/delete.png" class="imge"></a>
                          </td>
 	                        </tr>

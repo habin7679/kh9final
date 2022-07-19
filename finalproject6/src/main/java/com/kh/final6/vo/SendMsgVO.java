@@ -16,4 +16,5 @@ public class SendMsgVO {
 	private String msgNote;
 	private Date sendDate;
 	private String memberNick;
+	private String read;
 }
