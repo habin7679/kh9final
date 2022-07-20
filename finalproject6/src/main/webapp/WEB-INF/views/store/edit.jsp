@@ -84,17 +84,7 @@
 				<div>
 					<label>구</label> <input type="text" name="gu" autocomplete="off"
 						required class="form-control me-1">
-				</div>
-				<%--
-     
-     
-       <label>판매자번호뭐지</label>
-                <textarea name="sellerNo" required 
-                class="textarea form-input fill" rows="12">판매자번호:${sellerDto.sellerNo}</textarea>
-               
-     
-      --%>
-
+				
 				<div>
 					<label>가게이름</label> <input type="text" name="storeName"
 						autocomplete="off" required class="form-control me-1"">
