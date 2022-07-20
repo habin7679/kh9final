@@ -73,7 +73,7 @@
 					<input type="radio" name="category" value="스시" checked required>스시 
 					<input type="radio"	name="category" value="한우" required>한우
 					<input type="radio"name="category" value="꼬치" required>꼬치
-					<input type="radio"name="category" value="커피" required>커피
+					<input type="radio"name="category" value="디저트" required>디저트
 				</div>
 				<div>
 					<label>동</label> 
