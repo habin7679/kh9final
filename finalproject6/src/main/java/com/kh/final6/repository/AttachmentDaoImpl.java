@@ -24,7 +24,6 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		directory.mkdirs();
 	}
 	
-	@Override
 	public int save(MultipartFile attachment) throws IllegalStateException, IOException {
 		
 		int attachmentNo = sqlSession.selectOne("attachment.sequence");
@@ -43,7 +42,6 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		return attachmentNo;
 	}
 
-	@Override
 	public AttachmentDto info(int attachmentNo) {
 		return sqlSession.selectOne("attachment.one",attachmentNo);
 	}
@@ -66,24 +64,24 @@ public class AttachmentDaoImpl implements AttachmentDao{
 		sqlSession.delete("attachment.delete",attachNo);
 		
 	}
-//
-//	@Override
-//	public int savelist(List<MultipartFile> storeImg) throws IllegalStateException, IOException {
-//		int attachmentNo = sqlSession.selectOne("attachment.sequence");
-//		
-//		String fileName = String.valueOf(attachmentNo);
-//		File target = new File(directory, fileName);
-//		attachment.transferTo(target);
-//		
-//		sqlSession.insert("attachment.insert",AttachmentDto.builder()
-//														.attachmentNo(attachmentNo)
-//														.attachmentUploadname(attachment.getOriginalFilename())
-//														.attachmentSavename(fileName)
-//														.attachmentType(attachment.getContentType())
-//														.attachmentSize(attachment.getSize())
-//															.build());
-//		return attachmentNo;
-//	}
+
+	@Override
+	public int savelist(MultipartFile attachment) throws IllegalStateException, IOException {
+		int attachmentNo = sqlSession.selectOne("attachment.sequence");
+		
+		String fileName = String.valueOf(attachmentNo);
+		File target = new File(directory, fileName);
+		attachment.transferTo(target);
+		
+		sqlSession.insert("attachment.insert",AttachmentDto.builder()
+														.attachmentNo(attachmentNo)
+														.attachmentUploadname(attachment.getOriginalFilename())
+														.attachmentSavename(fileName)
+														.attachmentType(attachment.getContentType())
+														.attachmentSize(attachment.getSize())
+															.build());
+		return attachmentNo;
+	}
 
 	
 }

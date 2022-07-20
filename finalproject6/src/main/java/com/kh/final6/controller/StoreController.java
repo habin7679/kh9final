@@ -35,7 +35,6 @@ import com.kh.final6.repository.StoreAttachDao;
 import com.kh.final6.repository.StoreDao;
 import com.kh.final6.service.BarRoomStoreService;
 import com.kh.final6.service.StoreService;
-import com.kh.final6.vo.StoreComplexSearchVO;
 
 
 
@@ -79,8 +78,8 @@ public class StoreController {
 	public String insert(
 			@ModelAttribute SellerDto sellerDto, 
 			@ModelAttribute BarRoomStoreDto barRoomStoreDto,
-			@RequestParam MultipartFile storeImg,
-		//	@RequestParam List<MultipartFile> storeImg,
+		//	@RequestParam MultipartFile storeImg,
+			@RequestParam List<MultipartFile> storeImg,
 			HttpSession session,
 			RedirectAttributes attr) throws IllegalStateException, IOException
 			 {
@@ -91,9 +90,8 @@ public class StoreController {
 		barRoomStoreDto.setSellerNo(sellerNo1);
 		
 		//int storeNo = storeService.save(storeDto, storeImg);
-		System.out.println(">> barRoomStoreDto" + barRoomStoreDto.toString());
-		//int storeNo = barRoomStoreService.savelist(barRoomStoreDto, storeImg);
-		int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
+		int storeNo = barRoomStoreService.savelist(barRoomStoreDto, storeImg);
+		//int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
 		
 	return "redirect:/regularPay/pay?storeNo="+storeNo;
 	}
@@ -140,6 +138,7 @@ public class StoreController {
 	}
 		
 	
+
 	@GetMapping("/search")
 	public String complexSearch(
 			@RequestParam String keyword,
@@ -183,6 +182,7 @@ public class StoreController {
 		      model.addAttribute("list", list);
 		return "store/search";
 	}
+
 	
 	
 	

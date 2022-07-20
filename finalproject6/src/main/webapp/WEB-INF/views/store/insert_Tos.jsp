@@ -22,7 +22,7 @@
         
         <div class="row mt-4 p-2">
             <div class="col-md-8 offset-md-2 p-4 text-light bg-dark rounded">
-                <h1>결제 서비스 이용약관</h1>
+                <h1>결제/가게 서비스 이용약관</h1>
                 <p>
                     이용약관에 동의하셔야 서비스를 이용하실 수 있습니다.
                 </p>

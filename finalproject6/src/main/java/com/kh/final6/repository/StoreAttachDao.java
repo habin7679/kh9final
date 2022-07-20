@@ -1,8 +1,14 @@
 package com.kh.final6.repository;
 
+import java.util.List;
+
+import com.kh.final6.entity.StoreAttachDto;
+
 public interface StoreAttachDao {
 
 	void insert(int storeNo, int attachmentNo);
-	int info(int storeNo);
+	
+	// StoreAttachDto
+	List<StoreAttachDto> info(int storeNo);
 
 }

@@ -23,16 +23,32 @@
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
- <mapper namespace="storeAttach">
- 	<insert id="insert" parameterType="Map">
- 	insert into store_attachment (store_no, attachment_no) values (#{storeNo}, #{attachmentNo})
- 	</insert>
-
-
- 	
- 	<select id="one" parameterType="int" resultType="StoreAttachDto">
- 		select * from store_attachment where store_no = #{storeNo}
+ <mapper namespace="storelike">
+ 
+ 	<!-- 좋아요 눌럿는지 안눌럿는지 -->
+ 
+ 	<select id="findLike" resultType="int">
+		select count(*) from store_like where store_no = #{storeNo} and member_no = #{memberNo}
+	</select>
+	
+ 	<select id="likeSequence" resultType="int">
+ 		select review_seq.nextval from dual
  	</select>
+ 	
+ 	<select id= "likemax" resultType="int">
+ 	 	select nvl(max(like_no), 0) FROM store_like
+ 	</select>
+ 	
+ 	<insert id="likeUp">
+		insert into store_like (like_no ,store_no , member_no, like_check)
+		values(#{likeNo}, #{storeNo},#{memberNo},1)
+	</insert>
+	
+	<delete id="likeDown">
+	 delete from store_like where store_no = #{storeNo} and member_no = #{memberNo}
+	</delete>
+ 	
+ 	
  	
  	
  </mapper>

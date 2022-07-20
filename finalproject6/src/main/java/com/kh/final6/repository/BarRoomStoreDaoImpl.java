@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.final6.entity.BarRoomStoreDto;
+import com.kh.final6.entity.NoticeDto;
 import com.kh.final6.entity.StoreDto;
 
 @Repository
@@ -40,6 +41,28 @@ public class BarRoomStoreDaoImpl implements BarRoomStoreDao {
 	@Override
 	public int saveOff(BarRoomStoreDto barRoomStoreDto) {
 		return sqlSession.insert("off.insert",barRoomStoreDto);
+	}
+
+	@Override
+	public int edit(BarRoomStoreDto barRoomStoreDto) {
+			return sqlSession.update("store.edit",barRoomStoreDto);
+			
+		
+	}
+
+	@Override
+	public int editBar(BarRoomStoreDto barRoomStoreDto) {
+		return sqlSession.update("bar.edit",barRoomStoreDto);
+	}
+
+	@Override
+	public int editRoom(BarRoomStoreDto barRoomStoreDto) {
+		return sqlSession.update("room.edit",barRoomStoreDto);
+	}
+
+	@Override
+	public int editOff(BarRoomStoreDto barRoomStoreDto) {
+		return sqlSession.update("off.edit",barRoomStoreDto);
 	}
 
 }

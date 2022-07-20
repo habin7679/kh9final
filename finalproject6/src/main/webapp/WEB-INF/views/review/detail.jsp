@@ -54,9 +54,12 @@
     				</c:if>
     				<tr>
     					<td>
-    						<a href="${pageContext.request.contextPath}/review/edit?reviewNo=${reviewDto.reviewNo}" class="btn btn primary">수정</a>
-    						<a href="${pageContext.request.contextPath}/review/delete?reviewNo=${reviewDto.reviewNo}" class="btn btn primary">삭제</a>
-    						<a href="${pageContext.request.contextPath}/review/list" class="btn btn primary">목록</a>
+    					<c:set var ="memberNo" value="${reviewDto.memberNo}"/>
+    					<c:if test="${no eq memberNo}">
+                           <a href="${pageContext.request.contextPath}/review/edit?reviewNo=${reviewDto.reviewNo}" class="btn btn primary">수정</a>
+                           <a href="${pageContext.request.contextPath}/review/delete?reviewNo=${reviewDto.reviewNo}&storeNo=${reviewDto.storeNo}" class="btn btn primary">삭제</a>
+                           </c:if>
+    						<a href="${pageContext.request.contextPath}/review/list?storeNo=${reviewDto.storeNo}" class="btn btn primary">목록</a>
     					</td>
     				</tr>
     			</table>

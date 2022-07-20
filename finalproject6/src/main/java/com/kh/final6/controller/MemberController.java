@@ -131,13 +131,13 @@ public class MemberController {
 			session.setAttribute("nick", memberDto.getMemberNick());
 		
 			//판매자 번호
-			if(memberDto.getMemberKind()=="판매자") {
-				int sellerNo = sellerDao.getSellerNo(memberDto.getMemberNo());
+			if("판매자".equals(memberDto.getMemberKind())) {
+				//int sellerNo = sellerDao.sellerMemberNo(memberDto.getMemberNo());
+				int sellerNo = sellerDao.getSellerNo2(memberDto.getMemberNo());
 				session.setAttribute("sellerNo", sellerNo);
 			}
 				
-			
-			
+
 			//쿠키
 			if(remember != null) {//체크하고 로그인 했으면 -> 쿠키 발행
 				Cookie ck = new Cookie("saveId", memberDto.getMemberId());

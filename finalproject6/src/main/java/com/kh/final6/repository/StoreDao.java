@@ -10,18 +10,29 @@ import com.kh.final6.vo.StoreComplexSearchVO;
 public interface StoreDao {
 	
 	List<StoreDto> list();
-	StoreDto one(int storeNo);	
+
+	StoreDto one(int storeNo);
+
 	void delete(int storeNo);
-	int insert(StoreDto storeDto);	
+
+	int insert(StoreDto storeDto);
+
 	StoreDto update(StoreDto storeDto);
- 
 
-   int selectReservationPrice(int storeNo);
-BarRoomVO barRoom(int storeNo);
-OffDayDto offDayOne(int storeNo);
-BarRoomVO cntBarRoom(String reservationDate, int storeNo);
+	int selectReservationPrice(int storeNo);
 
-List<StoreDto> complexSearch(String keyword);
-List<StoreDto> categorySearch(String category);
+	BarRoomVO barRoom(int storeNo);
+
+	OffDayDto offDayOne(int storeNo);
+
+	BarRoomVO cntBarRoom(String reservationDate, int storeNo);
+
+	List<StoreDto> complexSearch(String keyword);
+
+	List<StoreDto> categorySearch(String category);
+	
+	int likePlus(int storeNo);
+
+	int likeMinus(int storeNo);
 
 }

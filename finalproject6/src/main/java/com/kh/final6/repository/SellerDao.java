@@ -14,6 +14,8 @@ public interface SellerDao {
 
 	int getSellerNo(int storeNo);
 	
+	int getSellerNo2(int memberNo);
+	
 	void join(SellerDto sellerDto);
 
 	List<SellerDto> list(int sellerNo);
@@ -24,6 +26,7 @@ public interface SellerDao {
 
 	void gradeEdit(int sellerNo);
 
+	
 	int sellerMemberNo(int sellerNo);
 
 	void gradeMemberEdit(int memberNo);

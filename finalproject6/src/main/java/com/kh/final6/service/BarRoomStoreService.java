@@ -9,8 +9,10 @@ import com.kh.final6.entity.BarRoomStoreDto;
 
 public interface BarRoomStoreService {
 	int save(BarRoomStoreDto barRoomStoreDto, MultipartFile storeImg) throws IllegalStateException, IOException;
-	//int savelist(BarRoomStoreDto barRoomStoreDto,  List<MultipartFile> storeImg) throws IllegalStateException, IOException;
+	int savelist(BarRoomStoreDto barRoomStoreDto,  List<MultipartFile> storeImg) throws IllegalStateException, IOException;
 	
 	int save1(BarRoomStoreDto barRoomStoreDto) throws IllegalStateException, IOException;		
+	
+	int edit(BarRoomStoreDto barRoomStoreDto);
 }
 

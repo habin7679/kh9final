@@ -14,19 +14,11 @@
 	<div>
 	
 	<div class="row mt-4">	      
-	<%--	아이디로그인후에 이걸로 바꿔치기
-			<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}"> 
-	        <input type="hidden" name="memberNo" value="${memberDto.memberNo}"> 
-	        <input type="hidden" name="storeNo"  value="${storeDto.storeNo}"> 
 	        <input type="hidden" name="reviewWriter" value="${reviewDto.reviewWriter}">
-	         --%>    
-	        <input type="hidden" name="reviewNo" autocomplete="off" value='1'   class="form-input fill input-round"> 
-	        <input type="hidden" name="memberNo" autocomplete="off" value='0'   class="form-input fill input-round"> 
-	        <input type="hidden" name="storeNo" autocomplete="off" value='0'   class="form-input fill input-round"> 
-     <div>
-	        <label>작성자</label>    
-	        <input type="text" name="reviewWriter" autocomplete="off" required class="form-input fill input-round">
-    </div>
+	        <input type="hidden" name="storeNo" autocomplete="off" value="${storeNo}"   class="form-input fill input-round">  
+	         
+	        <!-- <input type="hidden" name="reviewNo" autocomplete="off" value='1'   class="form-input fill input-round"> 
+	        <input type="hidden" name="memberNo" autocomplete="off" value='0'   class="form-input fill input-round">--> 
     
    
     <div>
