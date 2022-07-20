@@ -162,14 +162,58 @@
 		select count(room_eight) from reservation where reservation_date = #{reservationDate} and room_eight = 1 and reservation_status = '완료'
 	</select>
 	
+	<!-- 메인 통합검색 -->
 	<select id="complexSearch" resultType="StoreDto" parameterType="String">
 		select * from store where instr(store_name, #{keyword})>0 or instr(dong, #{keyword})> 0 or instr(gu, #{keyword})>0 
 		or instr(category, #{keyword})>0 or instr(store_address, #{keyword})>0 order by store_likecount desc
 
 	</select>
 	
+	<!-- 메인 인기순 조회(스시) -->
+	<select id="sList" parameterType="Map" resultType="StoreDto">
+		select * from (
+			select rownum rn, TMP.*	from(
+				select * from store 
+				where category = '스시' 
+				order by store_likecount desc, store_no asc)TMP
+			)where rn between ${begin} and ${end}
+	</select>
+	
+	<!-- 메인 인기순 조회(한우) -->
+	<select id="cList" parameterType="Map" resultType="StoreDto">
+		select * from (
+			select rownum rn, TMP.*	from(
+				select * from store 
+				where category = '한우' 
+				order by store_likecount desc, store_no asc)TMP
+			)where rn between ${begin} and ${end}
+	</select>
+	
+	<!-- 메인 인기순 조회(디저트) -->
+	<select id="dList" parameterType="Map" resultType="StoreDto">
+		select * from (
+			select rownum rn, TMP.*	from(
+				select * from store 
+				where category = '디저트' 
+				order by store_likecount desc, store_no asc)TMP
+			)where rn between ${begin} and ${end}
+	</select>
+	
+	<!-- 메인 인기순 조회(꼬치) -->
+	<select id="kList" parameterType="Map" resultType="StoreDto">
+		select * from (
+			select rownum rn, TMP.*	from(
+				select * from store 
+				where category = '꼬치' 
+				order by store_likecount desc, store_no asc)TMP
+			)where rn between ${begin} and ${end}
+
+
+	</select>
+	
 	<select id="catergory" resultType="StoreDto" parameterType="String">
 		select * from store where category = #{category} order by store_likecount desc
+
 
 	</select>
 	

@@ -85,7 +85,17 @@
  	</delete>
  	
  	
+<!--  	메인 리뷰 조회 -->
+	<select id="mainList" parameterType="Map" resultType="ReviewDto">
+		select * from (
+			select rownum rn, TMP.* from(
+				select * from review order by review_score desc)TMP
+		)where rn between ${begin} and ${end}
+	</select>
  	
- 	
+<!--  	메인 리뷰 가게 이름 조회 -->
+	<select id="name" parameterType="int" resultType="String">
+		select store_name from store where store_no = ${storeNo}
+	</select>
  	
  </mapper>

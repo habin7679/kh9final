@@ -193,92 +193,92 @@
         </div>
 
 	<!-- 페이지네이션 -->
-	<div class="row mt-2">
-			<ul class="pagination justify-content-center">
-				<c:if test="${p > 1}">
-					<c:choose>
-						<c:when test="${search}">
-							<li class="page-item"><a class="page-link"
-								href="ownerReply?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link"
-								href="ownerReply?p=1&s=${s}">&lt;</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+<!-- 	<div class="row mt-2"> -->
+<!-- 			<ul class="pagination justify-content-center"> -->
+<%-- 				<c:if test="${p > 1}"> --%>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${search}"> --%>
+<!-- 							<li class="page-item"><a class="page-link" -->
+<%-- 								href="ownerReply?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 							<li class="page-item"><a class="page-link" -->
+<%-- 								href="ownerReply?p=1&s=${s}">&lt;</a></li> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<%-- 				</c:if> --%>
 
-				<c:if test="${startBlock > 1}">
-					<c:choose>
-						<c:when test="${search}">
-							<li class="page-item"><a class="page-link"
-								href="ownerReply?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link"
-								href="ownerReply?p=${startBlock-1}&s=${s}">&laquo;</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+<%-- 				<c:if test="${startBlock > 1}"> --%>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${search}"> --%>
+<!-- 							<li class="page-item"><a class="page-link" -->
+<%-- 								href="ownerReply?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 							<li class="page-item"><a class="page-link" -->
+<%-- 								href="ownerReply?p=${startBlock-1}&s=${s}">&laquo;</a></li> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<%-- 				</c:if> --%>
 
-				<!-- 숫자 링크 영역 -->
-				<c:forEach var="i" begin="${startBlock}" end="${endBlock}" step="1">
-					<c:choose>
-						<c:when test="${search}">
-							<c:choose>
-								<c:when test="${i == p}">
-									<li class="page-item active"><a class="page-link"
-										href="ownerReply?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link"
-										href="ownerReply?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:when>
-						<c:otherwise>
-							<c:choose>
-								<c:when test="${i == p}">
-									<li class="page-item active"><a class="page-link"
-										href="ownerReply?p=${i}&s=${s}">${i}</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link"
-										href="ownerReply?p=${i}&s=${s}">${i}</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
+<!-- 				숫자 링크 영역 -->
+<%-- 				<c:forEach var="i" begin="${startBlock}" end="${endBlock}" step="1"> --%>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${search}"> --%>
+<%-- 							<c:choose> --%>
+<%-- 								<c:when test="${i == p}"> --%>
+<!-- 									<li class="page-item active"><a class="page-link" -->
+<%-- 										href="ownerReply?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li> --%>
+<%-- 								</c:when> --%>
+<%-- 								<c:otherwise> --%>
+<!-- 									<li class="page-item"><a class="page-link" -->
+<%-- 										href="ownerReply?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li> --%>
+<%-- 								</c:otherwise> --%>
+<%-- 							</c:choose> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<%-- 							<c:choose> --%>
+<%-- 								<c:when test="${i == p}"> --%>
+<!-- 									<li class="page-item active"><a class="page-link" -->
+<%-- 										href="ownerReply?p=${i}&s=${s}">${i}</a></li> --%>
+<%-- 								</c:when> --%>
+<%-- 								<c:otherwise> --%>
+<!-- 									<li class="page-item"><a class="page-link" -->
+<%-- 										href="ownerReply?p=${i}&s=${s}">${i}</a></li> --%>
+<%-- 								</c:otherwise> --%>
+<%-- 							</c:choose> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<%-- 				</c:forEach> --%>
 
-				<!-- 다음 버튼 영역 -->
-				<c:if test="${endBlock < lastPage}">
-					<c:choose>
-						<c:when test="${search}">
-							<li class="page-item"><a class="page-link"
-								href="ownerReply?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link"
-								href="ownerReply?p=${endBlock+1}&s=${s}">&gt;</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+<!-- 				다음 버튼 영역 -->
+<%-- 				<c:if test="${endBlock < lastPage}"> --%>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${search}"> --%>
+<!-- 							<li class="page-item"><a class="page-link" -->
+<%-- 								href="ownerReply?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 							<li class="page-item"><a class="page-link" -->
+<%-- 								href="ownerReply?p=${endBlock+1}&s=${s}">&gt;</a></li> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<%-- 				</c:if> --%>
 
-				<c:if test="${p < lastPage}">
-					<c:choose>
-						<c:when test="${search}">
-							<li class="page-item"><a class="page-link"
-								href="ownerReply?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link"
-								href="ownerReply?p=${lastPage}&s=${s}">&raquo;</a></li>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-			</ul>
-	</div>
+<%-- 				<c:if test="${p < lastPage}"> --%>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${search}"> --%>
+<!-- 							<li class="page-item"><a class="page-link" -->
+<%-- 								href="ownerReply?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li> --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 							<li class="page-item"><a class="page-link" -->
+<%-- 								href="ownerReply?p=${lastPage}&s=${s}">&raquo;</a></li> --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<%-- 				</c:if> --%>
+<!-- 			</ul> -->
+<!-- 	</div> -->
 
 	<div class="row mt-2 text-center">
 	
@@ -287,25 +287,25 @@
 		</div>
 	</div>
 
-	<div class="row mt-2 text-center">
-            <div class="col-md-8 offset-md-2">
-               <!--검색창-->
-               <div class="row">
-               <div class="col-md-3"></div>
-               <div class="col-md-6">
-               <form action="ownerReply" method="get">
-               <div class="d-flex justify-content-center" >
-                    <select name="type" class="form-select me-1" style="width:17%;">
-						<option value="reply_content">내용</option>
-                    </select>
-                <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" id="rk" style="width:50%;" autocomplete="off">
-                <input type="submit" value="검색" class="btn-s" style="width:15%;">
-               </div>
-               </form>
-               </div>
-               <div class="col-md-3"></div>
-           </div>     
-        </div>
+<!-- 	<div class="row mt-2 text-center"> -->
+<!--             <div class="col-md-8 offset-md-2"> -->
+<!--                검색창 -->
+<!--                <div class="row"> -->
+<!--                <div class="col-md-3"></div> -->
+<!--                <div class="col-md-6"> -->
+<!--                <form action="ownerReply" method="get"> -->
+<!--                <div class="d-flex justify-content-center" > -->
+<!--                     <select name="type" class="form-select me-1" style="width:17%;"> -->
+<!-- 						<option value="reply_content">내용</option> -->
+<!--                     </select> -->
+<%--                 <input type="search" name="keyword" placeholder="검색어 입력" value="${keyword}" class="form-control me-1" id="rk" style="width:50%;" autocomplete="off"> --%>
+<!--                 <input type="submit" value="검색" class="btn-s" style="width:15%;"> -->
+<!--                </div> -->
+<!--                </form> -->
+<!--                </div> -->
+<!--                <div class="col-md-3"></div> -->
+<!--            </div>      -->
+<!--         </div> -->
 </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

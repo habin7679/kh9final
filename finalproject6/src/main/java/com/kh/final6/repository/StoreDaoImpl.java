@@ -1,6 +1,8 @@
 package com.kh.final6.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +105,64 @@ public class StoreDaoImpl implements StoreDao {
 		return list;
 	}
 
+	
+	//메인페이지 카테고리별 인기순 조회(스시)
+	@Override
+	public List<StoreDto> sList(int p, int s) {
+		Map<String,Object> param = new HashMap<>();
+		
+		int end = p * s;
+		int begin = end - (s-1);
+		
+		param.put("begin", begin);
+		param.put("end", end);
+		return sqlSession.selectList("store.sList",param);
+	}
+	//메인페이지 카테고리별 인기순 조회(한우)
+	@Override
+	public List<StoreDto> cList(int p, int s) {
+		Map<String,Object> param = new HashMap<>();
+		
+		int end = p * s;
+		int begin = end - (s-1);
+		
+		param.put("begin", begin);
+		param.put("end", end);
+		return sqlSession.selectList("store.cList",param);
+	}
+	//메인페이지 카테고리별 인기순 조회(디저트)
+	@Override
+	public List<StoreDto> dList(int p, int s) {
+		Map<String,Object> param = new HashMap<>();
+		
+		int end = p * s;
+		int begin = end - (s-1);
+		
+		param.put("begin", begin);
+		param.put("end", end);
+		return sqlSession.selectList("store.dList",param);
+	}
+	//메인페이지 카테고리별 인기순 조회(꼬치)
+	@Override
+	public List<StoreDto> kList(int p, int s) {
+		Map<String,Object> param = new HashMap<>();
+		
+		int end = p * s;
+		int begin = end - (s-1);
+		
+		param.put("begin", begin);
+		param.put("end", end);
+		return sqlSession.selectList("store.kList",param);
+	}
+
+	@Override
+	public String name(int storeNo) {
+		return sqlSession.selectOne("review.name",storeNo);
+	}
+}
+
+
+
 	@Override
 	public List<StoreDto> categorySearch(String category) {
 		List<StoreDto> list = sqlSession.selectList("store.catergory", category);
@@ -119,3 +179,4 @@ public class StoreDaoImpl implements StoreDao {
 		return sqlSession.update("store.likeMinus", storeNo);
 	}
 }
+
