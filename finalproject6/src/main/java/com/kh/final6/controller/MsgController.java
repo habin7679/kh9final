@@ -52,7 +52,7 @@ public String send(
 public String send(	@ModelAttribute MsgDto msgDto
 	) {
 	msgDao.msg(msgDto);
-	return "redirect:/";
+	return "msg/send_success";
 }
 @GetMapping("/sendBox")
 public String sendBox(

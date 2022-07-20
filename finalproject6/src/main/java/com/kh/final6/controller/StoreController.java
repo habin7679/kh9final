@@ -1,7 +1,9 @@
 package com.kh.final6.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -136,8 +138,51 @@ public class StoreController {
 	}
 		
 	
+
+	@GetMapping("/search")
+	public String complexSearch(
+			@RequestParam String keyword,
+			Model model
+			) {
+		List<StoreDto> list = storeDao.complexSearch(keyword);
+		   List<Integer> AttachList = new ArrayList<>();
+		   
+		   for(StoreDto storeDto : list) {
+		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
+		         AttachList.add(attachmentNo);
+		      };
+		      
+		      model.addAttribute("sAttachList",AttachList);
+		      
+		      boolean sNoAttach = list.isEmpty();
+		      model.addAttribute("sNoAttach",sNoAttach);
+		      
+		      model.addAttribute("list", list);
+		      return "store/search";
+	}
 	
-	
+	@GetMapping("/category")
+	public String category(
+			@RequestParam String category,
+			Model model
+			) {
+		List<StoreDto> list = storeDao.categorySearch(category);
+		   List<Integer> AttachList = new ArrayList<>();
+		   
+		   for(StoreDto storeDto : list) {
+		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
+		         AttachList.add(attachmentNo);
+		      };
+		      
+		      model.addAttribute("sAttachList",AttachList);
+		      
+		      boolean sNoAttach = list.isEmpty();
+		      model.addAttribute("sNoAttach",sNoAttach);
+		      
+		      model.addAttribute("list", list);
+		return "store/search";
+	}
+
 	
 	
 	

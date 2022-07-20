@@ -164,10 +164,12 @@
 	<select id="complexSearch" resultType="StoreDto" parameterType="String">
 		select * from store where instr(store_name, #{keyword})>0 or instr(dong, #{keyword})> 0 or instr(gu, #{keyword})>0 
 		or instr(category, #{keyword})>0 or instr(store_address, #{keyword})>0 order by store_likecount desc
+
 	</select>
 	
 	<select id="catergory" resultType="StoreDto" parameterType="String">
 		select * from store where category = #{category} order by store_likecount desc
+
 	</select>
 	
  </mapper>

@@ -137,6 +137,7 @@ public class MemberController {
 				session.setAttribute("sellerNo", sellerNo);
 			}
 				
+
 			//쿠키
 			if(remember != null) {//체크하고 로그인 했으면 -> 쿠키 발행
 				Cookie ck = new Cookie("saveId", memberDto.getMemberId());
@@ -161,6 +162,7 @@ public class MemberController {
 		session.removeAttribute("login");
 		session.removeAttribute("auth");
 		session.removeAttribute("nick");
+		session.removeAttribute("sellerNo");
 		return "redirect:/";
 	}
 	
