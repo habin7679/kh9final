@@ -25,7 +25,7 @@ public class StoreAttachDaoImpl implements StoreAttachDao{
 	}
 
 	@Override
-	public List<StoreAttachDto> info(int storeNo) {
+	public List<StoreAttachDto> infolist(int storeNo) {
 	//	Integer attachmentNo = sqlSession.selectOne("storeAttach.one",storeNo);
 		List<StoreAttachDto> attachmentNoList = sqlSession.selectList("storeAttach.one",storeNo);
 	
@@ -39,5 +39,16 @@ public class StoreAttachDaoImpl implements StoreAttachDao{
 		}
 		 
 	}
+	   @Override
+	   public int info(int storeNo) {
+	      Integer attachmentNo = sqlSession.selectOne("storeAttach.one",storeNo);
+	      if(attachmentNo == null) {
+	         return 0;
+	      }
+	      else {
+	         return attachmentNo;
+	      }
+	      
+	   }
 
 }
