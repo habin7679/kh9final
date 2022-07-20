@@ -44,7 +44,6 @@ public interface StoreDao {
 	String name(int storeNo);
 
 
-
 	List<StoreDto> categorySearch(String category);
 	
 	int likePlus(int storeNo);

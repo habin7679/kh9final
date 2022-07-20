@@ -74,7 +74,7 @@
 					<label>주소 <i class="fa-solid fa-map-location-dot"></i></label>
 					 <input type="text" class="form-control" value="${myReservationVO.storePost }" readonly> 
 					 <div>
-					 <input type="text" class="form-control" value="${myReservationVOo.storeAddress}" readonly> 
+					 <input type="text" class="form-control" value="${myReservationVO.storeAddress}" readonly> 
 					 </div>
 					 <div>
 					<input type="text" class="form-control" value="${myReservationVO.storeDetailAddress }" readonly>

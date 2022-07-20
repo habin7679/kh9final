@@ -3,6 +3,12 @@
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- ${list} --%>
+<style>
+.a{
+width:500px;
+height:300px;
+}
+</style>
  <section id="menu" class="menu">
       <div class="container" data-aos="fade-up">
 	
@@ -20,7 +26,7 @@
              <c:choose>
               <c:when test="${sAttachList[status.index] != 0 }">
               <a href="${pageContext.request.contextPath}/store/detail?storeNo=${storeDto.storeNo}">
-              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${sAttachList[status.index]}" class="menu-img img-fluid">
+              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${sAttachList[status.index]}" class="menu-img a rounded" >
               </a>
               </c:when>
               <c:otherwise>

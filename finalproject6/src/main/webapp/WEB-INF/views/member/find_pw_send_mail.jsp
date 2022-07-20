@@ -9,7 +9,6 @@ color:var(--color-primary);
 <section>
 <div class="container ma-t-100" style="width:900px;">
 <div class="section-header mt-4 col-md-8 offset-md-2" >
-            <h2>find pw</h2>
             <p><span>비밀번호</span> 찾기</p>
        	</div>
        	<div class="col-md-8 offset-md-2">

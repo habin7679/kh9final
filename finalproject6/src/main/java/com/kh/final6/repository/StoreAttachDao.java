@@ -9,7 +9,7 @@ public interface StoreAttachDao {
 	void insert(int storeNo, int attachmentNo);
 	
 	// StoreAttachDto
-	List<StoreAttachDto> infolist(int storeNo);
+	//List<StoreAttachDto> infolist(int storeNo);
 	int info(int storeNo);
 	
 }

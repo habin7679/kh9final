@@ -6,7 +6,6 @@
 <form action="find_id" method="post">
 	<div class="container ma-t-100" style="width:900px;">
     <div class="section-header mt-4 col-md-8 offset-md-2" >
-            <h2>find id</h2>
             <p><span>아이디찾기</span></p>
        	</div>
 	    <div class="col-md-8 offset-md-2">

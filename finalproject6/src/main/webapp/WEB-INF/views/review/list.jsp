@@ -16,39 +16,27 @@
 <div class="container ma-t-100">
 
 
-	<!-- 글쓰기 버튼 -->
+	<%-- <!-- 글쓰기 버튼 -->
 	<div class="row mt-2">
 		<div class="col-md-8 offset-md-2">
-			<a href="insert" class="btn1 col-md-1 offset-md-11">리뷰쓰기</a>
+			<a href="${pageContext.request.contextPath}/review/insert?storeNo=${storeDto.storeNo}" class="btn1 col-md-1 offset-md-11">리뷰쓰기</a>
 		</div>
-	</div>
+	</div> --%>
 
 	<div class="row mt-2">
 		<div class="col-md-8 offset-md-2">
 			<table class="table">
 				<thead class="text-center">
 					<tr>
-						<th class="w-20">사진</th>
 						<th>작성자</th>
 						<th>작성일</th>
 						<th class="w-50">리뷰내용</th>
 						<th>평점</th>
-						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody class="text-center">
 					<c:forEach var="reviewDto" items="${list}">
 						<tr>
-							<td><c:choose>
-									<c:when test="${reviewAttach == false || passImg}">
-										<img src="${pageContext.request.contextPath}${reviewImgUrl}"
-											width="50%">
-									</c:when>
-									<c:otherwise>
-									
-										<pre>사진없음</pre>
-									</c:otherwise>
-								</c:choose></td>
 							<td style="text-align: left !important"><a
 								href="detail?reviewNo=${reviewDto.reviewNo}">
 
@@ -56,10 +44,7 @@
 							<td>${reviewDto.reviewTime}</td>
 							<td>${reviewDto.reviewContent}</td>
 							<td>${reviewDto.reviewScore}</td>
-							<%-- 당사자한테만 삭제랑 수정페이지 보여주기 --%>
-							<td><a
-								href="${pageContext.request.contextPath}/review/delete?reviewNo=${reviewDto.reviewNo}"
-								class="btn btn primary">삭제</a></td>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
