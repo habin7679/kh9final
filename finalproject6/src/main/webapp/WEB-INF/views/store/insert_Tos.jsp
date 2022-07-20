@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+    
  <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,58 +20,45 @@
 </head>
 <body>
     <!-- 특정 영역을 생성하여 이 부분만 vue로 제어한다 -->
-    <div id="app" class="container-fluid">
-        
-        <div class="row mt-4 p-2">
-            <div class="col-md-8 offset-md-2 p-4 text-light bg-dark rounded">
-                <h1>결제/가게 서비스 이용약관</h1>
-                <p>
-                    이용약관에 동의하셔야 서비스를 이용하실 수 있습니다.
-                </p>
-            </div>
-        </div>
+     <div id="app">
+  <div class="container py-4">
+  
 
-        <div class="row mt-4">
-            <div class="col-md-8 offset-md-2">
-                <label class="form-label">이용약관1</label>
-                <textarea class="form-control rounded" rows="5" readonly>{{agree1Text}}</textarea>
-                <label class="mt-2">
-                    <input type="checkbox" v-model="agree1">
+    <div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">결제/가게 서비스이용 약관</h1>
+        <p class="col-md-8 fs-4">이용약관에 동의하셔야 서비스를 이용하실 수 있습니다..</p>
+         <input type="checkbox" v-model="agree1">
                     <span class="ms-2">동의합니다</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-8 offset-md-2">
-                <label class="form-label">이용약관2</label>
-                <textarea class="form-control rounded" rows="5" readonly>{{agree2Text}}</textarea>
-                <label class="mt-2">
-                    <input type="checkbox" v-model="agree2">
-                    <span class="ms-2">동의합니다</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-8 offset-md-2">
-                <label class="form-label">이용약관3</label>
-                <textarea class="form-control rounded" rows="5" readonly>{{agree3Text}}</textarea>
-                <label class="mt-2">
-                    <input type="checkbox" v-model="agree3">
-                    <span class="ms-2">동의합니다</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-8 offset-md-2 d-grid">
-                <button onclick="location.href='insert';" class="btn btn-primary rounded" v-bind:disabled="agreeAll == false">다음 단계로 이동</button>
-            </div>
-        </div>
-        <div class="mt-5 mb-5"></div>
-
+      </div>
     </div>
+
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-bg-dark rounded-3">
+          <h2>지도 사용의 이용약관</h2>
+          <p>이용약관에 동의하셔야 서비스를 이용하실 수 있습니다.</p>
+           <input type="checkbox" v-model="agree2">
+                    <span class="ms-2">동의합니다</span>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>예야쿠 서비스 이용약관</h2>
+          <p>이용약관에 동의하셔야 서비스를 이용하실 수 있습니다..</p>
+           <input type="checkbox" v-model="agree3">
+                    <span class="ms-2">동의합니다</span>
+        </div>
+      </div>
+    </div>
+
+    <footer class="pt-3 mt-3 text-muted border-top">
+      <button onclick="location.href='insert';" class="btn btn-primary rounded" v-bind:disabled="agreeAll == false">다음 단계로 이동</button>
+           
+    </footer>
+  </div>
+    
+    
 
     <!-- vue js도 lazy loading을 사용한다 -->
     <script src="https://unpkg.com/vue@next"></script>
@@ -81,9 +70,6 @@
             //data : 화면을 구현하는데 필요한 데이터를 작성한다.
             data(){
                 return {
-                    agree1Text:"예약할꺼니깐 동의해주세요",
-                    agree2Text:"지도쓸꺼니깐 동의해주세요",
-                    agree3Text:"개인정보 동의해주세요",
                     agree1:false,//첫 번째 이용약관 동의여부
                     agree2:false,//두 번째 이용약관 동의여부
                     agree3:false,//세 번째 이용약관 동의여부
@@ -105,3 +91,6 @@
     </script>
 </body>
 </html>
+
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

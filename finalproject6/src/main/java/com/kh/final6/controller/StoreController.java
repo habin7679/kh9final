@@ -35,6 +35,7 @@ import com.kh.final6.repository.StoreAttachDao;
 import com.kh.final6.repository.StoreDao;
 import com.kh.final6.service.BarRoomStoreService;
 import com.kh.final6.service.StoreService;
+import com.kh.final6.vo.StoreComplexSearchVO;
 
 
 
@@ -63,10 +64,13 @@ public class StoreController {
 	public String storeedit() {
 		return "store/storeedit";
 	}
-	@GetMapping("/New")
-	public String New() {
-		return "store/New";
+	@GetMapping("/edit")
+	public String New(@RequestParam int storeNo, Model model) {
+		model.addAttribute("storeNo", storeNo);
+
+		return "store/edit";
 	}
+
 	
 	//insert
 	@GetMapping("/insert")
@@ -75,87 +79,61 @@ public class StoreController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(
-			@ModelAttribute SellerDto sellerDto, 
-			@ModelAttribute BarRoomStoreDto barRoomStoreDto,
-		//	@RequestParam MultipartFile storeImg,
-			@RequestParam List<MultipartFile> storeImg,
-			HttpSession session,
-			RedirectAttributes attr) throws IllegalStateException, IOException
-			 {
-		
-		//int sellerNo = (Integer)session.getAttribute("sellerNo");
-		//	판매자 안될경우
-		int sellerNo1 = 66;
-		barRoomStoreDto.setSellerNo(sellerNo1);
-		
-		//int storeNo = storeService.save(storeDto, storeImg);
+	public String insert(@ModelAttribute SellerDto sellerDto, @ModelAttribute BarRoomStoreDto barRoomStoreDto,
+			// @RequestParam MultipartFile storeImg,
+			@RequestParam List<MultipartFile> storeImg, HttpSession session, RedirectAttributes attr)
+			throws IllegalStateException, IOException {
+
+		int sellerNo = (Integer) session.getAttribute("sellerNo");
+		// 판매자 안될경우
+		// int sellerNo1 = 66;
+		barRoomStoreDto.setSellerNo(sellerNo);
+
+		// int storeNo = storeService.save(storeDto, storeImg);
 		int storeNo = barRoomStoreService.savelist(barRoomStoreDto, storeImg);
-		//int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
-		
-	return "redirect:/regularPay/pay?storeNo="+storeNo;
+		// int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
+
+		return "redirect:/regularPay/pay?storeNo=" + storeNo;
 	}
-	
 	
 	@GetMapping("/room")
 	public String room() {
 		return"store/room";
 	}
 	
-
-//	
-//	@PostMapping("/insert")
-//	public String write(@ModelAttribute StoreDto storeDto,
-//						@RequestParam MultipartFile storeImg,
-//						HttpSession session,
-//						RedirectAttributes attr) throws IllegalStateException, IOException {
-//		session.setAttribute("sellerNo",memberDto.getMemberNo());
-//		int sellerNo=(Integer)session.getAttribute("sellerNo");
-//		SellerDto sellerDto = sellerDao.one(sellerNo);
-//		storeDto.setSellerNo(sellerDto.getSellerNo());
-//		storeDto.setStoreNo(sellerDto.getSellerNo());
-//		
-//		int storeNo = storeService.save(storeDto, storeImg);
-//		
-//		attr.addAttribute("storeNo",storeNo);
-//		return "redirect:list";
-//		
-//	}
 	@GetMapping("/list")
 	public String list() {
 		return "store/list";
 	}
 	
-	
-	
 	@GetMapping("/detail/{storeNo}")
-	public String detail2(@PathVariable int storeNo, Model model
-			) {
+	public String detail2(@PathVariable int storeNo, Model model, @RequestParam MultipartFile storeImg) {
 		StoreDto storeDto = storeDao.one(storeNo);
-		model.addAttribute("storeDto",storeDto);
-		
-		return "store/detail2";
+		model.addAttribute("storeDto", storeDto);
+
+		return "store/detail";
 	}
-		
 	
 
+	
 	@GetMapping("/search")
 	public String complexSearch(
 			@RequestParam String keyword,
 			Model model
 			) {
 		List<StoreDto> list = storeDao.complexSearch(keyword);
-		   List<Integer> AttachList = new ArrayList<>();
+		   List<AttachmentDto> AttachList = new ArrayList<>();
 		   
 		   for(StoreDto storeDto : list) {
+		         
 		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
-		         AttachList.add(attachmentNo);
-		      };
-		      
-		      model.addAttribute("sAttachList",AttachList);
-		      
-		      boolean sNoAttach = list.isEmpty();
-		      model.addAttribute("sNoAttach",sNoAttach);
+		         AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
+		         AttachList.add(attachmentDto);
+		         model.addAttribute("sAttach",attachmentNo);
+		      }
+		      model.addAttribute("AttachList",AttachList);
+		      boolean NoAttach = AttachList.isEmpty();
+		      model.addAttribute("noAttach",NoAttach);
 		      
 		      model.addAttribute("list", list);
 		      return "store/search";
@@ -167,23 +145,9 @@ public class StoreController {
 			Model model
 			) {
 		List<StoreDto> list = storeDao.categorySearch(category);
-		   List<Integer> AttachList = new ArrayList<>();
-		   
-		   for(StoreDto storeDto : list) {
-		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
-		         AttachList.add(attachmentNo);
-		      };
-		      
-		      model.addAttribute("sAttachList",AttachList);
-		      
-		      boolean sNoAttach = list.isEmpty();
-		      model.addAttribute("sNoAttach",sNoAttach);
-		      
-		      model.addAttribute("list", list);
+		model.addAttribute("list", list);
 		return "store/search";
 	}
-
-	
 	
 	
 	
@@ -213,22 +177,5 @@ public class StoreController {
 	}
 
 	
-	
-	
-	
-	//@GetMapping("/storeedit")
-	//public List<StoreDto> list(){
-	//	return storeDao.list();
-	//}
-	
-	
-	
-	//@DeleteMapping("/{storeNo}")
-	//@DeleteMapping("/delete")
-	
-	//public void delete(@PathVariable int storeNo) {
-	//	storeDao.delete(storeNo);
-	//}
-
 
 }
