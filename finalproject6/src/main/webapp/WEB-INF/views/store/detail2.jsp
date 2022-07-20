@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<style>
+	
+</style>
 
 	<div class="container ma-t-100">
     <div class="row mt-20">
@@ -15,7 +17,7 @@
             <div class="row mt-20">
             <c:choose>
             	<c:when test="${!storeAttach}">
-              <img src="${pageContext.request.contextPath}${storeImgUrl}" class="menu-img img-fluid">
+              <img src="${pageContext.request.contextPath}${storeImgUrl}" class="menu-img img-fluid" >
               </c:when>
               <c:otherwise>
               	<img src="${pageContext.request.contextPath}/img/mainMap.png" class="menu-img img-fluid">
@@ -55,6 +57,7 @@
              <div class="row mt-10">
               <div class="col-md-6 mt-3">
                 <a href="${pageContext.request.contextPath}/reservation/?storeNo=${storeDto.storeNo}" class="btn1">예약하러 가기</a>
+              	<i class="fa-solid fa-heart" style="color:red; cursor:pointer;" id="likeButton"></i> ${storeDto.storeLikeCount}
               </div>
               <div class="col-md-6"></div>
              </div>
@@ -118,8 +121,35 @@
     </div>
   </div>				
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85dadd42b9eaa3324f969eda3e18fe08&libraries=services"></script>
-    <script type="text/javascript">
-        $(function(){
+  <script type="text/javascript">
+  $(document).ready(function() {
+  	function likeStore() {
+  		
+  		let store_no = ${storeDto.storeNo};
+  		let member_no = <%=(Integer) session.getAttribute("no")%>
+  		
+  		$.ajax({
+  			type :'GET',
+  			url : '${pageContext.request.contextPath}/rest/store/like',
+  			contentType: 'application/json',
+  			data : 				{
+  						"store_no" : store_no,
+  						"member_no" : member_no
+  					}	,	
+  				
+  			success : function(data) {
+  				alert("감사합니다.");
+  				location.reload();
+  			}
+  		})
+  	}
+
+  	$('#likeButton').click(likeStore);
+  });
+ 
+
+
+      $(function(){
 			// 지도가 표시될 영역을 선택한다
 			var container = document.querySelector('#map');
 
@@ -134,83 +164,83 @@
 			// 지도를 생성한다
 			var map = new kakao.maps.Map(container, options);
 
-                
-                // 주소를 불러온다.
-                var address = $(".address").val();
-                
+              
+              // 주소를 불러온다.
+              var address = $(".address").val();
+              
 
-                // 주소를 이용해서 위치를 찾고 지도를 변경하는 코드
+              // 주소를 이용해서 위치를 찾고 지도를 변경하는 코드
 
-                // [1] 탐색 도구 생성
-                var geocoder = new kakao.maps.services.Geocoder();
+              // [1] 탐색 도구 생성
+              var geocoder = new kakao.maps.services.Geocoder();
 
-                // [2] 주소 탐색
-                geocoder.addressSearch(address, function(result, status){
-                    //(참고) 함수 안에서 arguments 를 이용하면 매개변수를 모두 조사할 수 있다.
-                    console.log(arguments);
+              // [2] 주소 탐색
+              geocoder.addressSearch(address, function(result, status){
+                  //(참고) 함수 안에서 arguments 를 이용하면 매개변수를 모두 조사할 수 있다.
+                  console.log(arguments);
 
-                    //if(status === "OK") {}
-                    if(status === kakao.maps.services.Status.OK) {
+                  //if(status === "OK") {}
+                  if(status === kakao.maps.services.Status.OK) {
 
-                        // 검색된 위치의 좌표 객체를 생성한다
-                        var lat = result[0].y;
-                        var lng = result[0].x;
-                        var addr = result[0].address_name;
+                      // 검색된 위치의 좌표 객체를 생성한다
+                      var lat = result[0].y;
+                      var lng = result[0].x;
+                      var addr = result[0].address_name;
 
-                        console.log("lat = " + lat)
-                        console.log("lng = " + lng)
-                        // 지도 위치를 변경하고 마커를 인포윈도우와 함께 출력한다.
-                        moveMap(lat, lng);
-                        createMarker(lat, lng, addr);
-                        
-                    }
-                });
+                      console.log("lat = " + lat)
+                      console.log("lng = " + lng)
+                      // 지도 위치를 변경하고 마커를 인포윈도우와 함께 출력한다.
+                      moveMap(lat, lng);
+                      createMarker(lat, lng, addr);
+                      
+                  }
+              });
 
 
-            // 지도 이동 함수
-            function moveMap(lat, lng){
-                // 카카오에서 제공하는 위도경도 객체를 주어진 정보로 생성한다
-                var moveLocation = new kakao.maps.LatLng(lat, lng);
+          // 지도 이동 함수
+          function moveMap(lat, lng){
+              // 카카오에서 제공하는 위도경도 객체를 주어진 정보로 생성한다
+              var moveLocation = new kakao.maps.LatLng(lat, lng);
 
-                map.setCenter(moveLocation);//순간이동
-                //map.panTo(moveLocation);//부드럽게이동
-            }
+              map.setCenter(moveLocation);//순간이동
+              //map.panTo(moveLocation);//부드럽게이동
+          }
 
-            // 마커 생성 함수
-            // (1) lat, lng 만 있는 경우 마커만 생성
-            // (2) lat, lng, content가 모두 있다면 lat, lng로 마커를 만들고 content로 인포윈도우를 생성
-            function createMarker(lat, lng, content) {
-                // 카카오에서 제공하는 위도경도 객체를 주어진 정보로 생성한다
-                var markerPosition  = new kakao.maps.LatLng(lat, lng); 
+          // 마커 생성 함수
+          // (1) lat, lng 만 있는 경우 마커만 생성
+          // (2) lat, lng, content가 모두 있다면 lat, lng로 마커를 만들고 content로 인포윈도우를 생성
+          function createMarker(lat, lng, content) {
+              // 카카오에서 제공하는 위도경도 객체를 주어진 정보로 생성한다
+              var markerPosition  = new kakao.maps.LatLng(lat, lng); 
 
-                // 배치를 위한 마커를 생성한다
-                var marker = new kakao.maps.Marker({
-                    position: markerPosition
-                });
+              // 배치를 위한 마커를 생성한다
+              var marker = new kakao.maps.Marker({
+                  position: markerPosition
+              });
 
-                // 마커에 표시될 지도의 정보를 설정한다
-                marker.setMap(map);
+              // 마커에 표시될 지도의 정보를 설정한다
+              marker.setMap(map);
 
-                //세번째 매개변수인 content에 값이 들어온 경우 인포윈도우 생성 코드를 추가
-                if(content !== undefined) {
-                    //var iwContent = 하단에 있는 템플릿을 불러와서 복사;
-                    //var iwContent = document.getElementById("info-window-template").innerHTML;
-                    var iwContent = $("#info-window-template").html();
-                    iwContent = iwContent.replace("{{content}}", content);
+              //세번째 매개변수인 content에 값이 들어온 경우 인포윈도우 생성 코드를 추가
+              if(content !== undefined) {
+                  //var iwContent = 하단에 있는 템플릿을 불러와서 복사;
+                  //var iwContent = document.getElementById("info-window-template").innerHTML;
+                  var iwContent = $("#info-window-template").html();
+                  iwContent = iwContent.replace("{{content}}", content);
 
-                    var iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+                  var iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 
-                    // 인포윈도우를 생성합니다
-                    var infowindow = new kakao.maps.InfoWindow({
-                        position : iwPosition, 
-                        content : iwContent 
-                    });
-                    
-                    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-                    infowindow.open(map, marker); 
-                }
-            }
+                  // 인포윈도우를 생성합니다
+                  var infowindow = new kakao.maps.InfoWindow({
+                      position : iwPosition, 
+                      content : iwContent 
+                  });
+                  
+                  // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+                  infowindow.open(map, marker); 
+              }
+          }
 		});
-    </script>
-  
+  </script>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>				

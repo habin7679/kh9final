@@ -82,28 +82,18 @@
                             </td>
                         </tr>
                         
-<!--                         <tr> -->
-<!--                         	<td> -->
-<%--                         		 <a href="detail?qnaNo=${qnaDto.qnaNo}&superNo=${qnaDto.superNo}"> --%>
-<!-- 	                           	말머리 -->
-<%-- 		                            <c:if test="${qnaDto.qnaHead != null}"> --%>
-<%-- 		                            	[${qnaDto.qnaHead}] --%>
-<%-- 		                            </c:if> --%>
-<%-- 	                            	${qnaDto.qnaTitle} --%>
-<!-- 	                            </a> -->
-<!--                         	</td> -->
-<!--                         </tr> -->
-                        
                         <tr style="text-align: right;">
                            <td style="border-bottom: none;">
-                          <c:if test="${isOwner}">
-                            <a href="${pageContext.request.contextPath}/qna/edit?qnaNo=${qnaDto.qnaNo}" class="btn1 ms-1">수정</a>
-                            <a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a>
-                           </c:if>
-                           <c:if test="${isAdmin}">
-                           	<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a>
-                            <a href="${pageContext.request.contextPath}/qna/write?superNo=${qnaDto.qnaNo}" class="btn1 ms-1">답글</a>
-                           </c:if>
+                           <c:choose>
+                           	<c:when test="${isOwner }">
+                           		<a href="${pageContext.request.contextPath}/qna/edit?qnaNo=${qnaDto.qnaNo}" class="btn1 ms-1">수정</a>
+                            	<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a>
+                           	</c:when>
+                           	<c:otherwise>
+                           		<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a>
+                           		<a href="${pageContext.request.contextPath}/qna/write?superNo=${qnaDto.qnaNo}" class="btn1 ms-1">답글</a>
+                           	</c:otherwise>
+                           </c:choose>
                             <a href="${pageContext.request.contextPath}/qna/list" class="btn0 ms-1">목록</a>
                            </td>
                         </tr>
