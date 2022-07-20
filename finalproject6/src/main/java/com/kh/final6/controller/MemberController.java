@@ -282,7 +282,7 @@ public class MemberController {
 			return"redirect:mypage"; 
 		}
 		else {
-			return "redirect:information?error"; 
+			return "redirect:information"; 
 		}
 	}
 	

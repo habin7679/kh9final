@@ -11,7 +11,7 @@
 
                 <div class="col-md-8 offset-md-2">
                     <div class="section-header mt-4 text-center">
-                        <h2>mypage</h2>
+              
                         <p><span>회원</span> 정보</p>
                     </div>
 
@@ -58,13 +58,22 @@
                 </div>
             </div>
 
-            <div class="row mt-2 text-center">
-                <div class="col-md-8 offset-md-2">
-                    <h2><a href="password" class="btn btn-secondary">비밀번호 변경</a></h2>
-                    <h2><a href="information" class="btn btn-secondary">개인정보 변경</a></h2>
-                    <h2><a href="exit" class="btn btn-secondary">탈퇴하기</a></h2>
-                    <h2><a href="<%=request.getContextPath()%>/seller/join" class="btn btn-secondary">판매자 신청</a></h2>
-                	                    <h2><a href="<%=request.getContextPath()%>/seller/info" class="btn btn-secondary">판매자 정보</a></h2>
+    
+            <div class="row mb-1 ">
+        <div class="row ">
+        <div class="col-md-10 offset-md-3">
+                    <a href="password" class="btn btn-secondary" style="margin-right:70px;">비밀번호 변경</a>
+                 <a href="information" class="btn btn-secondary"  >개인정보 변경</a>
+                <a href="exit" class="btn btn-secondary"style="margin-left:70px;">탈퇴하기</a>
+           		</div>
+         </div>
+        </div>
+        
+         		<div class="row mb-1 ">
+      			  <div class="row ">
+                 <div class="col-md-10 offset-md-3">
+                    <a href="<%=request.getContextPath()%>/seller/join" class="btn btn-secondary" style="margin-right:70px;">판매자 신청</a>
+                    <a href="<%=request.getContextPath()%>/seller/info" class="btn btn-secondary" style="margin-left:20px;">판매자 정보</a>
                 </div>
             </div>
 	</div>
