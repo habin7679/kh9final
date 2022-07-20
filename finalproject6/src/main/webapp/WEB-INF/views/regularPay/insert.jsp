@@ -16,7 +16,7 @@
 		<h1>정기결제</h1>
 		<h1>정기결제</h1>
 	</div>
-		<form action="pay" method="post">
+		<form action="pay" method="get">
 				<div>
 					<label>결제명</label>
 					<input type="text" name="storeNo" value="${storeNo}" readonly>
