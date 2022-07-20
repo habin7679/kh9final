@@ -1,7 +1,9 @@
 package com.kh.final6.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,7 +35,6 @@ import com.kh.final6.repository.StoreAttachDao;
 import com.kh.final6.repository.StoreDao;
 import com.kh.final6.service.BarRoomStoreService;
 import com.kh.final6.service.StoreService;
-import com.kh.final6.vo.StoreComplexSearchVO;
 
 
 
@@ -77,8 +78,8 @@ public class StoreController {
 	public String insert(
 			@ModelAttribute SellerDto sellerDto, 
 			@ModelAttribute BarRoomStoreDto barRoomStoreDto,
-			@RequestParam MultipartFile storeImg,
-		//	@RequestParam List<MultipartFile> storeImg,
+		//	@RequestParam MultipartFile storeImg,
+			@RequestParam List<MultipartFile> storeImg,
 			HttpSession session,
 			RedirectAttributes attr) throws IllegalStateException, IOException
 			 {
@@ -89,12 +90,10 @@ public class StoreController {
 		barRoomStoreDto.setSellerNo(sellerNo1);
 		
 		//int storeNo = storeService.save(storeDto, storeImg);
-		System.out.println(">> barRoomStoreDto" + barRoomStoreDto.toString());
-		//int storeNo = barRoomStoreService.savelist(barRoomStoreDto, storeImg);
-		int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
-		attr.addAttribute("storeNo",storeNo);
+		int storeNo = barRoomStoreService.savelist(barRoomStoreDto, storeImg);
+		//int storeNo = barRoomStoreService.save(barRoomStoreDto, storeImg);
 		
-	return "redirect:/regularPay/pay?"+storeNo;
+	return "redirect:/regularPay/pay?storeNo="+storeNo;
 	}
 	
 	
@@ -139,17 +138,51 @@ public class StoreController {
 	}
 		
 	
+
 	@GetMapping("/search")
 	public String complexSearch(
 			@RequestParam String keyword,
 			Model model
 			) {
 		List<StoreDto> list = storeDao.complexSearch(keyword);
-		model.addAttribute("list", list);
-		return "store/search";
+		   List<Integer> AttachList = new ArrayList<>();
+		   
+		   for(StoreDto storeDto : list) {
+		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
+		         AttachList.add(attachmentNo);
+		      };
+		      
+		      model.addAttribute("sAttachList",AttachList);
+		      
+		      boolean sNoAttach = list.isEmpty();
+		      model.addAttribute("sNoAttach",sNoAttach);
+		      
+		      model.addAttribute("list", list);
+		      return "store/search";
 	}
 	
-	
+	@GetMapping("/category")
+	public String category(
+			@RequestParam String category,
+			Model model
+			) {
+		List<StoreDto> list = storeDao.categorySearch(category);
+		   List<Integer> AttachList = new ArrayList<>();
+		   
+		   for(StoreDto storeDto : list) {
+		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
+		         AttachList.add(attachmentNo);
+		      };
+		      
+		      model.addAttribute("sAttachList",AttachList);
+		      
+		      boolean sNoAttach = list.isEmpty();
+		      model.addAttribute("sNoAttach",sNoAttach);
+		      
+		      model.addAttribute("list", list);
+		return "store/search";
+	}
+
 	
 	
 	

@@ -24,11 +24,29 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
  <mapper namespace="store">
+ 	<select id="likecheck" parameterType="int">
+ 	select * from store where store_likecount = #{storeLikeCount}
+ 	store좋아요 개수 조회
+ 	</select>
+ 	
+ 	<update id="likePlus" parameterType="int">
+ 		UPDATE store 
+ 		SET store_likecount = store_likecount + 1 
+ 		WHERE store_no = #{storeNo}
+ 	</update>
+ 	
+ 	<update id="likeMinus" parameterType="int">
+ 		UPDATE store 
+ 		SET store_likecount = store_likecount - 1 	
+ 		WHERE store_no = #{storeNo}
+ 	</update>
+ 	
  	
  	<select id="one" resultType="StoreDto" parameterType="int">
  		select * from store 
  		where store_no = #{storeNo}
  	</select>
+ 	
  
  	<select id="sequence" resultType="int">
  		select store_seq.nextval from dual
@@ -83,20 +101,19 @@
  	
  	</insert>
  	
- 	<update id="update" parameterType="StoreDto">
+ 	<update id="edit" parameterType="BarRoomStoreDto">
  	update store
  	set
  	category = #{category},
  	dong = #{dong},
  	gu = #{gu},
- 	select_No = #{sellerNo},
+ 	seller_No = #{sellerNo},
  	store_Name = #{storeName},
  	store_Call = #{storeCall},
  	store_Post = #{storePost},
  	store_Address = #{storeAddress},
- 	store_Detail_Adress = #{storeDetailAddress},
+ 	store_Detail_Address = #{storeDetailAddress},
  	store_Boss_Name = #{storeBossName},
- 	store_Regist_Date = #{storeRegistDate},
  	store_Likecount = #{storeLikeCount},
  	store_Content= #{storeContent},
  	store_Lunch_Time = #{storeLunchTime},
@@ -113,6 +130,8 @@
   	delete store where store_No = #{storeNo}
   	
   	</delete>
+
+
 
  	<select id="price" resultType="int" parameterType="int">
  		select store_reservation_price from store where store_no = #{storeNo}
@@ -147,6 +166,7 @@
 	<select id="complexSearch" resultType="StoreDto" parameterType="String">
 		select * from store where instr(store_name, #{keyword})>0 or instr(dong, #{keyword})> 0 or instr(gu, #{keyword})>0 
 		or instr(category, #{keyword})>0 or instr(store_address, #{keyword})>0 order by store_likecount desc
+
 	</select>
 	
 	<!-- 메인 인기순 조회(스시) -->
@@ -187,6 +207,14 @@
 				where category = '꼬치' 
 				order by store_likecount desc, store_no asc)TMP
 			)where rn between ${begin} and ${end}
+
+
+	</select>
+	
+	<select id="catergory" resultType="StoreDto" parameterType="String">
+		select * from store where category = #{category} order by store_likecount desc
+
+
 	</select>
 	
  </mapper>

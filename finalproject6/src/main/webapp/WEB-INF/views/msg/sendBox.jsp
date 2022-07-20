@@ -17,7 +17,15 @@
 	max-width: 100px;
 	}
  </style>
-  <div class="container ma-t-100">
+ <script type="text/javascript">
+   $(function(){
+      let memberRecvNo = $("#msgNick").val();
+      $(".msgNick").click(function(){
+         window.open("${pageContext.request.contextPath}/msg/send?memberRecvNo="+memberRecvNo,"Message","width=500,height=500,scrollbars=no")
+      });
+   });
+   </script>
+  <div class="container ma-t-100" >
         <div class="section-header mt-4 col-md-8 offset-md-2" >
             <h2>Msg</h2>
             <p><span>보낸</span> 쪽지함</p>
@@ -43,9 +51,10 @@
                     </thead>
                      <tbody class="text-center">
                     	<c:forEach var="SendMsgVO" items="${sendBox}">
+                    	<input type="hidden" id="msgNick" value="${SendMsgVO.rmemberNo}">
 	                        <tr>
 	                            <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"><a href="${pageContext.request.contextPath}/msg/senddetail?msgNo=${SendMsgVO.msgNo}">${SendMsgVO.msgNote}</a></td>
-	                            <td><a href="${pageContext.request.contextPath}/msg/send?memberRecvNo=${SendMsgVO.rmemberNo}">${SendMsgVO.memberNick}</a></td>
+	                            <td><a href="#" class="msgNick">${SendMsgVO.memberNick}</a></td>
 	                            <td >${SendMsgVO.sendDate}</td>
 	                            <td>${SendMsgVO.read}</td>
 	                            <td style="width:200px;"><a href="${pageContext.request.contextPath}/msg/delete?msgNo=${SendMsgVO.msgNo}"> 

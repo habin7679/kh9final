@@ -60,7 +60,7 @@ public class RegularPayController {
 		return "regularPay/insert";
 	}
 	
-	@PostMapping("/pay")
+	@GetMapping("/pay")
 	public String regularpay(
 				@RequestParam int storeNo,
 				HttpSession session

@@ -8,4 +8,10 @@ public interface BarRoomStoreDao {
 	int saveRoom(BarRoomStoreDto barRoomStoreDto);
 	int saveBar(BarRoomStoreDto barRoomStoreDto);
 	int saveOff(BarRoomStoreDto barRoomStoreDto);
+
+	int edit(BarRoomStoreDto barRoomStoreDto);
+	int editBar(BarRoomStoreDto barRoomStoreDto);
+	int editRoom(BarRoomStoreDto barRoomStoreDto);
+	int editOff(BarRoomStoreDto barRoomStoreDto);
+	
 }

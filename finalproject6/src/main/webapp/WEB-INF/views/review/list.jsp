@@ -9,6 +9,10 @@
 </style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+</script>
 <div class="container ma-t-100">
 
 
@@ -93,9 +97,5 @@
 	</div>
 </div>
 
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-        
-    </script>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

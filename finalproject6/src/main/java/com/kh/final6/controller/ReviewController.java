@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +49,8 @@ public class ReviewController {
 	private AttachmentDto attachmentDto;
 	
 	@GetMapping("/insert")
-	public String insert() {
+	public String insert(@RequestParam int storeNo,Model model) {
+		model.addAttribute("storeNo",storeNo);
 		return "review/insert";
 	}
 	
@@ -58,15 +60,15 @@ public class ReviewController {
 			@RequestParam MultipartFile reviewImg,
 			HttpSession session,
 			RedirectAttributes attr) throws IllegalStateException, IOException {
+		
 		int memberNo = (Integer)session.getAttribute("no");
 		String memberId = (String)session.getAttribute("login");
 		MemberDto memberDto = memberdao.info(memberId);
 		reviewDto.setMemberNo(memberNo);
+		
 		reviewDto.setReviewWriter(memberDto.getMemberNick());
-		
 		int reviewNo = reviewService.save(reviewDto, reviewImg);
-		
-		attr.addAttribute("reviewNo",reviewNo);
+		attr.addAttribute("storeNo", reviewDto.getStoreNo());
 		
 		return "redirect:/review/list";
 	}
@@ -74,22 +76,17 @@ public class ReviewController {
 
 	@GetMapping("/edit")
 	public String edit(@RequestParam int reviewNo,Model model) {
-		ReviewDto reviewDto = reviewDao.one(reviewNo);
+		ReviewDto reviewDto = reviewDao.detail(reviewNo);
 		model.addAttribute(reviewDto);
-		
+		 
 		int attachmentNo = reviewAttachDao.info(reviewNo);
 		AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
 		
 		boolean reviewAttach = attachmentNo == 0;
 		model.addAttribute("reviewAttach",reviewAttach);
-		
 		model.addAttribute("attachmentDto",attachmentDto);
-		
-		
 		return "review/edit";
 	}
-	
-	
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute ReviewDto reviewDto,
@@ -111,7 +108,7 @@ public class ReviewController {
 		
 		boolean success = reviewDao.edit(reviewDto);
 		if(success) {
-			attr.addAttribute("reviewNo",reviewDto.getReviewNo());
+			attr.addAttribute("storeNo",reviewDto.getStoreNo());
 			return "redirect:/review/list";
 		}
 		else {
@@ -122,10 +119,12 @@ public class ReviewController {
 	
 	
 	@GetMapping("/delete")
-	public String delete(@RequestParam int reviewNo) {
+	public String delete(@RequestParam int reviewNo,@RequestParam int storeNo
+			,RedirectAttributes attr) {
 		boolean success = reviewDao.delete(reviewNo);
-		
+
 		if(success) {
+			attr.addAttribute("storeNo",storeNo);
 			return "redirect:/review/list";
 		}
 		else {
@@ -136,7 +135,7 @@ public class ReviewController {
 	
 	@GetMapping("/detail")
 	public String detail(@RequestParam int reviewNo, Model model, HttpSession session, RedirectAttributes attr) {
-		ReviewDto reviewDto = reviewDao.one(reviewNo);
+		ReviewDto reviewDto = reviewDao.detail(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
 
 		if (reviewDto.getReviewNo() != 0) {
@@ -178,17 +177,20 @@ public class ReviewController {
 	
 	@GetMapping("/list")
 	public String list(
-			@RequestParam int reviewNo,
+			@RequestParam int storeNo,
 			RedirectAttributes attr,
 			@RequestParam (required = false) String type,
 			@RequestParam (required = false) String keyword,
 			@RequestParam (required = false, defaultValue = "1") int p,
 			@RequestParam (required = false, defaultValue = "10") int s,
 			Model model) {
-		ReviewDto reviewDto = reviewDao.one(reviewNo);
+		
+		List<ReviewDto> reviewList = reviewDao.list(storeNo);
+		/*
+		ReviewDto reviewDto = reviewList.get(0);
 		model.addAttribute("reviewDto",reviewDto);
 		
-		int attachmentNo = reviewAttachDao.info(reviewNo);
+		int attachmentNo = reviewAttachDao.info(reviewDto.getReviewNo());
 		AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
 		
 		if (attachmentDto != null) {
@@ -203,13 +205,9 @@ public class ReviewController {
 
 		String attachName = attachmentDao.name(attachmentNo);
 		model.addAttribute("attachName", attachName);
-
-		
-		List<ReviewDto> list = reviewDao.list(type,keyword,p,s);
-		model.addAttribute("list",list);
-		
-
-		attr.addAttribute("reviewNo", reviewNo);
+		 */
+		model.addAttribute("list",reviewList);
+		attr.addAttribute("storeNo", storeNo);
 		return "review/list";
 	}
 	

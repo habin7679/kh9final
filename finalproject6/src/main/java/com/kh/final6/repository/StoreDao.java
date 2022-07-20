@@ -25,6 +25,7 @@ public interface StoreDao {
 
 	OffDayDto offDayOne(int storeNo);
 
+
 	BarRoomVO cntBarRoom(String reservationDate, int storeNo);
 	
 	//가게 통합검색
@@ -41,5 +42,17 @@ public interface StoreDao {
 	
 	//메인페이지 리뷰 가게이름 조회
 	String name(int storeNo);
+
+
+	BarRoomVO cntBarRoom(String reservationDate, int storeNo);
+
+	List<StoreDto> complexSearch(String keyword);
+
+	List<StoreDto> categorySearch(String category);
+	
+	int likePlus(int storeNo);
+
+	int likeMinus(int storeNo);
+
 
 }

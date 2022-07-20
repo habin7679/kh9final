@@ -37,6 +37,11 @@
  		select seller_no from store where store_no = #{storeNo}
  	</select>
  	
+ 	<select id="sellerNo2" parameterType="int" resultType="int">
+ 		select seller_no from seller where member_no = #{memberNo}
+ 		
+ 	</select>
+ 	
  		<!-- 판매자 시퀀스 -->
 	<select id="sequence" resultType="int">
 		select seller_seq.nextval from dual

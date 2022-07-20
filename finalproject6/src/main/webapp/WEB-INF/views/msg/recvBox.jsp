@@ -12,6 +12,14 @@
  	height:20px;
  }
  </style>
+ <script type="text/javascript">
+   $(function(){
+      let memberRecvNo = $("#msgNick").val();
+      $(".msgNick").click(function(){
+    	  window.open("${pageContext.request.contextPath}/msg/send?memberRecvNo="+memberRecvNo,"Message","width=500,height=500,scrollbars=no")
+    	 });
+   });
+</script>
   <div class="container ma-t-100">
         <div class="section-header mt-4 col-md-8 offset-md-2" >
             <h2>Msg</h2>
@@ -38,9 +46,10 @@
                     </thead>
                      <tbody class="text-center">
                     	<c:forEach var="RecvMsgVO" items="${recvBox}">
+                    	<input type="hidden" id="msgNick" value="${RecvMsgVO.smemberNo}">
 	                        <tr>
 	                            <td style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"><a href="${pageContext.request.contextPath}/msg/recvdetail?msgNo=${RecvMsgVO.msgNo}">${RecvMsgVO.msgNote}</a></td>
-	                            <td><a href="${pageContext.request.contextPath}/msg/send?memberRecvNo=${RecvMsgVO.smemberNo}">${RecvMsgVO.memberNick}</a></td>
+	                            <td><a href="#" class="msgNick">${RecvMsgVO.memberNick}</a></td>
 	                            <td>${RecvMsgVO.sendDate}</td>
 	                            <td>${RecvMsgVO.read}</td>
 	                            <td><a href="${pageContext.request.contextPath}/msg/delete1?msgNo=${RecvMsgVO.msgNo}"> 

@@ -21,62 +21,86 @@ import com.kh.final6.entity.RoomDto;
 import com.kh.final6.entity.StoreDto;
 import com.kh.final6.repository.RoomDao;
 import com.kh.final6.repository.StoreDao;
+import com.kh.final6.repository.StoreLikeDao;
+import com.kh.final6.service.StoreLikeservice;
+
+import lombok.RequiredArgsConstructor;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rest/store")
-
+@RequiredArgsConstructor
 public class StroeRestContoller {
+
 	@Autowired
 	private StoreDao storeDao;
 	private StoreDto storeDto;
 	@Autowired
 	private RoomDao roomDao;
-	
+	@Autowired
+	private StoreLikeDao storeLikeDao;
+
+	// 의존성 주입의 최고 방법 (Autowired 는 단점이 많음)
+	private final StoreLikeservice storeLikeservice;
+
 	@GetMapping("/")
-	public List<StoreDto> list(){
+	public List<StoreDto> list() {
 		return storeDao.list();
 	}
-	
-	
+
 	@GetMapping("/{storeNo}")
-	public StoreDto one(@PathVariable int storeNo){
-		System.out.println("스토어 넘버"+storeNo);
+	public StoreDto one(@PathVariable int storeNo) {
+		System.out.println("스토어 넘버" + storeNo);
 		return storeDao.one(storeNo);
 	}
-	//@PostMapping("/")
+	// @PostMapping("/")
 //	public StoreDto insert(@RequestBody StoreDto storeDto) {
 //		return storeDao.insert(storeDto);
 //	}
-	
+
 	@PutMapping("/")
 	public StoreDto update(@RequestBody StoreDto storeDto) {
 		return storeDao.update(storeDto);
 	}
-	
+
 	@DeleteMapping("/{storeNo}")
 	public void deletie(@PathVariable int storeNo) {
 		storeDao.delete(storeNo);
 	}
-	
-	
+
 	@GetMapping("/room")
-	public List<RoomDto> roomlist(){
+	public List<RoomDto> roomlist() {
 		return roomDao.list();
 	}
+
 	@DeleteMapping("/room/{storeNo}")
 	public void roomdelete(@PathVariable int storeNo) {
 		roomDao.delete(storeNo);
 	}
+
 	@PostMapping("/room")
 	public RoomDto insert(@RequestBody RoomDto roomDto) {
 		roomDto.setStoreNo(storeDto.getStoreNo());
 		return roomDao.insert(roomDto);
 	}
-	
+
 	@PutMapping("/room")
 	public RoomDto update(@RequestBody RoomDto roomDto) {
 		return roomDao.update(roomDto);
 	}
+
+	@GetMapping("/like")
+	public int likeStore(int store_no, int member_no) {
+
+//		try {
+			storeLikeservice.save2(store_no, member_no);
+			return 1;
+//		} catch (Exception e) {
+//			System.out.println("에러 발생" + e.getMessage());
+//			return 0;
+//		}
+	}
+
 //	
 //	@GetMapping("/bar")
 //	public List<BarDto> barlist(){
@@ -97,12 +121,7 @@ public class StroeRestContoller {
 //		return barDao.update(barDto);
 //	}
 //	
-	
-	
-	
-	
-	
-	
+
 //	@GetMapping("/bar")
 //	public List<BarDto> barlist(){
 //		return barDao.list();
@@ -113,5 +132,4 @@ public class StroeRestContoller {
 //		return storeDao.one(storeNo);
 //	}
 
-	
 }

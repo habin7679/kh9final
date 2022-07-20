@@ -30,6 +30,13 @@
 		values(#{storeNo}, #{barPrice}, #{barCount})
 	
 	</insert>
+ 	
+ 	<update id="edit" parameterType="BarRoomStoreDto">
+ 		update bar set
+ 			bar_price = #{barPrice},bar_count = #{barCount}
+ 		where store_no = #{storeNo}
+ 	</update>
+ 	
  	 
  	 
  	 
