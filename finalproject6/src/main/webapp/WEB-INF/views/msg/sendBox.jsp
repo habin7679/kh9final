@@ -21,11 +21,11 @@
    $(function(){
       let memberRecvNo = $("#msgNick").val();
       $(".msgNick").click(function(){
-         window.open("${pageContext.request.contextPath}/msg/send?memberRecvNo="+memberRecvNo,"Message","width=1200,height=600,scrollbars=no")
+         window.open("${pageContext.request.contextPath}/msg/send?memberRecvNo="+memberRecvNo,"Message","width=500,height=500,scrollbars=no")
       });
    });
    </script>
-  <div class="container ma-t-100">
+  <div class="container ma-t-100" >
         <div class="section-header mt-4 col-md-8 offset-md-2" >
             <h2>Msg</h2>
             <p><span>보낸</span> 쪽지함</p>
