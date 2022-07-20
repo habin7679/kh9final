@@ -33,6 +33,9 @@
  	<select id="one" parameterType="int" resultType="StoreAttachDto">
  		select * from store_attachment where store_no = #{storeNo}
  	</select>
+ 	<select id="oneNo" parameterType="int" resultType="Integer">
+ 		select attachment_no from store_attachment where store_no = #{storeNo}
+ 	</select>
  	
  	
  </mapper>

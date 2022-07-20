@@ -41,7 +41,7 @@ public class StoreAttachDaoImpl implements StoreAttachDao{
 	}
 	   @Override
 	   public int info(int storeNo) {
-	      Integer attachmentNo = sqlSession.selectOne("storeAttach.one",storeNo);
+	      Integer attachmentNo = sqlSession.selectOne("storeAttach.oneNo",storeNo);
 	      if(attachmentNo == null) {
 	         return 0;
 	      }
