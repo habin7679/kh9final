@@ -21,7 +21,7 @@
 		 				order by ${column} ${order}
 		 			</when>
 		 			<otherwise>
-		 				order by together_no desc
+		 				order by together_time desc
 		 			</otherwise>
 		 		</choose>	
 		 			)TMP
