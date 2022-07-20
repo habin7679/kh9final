@@ -24,21 +24,21 @@ public class StoreAttachDaoImpl implements StoreAttachDao{
 		sqlSession.insert("storeAttach.insert",param);
 	}
 
-	@Override
-	public List<StoreAttachDto> infolist(int storeNo) {
-	//	Integer attachmentNo = sqlSession.selectOne("storeAttach.one",storeNo);
-		List<StoreAttachDto> attachmentNoList = sqlSession.selectList("storeAttach.one",storeNo);
-	
-		System.out.println(">> " + attachmentNoList);
-		 
-		if(attachmentNoList.size() < 0) {
-			return null;
-		}
-		else {
-			return attachmentNoList;
-		}
-		 
-	}
+//	@Override
+//	public List<StoreAttachDto> infolist(int storeNo) {
+//	//	Integer attachmentNo = sqlSession.selectOne("storeAttach.one",storeNo);
+//		List<StoreAttachDto> attachmentNoList = sqlSession.selectList("storeAttach.one",storeNo);
+//	
+//		System.out.println(">> " + attachmentNoList);
+//		 
+//		if(attachmentNoList.size() < 0) {
+//			return null;
+//		}
+//		else {
+//			return attachmentNoList;
+//		}
+//		 
+//	}
 	   @Override
 	   public int info(int storeNo) {
 	      Integer attachmentNo = sqlSession.selectOne("storeAttach.oneNo",storeNo);
