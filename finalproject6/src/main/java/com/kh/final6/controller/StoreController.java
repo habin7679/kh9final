@@ -122,22 +122,21 @@ public class StoreController {
 			Model model
 			) {
 		List<StoreDto> list = storeDao.complexSearch(keyword);
-		   List<AttachmentDto> AttachList = new ArrayList<>();
-		   
-		   for(StoreDto storeDto : list) {
-		         
-		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
-		         AttachmentDto attachmentDto = attachmentDao.info(attachmentNo);
-		         AttachList.add(attachmentDto);
-		         model.addAttribute("sAttach",attachmentNo);
-		      }
-		      model.addAttribute("AttachList",AttachList);
-		      boolean NoAttach = AttachList.isEmpty();
-		      model.addAttribute("noAttach",NoAttach);
-		      
-		      model.addAttribute("list", list);
-		      return "store/search";
-	}
+		List<Integer> AttachList = new ArrayList<>();
+		for(StoreDto storeDto : list) {
+			  int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
+			  AttachList.add(attachmentNo);
+	      };
+
+	      model.addAttribute("sAttachList",AttachList);
+
+	      boolean sNoAttach = list.isEmpty();
+	      model.addAttribute("sNoAttach",sNoAttach);
+
+	      model.addAttribute("list", list);
+	      return "store/search";
+}
+		
 	
 	@GetMapping("/category")
 	public String category(
@@ -145,7 +144,19 @@ public class StoreController {
 			Model model
 			) {
 		List<StoreDto> list = storeDao.categorySearch(category);
-		model.addAttribute("list", list);
+		List<Integer> AttachList = new ArrayList<>();
+
+		   for(StoreDto storeDto : list) {
+		         int attachmentNo = storeAttachDao.info(storeDto.getStoreNo());
+		         AttachList.add(attachmentNo);
+		      };
+
+		      model.addAttribute("sAttachList",AttachList);
+
+		      boolean sNoAttach = list.isEmpty();
+		      model.addAttribute("sNoAttach",sNoAttach);
+
+		      model.addAttribute("list", list);
 		return "store/search";
 	}
 	
