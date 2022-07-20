@@ -100,4 +100,6 @@ public class RegularPaymentDaoImpl implements RegularPaymentDao {
 	public int getSellerNo(int regularpaymentNo) {
 		return sqlSession.selectOne("regularPayment.sellerNo", regularpaymentNo);
 	}
+	
+
 }

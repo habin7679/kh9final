@@ -78,4 +78,5 @@
  		select seller_no from regular_payment where regular_payment_no = #{regularPaymentNo}
  	</select>
  	
+ 	
  </mapper>
