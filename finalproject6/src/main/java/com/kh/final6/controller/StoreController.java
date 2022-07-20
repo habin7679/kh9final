@@ -109,7 +109,9 @@ public class StoreController {
 	@GetMapping("/detail/{storeNo}")
 	public String detail2(@PathVariable int storeNo, Model model, @RequestParam MultipartFile storeImg) {
 		StoreDto storeDto = storeDao.one(storeNo);
+
 		model.addAttribute("storeDto", storeDto);
+
 
 		return "store/detail";
 	}
@@ -184,7 +186,7 @@ public class StoreController {
 		String attachName = attachmentDao.name(attachmentNo);
 		model.addAttribute("attachName", attachName);
 
-		return "store/detail";
+		return "store/detail2";
 	}
 
 	

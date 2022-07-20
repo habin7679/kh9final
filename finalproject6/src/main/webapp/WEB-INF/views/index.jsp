@@ -95,7 +95,7 @@
                 <h4 class="fw-bold">${storeDto.storeName}</h4>
                 </a>
                 <p class="ingredients">
-                  ${storeDto.gu}
+                  ${storeDto.storeAddress}
                 </p>
 <!--                 <p class="price"> -->
 <%--                   ${storeDto.storeLikeCount} --%>
@@ -134,7 +134,7 @@
                 <h4>${storeDto.storeName}</h4>
                 </a>
                 <p class="ingredients">
-                  ${storeDto.gu}
+                  ${storeDto.storeAddress}
                 </p>
 <!--                 <p class="price"> -->
 <!--                   $5.95 -->
@@ -171,7 +171,7 @@
                 <h4>${storeDto.storeName}</h4>
                 </a>
                 <p class="ingredients">
-                  ${storeDto.gu}
+                  ${storeDto.storeAddress}
                 </p>
 <!--                 <p class="price"> -->
 <!--                   $5.95 -->
@@ -208,7 +208,7 @@
                 <h4>${storeDto.storeName}</h4>
                 </a>
                 <p class="ingredients">
-                  ${storeDto.gu}
+                  ${storeDto.storeAddress}
                 </p>
 <!--                 <p class="price"> -->
 <!--                   $5.95 -->

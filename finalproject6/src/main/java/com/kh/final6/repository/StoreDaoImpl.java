@@ -162,7 +162,6 @@ public class StoreDaoImpl implements StoreDao {
 
 
 
-
 	@Override
 	public List<StoreDto> categorySearch(String category) {
 		List<StoreDto> list = sqlSession.selectList("store.catergory", category);
