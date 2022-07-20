@@ -159,8 +159,6 @@ public class StoreDaoImpl implements StoreDao {
 	public String name(int storeNo) {
 		return sqlSession.selectOne("review.name",storeNo);
 	}
-}
-
 
 
 	@Override

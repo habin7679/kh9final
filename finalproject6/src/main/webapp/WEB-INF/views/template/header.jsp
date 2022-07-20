@@ -9,6 +9,8 @@
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 <c:set var="nick" value="${nick}"></c:set>
 <c:set var="sellerNo" value="${sellerNo}"></c:set>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>

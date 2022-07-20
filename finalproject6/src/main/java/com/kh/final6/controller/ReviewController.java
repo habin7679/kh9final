@@ -172,7 +172,7 @@ public class ReviewController {
 
 		attr.addAttribute("reviewNo", reviewNo);
 
-		return "review/detail";
+		return "review/detail2";
 	}
 	
 	@GetMapping("/list")
