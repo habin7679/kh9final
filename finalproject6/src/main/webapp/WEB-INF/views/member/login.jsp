@@ -49,6 +49,7 @@ color:#fff;
         <div class="row mb-2">
             <input type="submit" value="로그인" class="btn1 c">
         </div>
+        
         <div class="row text-center mb-1 ">
         <div class="row ">
         <div class="col-md-6">

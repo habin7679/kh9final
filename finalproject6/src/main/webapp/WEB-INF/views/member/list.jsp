@@ -12,7 +12,6 @@
     <div class="container ma-t-100">
     
     <div class="section-header mt-4 col-md-8 offset-md-2" >
-            <h2>Member</h2>
             <p><span>회원</span> 관리</p>
        	</div>
        

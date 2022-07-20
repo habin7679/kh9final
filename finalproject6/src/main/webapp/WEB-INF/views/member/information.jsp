@@ -11,7 +11,6 @@
 		
 	<div class="container ma-t-100" style="width:900px;" >
  	<div class="section-header mt-4 col-md-8 offset-md-2" >
-	        <h1>change</h1>
 	        <p><span>개인정보 변경</span></p>
 	    </div>
 	    
