@@ -70,6 +70,18 @@ public ReviewDto one(int reviewNo) {
 		return sqlSession.selectList("review.list",param);
 	}
 
+	//메인 리뷰 조회
+	@Override
+	public List<ReviewDto> list(int p, int s) {
+		Map<String,Object> param = new HashMap<>();
+		
+		int end = p * s;
+		int begin = end - (s-1);
+		
+		param.put("begin", begin);
+		param.put("end", end);
+		return sqlSession.selectList("review.mainList",param);
+	}
 
-
+	
 }

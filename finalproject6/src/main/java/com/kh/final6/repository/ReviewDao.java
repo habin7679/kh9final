@@ -14,5 +14,8 @@ public interface ReviewDao {
 	boolean delete(int reviewNo);
 	List<ReviewDto> list(String type, String keyword, int p, int s);
 	
+	//메인 리뷰 조회
+	List<ReviewDto> list(int p, int s);
+	
 
 }
