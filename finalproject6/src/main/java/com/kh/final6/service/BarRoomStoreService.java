@@ -12,5 +12,7 @@ public interface BarRoomStoreService {
 	int savelist(BarRoomStoreDto barRoomStoreDto,  List<MultipartFile> storeImg) throws IllegalStateException, IOException;
 	
 	int save1(BarRoomStoreDto barRoomStoreDto) throws IllegalStateException, IOException;		
+	
+	int edit(BarRoomStoreDto barRoomStoreDto);
 }
 

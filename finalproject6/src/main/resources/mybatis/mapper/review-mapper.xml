@@ -51,9 +51,12 @@
  	</select>
  	
  	
- 
- 
  	<select id="one" resultType="ReviewDto" parameterType="int">
+ 		select * from review
+ 		where store_no = #{storeNo}
+ 	</select>
+ 	
+ 	<select id="detail" resultType="ReviewDto" parameterType="int">
  		select * from review
  		where review_no = #{reviewNo}
  	</select>
@@ -66,7 +69,9 @@
  	<insert id="insert" parameterType="ReviewDto">
  		insert into review (
  			review_no,store_no,member_no,review_content,review_score,review_writer)
- 		values (#{reviewNo},#{storeNo},#{memberNo},#{reviewContent},#{reviewScore},#{reviewWriter})
+ 		values (
+ 		#{reviewNo},#{storeNo},#{memberNo},#{reviewContent},#{reviewScore},#{reviewWriter}
+ 		)
  	</insert>
  	
  	<update id="edit" parameterType="reviewDto">

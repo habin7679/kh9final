@@ -50,7 +50,7 @@
 	
 	</insert>
 
-	<update id="update" parameterType="RoomDto">
+	<update id="edit" parameterType="BarRoomStoreDto">
 		update room 
 			set
 				room_price = #{roomPrice}, room_count = #{roomCount},

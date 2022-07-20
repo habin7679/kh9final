@@ -8,6 +8,7 @@
 <c:set var="isAdmin" value="${auth == '관리자'}"></c:set>
 <c:set var="isSeller" value="${auth == '판매자'}"></c:set>
 <c:set var="nick" value="${nick}"></c:set>
+<c:set var="sellerNo" value="${sellerNo}"></c:set>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -64,7 +65,6 @@ $(document).ready(function(){
 
     // 데이터를 전달 받았을때 
     sock.onmessage = onMessage; // toast 생성
-    ...
 });
 
 // toast생성 및 추가
@@ -124,7 +124,6 @@ function onMessage(evt){
     <div class="container d-flex align-items-stretch oi ">
 
       <nav id="navbar" class="navbar">
-
         
           <a href="${pageContext.request.contextPath}/">
 

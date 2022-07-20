@@ -1,11 +1,14 @@
 package com.kh.final6.repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.kh.final6.entity.StoreAttachDto;
 
 @Repository
 public class StoreAttachDaoImpl implements StoreAttachDao{
@@ -22,15 +25,19 @@ public class StoreAttachDaoImpl implements StoreAttachDao{
 	}
 
 	@Override
-	public int info(int storeNo) {
-		Integer attachmentNo = sqlSession.selectOne("storeAttach.one",storeNo);
-		if(attachmentNo == null) {
-			return 0;
+	public List<StoreAttachDto> info(int storeNo) {
+	//	Integer attachmentNo = sqlSession.selectOne("storeAttach.one",storeNo);
+		List<StoreAttachDto> attachmentNoList = sqlSession.selectList("storeAttach.one",storeNo);
+	
+		System.out.println(">> " + attachmentNoList);
+		 
+		if(attachmentNoList.size() < 0) {
+			return null;
 		}
 		else {
-			return attachmentNo;
+			return attachmentNoList;
 		}
-		
+		 
 	}
 
 }

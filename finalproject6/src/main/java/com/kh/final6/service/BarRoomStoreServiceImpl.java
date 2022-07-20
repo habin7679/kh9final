@@ -79,4 +79,18 @@ public class BarRoomStoreServiceImpl implements BarRoomStoreService{
 		System.out.println("휴무"+result3);
 		return storeNo;
 	}
+
+
+	@Override
+	public int edit(BarRoomStoreDto barRoomStoreDto) {
+			int storeNo = barRoomStoreDao.edit(barRoomStoreDto);
+			int result1 = barRoomStoreDao.editRoom(barRoomStoreDto);
+			int result2 = barRoomStoreDao.editBar(barRoomStoreDto);
+			int result3 = barRoomStoreDao.editOff(barRoomStoreDto);
+			System.out.println("룸"+result1);
+			System.out.println("바"+result2);
+			System.out.println("휴무"+result3);
+			return storeNo;
+		
+	}
 }

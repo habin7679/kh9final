@@ -1,183 +1,212 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <!-- include libraries(jQuery, bootstrap) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- include libraries(jQuery, bootstrap) -->
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- include summernote css/js -->
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <style>
-        .passSpace{
-            word-break: break-all;
-        }
-        .fa-cursor{
-            cursor: pointer;
-        }
-        .a{
-            border-collapse: separate;           
-        }
-        
-        .d{
-            border-bottom-left-radius: 1em;
-            border-bottom-right-radius: 1em;
-        }
-        .e{
-            border-top-left-radius: 1em;
-            border-top-right-radius: 1em;
-        }
+.passSpace {
+	word-break: break-all;
+}
 
-        .tb-color{
-            background-color: #f1f2f6;
-        }
-       .circle-head{
-        background-color: #57606f;
-        border-radius: 1.2em;
-        color: white;
-        padding: 0.5em;
-        font-size: 14px;
-       }
-       .title-size{
-        font-size: 22px;
-       }
-     </style>
-        
- <script>
- $(function(){
-     $("textarea[name=reviewContent]").summernote({
-         height: 350
-         });
-     
-     console.log($("#ckb").val());
-    
-     $("input[type=checkbox]").on("input",function(){
- 		if($(this).is(":checked") ==true){
- 			$(this).val(1);
- 			console.log($(this).val());
- 		}
- 		else{
- 			$(this).val(0);
- 			console.log($(this).val());
- 		}
- 	});
-   
- });
-</script>
-     
- <div id="app" class="container ma-t-100">
- 	
- 	<div class="section-header mt-4 col-md-6 offset-md-3" >
-            <h2>reivew</h2>
-            <p><span>리뷰</span> 게시판</p>
-            <h2>리뷰확인하세요.</h2>
-       	</div>
- 
- 	<form action="edit" method="post" enctype="multipart/form-data">
- 	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
- 	<div class="mt-5">
- 		<div class="col-md-6 offset-md-3 tb-color rounded">
-	
- 	<div class="row mt-2">
-	<div class="col-md-10 offset-md-1">
-		<textarea name="reviewContent">${reviewDto.reviewContent}</textarea>
+.fa-cursor {
+	cursor: pointer;
+}
+
+.a {
+	border-collapse: separate;
+}
+
+.d {
+	border-bottom-left-radius: 1em;
+	border-bottom-right-radius: 1em;
+}
+
+.e {
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+}
+
+.tb-color {
+	background-color: #f1f2f6;
+}
+
+.circle-head {
+	background-color: #57606f;
+	border-radius: 1.2em;
+	color: white;
+	padding: 0.4em;
+	font-size: 14px;
+}
+
+.title-size {
+	font-size: 22px;
+}
+</style>
+	<div id = "app" class = "container ma-t-100">
+	<div class="section-header mt-4 col-md-6 offset-md-3">
+		<h2>store</h2>
+		<p>
+			<span>가게</span>정보변경
+		</p>
+		<h2>내 가게 변경하기</h2>
 	</div>
- 	</div>
- 	
- 	<c:if test="${attachmentDto != null }">
- 		<div class="row mt-2" v-if="!isNoneAttach" >
- 			<div class="col-md-4 offset-md-1">
- 				<span>{{attachmentName}}</span>
- 				<button type="button" class="btn0" @click="deleteAttach">삭제</button>
- 			</div>
- 		</div>
- 	</c:if>	
- 	
- 	<div class="row mt-2">
- 			<div class="col-md-4 offset-md-1">
- 				<input type="file" name="reviewImg" accept=".jpg, .png, .gif, .pdf, .ppt, .txt, .hwp">
- 			</div>
- 		</div>
-	 	
- 		<div class="row mt-2">
- 			<div class="col-md-6 offset-md-3 text-center">
-	 			<input type="submit" value="수정" class="btn1">
-	 			<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${reveiwDto.reviewNo}" class="btn0">취소</a>
- 			</div>
- 		</div>
- 		
- 		</div>
- 	</div>
-    </form>    
-    </div>
- 
- <script src="https://unpkg.com/vue@next"></script>
- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
- <c:if test="${attachmentDto != null }">
- <script>
-        //div[id=app]을 제어할 수 있는 Vue instance를 생성
-        const app = Vue.createApp({
-            //data : 화면을 구현하는데 필요한 데이터를 작성해둔다
-            data(){
-                return {
-                   attachmentNo:${attachmentDto.attachmentNo},
-                   attachmentName:"",
-                };
-            },
-            
-            computed:{
-				isNoneAttach(){
-					return this.attachmentNo == 0 || this.attachmentNo == null;
-				},
-				
-				
-            },
-            
-             methods:{
-               deleteAttach(){
-            	   if(this.attachmentNo == null) return;
-            	   
-            	   let choice = window.confirm("정말 삭제하시겠습니까?");
-            	   if(!choice) return;
-            	   
-            	   axios({
-            		   url:"${pageContext.request.contextPath}/rest/reviewAttach/"+this.attachmentNo,
-            		   method:"delete",
-            	   })
-            	   .then(resp=>{
-            		   this.loadAttach();
-            	   });
-               },
+	
+<form action="edit" method="post" enctype="multipart/form-data">
+	<div class="mt-5">
+		<div class="col-md-6 offset-md-3 tb-color rounded">
+			<div class="row mt-4">
+			 <input type="hidden" name="storeNo" autocomplete="off" value="${storeNo}"   class="form-input fill input-round">  
+	         
+				<div>
+					<label>음식점 종류</label> <br> 
+					<input type="radio" name="category" value="스시" checked required>스시 
+					<input type="radio"	name="category" value="한우" required>한우
+					<input type="radio"name="category" value="꼬치" required>꼬치
+					<input type="radio"name="category" value="커피" required>커피
+				</div>
+				<div>
+					<label>동</label> 
+					<input type="text" name="dong" autocomplete="off"required class="form-control me-1">
+				</div>
+				<div>
+					<label>구</label> <input type="text" name="gu" autocomplete="off"
+						required class="form-control me-1">
+				</div>
+				<%--
+     
+     
+       <label>판매자번호뭐지</label>
+                <textarea name="sellerNo" required 
+                class="textarea form-input fill" rows="12">판매자번호:${sellerDto.sellerNo}</textarea>
                
-               loadAttach(){
-            	   if(this.attachmentNo == null) return;
-            	   
-            	   axios({
-            		 url:"${pageContext.request.contextPath}/rest/reviewAttach/"+this.attachmentNo,
-            		 method:"get",
-            		 
-            	   })
-            	   .then(resp=>{
-            		   console.log(resp);
-            		   this.attachmentName = resp.data.attachmentUploadname;
-            	   });
-               },
-               
-            },
-            
-            created(){
-            	this.loadAttach();
-            },
-            
-             watch:{
-               
-            },
-        });
-        app.mount("#app");
-    </script>
-</c:if> 
+     
+      --%>
 
-    
+				<div>
+					<label>가게이름</label> <input type="text" name="storeName"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>가게전화번호</label> <input type="text" name="storeCall"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>post</label> <input type="text" name="storePost"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>가게주소</label> <input type="text" name="storeAddress"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>가게상세주소</label> <input type="text" name="storeDetailAddress"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>사장님이름</label> <input type="text" name="storeBossName"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+
+				<div>
+					<label>가게컨텐츠</label> <input type="text" name="storeContent"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<input type="hidden" name="storeLikeCount" autocomplete="off"
+						value='0' required class="form-control me-1"">
+				</div>
+				<div>
+					<label>점심시간</label> <input type="text" name="storeLunchTime"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>저녁시간</label> <input type="text" name="storeDinnerTime"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>가게시작시간</label> <input type="text" name="storeStart"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>휴무일</label> <br> <input type="radio" name="offKind"
+						value="정기" checked required>정기 <input type="radio"
+						name="offKind" value="수동" required>수동
+				</div>
+				<div>
+					<label>휴무 시작일</label> <input type="date" name="offStart"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>휴무 종료일</label> <input type="date" name="offEnd"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>바 가격</label> <input type="number" name="barPrice"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>바 인원수</label> <input type="number" name="barCount"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>룸 가격</label> <input type="number" name="roomPrice"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>매장내 룸 개수</label> <input type="number" name="roomCount"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>4인실 개수</label> <input type="number" name="roomFour"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+				<div>
+					<label>6인실 개수</label> <input type="number" name="roomSix"
+						autocomplete="off" required class="form-control me-1">
+				</div>
+				<div>
+					<label>8인실 개수</label> <input type="number" name="roomEight"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+
+
+				<div>
+					<label>가게문닫는시간</label> <input type="text" name="storeEnd"
+						autocomplete="off" required class="form-control me-1"">
+				</div>
+			
+				<div>
+					<label>예약금</label> <input type="number"
+						name="storeReservationPrice" autocomplete="off" required
+						class="form-control me-1"">
+				</div>
+				<br> <br> <br> <br>
+
+
+
+				<div class="row mt-2">
+					<button type="submit" class="btn1">수정하기</button>
+				</div>
+			</div>
+	</div>
+	</div>
+</form>
+</div>
+
+
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+

@@ -19,20 +19,22 @@ public class ReviewDaoImpl implements ReviewDao {
 private SqlSession sqlSession;
 	
 
-@Override
-public ReviewDto one(int reviewNo) {
-	return sqlSession.selectOne("review.one", reviewNo);
-}
+	@Override
+	public ReviewDto one(int storeNo) {
+		return sqlSession.selectOne("review.one", storeNo);
+	}
 
+	@Override
+	public List<ReviewDto> list(int storeNo) {
+		return sqlSession.selectList("review.one", storeNo);
+	}
 
 	@Override
 	public int insert(ReviewDto reviewDto) {
 		int reviewNo = sqlSession.selectOne("review.sequence");
 		reviewDto.setReviewNo(reviewNo);
 		return sqlSession.insert("review.insert", reviewDto);
-		
 	}
-
 
 	@Override
 	public boolean edit(ReviewDto reviewDto) {
@@ -40,10 +42,6 @@ public ReviewDto one(int reviewNo) {
 		return count > 0;
 		
 	}
-
-
-	
-
 
 	@Override
 	public boolean delete(int reviewNo) {
@@ -68,6 +66,11 @@ public ReviewDto one(int reviewNo) {
 		param.put("begin", begin);
 		param.put("end", end);
 		return sqlSession.selectList("review.list",param);
+	}
+
+	@Override
+	public ReviewDto detail(int reviewNo) {
+		return sqlSession.selectOne("review.detail", reviewNo);
 	}
 
 
