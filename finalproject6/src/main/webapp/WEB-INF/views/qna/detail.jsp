@@ -90,7 +90,7 @@
                             	<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a>
                            	</c:when>
                            	<c:otherwise>
-                           		<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a>
+<%--                            		<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="btn0 ms-1">삭제</a> --%>
                            		<a href="${pageContext.request.contextPath}/qna/write?superNo=${qnaDto.qnaNo}" class="btn1 ms-1">답글</a>
                            	</c:otherwise>
                            </c:choose>
