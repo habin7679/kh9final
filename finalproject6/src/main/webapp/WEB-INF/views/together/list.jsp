@@ -54,9 +54,9 @@
                     </thead>
                     <tbody class="text-center">
                     	<c:forEach var="togetherDto" items="${list}">
-                    	<input type="hidden" value="${togetherDto.memberNo}" id="msgNick">
 	                        <tr class="normal-font" style="background-color:white;">
 	                        
+                    	
 	                            <td>${togetherDto.togetherNo}</td>
 	                            <td style="text-align: left !important">
 	                            <a href="detail?togetherNo=${togetherDto.togetherNo}">
@@ -68,6 +68,7 @@
 	                            </a>
 	                            </td>
 	                            <td> <a class="msgNick" href="#">
+	                            <input type="hidden" value="${togetherDto.memberNo}" id="msgNick">
 	                            ${togetherDto.togetherWriter}</a></td><!-- 작성자 닉네임 클릭 시 쪽지 -->
 	                            <td>${togetherDto.togetherTime}</td>
 	                            <td >${togetherDto.togetherReadcount }</td>
