@@ -41,7 +41,7 @@
 
         <div class="section-header">
           <h2>Popular Store</h2>
-          <p>예야쿠 <span> TOP 6</span></p>
+          <p><span>TOP6</span></p>
         </div>
 
         <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
