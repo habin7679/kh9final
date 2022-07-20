@@ -91,13 +91,15 @@
                         </tr>
                         <tr style="text-align: right;">
                            <td style="border-bottom: none;">
-                          <c:if test="${isOwner}">
-                            <a href="${pageContext.request.contextPath}/together/edit?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">수정</a>
-                            <a href="${pageContext.request.contextPath}/together/delete?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">삭제</a>
-                           </c:if>
-                           <c:if test="${isAdmin}">
-                            <a href="${pageContext.request.contextPath}/together/delete?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">삭제</a>
-                           </c:if>
+                           <c:choose>
+                           	<c:when test="${isOwner }">
+                           		 <a href="${pageContext.request.contextPath}/together/edit?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">수정</a>
+                            	<a href="${pageContext.request.contextPath}/together/delete?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">삭제</a>
+                           	</c:when>
+                           	<c:when test="${isAdmin }">
+                           		<a href="${pageContext.request.contextPath}/together/delete?togetherNo=${togetherDto.togetherNo}" class="btn0 ms-1">삭제</a>
+                           	</c:when>
+                           </c:choose>
                             <a href="${pageContext.request.contextPath}/together/list" class="btn0 ms-1">목록</a>
                            </td>
                         </tr>

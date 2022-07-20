@@ -4,7 +4,12 @@
     <c:set var="root" value="${pageContext.request.contextPath}"></c:set>
     
     <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<style>
+	.a{
+		width:500px;
+		height:300px;
+	}
+</style>
 
    <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero d-flex align-items-center section-bg">
@@ -82,7 +87,7 @@
              <c:choose>
               <c:when test="${sAttachList[status.index] != 0 }">
               <a href="${pageContext.request.contextPath}/store/detail?storeNo=${storeDto.storeNo}">
-              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${sAttachList[status.index]}" class="menu-img img-fluid">
+              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${sAttachList[status.index]}" class="menu-img a">
               </a>
               </c:when>
               <c:otherwise>
@@ -121,7 +126,7 @@
                <c:choose>
 	              <c:when test="${cAttachList[status.index] != 0 }">
 	              <a href="${pageContext.request.contextPath}/store/detail?storeNo=${storeDto.storeNo}">
-	              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${cAttachList[status.index]}" class="menu-img img-fluid">
+	              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${cAttachList[status.index]}" class="menu-img a">
 	              </a>
 	              </c:when>
 	              <c:otherwise>
@@ -158,7 +163,7 @@
                <c:choose>
 	              <c:when test="${dAttachList[status.index] != 0 }">
 	              <a href="${pageContext.request.contextPath}/store/detail?storeNo=${storeDto.storeNo}">
-	              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${dAttachList[status.index]}" class="menu-img img-fluid">
+	              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${dAttachList[status.index]}" class="menu-img a">
 	              </a>
 	              </c:when>
 	              <c:otherwise>
@@ -195,7 +200,7 @@
               <c:choose>
 	              <c:when test="${kAttachList[status.index] != 0 }">
 	              <a href="${pageContext.request.contextPath}/store/detail?storeNo=${storeDto.storeNo}">
-	              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${kAttachList[status.index]}" class="menu-img img-fluid">
+	              <img src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${kAttachList[status.index]}" class="menu-img a">
 	              </a>
 	              </c:when>
 	              <c:otherwise>
