@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 	
@@ -32,9 +33,9 @@
             </div>
             
             <div class="row mt-3">
-            <span>
-            주소 : <span class="address">${storeDto.storeAddress}</span>
-            </span>
+           
+            주소 : <input type="text" id="address" class="address" value="${storeDto.storeAddress}">
+           
             </div>
             
             <div class="row mt-10">
