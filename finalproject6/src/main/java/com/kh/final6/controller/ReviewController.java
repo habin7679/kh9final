@@ -49,7 +49,7 @@ public class ReviewController {
 	private AttachmentDto attachmentDto;
 	
 	@GetMapping("/insert")
-	public String insert(@RequestParam int storeNo,Model model) {
+	public String insert(@RequestParam(required=false, defaultValue="1") int storeNo,Model model) {
 		model.addAttribute("storeNo",storeNo);
 		return "review/insert";
 	}
@@ -172,7 +172,7 @@ public class ReviewController {
 
 		attr.addAttribute("reviewNo", reviewNo);
 
-		return "review/detail2";
+		return "review/detail";
 	}
 	
 	@GetMapping("/list")
