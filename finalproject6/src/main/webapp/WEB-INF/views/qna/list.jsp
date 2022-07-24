@@ -86,35 +86,35 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
 						</c:when>
 						<c:when test="${search && readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">&lt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">&lt;</a></li>
 						</c:when>
 						<c:when test="${search && noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">&lt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">&lt;</a></li>
 						</c:when>
 						<c:when test="${search && noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">&lt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=1&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">&lt;</a></li>
 						</c:when>
 						<c:when test="${readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=qna_readcount&order=desc">&lt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=1&s=${s}&column=qna_readcount&order=desc">&lt;</a></li>
 						</c:when>
 						<c:when test="${noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=qna_no&order=desc">&lt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=1&s=${s}&column=qna_no&order=desc">&lt;</a></li>
 						</c:when>
 						<c:when test="${noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&column=qna_no&order=asc">&lt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=1&s=${s}&column=qna_no&order=asc">&lt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}">&lt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=1&s=${s}">&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -123,35 +123,35 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${search && noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&column=qna_readcount&order=desc">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${startBlock-1}&s=${s}&column=qna_readcount&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&column=qna_no&order=desc">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${startBlock-1}&s=${s}&column=qna_no&order=desc">&laquo;</a></li>
 						</c:when>
 						<c:when test="${noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&column=qna_no&order=asc">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${startBlock-1}&s=${s}&column=qna_no&order=asc">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${startBlock-1}&s=${s}">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -163,35 +163,35 @@
 							<c:choose>
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:when>
 								<c:when test="${i == p && readcountSearch}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">${i}</a></li>
 								</c:when>
 								<c:when test="${i == p && noDescSearch}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">${i}</a></li>
 								</c:when>
 								<c:when test="${i == p && noAscSearch}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">${i}</a></li>
 								</c:when>
 								<c:when test="${i != p && readcountSearch}">
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">${i}</a></li>
 								</c:when>
 								<c:when test="${i != p && noDescSearch}">
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">${i}</a></li>
 								</c:when>
 								<c:when test="${i != p && noAscSearch}">
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">${i}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -199,35 +199,35 @@
 							<c:choose>
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}">${i}</a></li>
 								</c:when>
 								<c:when test="${i == p && readcountSearch}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&column=qna_readcount&order=desc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&column=qna_readcount&order=desc">${i}</a></li>
 								</c:when>
 								<c:when test="${i == p && noDescSearch}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&column=qna_no&order=desc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&column=qna_no&order=desc">${i}</a></li>
 								</c:when>
 								<c:when test="${i == p && noAscSearch}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&column=qna_no&order=asc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&column=qna_no&order=asc">${i}</a></li>
 								</c:when>
 								<c:when test="${i != p && noDescSearch}">
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&column=qna_no&order=desc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&column=qna_no&order=desc">${i}</a></li>
 								</c:when>
 								<c:when test="${i != p && noAscSearch}">
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&column=qna_no&order=asc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&column=qna_no&order=asc">${i}</a></li>
 								</c:when>
 								<c:when test="${i != p && readcountSearch}">
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&column=qna_readcount&order=desc">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}&column=qna_readcount&order=desc">${i}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}">${i}</a></li>
+										href="${pageContext.request.contextPath}/qna/list?p=${i}&s=${s}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -239,35 +239,35 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
 						</c:when>
 						<c:when test="${search && readcountSeasrch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">&gt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">&gt;</a></li>
 						</c:when>
 						<c:when test="${search && noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">&gt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">&gt;</a></li>
 						</c:when>
 						<c:when test="${search && noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">&gt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">&gt;</a></li>
 						</c:when>
 						<c:when test="${readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&column=qna_readcount&order=desc">&gt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${endBlock+1}&s=${s}&column=qna_readcount&order=desc">&gt;</a></li>
 						</c:when>
 						<c:when test="${noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&column=qna_no&order=desc">&gt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${endBlock+1}&s=${s}&column=qna_no&order=desc">&gt;</a></li>
 						</c:when>
 						<c:when test="${noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&column=qna_no&order=asc">&gt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${endBlock+1}&s=${s}&column=qna_no&order=asc">&gt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}">&gt;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${endBlock+1}&s=${s}">&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -276,35 +276,35 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
 						</c:when>
 						<c:when test="${search && readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=qna_readcount&order=desc">&raquo;</a></li>
 						</c:when>
 						<c:when test="${search && noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=desc">&raquo;</a></li>
 						</c:when>
 						<c:when test="${search && noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}&column=qna_no&order=asc">&raquo;</a></li>
 						</c:when>
 						<c:when test="${readcountSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&column=qna_readcount&order=desc">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${lastPage}&s=${s}&column=qna_readcount&order=desc">&raquo;</a></li>
 						</c:when>
 						<c:when test="${noDescSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&column=qna_no&order=desc">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${lastPage}&s=${s}&column=qna_no&order=desc">&raquo;</a></li>
 						</c:when>
 						<c:when test="${noAscSearch}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&column=qna_no&order=asc">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${lastPage}&s=${s}&column=qna_no&order=asc">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/qna/list?p=${lastPage}&s=${s}">&raquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -318,7 +318,7 @@
                <div class="row">
                <div class="col-md-3"></div>
                <div class="col-md-6">
-               <form action="list" method="get">
+               <form action="${pageContext.request.contextPath}/qna/list" method="get">
                <div class="d-flex justify-content-center" >
                     <select name="type" class="form-select me-1" style="width:17%;">
                         <option value="qna_head" <c:if test="${type == 'qna_head'}">selected</c:if>>말머리</option>

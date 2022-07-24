@@ -71,7 +71,7 @@
             <h2>공지 및 이벤트를 확인하세요.</h2>
        	</div>
  
- 	<form action="write" method="post" enctype="multipart/form-data">
+ 	<form action="${pageContext.request.contextPath}/notice/write" method="post" enctype="multipart/form-data">
  	<div class="mt-5">
  		<div class="col-md-6 offset-md-3 tb-color rounded">
  		

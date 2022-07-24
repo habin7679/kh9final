@@ -61,7 +61,7 @@
             <h2>관리자의 답변이 필요하시면 문의글을 남겨주세요.</h2>
        	</div>
  
- 	<form action="write" method="post">
+ 	<form action="${pageContext.request.contextPath}/qna/write" method="post">
  	<c:if test="${superNo != null }">
 		<input type="hidden" name="superNo" value="${superNo}">
 	</c:if>

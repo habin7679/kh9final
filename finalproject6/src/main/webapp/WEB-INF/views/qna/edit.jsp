@@ -60,7 +60,7 @@
             <h2>관리자의 답변이 필요하시면 문의글을 남겨주세요.</h2>
        	</div>
  
- 	<form action="edit" method="post">
+ 	<form action="${pageContext.request.contextPath}/qna/edit" method="post">
  	<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
  	<div class="mt-5">
  		<div class="col-md-6 offset-md-3 tb-color rounded">
