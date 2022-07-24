@@ -69,7 +69,7 @@
             <h2>함께 식사할 동행을 구해보세요.</h2>
        	</div>
  
- 	<form action="write" method="post">
+ 	<form action="${pageContext.request.contextPath}/together/write" method="post">
  	<div class="mt-4">
  		<div class="col-md-6 offset-md-3 tb-color rounded">
  		<div class="row mt-2">

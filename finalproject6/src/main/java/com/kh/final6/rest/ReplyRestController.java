@@ -22,9 +22,7 @@ import com.kh.final6.repository.MemberDao;
 import com.kh.final6.repository.ReplyDao;
 
 import springfox.documentation.annotations.ApiIgnore;
-@CrossOrigin(origins = {"*"}
 
-)
 @RestController
 @RequestMapping("/rest/reply")
 public class ReplyRestController {

@@ -140,7 +140,7 @@
 		});
 		
 		function chatStart(){ //챗봇 연결
-			let uri = "ws://";
+			let uri = "wss://";
 			uri += location.host;
 			uri += "${pageContext.request.contextPath}";
 			uri += "/ws/chatbot"
