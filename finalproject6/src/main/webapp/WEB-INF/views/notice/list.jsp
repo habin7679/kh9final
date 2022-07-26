@@ -25,7 +25,7 @@
          <div class="row mt-2"> 
             <div class="col-md-6 offset-md-3">
             <c:if test="${isAdmin}">
-               <a href="write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
+               <a href="${pageContext.request.contextPath}/notice/write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
             </c:if>
             </div>
         </div>

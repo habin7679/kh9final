@@ -41,7 +41,7 @@
  	<div class="row mt-2 text-center">
 	<div class="row ">
 		<div class="col-md-8 offset-md-2">
-		<a href="recvBox"  class="btn btn-secondary" >목록으로</a>
+		<a href="${pageContext.request.contextPath}/msg/recvBox"  class="btn btn-secondary" >목록으로</a>
 	</div>
 	</div>
 	

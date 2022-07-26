@@ -36,7 +36,7 @@
         <!-- 글쓰기 버튼 -->
          <div class="row mt-2"> 
             <div class="col-md-6 offset-md-3">
-               <a href="write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
+               <a href="${pageContext.request.contextPath}/together/write" class="btn1 col-md-1 offset-md-11">글쓰기</a>
             </div>
         </div>
 

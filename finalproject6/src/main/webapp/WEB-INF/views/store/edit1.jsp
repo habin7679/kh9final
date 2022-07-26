@@ -74,7 +74,7 @@
             <h2>리뷰확인하세요.</h2>
        	</div>
  
- 	<form action="edit" method="post" enctype="multipart/form-data">
+ 	<form action="${pageContext.request.contextPath}/store/edit" method="post" enctype="multipart/form-data">
  	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
  	<div class="mt-5">
  		<div class="col-md-6 offset-md-3 tb-color rounded">

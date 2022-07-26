@@ -64,7 +64,7 @@
 		<h2>내 가게 등록하기</h2>
 	</div>
 	
-<form action="insert" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/store/insert" method="post" enctype="multipart/form-data">
 	<div class="mt-5">
 		<div class="col-md-6 offset-md-3 tb-color rounded">
 			<div class="row mt-4">

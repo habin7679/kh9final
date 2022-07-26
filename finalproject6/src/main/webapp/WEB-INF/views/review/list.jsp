@@ -19,7 +19,7 @@
 
 	<div class="row mt-2">
 		<div class="col-md-8 offset-md-2">
-			<a href="insert" class="btn1 col-md-1 offset-md-11">리뷰쓰기</a>
+			<a href="${pageContext.request.contextPath}/review/insert" class="btn1 col-md-1 offset-md-11">리뷰쓰기</a>
 		</div>
 	</div> 
 
@@ -64,7 +64,7 @@
 			<div class="row">
 				<div class="col-md-3"></div>
 				<div class="col-md-6">
-					<form action="list" method="get">
+					<form action="${pageContext.request.contextPath}/review/list" method="get">
 						<div class="d-flex justify-content-center">
 							<select name="type" class="form-select me-1" style="width: 15%;">
 								<option value="review_writer"
