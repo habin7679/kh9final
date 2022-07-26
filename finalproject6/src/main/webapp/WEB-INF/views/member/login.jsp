@@ -15,7 +15,7 @@ color:#fff;
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section>
-<form action="login" method="post">
+<form action="${pageContext.request.contextPath}/member/login" method="post">
 	<input type="hidden" name="referer" value="${referer}">
     
     <div class="container ma-t-100" style="width:900px;">
@@ -53,15 +53,15 @@ color:#fff;
         <div class="row text-center mb-1 ">
         <div class="row ">
         <div class="col-md-6">
-            <a href="find_id" >아이디 찾기</a> 
+            <a href="${pageContext.request.contextPath}/member/find_id" >아이디 찾기</a> 
         </div>
         <div class="col-md-6">
-             <a href="find_pw" >비밀번호 찾기</a>
+             <a href="${pageContext.request.contextPath}/member/find_pw" >비밀번호 찾기</a>
         </div>
         </div>
         </div>
         <div class="row text-center mb-1">
-            <a href="join" class="b" >새로 오셨나요?</a>
+            <a href="${pageContext.request.contextPath}/member/join" class="b" >새로 오셨나요?</a>
         </div>
         </div>
 

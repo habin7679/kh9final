@@ -72,11 +72,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="recvBox?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
+								href="${pageContext.request.contextPath}/msg/recvBox?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="recvBox?p=1&s=${s}">&lt;</a></li>
+								href="${pageContext.request.contextPath}/msg/recvBox?p=1&s=${s}">&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -84,11 +84,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="recvBox?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/msg/recvBox?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="recvBox?p=${startBlock-1}&s=${s}">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/msg/recvBox?p=${startBlock-1}&s=${s}">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -100,11 +100,11 @@
 							<c:choose>
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
-										href="recvBox?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+										href="${pageContext.request.contextPath}/msg/recvBox?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="recvBox?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+										href="${pageContext.request.contextPath}/msg/recvBox?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -112,12 +112,12 @@
 							<c:choose>
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
-										href="recvBox?p=${i}&s=${s}">${i}</a></li>
+										href="${pageContext.request.contextPath}/msg/recvBox?p=${i}&s=${s}">${i}</a></li>
 								</c:when>
 								
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="recvBox?p=${i}&s=${s}">${i}</a></li>
+										href="${pageContext.request.contextPath}/msg/recvBox?p=${i}&s=${s}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -129,11 +129,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="recvBox?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
+								href="${pageContext.request.contextPath}/msg/recvBox?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="recvBox?p=${endBlock+1}&s=${s}">&gt;</a></li>
+								href="${pageContext.request.contextPath}/msg/recvBox?p=${endBlock+1}&s=${s}">&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -142,11 +142,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="recvBox?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/msg/recvBox?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="recvBox?p=${lastPage}&s=${s}">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/msg/recvBox?p=${lastPage}&s=${s}">&raquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -160,7 +160,7 @@
                <div class="row">
                <div class="col-md-3"></div>
                <div class="col-md-6">
-               <form action="recvBox" method="get">
+               <form action="${pageContext.request.contextPath}/msg/recvBox" method="get">
                <div class="d-flex justify-content-center" >
                     <select name="type" class="form-select me-1" style="width:20%;">
                         <option value="member_nick">받은사람</option>

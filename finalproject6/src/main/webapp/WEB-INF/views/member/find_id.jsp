@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <section>
-<form action="find_id" method="post">
+<form action="${pageContext.request.contextPath}/member/find_id" method="post">
 	<div class="container ma-t-100" style="width:900px;">
     <div class="section-header mt-4 col-md-8 offset-md-2" >
             <p><span>아이디찾기</span></p>

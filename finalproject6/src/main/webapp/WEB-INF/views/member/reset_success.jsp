@@ -16,7 +16,7 @@ color:var(--color-primary);
 	        <label style="font-size:25px;">비밀번호 재설정 완료!</label>
 	        </div>
 	        <div class="row text-center mb-1 mt-4" >
-	<a href="login"  class="b" >로그인 하러가기</a>
+	<a href="${pageContext.request.contextPath}/member/login"  class="b" >로그인 하러가기</a>
 	</div>
 	<div class="row text-center mb-1">
 		<a href="${pageContext.request.contextPath}" class="b">메인 페이지로 이동</a>

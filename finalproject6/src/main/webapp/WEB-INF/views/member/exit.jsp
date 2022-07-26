@@ -4,7 +4,7 @@
    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
  
 <section>
-<form action="exit" method="post">
+<form action="${pageContext.request.contextPath}/member/exit" method="post">
 	<div class="container ma-t-100" style="width:900px;">
     <div class="section-header mt-4 col-md-8 offset-md-2" >
             <p><span>탈퇴</span></p>

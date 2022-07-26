@@ -65,11 +65,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
+								href="${pageContext.request.contextPath}/member/list?p=1&s=${s}&type=${type}&keyword=${keyword}">&lt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=1&s=${s}">&lt;</a></li>
+								href="${pageContext.request.contextPath}/member/list?p=1&s=${s}">&lt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -77,11 +77,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/member/list?p=${startBlock-1}&s=${s}&type=${type}&keyword=${keyword}">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${startBlock-1}&s=${s}">&laquo;</a></li>
+								href="${pageContext.request.contextPath}/member/list?p=${startBlock-1}&s=${s}">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -93,11 +93,11 @@
 							<c:choose>
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+										href="${pageContext.request.contextPath}/member/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
+										href="${pageContext.request.contextPath}/member/list?p=${i}&s=${s}&type=${type}&keyword=${keyword}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -105,12 +105,12 @@
 							<c:choose>
 								<c:when test="${i == p}">
 									<li class="page-item active"><a class="page-link"
-										href="list?p=${i}&s=${s}">${i}</a></li>
+										href="${pageContext.request.contextPath}/member/list?p=${i}&s=${s}">${i}</a></li>
 								</c:when>
 								
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="list?p=${i}&s=${s}">${i}</a></li>
+										href="${pageContext.request.contextPath}/member/list?p=${i}&s=${s}">${i}</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -122,11 +122,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
+								href="${pageContext.request.contextPath}/member/list?p=${endBlock+1}&s=${s}&type=${type}&keyword=${keyword}">&gt;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${endBlock+1}&s=${s}">&gt;</a></li>
+								href="${pageContext.request.contextPath}/member/list?p=${endBlock+1}&s=${s}">&gt;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -135,11 +135,11 @@
 					<c:choose>
 						<c:when test="${search}">
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/member/list?p=${lastPage}&s=${s}&type=${type}&keyword=${keyword}">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="page-item"><a class="page-link"
-								href="list?p=${lastPage}&s=${s}">&raquo;</a></li>
+								href="${pageContext.request.contextPath}/member/list?p=${lastPage}&s=${s}">&raquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
@@ -153,7 +153,7 @@
                <div class="row">
                <div class="col-md-3"></div>
                <div class="col-md-6">
-               <form action="list" method="get">
+               <form action="${pageContext.request.contextPath}/member/list" method="get">
                <div class="d-flex justify-content-center" >
                     <select name="type" class="form-select me-1" style="width:17%;">
                         <option value="member_name">이름</option>

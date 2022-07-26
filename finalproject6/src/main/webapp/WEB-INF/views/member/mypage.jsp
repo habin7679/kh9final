@@ -62,9 +62,9 @@
             <div class="row mb-1 ">
         <div class="row ">
         <div class="col-md-10 offset-md-3">
-                    <a href="password" class="btn btn-secondary" style="margin-right:70px;">비밀번호 변경</a>
-                 <a href="information" class="btn btn-secondary"  >개인정보 변경</a>
-                <a href="exit" class="btn btn-secondary"style="margin-left:70px;">탈퇴하기</a>
+                    <a href="${pageContext.request.contextPath}/member/password" class="btn btn-secondary" style="margin-right:70px;">비밀번호 변경</a>
+                 <a href="${pageContext.request.contextPath}/member/information" class="btn btn-secondary"  >개인정보 변경</a>
+                <a href="${pageContext.request.contextPath}/member/exit" class="btn btn-secondary"style="margin-left:70px;">탈퇴하기</a>
            		</div>
          </div>
         </div>
