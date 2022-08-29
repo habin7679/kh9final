@@ -30,7 +30,8 @@ public class SchedulerServiceImpl implements SchedulerService{
 	@Autowired
 	private HolidayChecker holidayChecker;
 	
-	@Scheduled(cron=" 0 0 9 * * *") //매일 9시 마다
+	@Scheduled(cron = "0 0 18 * * *") //매일 18시 마다
+//	@Scheduled(cron=" */20 * * * * *") //20초마다
 	@Override
 	public void regularPay() throws ParseException, URISyntaxException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
